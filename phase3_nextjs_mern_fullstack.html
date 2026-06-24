@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Full Stack: Next.js & MERN</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin-bottom:14px}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:22px;font-weight:600;margin-bottom:4px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{background:#f5f5f5;border:1px solid #e8e8e8;border-radius:8px;padding:12px 14px;font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;margin:8px 0;line-height:1.85}@media(prefers-color-scheme:dark){pre{background:#1a1a1a;border-color:#2a2a2a;color:#e8e8e8}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}.card{border:1px solid #e0e0e0;border-radius:10px;padding:14px}@media(prefers-color-scheme:dark){.card{border-color:#2a2a2a}}.ct{font-size:13px;font-weight:600;margin-bottom:6px}.cb{font-size:12px;color:#666;line-height:1.6}@media(prefers-color-scheme:dark){.cb{color:#999}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.tag{display:inline-block;font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid #e0e0e0;color:#666;margin:3px}@media(prefers-color-scheme:dark){.tag{border-color:#2a2a2a;color:#888}}</style></head><body><span class="chip">Phase 3 · Weeks 9–12</span><h1>Full Stack: Next.js & MERN</h1><p class="sub">React Native to React web is a small step. Full-stack is one more.</p><h2><span class="sn">1</span>React for web — your RN knowledge transfers</h2>
+<p>React Native and React share the same core: components, props, state, hooks, context, and the reconciler. What changes is only the <strong>rendering target</strong> — HTML elements instead of native views.</p>
+<div class="g2">
+<div class="card"><div class="ct">React Native primitives</div><div class="cb" style="font-family:monospace;font-size:11px;line-height:2">&lt;View&gt; &lt;Text&gt; &lt;Image&gt;<br>&lt;TouchableOpacity&gt;<br>&lt;FlatList&gt; &lt;ScrollView&gt;<br>StyleSheet.create({})</div></div>
+<div class="card"><div class="ct">React web equivalents</div><div class="cb" style="font-family:monospace;font-size:11px;line-height:2">&lt;div&gt; &lt;p&gt;&lt;span&gt; &lt;img&gt;<br>&lt;button&gt; &lt;a&gt;<br>&lt;ul&gt;&lt;li&gt; or Array.map<br>CSS / Tailwind classes</div></div>
+</div>
+<div class="tip"><strong>The hook layer is identical.</strong> useState, useEffect, useContext, useCallback, custom hooks — all behave exactly the same. Your 14 years of React Native hook knowledge transfers 100%.</div>
+
+<h2><span class="sn">2</span>Next.js — Expo for the web</h2>
+<p>Plain React handles only UI. Next.js wraps React and adds routing, server-side rendering, API routes, image optimization, and deployment infrastructure. The same relationship as React Native → Expo.</p>
+<h3>File-based routing — the filesystem is your router</h3>
+<pre>app/
+├── page.tsx           →  https://myapp.com/
+├── about/page.tsx     →  https://myapp.com/about
+├── users/
+│   ├── page.tsx       →  https://myapp.com/users
+│   └── [id]/page.tsx  →  https://myapp.com/users/42   (dynamic)
+└── api/
+    └── users/route.ts →  https://myapp.com/api/users  (API endpoint)</pre>
+<div class="tip"><strong>Mobile analogy:</strong> Exactly like Expo Router — the file path is the route. You already know this mental model from your React Native work.</div>
+
+<h3>The 3 rendering modes — the key architectural concept</h3>
+<div class="g3">
+<div class="card"><div class="ct" style="color:#185FA5">CSR</div><div class="cb"><strong>Client-Side Rendering</strong><br>Empty HTML shell sent. React runs in the browser, fetches data after load.<br><br>Use for dashboards, anything behind auth.</div></div>
+<div class="card"><div class="ct" style="color:#0F6E56">SSG</div><div class="cb"><strong>Static Generation</strong><br>HTML built at build time. Blazing fast, CDN-cacheable.<br><br>Use for blogs, docs, marketing pages.</div></div>
+<div class="card"><div class="ct" style="color:#BA7517">SSR</div><div class="cb"><strong>Server-Side Rendering</strong><br>HTML built per-request on the server. Fresh data + SEO.<br><br>Use for product pages, social feeds.</div></div>
+</div>
+<pre><span class="cm">// SSR — async Server Component (Next.js 13+ App Router)</span>
+<span class="cm">// This function runs on the SERVER, not in the browser</span>
+<span class="kw">export default async function</span> <span class="fn">UserPage</span>({ params }) {
+  <span class="kw">const</span> user = <span class="kw">await</span> prisma.user.<span class="fn">findUnique</span>({ where: { id: +params.id } });
+  <span class="kw">return</span> &lt;<span class="tn">div</span>&gt;&lt;<span class="tn">h1</span>&gt;{user.name}&lt;/<span class="tn">h1</span>&gt;&lt;/<span class="tn">div</span>&gt;;
+}
+
+<span class="cm">// Force re-render on every request (opt into SSR)</span>
+<span class="kw">export const</span> dynamic = <span class="str">'force-dynamic'</span>;</pre>
+
+<h3>API Routes — backend in the same project</h3>
+<pre><span class="cm">// app/api/users/route.ts</span>
+<span class="kw">import</span> { NextResponse } <span class="kw">from</span> <span class="str">'next/server'</span>;
+<span class="kw">import</span> { prisma } <span class="kw">from</span> <span class="str">'@/lib/prisma'</span>;
+
+<span class="kw">export async function</span> <span class="fn">GET</span>() {
+  <span class="kw">const</span> users = <span class="kw">await</span> prisma.user.<span class="fn">findMany</span>();
+  <span class="kw">return</span> NextResponse.<span class="fn">json</span>(users);
+}
+
+<span class="kw">export async function</span> <span class="fn">POST</span>(req) {
+  <span class="kw">const</span> body = <span class="kw">await</span> req.<span class="fn">json</span>();
+  <span class="kw">const</span> user = <span class="kw">await</span> prisma.user.<span class="fn">create</span>({ data: body });
+  <span class="kw">return</span> NextResponse.<span class="fn">json</span>(user, { status: <span class="num">201</span> });
+}</pre>
+
+<h2><span class="sn">3</span>The MERN stack</h2>
+<p>MongoDB + Express + React + Node. One language (JS/TS) from database to browser. The canonical choice when you want full-stack JavaScript without Next.js opinionation.</p>
+<table>
+<tr><th>Letter</th><th>Technology</th><th>Role</th></tr>
+<tr><td><strong>M</strong></td><td>MongoDB</td><td>Database — stores data as JSON documents</td></tr>
+<tr><td><strong>E</strong></td><td>Express</td><td>Backend — HTTP routing, middleware, API</td></tr>
+<tr><td><strong>R</strong></td><td>React</td><td>Frontend UI — component tree in the browser</td></tr>
+<tr><td><strong>N</strong></td><td>Node.js</td><td>Runtime — JS on the server</td></tr>
+</table>
+<pre><span class="cm">// Minimal MERN server (Express + Mongoose)</span>
+<span class="kw">const</span> express  = require(<span class="str">'express'</span>);
+<span class="kw">const</span> mongoose = require(<span class="str">'mongoose'</span>);
+<span class="kw">const</span> cors     = require(<span class="str">'cors'</span>);
+
+<span class="kw">const</span> app = <span class="fn">express</span>();
+app.<span class="fn">use</span>(cors()); app.<span class="fn">use</span>(express.<span class="fn">json</span>());
+mongoose.<span class="fn">connect</span>(process.env.MONGODB_URI);
+
+<span class="kw">const</span> UserSchema = <span class="kw">new</span> mongoose.<span class="fn">Schema</span>({
+  name:  <span class="fn">String</span>,
+  email: { type: <span class="fn">String</span>, unique: <span class="kw">true</span> }
+});
+<span class="kw">const</span> User = mongoose.<span class="fn">model</span>(<span class="str">'User'</span>, UserSchema);
+
+app.<span class="fn">get</span>(<span class="str">'/api/users'</span>,     <span class="kw">async</span> (_, res) => res.<span class="fn">json</span>(<span class="kw">await</span> User.<span class="fn">find</span>()));
+app.<span class="fn">post</span>(<span class="str">'/api/users'</span>,    <span class="kw">async</span> (req, res) => res.<span class="fn">status</span>(<span class="num">201</span>).<span class="fn">json</span>(<span class="kw">await</span> User.<span class="fn">create</span>(req.body)));
+app.<span class="fn">listen</span>(<span class="num">4000</span>);</pre>
+
+<h2><span class="sn">4</span>Environment variables</h2>
+<pre><span class="cm"># .env.local — NEVER commit to git, add to .gitignore</span>
+DATABASE_URL=postgresql://user:pass@localhost:5432/myapp
+MONGODB_URI=mongodb://localhost:27017/myapp
+JWT_SECRET=long-random-secret-here
+NEXT_PUBLIC_API_URL=https://api.myapp.com   <span class="cm"># browser-accessible</span></pre>
+<div class="warn"><code>NEXT_PUBLIC_*</code> variables are bundled into the client JS and visible to anyone in the browser. Never put secrets, API keys, or DB credentials in public variables.</div>
+
+<h2><span class="sn">5</span>Deployment</h2>
+<div class="g2">
+<div class="card"><div class="ct" style="color:#185FA5">Vercel (Next.js)</div><div class="cb">Push to GitHub → auto-deploys. Free tier handles SSR, CDN, edge functions. The default choice for Next.js projects. <code>npx vercel</code> to deploy.</div></div>
+<div class="card"><div class="ct" style="color:#0F6E56">Render (MERN backend)</div><div class="cb">Deploy Express/Node servers. Connect GitHub → auto-deploys on push. Free tier available. MongoDB via MongoDB Atlas (cloud-hosted).</div></div>
+</div>
+<div class="ok"><strong>The complete free-tier stack:</strong> React frontend on Vercel → calls Express API on Render → reads/writes MongoDB Atlas. Three services, zero cost, your first full-stack app is live.</div>
+<h2><span class="sn">6</span>Mental model map</h2>
+<div class="g2">
+<div class="card"><div class="ct">Your mobile world</div><div class="cb" style="line-height:2">iOS/Android app<br>URLSession / fetch()<br>UserDefaults / Core Data<br>AppDelegate entry point<br>Push notification handler<br>TestFlight / App Store deploy</div></div>
+<div class="card"><div class="ct">Full-stack web world</div><div class="cb" style="line-height:2">React web frontend<br>fetch() / axios (identical!)<br>LocalStorage / PostgreSQL<br>server.js / app entry point<br>Webhook / event handler<br>Vercel / Render deploy</div></div>
+</div></body></html>

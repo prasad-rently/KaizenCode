@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Distributed Systems & Kafka</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin-bottom:14px}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:22px;font-weight:600;margin-bottom:4px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{background:#f5f5f5;border:1px solid #e8e8e8;border-radius:8px;padding:12px 14px;font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;margin:8px 0;line-height:1.85}@media(prefers-color-scheme:dark){pre{background:#1a1a1a;border-color:#2a2a2a;color:#e8e8e8}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}.card{border:1px solid #e0e0e0;border-radius:10px;padding:14px}@media(prefers-color-scheme:dark){.card{border-color:#2a2a2a}}.ct{font-size:13px;font-weight:600;margin-bottom:6px}.cb{font-size:12px;color:#666;line-height:1.6}@media(prefers-color-scheme:dark){.cb{color:#999}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.tag{display:inline-block;font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid #e0e0e0;color:#666;margin:3px}@media(prefers-color-scheme:dark){.tag{border-color:#2a2a2a;color:#888}}</style></head><body><span class="chip">Phase 6 · Weeks 21–24</span><h1>Distributed Systems & Kafka</h1><p class="sub">How large-scale systems are really built. The CTO's mental model for architecture.</p><h2><span class="sn">1</span>Why distributed systems?</h2>
+<p>A single server hits limits — CPU, RAM, disk, network bandwidth. When you exceed those limits, you distribute work across many servers. But distribution introduces new problems: partial failures, network latency, and data consistency challenges.</p>
+<div class="g2">
+<div class="card"><div class="ct">Vertical scaling ↑</div><div class="cb">Get a bigger server. Simple — no code changes. But has a hard ceiling, causes downtime to upgrade, and is expensive at the top end.</div></div>
+<div class="card"><div class="ct">Horizontal scaling →</div><div class="cb">Add more servers. No theoretical ceiling — run 1,000 instances. But requires load balancing, shared state management, and coordination.</div></div>
+</div>
+<div class="tip"><strong>Mobile analogy:</strong> Vertical = upgrading from an iPhone 14 to 15 Pro Max. Horizontal = giving the whole team phones and splitting the calls. The second scales to millions — but you need coordination.</div>
+
+<h2><span class="sn">2</span>Message queues — the decoupling pattern</h2>
+<p>Instead of Service A calling Service B directly (tight coupling — both must be running), A drops a message into a queue and B picks it up when ready (loose coupling — fully independent).</p>
+<div class="g2">
+<div class="card"><div class="ct" style="color:#993C1D">Without a queue (tight)</div><div class="cb">OrderService → calls EmailService directly. If EmailService is slow or crashes, OrderService also fails. They're coupled at runtime.</div></div>
+<div class="card"><div class="ct" style="color:#0F6E56">With a queue (loose)</div><div class="cb">OrderService drops "order.placed" event. EmailService picks it up when ready. OrderService never blocks. Neither knows about the other.</div></div>
+</div>
+<div class="tip"><strong>Mobile analogy:</strong> APNs push notifications. Your backend fires a notification into APNs and moves on immediately. APNs delivers it when the device is online. That IS the message queue pattern — exactly.</div>
+
+<h2><span class="sn">3</span>Apache Kafka</h2>
+<p>Kafka is a distributed message streaming platform. Unlike simple queues (message deleted once consumed), Kafka <strong>retains messages for days</strong> and lets multiple independent consumers read the same stream. Built for millions of events per second.</p>
+<h3>Core concepts</h3>
+<table>
+<tr><th>Concept</th><th>What it is</th><th>Analogy</th></tr>
+<tr><td><strong>Topic</strong></td><td>A named stream / category of messages</td><td>A WhatsApp group or Slack channel</td></tr>
+<tr><td><strong>Partition</strong></td><td>A topic split into N parallel lanes for scale</td><td>Multiple checkout lines at a supermarket</td></tr>
+<tr><td><strong>Producer</strong></td><td>Service that writes messages to a topic</td><td>The person sending the message</td></tr>
+<tr><td><strong>Consumer</strong></td><td>Service that reads messages from a topic</td><td>The person receiving and acting on it</td></tr>
+<tr><td><strong>Consumer Group</strong></td><td>Team of consumers sharing work on a topic</td><td>A customer service team sharing a queue</td></tr>
+<tr><td><strong>Broker</strong></td><td>A Kafka server node in the cluster</td><td>The message relay server</td></tr>
+<tr><td><strong>Offset</strong></td><td>Position of a message in a partition</td><td>Page number in a book — never changes</td></tr>
+</table>
+<pre><span class="kw">const</span> { Kafka } = require(<span class="str">'kafkajs'</span>);
+<span class="kw">const</span> kafka = <span class="kw">new</span> <span class="fn">Kafka</span>({ brokers: [<span class="str">'kafka:9092'</span>] });
+
+<span class="cm">// Producer — OrderService publishes an event</span>
+<span class="kw">const</span> producer = kafka.<span class="fn">producer</span>();
+<span class="kw">await</span> producer.<span class="fn">connect</span>();
+<span class="kw">await</span> producer.<span class="fn">send</span>({
+  topic:    <span class="str">'order-events'</span>,
+  messages: [{ key: <span class="str">'order-123'</span>, value: JSON.<span class="fn">stringify</span>({ orderId: <span class="num">123</span>, status: <span class="str">'placed'</span> }) }]
+});
+
+<span class="cm">// Consumer — EmailService subscribes independently</span>
+<span class="kw">const</span> consumer = kafka.<span class="fn">consumer</span>({ groupId: <span class="str">'email-service'</span> });
+<span class="kw">await</span> consumer.<span class="fn">connect</span>();
+<span class="kw">await</span> consumer.<span class="fn">subscribe</span>({ topic: <span class="str">'order-events'</span>, fromBeginning: <span class="kw">false</span> });
+<span class="kw">await</span> consumer.<span class="fn">run</span>({
+  eachMessage: <span class="kw">async</span> ({ message }) => {
+    <span class="kw">const</span> event = JSON.<span class="fn">parse</span>(message.value.toString());
+    <span class="kw">await</span> <span class="fn">sendOrderConfirmationEmail</span>(event);
+  }
+});</pre>
+<div class="ok"><strong>Kafka vs simple queue (SQS/RabbitMQ):</strong> In SQS, a message is deleted once consumed. In Kafka, messages are retained (default 7 days). A new analytics service can join and replay all historical events from the beginning. This is why Kafka powers event sourcing, audit logs, and real-time analytics pipelines.</div>
+
+<h2><span class="sn">4</span>Redis — the Swiss Army knife</h2>
+<p>Redis is an in-memory data store. Microsecond reads. Used for caching, session storage, rate limiting, leaderboards, pub/sub, and job queues.</p>
+<pre><span class="kw">const</span> redis = require(<span class="str">'ioredis'</span>);
+<span class="kw">const</span> client = <span class="kw">new</span> <span class="fn">redis</span>(<span class="str">'redis://localhost:6379'</span>);
+
+<span class="cm">// Cache-aside pattern — check Redis first, DB second</span>
+<span class="kw">async function</span> <span class="fn">getUser</span>(id) {
+  <span class="kw">const</span> key    = <span class="str">'user:'</span> + id;
+  <span class="kw">const</span> cached = <span class="kw">await</span> client.<span class="fn">get</span>(key);
+  <span class="kw">if</span> (cached) <span class="kw">return</span> JSON.<span class="fn">parse</span>(cached);   <span class="cm">// cache hit: ~0.1ms</span>
+
+  <span class="kw">const</span> user = <span class="kw">await</span> db.<span class="fn">findUser</span>(id);       <span class="cm">// cache miss: ~10ms</span>
+  <span class="kw">await</span> client.<span class="fn">setex</span>(key, <span class="num">3600</span>, JSON.<span class="fn">stringify</span>(user)); <span class="cm">// TTL 1hr</span>
+  <span class="kw">return</span> user;
+}
+
+<span class="cm">// Rate limiting — max 100 requests per IP per minute</span>
+<span class="kw">async function</span> <span class="fn">rateLimit</span>(ip) {
+  <span class="kw">const</span> key   = <span class="str">'rate:'</span> + ip;
+  <span class="kw">const</span> count = <span class="kw">await</span> client.<span class="fn">incr</span>(key);
+  <span class="kw">if</span> (count === <span class="num">1</span>) <span class="kw">await</span> client.<span class="fn">expire</span>(key, <span class="num">60</span>);
+  <span class="kw">return</span> count &gt; <span class="num">100</span>; <span class="cm">// true = blocked</span>
+}</pre>
+<div class="g2">
+<div class="card"><div class="ct">Common use cases</div><div class="cb">Session storage<br>API rate limiting<br>Leaderboards (Sorted Sets)<br>Job queues (Bull/BullMQ)<br>Pub/sub for real-time features</div></div>
+<div class="card"><div class="ct">Redis data structures</div><div class="cb"><strong>String:</strong> cache, counters<br><strong>Hash:</strong> user session objects<br><strong>List:</strong> activity feeds, queues<br><strong>Set:</strong> unique visitors, tags<br><strong>Sorted Set:</strong> leaderboards, scores</div></div>
+</div>
+<div class="warn"><strong>Important:</strong> Redis is in-memory. Data can be lost if Redis restarts (unless persistence is enabled). Never use Redis as your only store for critical data — it complements your primary database, not replaces it.</div>
+
+<h2><span class="sn">5</span>Microservices vs Monolith</h2>
+<div class="g2">
+<div class="card"><div class="ct" style="color:#185FA5">Monolith</div><div class="cb">One codebase, one deployment, one database. Simple to build, test, and debug. Hard to scale one hot component independently. Right for most products until ~50 engineers.</div></div>
+<div class="card"><div class="ct" style="color:#5350B4">Microservices</div><div class="cb">Each service is independent: own codebase, deployment, database. Teams move independently. Operationally complex — distributed tracing, service discovery, network calls everywhere.</div></div>
+</div>
+<div class="warn"><strong>CTO advice:</strong> Don't start with microservices. Every successful microservices architecture started as a monolith. Split only when you have a proven, specific scale or team ownership problem. Premature microservices is one of the most common early-stage engineering mistakes.</div>
+
+<h2><span class="sn">6</span>CAP theorem</h2>
+<p>In any distributed system, during a network partition, you must choose between <strong>Consistency</strong> and <strong>Availability</strong>. You cannot have both simultaneously. Partition tolerance is not optional in a real network.</p>
+<div class="g3">
+<div class="card"><div class="ct" style="color:#5350B4">Consistency (C)</div><div class="cb">Every read returns the most recent write or an error. All nodes see the same data at the same time.</div></div>
+<div class="card"><div class="ct" style="color:#0F6E56">Availability (A)</div><div class="cb">Every request gets a non-error response. The system stays operational even if the data might be slightly stale.</div></div>
+<div class="card"><div class="ct" style="color:#BA7517">Partition tolerance (P)</div><div class="cb">System works even when network failures split it into isolated parts. Required for any distributed system.</div></div>
+</div>
+<table>
+<tr><th>Database</th><th>Choice</th><th>When partitioned…</th></tr>
+<tr><td>PostgreSQL, MySQL</td><td>CP</td><td>Returns error rather than stale data</td></tr>
+<tr><td>Cassandra, DynamoDB</td><td>AP</td><td>Returns possibly-stale data, stays up</td></tr>
+<tr><td>MongoDB</td><td>CP (default)</td><td>Configurable per-operation</td></tr>
+<tr><td>Redis Cluster</td><td>AP</td><td>May lose recent writes</td></tr>
+</table>
+
+<h2><span class="sn">7</span>System design patterns</h2>
+<div class="g2">
+<div class="card"><div class="ct">Load balancing</div><div class="cb">Distribute requests across multiple instances. AWS ALB, Nginx, HAProxy. Round-robin or least-connections. Health checks remove failed nodes automatically.</div></div>
+<div class="card"><div class="ct">Caching layers</div><div class="cb">CDN → Redis → DB query cache. Each layer reduces load on the next. A CDN cache hit costs microseconds; a DB query costs milliseconds.</div></div>
+<div class="card"><div class="ct">Rate limiting</div><div class="cb">Protect your API from abuse. Redis sliding-window counters. 100 req/min per IP. Return 429 Too Many Requests. Essential before going public.</div></div>
+<div class="card"><div class="ct">Circuit breaker</div><div class="cb">If downstream service B is failing, stop calling it immediately. Return a cached fallback. Prevents cascade failures from taking down your whole system.</div></div>
+<div class="card"><div class="ct">Database sharding</div><div class="cb">Split one large table across multiple DB servers by a shard key (user_id % N). Each shard holds a subset of the data. Used at extreme scale.</div></div>
+<div class="card"><div class="ct">Event sourcing</div><div class="cb">Store all state changes as immutable events rather than overwriting state. Enables full audit history, time travel debugging, and event replay.</div></div>
+</div>
+
+<h2><span class="sn">8</span>The CTO architecture lens</h2>
+<div class="ok"><strong>Questions to ask about any distributed architecture:</strong><br><br>
+• Where is the actual bottleneck? (CPU? DB? Network? I/O?)<br>
+• What happens when any single component goes down?<br>
+• Can we replay events if a consumer fails mid-processing?<br>
+• How do we trace a single request across 5 microservices?<br>
+• Are we solving a problem we actually have, or one we imagine at scale?<br>
+• Could a well-indexed Postgres query and Redis cache solve this instead of Kafka?<br>
+• What's the operational burden of this choice on a 5-person team?
+</div>
+<div class="warn"><strong>The rule of three:</strong> Add architectural complexity only when you've hit the limit three times. Hit the DB wall? Add caching. Hit caching limits? Add read replicas. Hit replica limits? Consider sharding. Skip levels and you're over-engineering.</div></body></html>

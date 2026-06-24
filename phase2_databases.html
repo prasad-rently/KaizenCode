@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Databases</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin-bottom:14px}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:22px;font-weight:600;margin-bottom:4px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{background:#f5f5f5;border:1px solid #e8e8e8;border-radius:8px;padding:12px 14px;font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;margin:8px 0;line-height:1.85}@media(prefers-color-scheme:dark){pre{background:#1a1a1a;border-color:#2a2a2a;color:#e8e8e8}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}.card{border:1px solid #e0e0e0;border-radius:10px;padding:14px}@media(prefers-color-scheme:dark){.card{border-color:#2a2a2a}}.ct{font-size:13px;font-weight:600;margin-bottom:6px}.cb{font-size:12px;color:#666;line-height:1.6}@media(prefers-color-scheme:dark){.cb{color:#999}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.tag{display:inline-block;font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid #e0e0e0;color:#666;margin:3px}@media(prefers-color-scheme:dark){.tag{border-color:#2a2a2a;color:#888}}</style></head><body><span class="chip">Phase 2 · Weeks 5–8</span><h1>Databases</h1><p class="sub">Where your data lives permanently — queryable, relational, and built for scale.</p><h2><span class="sn">1</span>SQL vs NoSQL — the fundamental choice</h2>
+<p>Before writing a query, choose your database type. This architectural decision is hard to reverse once data is in production.</p>
+<div class="g2">
+<div class="card"><div class="ct" style="color:#185FA5">SQL (Relational)</div><div class="cb">Tables with fixed columns. Rows relate via foreign keys. ACID transactions. Strong consistency.<br><br><strong>PostgreSQL · MySQL · SQLite</strong></div></div>
+<div class="card"><div class="ct" style="color:#0F6E56">NoSQL (Document)</div><div class="cb">JSON documents. No fixed schema. Flexible, fast writes. Weak cross-document transactions.<br><br><strong>MongoDB · Firestore · DynamoDB</strong></div></div>
+</div>
+<div class="tip"><strong>Mobile analogy:</strong> SQL = Core Data with a strict managed object model. NoSQL = storing raw JSON in a folder — flexible but you enforce the shape yourself.</div>
+<table>
+<tr><th>Use SQL when</th><th>Use NoSQL when</th></tr>
+<tr><td>Complex relationships / JOINs needed</td><td>Flexible or evolving schema</td></tr>
+<tr><td>Financial / transactional data</td><td>High-volume writes / logs / events</td></tr>
+<tr><td>Data integrity is critical</td><td>Prototyping fast or early-stage product</td></tr>
+</table>
+
+<h2><span class="sn">2</span>PostgreSQL — tables, rows, columns</h2>
+<pre><span class="cm">-- Create a table</span>
+<span class="kw">CREATE TABLE</span> users (
+  id         <span class="fn">SERIAL PRIMARY KEY</span>,
+  name       <span class="fn">VARCHAR</span>(<span class="num">100</span>) <span class="kw">NOT NULL</span>,
+  email      <span class="fn">VARCHAR</span>(<span class="num">255</span>) <span class="kw">UNIQUE NOT NULL</span>,
+  role       <span class="fn">VARCHAR</span>(<span class="num">20</span>)  <span class="kw">DEFAULT</span> <span class="str">'user'</span>,
+  created_at <span class="fn">TIMESTAMPTZ</span>   <span class="kw">DEFAULT NOW</span>()
+);</pre>
+<h3>The 4 core SQL operations</h3>
+<pre><span class="cm">-- INSERT</span>
+<span class="kw">INSERT INTO</span> users (name, email) <span class="kw">VALUES</span> (<span class="str">'Gokul'</span>, <span class="str">'g@example.com'</span>);
+
+<span class="cm">-- SELECT</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> users;
+<span class="kw">SELECT</span> name, email <span class="kw">FROM</span> users <span class="kw">WHERE</span> id = <span class="num">1</span>;
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> users <span class="kw">ORDER BY</span> created_at <span class="kw">DESC LIMIT</span> <span class="num">10</span> <span class="kw">OFFSET</span> <span class="num">0</span>;
+
+<span class="cm">-- UPDATE</span>
+<span class="kw">UPDATE</span> users <span class="kw">SET</span> name = <span class="str">'Gokul Prasad'</span> <span class="kw">WHERE</span> id = <span class="num">1</span>;
+
+<span class="cm">-- DELETE</span>
+<span class="kw">DELETE FROM</span> users <span class="kw">WHERE</span> id = <span class="num">1</span>;</pre>
+<div class="warn"><strong>Never</strong> run <code>UPDATE</code> or <code>DELETE</code> without a <code>WHERE</code> clause — it affects every row in the table.</div>
+
+<h3>JOINs — relating tables</h3>
+<pre><span class="cm">-- posts table with a foreign key to users</span>
+<span class="kw">CREATE TABLE</span> posts (
+  id      <span class="fn">SERIAL PRIMARY KEY</span>,
+  user_id <span class="fn">INT REFERENCES</span> users(id) <span class="kw">ON DELETE CASCADE</span>,
+  title   <span class="fn">VARCHAR</span>(<span class="num">255</span>),
+  body    <span class="fn">TEXT</span>
+);
+
+<span class="cm">-- INNER JOIN: get posts with their author's name</span>
+<span class="kw">SELECT</span> posts.title, users.name <span class="kw">AS</span> author
+<span class="kw">FROM</span> posts
+<span class="kw">JOIN</span> users <span class="kw">ON</span> posts.user_id = users.id;
+
+<span class="cm">-- LEFT JOIN: all users, even those with no posts</span>
+<span class="kw">SELECT</span> users.name, COUNT(posts.id) <span class="kw">AS</span> post_count
+<span class="kw">FROM</span> users
+<span class="kw">LEFT JOIN</span> posts <span class="kw">ON</span> posts.user_id = users.id
+<span class="kw">GROUP BY</span> users.id;</pre>
+<div class="tip"><strong>Mobile analogy:</strong> A JOIN is like a Core Data relationship fetch — <code>user.posts</code> — except you write it explicitly in SQL and control exactly what columns come back.</div>
+
+<h3>Indexes — making queries fast</h3>
+<pre><span class="cm">-- Without index: full table scan O(n) — slow at millions of rows</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> users <span class="kw">WHERE</span> email = <span class="str">'g@example.com'</span>;
+
+<span class="cm">-- Add index on columns you query frequently</span>
+<span class="kw">CREATE INDEX</span> idx_users_email <span class="kw">ON</span> users(email);
+<span class="cm">-- Now the same query is O(log n)</span>
+
+<span class="cm">-- Index columns used in: WHERE, JOIN ON, ORDER BY</span>
+<span class="cm">-- Primary keys are indexed automatically</span></pre>
+
+<h2><span class="sn">3</span>MongoDB — document databases</h2>
+<pre><span class="cm">// A MongoDB document — a JSON object in a collection</span>
+{
+  _id: <span class="fn">ObjectId</span>(<span class="str">"64ab12..."</span>),
+  name:  <span class="str">"Gokul"</span>,
+  email: <span class="str">"g@example.com"</span>,
+  prefs: { theme: <span class="str">"dark"</span>, notifications: <span class="kw">true</span> },
+  tags:  [<span class="str">"mobile"</span>, <span class="str">"ios"</span>]
+}</pre>
+<pre><span class="kw">const</span> User = <span class="fn">require</span>(<span class="str">'./models/User'</span>);
+
+<span class="kw">await</span> User.<span class="fn">create</span>({ name: <span class="str">'Gokul'</span>, email: <span class="str">'g@example.com'</span> });
+<span class="kw">await</span> User.<span class="fn">find</span>();                          <span class="cm">// all users</span>
+<span class="kw">await</span> User.<span class="fn">findById</span>(id);                    <span class="cm">// one by ID</span>
+<span class="kw">await</span> User.<span class="fn">findOne</span>({ email: <span class="str">'g@example.com'</span> });
+<span class="kw">await</span> User.<span class="fn">findByIdAndUpdate</span>(id, { name: <span class="str">'Gokul P'</span> }, { new: <span class="kw">true</span> });
+<span class="kw">await</span> User.<span class="fn">findByIdAndDelete</span>(id);</pre>
+
+<h2><span class="sn">4</span>Prisma ORM — type-safe database access</h2>
+<pre><span class="cm">// schema.prisma</span>
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String @unique
+  posts Post[]
+}
+model Post {
+  id     Int    @id @default(autoincrement())
+  title  String
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int
+}</pre>
+<pre><span class="kw">const</span> prisma = <span class="kw">new</span> <span class="fn">PrismaClient</span>();
+
+<span class="cm">// Auto-completed, type-safe queries</span>
+<span class="kw">const</span> user = <span class="kw">await</span> prisma.user.<span class="fn">findUnique</span>({
+  where:   { id: <span class="num">1</span> },
+  include: { posts: <span class="kw">true</span> }   <span class="cm">// JOIN equivalent</span>
+});
+
+<span class="kw">await</span> prisma.user.<span class="fn">create</span>({ data: { name: <span class="str">'Gokul'</span>, email: <span class="str">'g@x.com'</span> } });
+<span class="kw">await</span> prisma.user.<span class="fn">update</span>({ where: { id: <span class="num">1</span> }, data: { name: <span class="str">'Gokul P'</span> } });
+<span class="kw">await</span> prisma.user.<span class="fn">delete</span>({ where: { id: <span class="num">1</span> } });</pre>
+<div class="tip"><strong>Mobile analogy:</strong> Prisma is like a type-safe API client generated from a schema — similar to Codable + URLSession, but for your database. You define the model, Prisma handles the SQL.</div>
+
+<h2><span class="sn">5</span>Migrations — versioning your schema</h2>
+<pre><span class="cm"># Generate and apply a migration (Prisma)</span>
+npx prisma migrate dev --name add_avatar_to_users
+<span class="cm"># Prisma generates: ALTER TABLE users ADD COLUMN avatar_url VARCHAR(500);</span>
+<span class="cm"># Applies it to dev DB, records it in migrations/ folder</span>
+
+<span class="cm"># Deploy to production</span>
+npx prisma migrate deploy
+<span class="cm"># Applies only un-run migrations, in order</span></pre>
+<div class="tip"><strong>Mobile analogy:</strong> Migrations are Core Data lightweight migrations — versioned schema changes that apply in sequence so every environment (dev, staging, prod) stays in sync.</div>
+<div class="ok"><strong>Week 5–8 project:</strong> Replace the in-memory array from Phase 1 with a PostgreSQL database using Prisma. Add a posts table with a foreign key to users. Write queries for paginated post listing and post-with-author joins.</div></body></html>

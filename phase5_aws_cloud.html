@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Cloud: AWS</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin-bottom:14px}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:22px;font-weight:600;margin-bottom:4px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{background:#f5f5f5;border:1px solid #e8e8e8;border-radius:8px;padding:12px 14px;font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;margin:8px 0;line-height:1.85}@media(prefers-color-scheme:dark){pre{background:#1a1a1a;border-color:#2a2a2a;color:#e8e8e8}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}.card{border:1px solid #e0e0e0;border-radius:10px;padding:14px}@media(prefers-color-scheme:dark){.card{border-color:#2a2a2a}}.ct{font-size:13px;font-weight:600;margin-bottom:6px}.cb{font-size:12px;color:#666;line-height:1.6}@media(prefers-color-scheme:dark){.cb{color:#999}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.tag{display:inline-block;font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid #e0e0e0;color:#666;margin:3px}@media(prefers-color-scheme:dark){.tag{border-color:#2a2a2a;color:#888}}</style></head><body><span class="chip">Phase 5 · Weeks 17–20</span><h1>Cloud: AWS</h1><p class="sub">The infrastructure layer every CTO must own. You rent computers. Amazon manages the hardware.</p><h2><span class="sn">1</span>The mental model</h2>
+<p>AWS is the world's largest cloud provider — 200+ services, but you need only 8 to deploy most production apps. Instead of buying physical servers, you rent compute, storage, and networking by the second or GB.</p>
+<div class="tip"><strong>Mobile analogy:</strong> Before iCloud, apps managed their own file servers. AWS is to infrastructure what iCloud is to storage — you consume it via API without worrying about hardware, cooling, or physical security.</div>
+<div class="g2">
+<div class="card"><div class="ct">Region</div><div class="cb">A geographic area: <code>ap-south-1</code> (Mumbai), <code>us-east-1</code> (Virginia). Pick the one closest to your users. Data doesn't automatically cross regions.</div></div>
+<div class="card"><div class="ct">Availability Zone (AZ)</div><div class="cb">Independent data centers within a region. Deploy to 2+ AZs for high availability. One AZ failing shouldn't take down your app.</div></div>
+</div>
+
+<h2><span class="sn">2</span>EC2 — virtual machines</h2>
+<p>Elastic Compute Cloud gives you a virtual machine in the cloud. SSH in and run anything — Node.js, Python, Go, Docker. The closest thing to having your own server.</p>
+<pre><span class="cm"># After launching an EC2 instance (Ubuntu), SSH in:</span>
+ssh -i "~/.ssh/my-key.pem" ubuntu@ec2-54-123-45-67.compute.amazonaws.com
+
+<span class="cm"># Deploy your app:</span>
+git clone https://github.com/you/myapp &amp;&amp; cd myapp
+npm install &amp;&amp; npm run build
+
+<span class="cm"># Keep it running with PM2 (process manager)</span>
+pm2 start dist/server.js --name api
+pm2 startup  <span class="cm"># auto-restart on server reboot</span>
+pm2 save</pre>
+<div class="g2">
+<div class="card"><div class="ct">Key concepts</div><div class="cb"><strong>AMI:</strong> OS image template (like a Docker base image for a whole VM)<br><strong>Security Group:</strong> Firewall rules — open port 443 (HTTPS), 22 (SSH)<br><strong>Elastic IP:</strong> Static IP address that survives restarts<br><strong>Key Pair:</strong> SSH keys to access your instance</div></div>
+<div class="card"><div class="ct">Common instance types</div><div class="cb"><code>t3.micro</code> — free tier, dev/test<br><code>t3.small</code> — small production<br><code>t3.medium</code> — moderate load<br><code>m6i.large</code> — general production<br><code>c6i.xlarge</code> — compute-heavy</div></div>
+</div>
+
+<h2><span class="sn">3</span>S3 — object storage</h2>
+<p>Simple Storage Service stores any file — images, videos, PDFs, backups, static websites. Virtually unlimited capacity, 11 nines of durability, cheap.</p>
+<pre><span class="kw">const</span> { S3Client, PutObjectCommand, GetObjectCommand } = require(<span class="str">'@aws-sdk/client-s3'</span>);
+<span class="kw">const</span> s3 = <span class="kw">new</span> <span class="fn">S3Client</span>({ region: <span class="str">'ap-south-1'</span> });
+
+<span class="cm">// Upload a file (e.g., user avatar)</span>
+<span class="kw">await</span> s3.<span class="fn">send</span>(<span class="kw">new</span> <span class="fn">PutObjectCommand</span>({
+  Bucket:      <span class="str">'my-app-uploads'</span>,
+  Key:         <span class="str">'avatars/user-42.jpg'</span>,  <span class="cm">// the "path" inside the bucket</span>
+  Body:        fileBuffer,
+  ContentType: <span class="str">'image/jpeg'</span>,
+}));
+
+<span class="cm">// Public URL (if bucket is configured for public access)</span>
+<span class="cm">// https://my-app-uploads.s3.ap-south-1.amazonaws.com/avatars/user-42.jpg</span></pre>
+<div class="tip"><strong>Mobile analogy:</strong> S3 is like a global file server. You store the file URL in your database, load the image from S3 in your app. Your EC2 server never stores user uploads on its own disk — that would be lost on a redeployment.</div>
+
+<h2><span class="sn">4</span>RDS — managed databases</h2>
+<p>RDS runs PostgreSQL/MySQL on AWS-managed hardware. AWS handles automated backups, OS patching, multi-AZ failover, and read replicas. You just connect with a connection string.</p>
+<div class="g2">
+<div class="card"><div class="ct" style="color:#0F6E56">Why RDS over self-hosted</div><div class="cb">Automated daily backups<br>Point-in-time recovery (oops!)<br>Read replicas for scale<br>Multi-AZ automatic failover<br>No OS-level maintenance</div></div>
+<div class="card"><div class="ct" style="color:#BA7517">RDS alternatives</div><div class="cb"><strong>Supabase:</strong> Postgres + auth + storage, free tier, great DX<br><strong>PlanetScale:</strong> MySQL, branching model<br><strong>Railway:</strong> Simple, cheap, great for side projects</div></div>
+</div>
+
+<h2><span class="sn">5</span>Lambda — serverless functions</h2>
+<p>Lambda runs your code in response to events — HTTP requests, S3 file uploads, scheduled timers — without you managing any server. Pay per invocation (first 1M free/month).</p>
+<pre><span class="cm">// Lambda handler — runs in response to an event</span>
+exports.handler = <span class="kw">async</span> (event) => {
+  <span class="kw">const</span> { userId } = JSON.<span class="fn">parse</span>(event.body);
+  <span class="kw">const</span> user = <span class="kw">await</span> db.<span class="fn">findUser</span>(userId);
+  <span class="kw">return</span> {
+    statusCode: <span class="num">200</span>,
+    headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+    body: JSON.<span class="fn">stringify</span>(user)
+  };
+};
+
+<span class="cm">// Common triggers:</span>
+<span class="cm">// API Gateway → Lambda (HTTP API endpoint)</span>
+<span class="cm">// S3 event    → Lambda (resize image on upload)</span>
+<span class="cm">// EventBridge → Lambda (scheduled cron job)</span>
+<span class="cm">// SNS/SQS     → Lambda (process queue messages)</span></pre>
+<div class="warn"><strong>Cold start:</strong> First invocation after idle period takes 100ms–3s. Keep latency-sensitive Lambdas warm with scheduled pings, or use Provisioned Concurrency.</div>
+
+<h2><span class="sn">6</span>IAM — identity and access management</h2>
+<p>IAM controls who can do what to which AWS resources. Misconfigured IAM is the #1 cause of AWS data breaches. Learn it thoroughly.</p>
+<pre><span class="cm">// IAM Policy — allow Lambda to write to S3, nothing else</span>
+{
+  <span class="str">"Version"</span>: <span class="str">"2012-10-17"</span>,
+  <span class="str">"Statement"</span>: [{
+    <span class="str">"Effect"</span>:   <span class="str">"Allow"</span>,
+    <span class="str">"Action"</span>:   [<span class="str">"s3:PutObject"</span>, <span class="str">"s3:GetObject"</span>],
+    <span class="str">"Resource"</span>: <span class="str">"arn:aws:s3:::my-uploads/*"</span>
+  }]
+}</pre>
+<div class="warn"><strong>Principle of least privilege:</strong> Every user, EC2 instance, and Lambda should have only the minimum permissions it needs. Never use root credentials in production. Never hardcode AWS keys in code.</div>
+<ul>
+<li><strong>User:</strong> A person with long-lived credentials (access key + secret)</li>
+<li><strong>Role:</strong> A set of permissions attached to an AWS service (EC2, Lambda)</li>
+<li><strong>Policy:</strong> JSON document defining allowed/denied actions on resources</li>
+<li><strong>Best practice:</strong> Use roles for services, never hardcode access keys in app code</li>
+</ul>
+
+<h2><span class="sn">7</span>VPC — virtual private cloud</h2>
+<p>VPC is your private network on AWS. Resources are isolated from the internet unless explicitly exposed.</p>
+<div class="g2">
+<div class="card"><div class="ct" style="color:#185FA5">Public subnet</div><div class="cb">Has a route to the internet via Internet Gateway. Put your Load Balancer and NAT Gateway here. Direct internet access.</div></div>
+<div class="card"><div class="ct" style="color:#5350B4">Private subnet</div><div class="cb">No inbound internet route. Put EC2 app servers and RDS databases here. Only reachable from within the VPC — safest for your backend.</div></div>
+</div>
+<div class="tip"><strong>Best practice:</strong> Your RDS database should always live in a private subnet. The internet cannot reach it directly — only your app server (also in the VPC) can connect to it.</div>
+
+<h2><span class="sn">8</span>CloudWatch + Route 53</h2>
+<div class="g2">
+<div class="card"><div class="ct" style="color:#185FA5">CloudWatch</div><div class="cb">Logs, metrics, and alarms for all AWS services. Set an alarm when CPU exceeds 80%, when error rate spikes, or when a Lambda fails. First stop when production breaks.</div></div>
+<div class="card"><div class="ct" style="color:#0F6E56">Route 53</div><div class="cb">AWS's DNS service. Register domains, create A records pointing to EC2 / Load Balancers. Health checks + failover routing built in.</div></div>
+</div>
+<div class="ok"><strong>Standard production architecture:</strong> Route 53 → CloudFront (CDN) → Application Load Balancer → EC2 in private subnet → RDS in private subnet. S3 for assets. CloudWatch for monitoring. IAM roles for all service-to-service auth. This pattern covers 90% of production web apps.</div></body></html>

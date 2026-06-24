@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Docker & DevOps</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin-bottom:14px}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:22px;font-weight:600;margin-bottom:4px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{background:#f5f5f5;border:1px solid #e8e8e8;border-radius:8px;padding:12px 14px;font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;margin:8px 0;line-height:1.85}@media(prefers-color-scheme:dark){pre{background:#1a1a1a;border-color:#2a2a2a;color:#e8e8e8}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}.card{border:1px solid #e0e0e0;border-radius:10px;padding:14px}@media(prefers-color-scheme:dark){.card{border-color:#2a2a2a}}.ct{font-size:13px;font-weight:600;margin-bottom:6px}.cb{font-size:12px;color:#666;line-height:1.6}@media(prefers-color-scheme:dark){.cb{color:#999}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.tag{display:inline-block;font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid #e0e0e0;color:#666;margin:3px}@media(prefers-color-scheme:dark){.tag{border-color:#2a2a2a;color:#888}}</style></head><body><span class="chip">Phase 4 · Weeks 13–16</span><h1>Docker & DevOps</h1><p class="sub">Containerise your app, automate your pipeline, ship with confidence.</p><h2><span class="sn">1</span>What is Docker?</h2>
+<p>The classic problem: "It works on my machine." Docker solves this by packaging your app and all its dependencies into a <strong>container</strong> — a portable, self-contained unit that runs identically on any machine, any OS, any cloud.</p>
+<div class="tip"><strong>Mobile analogy:</strong> A Docker image is like an .ipa or .apk — it bundles the app and its runtime together. Docker runs these bundles on any server, the same way iOS runs .ipa on any iPhone.</div>
+<div class="g2">
+<div class="card"><div class="ct">Virtual Machine</div><div class="cb">Emulates full hardware. Has its own OS kernel. Heavy (GBs). Slow to start (minutes). Full isolation.</div></div>
+<div class="card"><div class="ct">Container (Docker)</div><div class="cb">Shares host OS kernel. Just app + deps. Lightweight (MBs). Starts in seconds. Process-level isolation.</div></div>
+</div>
+
+<h2><span class="sn">2</span>Dockerfile — building an image</h2>
+<p>A Dockerfile is a recipe that defines your container image, layer by layer. Each instruction creates a cached layer — unchanged layers are reused on rebuild.</p>
+<pre><span class="cm"># Start from the official Node.js 20 base image</span>
+FROM node:20-alpine
+
+<span class="cm"># Set working directory inside the container</span>
+WORKDIR /app
+
+<span class="cm"># Copy package files FIRST (separate layer = better caching)</span>
+COPY package*.json ./
+RUN npm ci --only=production
+
+<span class="cm"># Copy source code (only re-runs when source changes)</span>
+COPY . .
+
+<span class="cm"># Document which port the app listens on</span>
+EXPOSE 3000
+
+<span class="cm"># Default command when the container starts</span>
+CMD ["node", "server.js"]</pre>
+<pre><span class="cm"># Build the image</span>
+docker build -t my-api:1.0 .
+
+<span class="cm"># Run the container (map host port 3000 to container port 3000)</span>
+docker run -p 3000:3000 my-api:1.0
+
+<span class="cm"># Run detached (background), with env variable</span>
+docker run -d -p 3000:3000 -e NODE_ENV=production my-api:1.0</pre>
+
+<h2><span class="sn">3</span>Essential Docker commands</h2>
+<pre>docker ps                 <span class="cm"># list running containers</span>
+docker ps -a              <span class="cm"># all containers (including stopped)</span>
+docker images             <span class="cm"># list local images</span>
+docker logs &lt;id&gt;          <span class="cm"># view stdout/stderr (like Xcode console)</span>
+docker exec -it &lt;id&gt; sh  <span class="cm"># open a shell inside running container</span>
+docker stop &lt;id&gt;          <span class="cm"># gracefully stop</span>
+docker rm &lt;id&gt;            <span class="cm"># remove stopped container</span>
+docker rmi &lt;image&gt;        <span class="cm"># remove image</span>
+docker system prune       <span class="cm"># clean up all unused resources</span></pre>
+
+<h2><span class="sn">4</span>Docker Compose — multi-container apps</h2>
+<p>Real apps need multiple services running together: API server, database, cache, background worker. Docker Compose defines all of them in one YAML file and starts them with a single command.</p>
+<pre><span class="cm"># docker-compose.yml</span>
+version: <span class="str">'3.8'</span>
+services:
+  api:
+    build: .
+    ports: [<span class="str">"3000:3000"</span>]
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/myapp
+      - REDIS_URL=redis://redis:6379
+    depends_on: [mongo, redis]
+    volumes:
+      - .:/app             <span class="cm"># hot reload in dev</span>
+      - /app/node_modules  <span class="cm"># keep container's node_modules</span>
+
+  mongo:
+    image: mongo:7
+    volumes: [mongo_data:/data/db]
+    ports: [<span class="str">"27017:27017"</span>]
+
+  redis:
+    image: redis:7-alpine
+    ports: [<span class="str">"6379:6379"</span>]
+
+volumes:
+  mongo_data:</pre>
+<pre>docker compose up -d        <span class="cm"># start all services in background</span>
+docker compose down         <span class="cm"># stop and remove containers</span>
+docker compose logs -f api  <span class="cm"># follow logs from api service</span>
+docker compose exec api sh  <span class="cm"># shell into running api container</span></pre>
+<div class="tip"><strong>Mobile analogy:</strong> docker-compose.yml is like a Package.swift or Podfile for your entire runtime environment — one file declares all services, one command boots them all.</div>
+
+<h2><span class="sn">5</span>CI/CD — automated pipelines</h2>
+<p>CI/CD means every push to your repo automatically: runs tests → builds → deploys. No manual steps, no "deploy Fridays", no human error.</p>
+<div class="g2">
+<div class="card"><div class="ct" style="color:#185FA5">CI — Continuous Integration</div><div class="cb">Run linting + tests on every push. Catch bugs before they merge to main. Fail fast.</div></div>
+<div class="card"><div class="ct" style="color:#0F6E56">CD — Continuous Deployment</div><div class="cb">If tests pass on main, auto-deploy to staging or production. Removes the human deploy step.</div></div>
+</div>
+<pre><span class="cm"># .github/workflows/ci.yml</span>
+name: CI Pipeline
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with: { node-version: '20' }
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test -- --coverage
+
+      - name: Build Docker image
+        run: docker build -t my-api:latest .
+
+      <span class="cm"># On success → deploy to Render / AWS / etc.</span></pre>
+
+<h2><span class="sn">6</span>Nginx — the front door</h2>
+<p>Nginx (engine-x) sits in front of your Node.js app handling SSL termination, load balancing, and static file serving. Your app never deals with TLS certificates directly.</p>
+<pre><span class="cm"># /etc/nginx/sites-available/myapp</span>
+server {
+    listen 80;
+    server_name api.myapp.com;
+    return 301 https://$host$request_uri;  <span class="cm"># force HTTPS</span>
+}
+
+server {
+    listen 443 ssl;
+    server_name api.myapp.com;
+    ssl_certificate     /etc/letsencrypt/live/myapp.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/myapp.com/privkey.pem;
+
+    location / {
+        proxy_pass         http://localhost:3000;  <span class="cm"># forward to Node</span>
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_http_version 1.1;
+        proxy_set_header   Upgrade $http_upgrade;
+        proxy_set_header   Connection 'upgrade';  <span class="cm"># for WebSockets</span>
+    }
+}</pre>
+<div class="tip"><strong>Mobile analogy:</strong> Nginx is like an API Gateway — it terminates SSL and forwards clean HTTP to your app internally. Your Node.js process only ever sees plain HTTP on localhost.</div>
+<div class="ok"><strong>Phase 4 project:</strong> Dockerise your Express API from Phase 1. Write a docker-compose.yml that starts your API + PostgreSQL. Add a GitHub Actions workflow that runs your tests on every push.</div></body></html>
