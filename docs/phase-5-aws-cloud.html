@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Phase 5 — Cloud: AWS · KaizenCode</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fbfbfd;color:#1a1a1a;padding:32px 20px 64px;max-width:740px;margin:0 auto;line-height:1.65}@media(prefers-color-scheme:dark){body{background:#0c0c0e;color:#e8e8e8}}.nav{display:flex;gap:14px;font-size:12.5px;font-weight:600;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid #ececf0}@media(prefers-color-scheme:dark){.nav{border-color:#222226}}.nav a{color:#5350B4;text-decoration:none}@media(prefers-color-scheme:dark){.nav a{color:#8f8cff}}.nav a:hover{text-decoration:underline}h1{font-size:30px;font-weight:700;letter-spacing:-.8px;margin:18px 0 10px;line-height:1.15}h2{font-size:21px;font-weight:700;letter-spacing:-.4px;margin:34px 0 10px;padding-top:18px;border-top:1px solid #ececf0}@media(prefers-color-scheme:dark){h2{border-color:#1d1d20}}h3{font-size:16px;font-weight:700;margin:22px 0 8px}p{font-size:15px;color:#33333a;margin:10px 0}@media(prefers-color-scheme:dark){p{color:#c4c4cc}}a{color:#5350B4}@media(prefers-color-scheme:dark){a{color:#8f8cff}}strong{color:#1a1a1a;font-weight:650}@media(prefers-color-scheme:dark){strong{color:#fff}}ul,ol{margin:10px 0 10px 24px}li{font-size:15px;color:#33333a;margin:5px 0}@media(prefers-color-scheme:dark){li{color:#c4c4cc}}code{font-family:'SF Mono','Fira Code',ui-monospace,monospace;font-size:13px;background:#ececf1;padding:1.5px 6px;border-radius:5px}@media(prefers-color-scheme:dark){code{background:#1c1c20;color:#e8e8e8}}pre{background:#f4f4f7;border:1px solid #e6e6ec;border-radius:10px;padding:14px 16px;overflow-x:auto;margin:14px 0;font-size:13px;line-height:1.7;font-family:'SF Mono','Fira Code',ui-monospace,monospace}pre code{background:none;padding:0}@media(prefers-color-scheme:dark){pre{background:#141417;border-color:#26262b}}blockquote{border-left:3px solid #5350B4;background:#f3f2ff;padding:12px 16px;margin:16px 0;border-radius:0 10px 10px 0;font-size:14.5px;color:#444}@media(prefers-color-scheme:dark){blockquote{background:#16142a;color:#cfcfe6;border-color:#8f8cff}}table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0;display:block;overflow-x:auto}th{background:#f0f0f4;font-weight:650;text-align:left;padding:9px 12px;border:1px solid #e2e2ea}td{padding:9px 12px;border:1px solid #e6e6ec;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#17171b;border-color:#28282e}td{border-color:#222226}}hr{border:none;border-top:1px solid #ececf0;margin:26px 0}@media(prefers-color-scheme:dark){hr{border-color:#222226}}.footer{margin-top:48px;padding-top:20px;border-top:1px solid #ececf0;font-size:12.5px;color:#8a8a92}@media(prefers-color-scheme:dark){.footer{border-color:#222226}}</style></head><body>
+<nav class="nav"><a href="../index.html">← KaizenCode</a><a href="README.html">📚 All docs</a></nav>
+<h1>Phase 5 — Cloud: AWS</h1>
+<p><strong>Weeks 17–20</strong> · <code>phase5_aws_cloud.html</code></p>
+<blockquote>The infrastructure layer every CTO must own. You rent computers; Amazon manages the hardware.</blockquote>
+<h2>What you'll learn</h2>
+<ul><li><strong>Mental model</strong> — regions, availability zones; renting infrastructure via API</li></ul>
+<p>  instead of owning hardware.</p>
+<ul><li><strong>EC2</strong> — virtual machines; SSH, AMIs, security groups, Elastic IPs, instance</li></ul>
+<p>  types (<code>t3.micro</code> → <code>m6i.large</code>).</p>
+<ul><li><strong>S3</strong> — object storage for files; buckets, keys, public URLs. Never store</li></ul>
+<p>  uploads on the EC2 disk.</p>
+<ul><li><strong>RDS</strong> — managed PostgreSQL/MySQL; automated backups, multi-AZ failover, read</li></ul>
+<p>  replicas. Alternatives: Supabase, PlanetScale.</p>
+<ul><li><strong>Lambda</strong> — serverless functions triggered by HTTP, S3 events, or schedules;</li></ul>
+<p>  pay per invocation; watch cold starts.</p>
+<ul><li><strong>IAM</strong> — users, roles, policies; principle of least privilege; never hardcode</li></ul>
+<p>  access keys in application code.</p>
+<ul><li><strong>VPC</strong> — public subnets (load balancer) vs private subnets (app servers +</li></ul>
+<p>  databases). RDS always lives in a private subnet.</p>
+<ul><li><strong>CloudWatch</strong> — logs, metrics, alarms; the first stop when production breaks.</li><li><strong>Route 53</strong> — DNS, domain registration, health checks, failover routing.</li></ul>
+<h2>Standard production architecture</h2>
+<pre>Route 53 → CloudFront (CDN) → ALB → EC2 (private subnet) → RDS (private subnet)
+                                                          → S3 (assets/uploads)
+                                                          → CloudWatch (monitoring)</pre>
+<h2>Mobile analogies</h2>
+<ul><li><strong>AWS</strong> ≈ iCloud for everything — consume infrastructure via API without</li></ul>
+<p>  managing hardware.</p>
+<ul><li><strong>S3</strong> ≈ a global file server — store the URL in the DB, serve the file from</li></ul>
+<p>  the S3/CDN edge.</p>
+<h2>Self-check</h2>
+<ul><li>Why does RDS belong in a private subnet, never a public one?</li><li>What's the IAM "least privilege" principle, in one sentence?</li><li>When is Lambda the right tool — and when do cold starts make it the wrong one?</li><li>What's the first place you look when production is down?</li></ul>
+<div class="footer">改 KaizenCode — generated from <code>Phase 5 — Cloud: AWS</code>. Edit the source <code>.md</code> and run <code>node scripts/build-docs.mjs</code> to regenerate.</div>
+</body></html>

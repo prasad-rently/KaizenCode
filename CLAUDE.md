@@ -15,10 +15,18 @@ incremental improvement.
 
 ## Project structure
 
-- `index.html` — the homepage; links to all six phases and the docs.
-- `phaseN_*.html` — six standalone learning docs (phases 1–6).
+- `index.html` — the homepage; links to all six phases, the Mastery Track, and the docs.
+- `phaseN_*.html` — six standalone core learning docs (phases 1–6).
+- `mastery_*.html` — eleven standalone Mastery Track modules (named, not numbered)
+  covering cross-cutting topics. These add an **inline runnable-code component**:
+  every `<pre>` is wrapped in `.snippet` with a Copy button, and JS snippets get a
+  ▶ Run button driven by a small vanilla-JS runner inlined at the bottom of each
+  file (sandboxed `new Function` + captured `console`). Keep it dependency-free.
 - `roadmap_summary_md.md` — full prose summary of all phases (source of truth for content).
-- `docs/` — markdown companion docs: one per phase, plus project-setup and future-roadmap notes.
+- `docs/` — markdown companion docs (per phase + meta). The `.md` files are the
+  source of truth; `docs/*.html` and `roadmap_summary.html` are **generated** from
+  them by `scripts/build-docs.mjs` (run `node scripts/build-docs.mjs` after editing
+  any doc). Don't hand-edit the generated `.html` docs.
 
 ## Conventions (match these when editing)
 

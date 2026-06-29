@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Future Roadmap · KaizenCode</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fbfbfd;color:#1a1a1a;padding:32px 20px 64px;max-width:740px;margin:0 auto;line-height:1.65}@media(prefers-color-scheme:dark){body{background:#0c0c0e;color:#e8e8e8}}.nav{display:flex;gap:14px;font-size:12.5px;font-weight:600;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid #ececf0}@media(prefers-color-scheme:dark){.nav{border-color:#222226}}.nav a{color:#5350B4;text-decoration:none}@media(prefers-color-scheme:dark){.nav a{color:#8f8cff}}.nav a:hover{text-decoration:underline}h1{font-size:30px;font-weight:700;letter-spacing:-.8px;margin:18px 0 10px;line-height:1.15}h2{font-size:21px;font-weight:700;letter-spacing:-.4px;margin:34px 0 10px;padding-top:18px;border-top:1px solid #ececf0}@media(prefers-color-scheme:dark){h2{border-color:#1d1d20}}h3{font-size:16px;font-weight:700;margin:22px 0 8px}p{font-size:15px;color:#33333a;margin:10px 0}@media(prefers-color-scheme:dark){p{color:#c4c4cc}}a{color:#5350B4}@media(prefers-color-scheme:dark){a{color:#8f8cff}}strong{color:#1a1a1a;font-weight:650}@media(prefers-color-scheme:dark){strong{color:#fff}}ul,ol{margin:10px 0 10px 24px}li{font-size:15px;color:#33333a;margin:5px 0}@media(prefers-color-scheme:dark){li{color:#c4c4cc}}code{font-family:'SF Mono','Fira Code',ui-monospace,monospace;font-size:13px;background:#ececf1;padding:1.5px 6px;border-radius:5px}@media(prefers-color-scheme:dark){code{background:#1c1c20;color:#e8e8e8}}pre{background:#f4f4f7;border:1px solid #e6e6ec;border-radius:10px;padding:14px 16px;overflow-x:auto;margin:14px 0;font-size:13px;line-height:1.7;font-family:'SF Mono','Fira Code',ui-monospace,monospace}pre code{background:none;padding:0}@media(prefers-color-scheme:dark){pre{background:#141417;border-color:#26262b}}blockquote{border-left:3px solid #5350B4;background:#f3f2ff;padding:12px 16px;margin:16px 0;border-radius:0 10px 10px 0;font-size:14.5px;color:#444}@media(prefers-color-scheme:dark){blockquote{background:#16142a;color:#cfcfe6;border-color:#8f8cff}}table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0;display:block;overflow-x:auto}th{background:#f0f0f4;font-weight:650;text-align:left;padding:9px 12px;border:1px solid #e2e2ea}td{padding:9px 12px;border:1px solid #e6e6ec;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#17171b;border-color:#28282e}td{border-color:#222226}}hr{border:none;border-top:1px solid #ececf0;margin:26px 0}@media(prefers-color-scheme:dark){hr{border-color:#222226}}.footer{margin-top:48px;padding-top:20px;border-top:1px solid #ececf0;font-size:12.5px;color:#8a8a92}@media(prefers-color-scheme:dark){.footer{border-color:#222226}}</style></head><body>
+<nav class="nav"><a href="../index.html">← KaizenCode</a><a href="README.html">📚 All docs</a></nav>
+<h1>Future Roadmap — What to Explore Next</h1>
+<p>An analysis of KaizenCode as it stands today and concrete directions to grow it. True to <em>Kaizen</em>, these are incremental improvements — ship one, learn, repeat.</p>
+<h2>Where the project is today</h2>
+<p><strong>Strengths</strong></p>
+<ul><li>Six focused, self-contained learning docs with a consistent voice and design.</li><li>Zero dependencies → loads instantly, works offline, hosts free, never rots.</li><li>Strong pedagogy: mobile-engineer analogies, runnable code, weekly projects.</li><li>Now has a homepage, docs, a public repo, and free hosting.</li></ul>
+<p><strong>Gaps / opportunities</strong></p>
+<ul><li>Content is <strong>read-only</strong> — no way to <em>do</em> the exercises in-page.</li><li>No sense of <strong>progress</strong> — a learner can't track which phases they've finished.</li><li>No <strong>search</strong> across phases, and no cross-linking between related concepts.</li><li>Each HTML file repeats the same inline CSS (~1.5 KB duplicated six times).</li><li>No <strong>analytics</strong> or feedback loop on which sections land.</li></ul>
+<h2>Ideas to explore (roughly by effort)</h2>
+<h3>Quick wins (hours)</h3>
+<ul><li><strong>Per-phase "mark complete" toggles</strong> stored in <code>localStorage</code>, with a progress</li></ul>
+<p>  bar on the homepage. No backend needed.</p>
+<ul><li><strong>Estimated reading time</strong> and a <strong>table of contents</strong> on each phase.</li><li><strong>"Copy code" buttons</strong> on every <code>&lt;pre&gt;</code> block.</li><li><strong>A <code>print.css</code></strong> so phases export cleanly to PDF for offline study.</li><li><strong>Open Graph preview image</strong> so links unfurl nicely when shared.</li></ul>
+<h3>Medium (days)</h3>
+<ul><li><strong>Interactive code playgrounds</strong> — embed a JS sandbox (e.g. a sandboxed</li></ul>
+<p>  iframe or StackBlitz) so HTTP/Express snippets run in-page.</p>
+<ul><li><strong>End-of-phase quizzes</strong> — turn each doc's "self-check" questions into</li></ul>
+<p>  interactive multiple-choice with instant feedback.</p>
+<ul><li><strong>Client-side search</strong> across all phases (a small prebuilt index + fuzzy match).</li><li><strong>Shared stylesheet / build step</strong> — extract the duplicated CSS into one file,</li></ul>
+<p>  or generate the phase HTML from markdown so content and styling live separately.</p>
+<ul><li><strong>Architect's Journal</strong> — a simple <code>localStorage</code>-backed notes panel matching</li></ul>
+<p>  the program's "how would I architect this?" habit.</p>
+<h3>Larger (weeks)</h3>
+<ul><li><strong>Phase 7+ expansion</strong> — natural next topics: Observability (tracing, metrics,</li></ul>
+<p>  SLOs), Security (OWASP, secrets management, auth deep-dive), Testing strategy,   GraphQL &amp; API gateways, Infrastructure as Code (Terraform), and an   Engineering-Management track (hiring, code review culture, on-call, roadmaps).</p>
+<ul><li><strong>Hands-on lab repos</strong> — a companion repo per mini-project with starter code,</li></ul>
+<p>  tests, and a reference solution branch.</p>
+<ul><li><strong>Spaced-repetition review</strong> — resurface key concepts on a schedule (the Kaizen</li></ul>
+<p>  cadence applied to memory).</p>
+<ul><li><strong>Companion CLI or PWA</strong> — installable offline app, daily nudge to do today's</li></ul>
+<p>  30+30 minutes.</p>
+<h2>A "Phase 7 / Management" track (CTO-completion)</h2>
+<p>The current six phases build the <em>technical</em> CTO foundation. To round out the "Mobile Engineer → CTO" arc, a leadership track could cover:</p>
+<ul><li>System design interviews &amp; whiteboarding practice.</li><li>Cost awareness (cloud bills, build vs buy).</li><li>Team topologies, ownership boundaries, on-call &amp; incident response.</li><li>Technical strategy, RFCs/ADRs, and communicating architecture to non-engineers.</li></ul>
+<h2>Suggested next step</h2>
+<p>Start with the <strong>quick wins</strong> — progress tracking + copy buttons + reading time. They're high-value, need no backend, and keep the zero-dependency promise intact. Then evaluate whether an interactive playground justifies introducing a light build step.</p>
+<div class="footer">改 KaizenCode — generated from <code>Future Roadmap</code>. Edit the source <code>.md</code> and run <code>node scripts/build-docs.mjs</code> to regenerate.</div>
+</body></html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Phase 2 — Databases · KaizenCode</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fbfbfd;color:#1a1a1a;padding:32px 20px 64px;max-width:740px;margin:0 auto;line-height:1.65}@media(prefers-color-scheme:dark){body{background:#0c0c0e;color:#e8e8e8}}.nav{display:flex;gap:14px;font-size:12.5px;font-weight:600;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid #ececf0}@media(prefers-color-scheme:dark){.nav{border-color:#222226}}.nav a{color:#5350B4;text-decoration:none}@media(prefers-color-scheme:dark){.nav a{color:#8f8cff}}.nav a:hover{text-decoration:underline}h1{font-size:30px;font-weight:700;letter-spacing:-.8px;margin:18px 0 10px;line-height:1.15}h2{font-size:21px;font-weight:700;letter-spacing:-.4px;margin:34px 0 10px;padding-top:18px;border-top:1px solid #ececf0}@media(prefers-color-scheme:dark){h2{border-color:#1d1d20}}h3{font-size:16px;font-weight:700;margin:22px 0 8px}p{font-size:15px;color:#33333a;margin:10px 0}@media(prefers-color-scheme:dark){p{color:#c4c4cc}}a{color:#5350B4}@media(prefers-color-scheme:dark){a{color:#8f8cff}}strong{color:#1a1a1a;font-weight:650}@media(prefers-color-scheme:dark){strong{color:#fff}}ul,ol{margin:10px 0 10px 24px}li{font-size:15px;color:#33333a;margin:5px 0}@media(prefers-color-scheme:dark){li{color:#c4c4cc}}code{font-family:'SF Mono','Fira Code',ui-monospace,monospace;font-size:13px;background:#ececf1;padding:1.5px 6px;border-radius:5px}@media(prefers-color-scheme:dark){code{background:#1c1c20;color:#e8e8e8}}pre{background:#f4f4f7;border:1px solid #e6e6ec;border-radius:10px;padding:14px 16px;overflow-x:auto;margin:14px 0;font-size:13px;line-height:1.7;font-family:'SF Mono','Fira Code',ui-monospace,monospace}pre code{background:none;padding:0}@media(prefers-color-scheme:dark){pre{background:#141417;border-color:#26262b}}blockquote{border-left:3px solid #5350B4;background:#f3f2ff;padding:12px 16px;margin:16px 0;border-radius:0 10px 10px 0;font-size:14.5px;color:#444}@media(prefers-color-scheme:dark){blockquote{background:#16142a;color:#cfcfe6;border-color:#8f8cff}}table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0;display:block;overflow-x:auto}th{background:#f0f0f4;font-weight:650;text-align:left;padding:9px 12px;border:1px solid #e2e2ea}td{padding:9px 12px;border:1px solid #e6e6ec;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#17171b;border-color:#28282e}td{border-color:#222226}}hr{border:none;border-top:1px solid #ececf0;margin:26px 0}@media(prefers-color-scheme:dark){hr{border-color:#222226}}.footer{margin-top:48px;padding-top:20px;border-top:1px solid #ececf0;font-size:12.5px;color:#8a8a92}@media(prefers-color-scheme:dark){.footer{border-color:#222226}}</style></head><body>
+<nav class="nav"><a href="../index.html">← KaizenCode</a><a href="README.html">📚 All docs</a></nav>
+<h1>Phase 2 — Databases</h1>
+<p><strong>Weeks 5–8</strong> · <code>phase2_databases.html</code></p>
+<blockquote>Where your data lives permanently — queryable, relational, and built for scale.</blockquote>
+<h2>What you'll learn</h2>
+<ul><li><strong>SQL vs NoSQL</strong> — relational (transactions, relationships, strict schema) vs</li></ul>
+<p>  document (flexible schema, high write volume). When each wins.</p>
+<ul><li><strong>PostgreSQL</strong> — tables, columns, data types; <code>CREATE TABLE</code>, <code>INSERT</code>,</li></ul>
+<p>  <code>SELECT</code>, <code>UPDATE</code>, <code>DELETE</code>.</p>
+<ul><li><strong>SQL queries</strong> — <code>WHERE</code>, <code>ORDER BY</code>, <code>LIMIT/OFFSET</code> (pagination), <code>GROUP BY</code>,</li></ul>
+<p>  <code>COUNT</code>.</p>
+<ul><li><strong>JOINs</strong> — <code>INNER JOIN</code>, <code>LEFT JOIN</code>, foreign keys, <code>ON DELETE CASCADE</code>.</li><li><strong>Indexes</strong> — why queries slow at scale, how an index works, which columns to</li></ul>
+<p>  index (and the write-cost trade-off).</p>
+<ul><li><strong>MongoDB</strong> — documents, collections, schema-free design; <code>find</code> / <code>create</code> /</li></ul>
+<p>  <code>findByIdAndUpdate</code>.</p>
+<ul><li><strong>Prisma ORM</strong> — type-safe DB access, <code>schema.prisma</code>, generated client,</li></ul>
+<p>  <code>include</code> for joins.</p>
+<ul><li><strong>Migrations</strong> — versioned schema changes; <code>prisma migrate dev</code>; keeping</li></ul>
+<p>  environments in sync.</p>
+<h2>Mobile analogies</h2>
+<ul><li><strong>SQL</strong> ≈ Core Data with a strict managed-object model.</li><li><strong>JOIN</strong> ≈ a Core Data relationship fetch (<code>user.posts</code>).</li><li><strong>Migrations</strong> ≈ Core Data lightweight migration policies.</li></ul>
+<h2>Mini project</h2>
+<p>Replace the in-memory array from Phase 1 with PostgreSQL via Prisma. Add a <code>posts</code> table with a foreign key to <code>users</code>, and expose nested reads (<code>/users/:id/posts</code>).</p>
+<h2>Self-check</h2>
+<ul><li>When would you reach for MongoDB over PostgreSQL — and when is that a mistake?</li><li>What's the difference between <code>INNER JOIN</code> and <code>LEFT JOIN</code>?</li><li>An index makes reads faster — what does it cost you?</li><li>Why run migrations instead of editing the schema by hand on each environment?</li></ul>
+<div class="footer">改 KaizenCode — generated from <code>Phase 2 — Databases</code>. Edit the source <code>.md</code> and run <code>node scripts/build-docs.mjs</code> to regenerate.</div>
+</body></html>

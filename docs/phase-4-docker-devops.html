@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Phase 4 — Docker &amp; DevOps · KaizenCode</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fbfbfd;color:#1a1a1a;padding:32px 20px 64px;max-width:740px;margin:0 auto;line-height:1.65}@media(prefers-color-scheme:dark){body{background:#0c0c0e;color:#e8e8e8}}.nav{display:flex;gap:14px;font-size:12.5px;font-weight:600;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid #ececf0}@media(prefers-color-scheme:dark){.nav{border-color:#222226}}.nav a{color:#5350B4;text-decoration:none}@media(prefers-color-scheme:dark){.nav a{color:#8f8cff}}.nav a:hover{text-decoration:underline}h1{font-size:30px;font-weight:700;letter-spacing:-.8px;margin:18px 0 10px;line-height:1.15}h2{font-size:21px;font-weight:700;letter-spacing:-.4px;margin:34px 0 10px;padding-top:18px;border-top:1px solid #ececf0}@media(prefers-color-scheme:dark){h2{border-color:#1d1d20}}h3{font-size:16px;font-weight:700;margin:22px 0 8px}p{font-size:15px;color:#33333a;margin:10px 0}@media(prefers-color-scheme:dark){p{color:#c4c4cc}}a{color:#5350B4}@media(prefers-color-scheme:dark){a{color:#8f8cff}}strong{color:#1a1a1a;font-weight:650}@media(prefers-color-scheme:dark){strong{color:#fff}}ul,ol{margin:10px 0 10px 24px}li{font-size:15px;color:#33333a;margin:5px 0}@media(prefers-color-scheme:dark){li{color:#c4c4cc}}code{font-family:'SF Mono','Fira Code',ui-monospace,monospace;font-size:13px;background:#ececf1;padding:1.5px 6px;border-radius:5px}@media(prefers-color-scheme:dark){code{background:#1c1c20;color:#e8e8e8}}pre{background:#f4f4f7;border:1px solid #e6e6ec;border-radius:10px;padding:14px 16px;overflow-x:auto;margin:14px 0;font-size:13px;line-height:1.7;font-family:'SF Mono','Fira Code',ui-monospace,monospace}pre code{background:none;padding:0}@media(prefers-color-scheme:dark){pre{background:#141417;border-color:#26262b}}blockquote{border-left:3px solid #5350B4;background:#f3f2ff;padding:12px 16px;margin:16px 0;border-radius:0 10px 10px 0;font-size:14.5px;color:#444}@media(prefers-color-scheme:dark){blockquote{background:#16142a;color:#cfcfe6;border-color:#8f8cff}}table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0;display:block;overflow-x:auto}th{background:#f0f0f4;font-weight:650;text-align:left;padding:9px 12px;border:1px solid #e2e2ea}td{padding:9px 12px;border:1px solid #e6e6ec;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#17171b;border-color:#28282e}td{border-color:#222226}}hr{border:none;border-top:1px solid #ececf0;margin:26px 0}@media(prefers-color-scheme:dark){hr{border-color:#222226}}.footer{margin-top:48px;padding-top:20px;border-top:1px solid #ececf0;font-size:12.5px;color:#8a8a92}@media(prefers-color-scheme:dark){.footer{border-color:#222226}}</style></head><body>
+<nav class="nav"><a href="../index.html">← KaizenCode</a><a href="README.html">📚 All docs</a></nav>
+<h1>Phase 4 — Docker &amp; DevOps</h1>
+<p><strong>Weeks 13–16</strong> · <code>phase4_docker_devops.html</code></p>
+<blockquote>Containerise your app, automate your pipeline, ship with confidence.</blockquote>
+<h2>What you'll learn</h2>
+<ul><li><strong>Docker</strong> — containers vs VMs; why "works on my machine" disappears when you</li></ul>
+<p>  package app + dependencies together.</p>
+<ul><li><strong>Dockerfile</strong> — <code>FROM</code>, <code>WORKDIR</code>, <code>COPY</code>, <code>RUN</code>, <code>EXPOSE</code>, <code>CMD</code>; layer</li></ul>
+<p>  caching strategy (order matters for fast rebuilds).</p>
+<ul><li><strong>Docker commands</strong> — <code>build</code>, <code>run</code>, <code>ps</code>, <code>logs</code>, <code>exec</code>, <code>stop</code>, <code>rm</code>,</li></ul>
+<p>  <code>system prune</code>.</p>
+<ul><li><strong>Docker Compose</strong> — multi-container orchestration; one <code>docker-compose.yml</code></li></ul>
+<p>  boots API + database + Redis together.</p>
+<ul><li><strong>CI/CD</strong> — Continuous Integration (run tests on every push) + Continuous</li></ul>
+<p>  Deployment (auto-deploy on green).</p>
+<ul><li><strong>GitHub Actions</strong> — <code>.github/workflows/*.yml</code>; <code>on: push</code>, jobs, steps,</li></ul>
+<p>  <code>actions/checkout</code>, <code>setup-node</code>.</p>
+<ul><li><strong>Nginx</strong> — reverse proxy in front of Node; SSL termination, forwarding plain</li></ul>
+<p>  HTTP internally.</p>
+<h2>Mobile analogies</h2>
+<ul><li><strong>Docker image</strong> ≈ an <code>.ipa</code> / <code>.apk</code> — app + runtime bundled, runs identically</li></ul>
+<p>  anywhere.</p>
+<ul><li><strong><code>docker-compose.yml</code></strong> ≈ a <code>Podfile</code> / <code>Package.swift</code> for your <em>entire</em></li></ul>
+<p>  runtime environment, not just app dependencies.</p>
+<h2>Mini project</h2>
+<p>Dockerise the Express API from Phase 1. Write a <code>docker-compose.yml</code> (API + PostgreSQL). Add a GitHub Actions CI workflow that runs tests on every push.</p>
+<h2>Self-check</h2>
+<ul><li>Why order Dockerfile layers so <code>COPY package.json</code> comes before <code>COPY . .</code>?</li><li>What's the difference between a Docker image and a running container?</li><li>What does a reverse proxy like Nginx give you that exposing Node directly does not?</li></ul>
+<div class="footer">改 KaizenCode — generated from <code>Phase 4 — Docker &amp; DevOps</code>. Edit the source <code>.md</code> and run <code>node scripts/build-docs.mjs</code> to regenerate.</div>
+</body></html>

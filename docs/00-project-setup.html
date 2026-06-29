@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Project Setup &amp; Hosting · KaizenCode</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fbfbfd;color:#1a1a1a;padding:32px 20px 64px;max-width:740px;margin:0 auto;line-height:1.65}@media(prefers-color-scheme:dark){body{background:#0c0c0e;color:#e8e8e8}}.nav{display:flex;gap:14px;font-size:12.5px;font-weight:600;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid #ececf0}@media(prefers-color-scheme:dark){.nav{border-color:#222226}}.nav a{color:#5350B4;text-decoration:none}@media(prefers-color-scheme:dark){.nav a{color:#8f8cff}}.nav a:hover{text-decoration:underline}h1{font-size:30px;font-weight:700;letter-spacing:-.8px;margin:18px 0 10px;line-height:1.15}h2{font-size:21px;font-weight:700;letter-spacing:-.4px;margin:34px 0 10px;padding-top:18px;border-top:1px solid #ececf0}@media(prefers-color-scheme:dark){h2{border-color:#1d1d20}}h3{font-size:16px;font-weight:700;margin:22px 0 8px}p{font-size:15px;color:#33333a;margin:10px 0}@media(prefers-color-scheme:dark){p{color:#c4c4cc}}a{color:#5350B4}@media(prefers-color-scheme:dark){a{color:#8f8cff}}strong{color:#1a1a1a;font-weight:650}@media(prefers-color-scheme:dark){strong{color:#fff}}ul,ol{margin:10px 0 10px 24px}li{font-size:15px;color:#33333a;margin:5px 0}@media(prefers-color-scheme:dark){li{color:#c4c4cc}}code{font-family:'SF Mono','Fira Code',ui-monospace,monospace;font-size:13px;background:#ececf1;padding:1.5px 6px;border-radius:5px}@media(prefers-color-scheme:dark){code{background:#1c1c20;color:#e8e8e8}}pre{background:#f4f4f7;border:1px solid #e6e6ec;border-radius:10px;padding:14px 16px;overflow-x:auto;margin:14px 0;font-size:13px;line-height:1.7;font-family:'SF Mono','Fira Code',ui-monospace,monospace}pre code{background:none;padding:0}@media(prefers-color-scheme:dark){pre{background:#141417;border-color:#26262b}}blockquote{border-left:3px solid #5350B4;background:#f3f2ff;padding:12px 16px;margin:16px 0;border-radius:0 10px 10px 0;font-size:14.5px;color:#444}@media(prefers-color-scheme:dark){blockquote{background:#16142a;color:#cfcfe6;border-color:#8f8cff}}table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0;display:block;overflow-x:auto}th{background:#f0f0f4;font-weight:650;text-align:left;padding:9px 12px;border:1px solid #e2e2ea}td{padding:9px 12px;border:1px solid #e6e6ec;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#17171b;border-color:#28282e}td{border-color:#222226}}hr{border:none;border-top:1px solid #ececf0;margin:26px 0}@media(prefers-color-scheme:dark){hr{border-color:#222226}}.footer{margin-top:48px;padding-top:20px;border-top:1px solid #ececf0;font-size:12.5px;color:#8a8a92}@media(prefers-color-scheme:dark){.footer{border-color:#222226}}</style></head><body>
+<nav class="nav"><a href="../index.html">← KaizenCode</a><a href="README.html">📚 All docs</a></nav>
+<h1>Project Setup &amp; Hosting</h1>
+<p>How KaizenCode is put together, and how it's published to the web for free.</p>
+<h2>What was done</h2>
+<p>This repository started as a loose bundle of six standalone HTML learning files plus a markdown summary. It was turned into a proper, hosted project:</p>
+<ol><li><strong>Renamed</strong> the project from <em>KaizenCore</em> → <strong>KaizenCode</strong> (after <em>Kaizen</em>,</li></ol>
+<p>   改善 — continuous, incremental improvement).</p>
+<ol><li><strong>Built a homepage</strong> (<code>index.html</code>) — a polished landing page that links every</li></ol>
+<p>   phase, explains the philosophy, shows the daily rhythm, and links the docs.    Matches the phases' Apple-style design, accent purple, and automatic dark mode.</p>
+<ol><li><strong>Added project scaffolding</strong> — <code>README.md</code>, <code>CLAUDE.md</code> (contributor/agent</li></ol>
+<p>   guidance), <code>.gitignore</code>, <code>LICENSE</code> (MIT).</p>
+<ol><li><strong>Wrote markdown docs</strong> — this <code>docs/</code> folder: one note per phase plus this</li></ol>
+<p>   setup doc and a future-roadmap analysis.</p>
+<ol><li><strong>Published to GitHub</strong> as a public repo and <strong>hosted it free on GitHub Pages</strong>.</li></ol>
+<h2>Architecture (deliberately boring)</h2>
+<ul><li><strong>Static, zero-dependency, no build step.</strong> Every page is a single HTML file</li></ul>
+<p>  with inline CSS. Nothing to compile, install, or run.</p>
+<ul><li><strong>Why:</strong> it loads instantly, works offline, can't rot from dependency churn,</li></ul>
+<p>  and hosts free anywhere. For learning material, that durability matters more   than tooling sophistication.</p>
+<h2>Hosting: GitHub Pages</h2>
+<p>Because the site is pure static files, GitHub Pages is the simplest fit — it serves files straight from the repo with zero config.</p>
+<pre># One-time, after the repo exists:
+# Settings → Pages → Source: "Deploy from a branch" → main / (root)
+# Or via CLI:
+gh api -X POST repos/&lt;owner&gt;/KaizenCode/pages \
+  -f "source[branch]=main" -f "source[path]=/"</pre>
+<p>Live URL: <code>https://&lt;owner&gt;.github.io/KaizenCode/</code></p>
+<p>Every push to <code>main</code> redeploys automatically in ~1 minute. No pipeline, no secrets, no cost.</p>
+<h2>Best free platforms for static pages — comparison</h2>
+<p>All four below are genuinely free for a project this size. Recommendation first:</p>
+<table><thead><tr><th>Platform</th><th>Best for</th><th>Free tier highlights</th><th>Trade-offs</th></tr></thead><tbody><tr><td><strong>GitHub Pages</strong> ⭐</td><td>Docs/sites already on GitHub</td><td>Free, unlimited static sites, custom domain + free HTTPS, deploy on push</td><td>No server-side code; soft 100 GB/mo bandwidth; build only via Actions</td></tr><tr><td><strong>Cloudflare Pages</strong></td><td>Fastest global delivery</td><td>Unlimited bandwidth, huge CDN, custom domain, preview deploys</td><td>Slightly more setup than Pages</td></tr><tr><td><strong>Netlify</strong></td><td>Forms, redirects, build plugins</td><td>100 GB/mo bandwidth, instant rollbacks, deploy previews</td><td>Build-minute limits if you add a build step</td></tr><tr><td><strong>Vercel</strong></td><td>Next.js / dynamic apps</td><td>Great DX, edge network, previews</td><td>Overkill for plain static; oriented around frameworks</td></tr></tbody></table>
+<p><strong>Recommendation: GitHub Pages.</strong> The content already lives on GitHub, there's no build step, and "push to <code>main</code>" is the entire deploy process. If you later want unlimited bandwidth or edge functions, <strong>Cloudflare Pages</strong> is the easiest upgrade — point it at the same repo, no code changes.</p>
+<h2>Custom domain (optional, later)</h2>
+<p>Any of the above support a free custom domain with auto HTTPS. For GitHub Pages: add a <code>CNAME</code> file with your domain, then point a DNS <code>CNAME</code>/<code>A</code> record at GitHub. You only pay for the domain itself (~$10/yr), never the hosting.</p>
+<div class="footer">改 KaizenCode — generated from <code>Project Setup &amp; Hosting</code>. Edit the source <code>.md</code> and run <code>node scripts/build-docs.mjs</code> to regenerate.</div>
+</body></html>

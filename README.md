@@ -58,14 +58,35 @@ KaizenCode/
 ├── phase5_aws_cloud.html
 ├── phase6_distributed_systems_kafka.html
 ├── roadmap_summary_md.md                   # full text summary of all phases
-├── docs/                                   # markdown companion docs (per phase + meta)
+├── mastery_*.html                          # 11 Mastery Track modules (inline runnable code)
+├── roadmap_summary_md.md                   # full text summary of all phases
+├── docs/                                   # markdown companion docs (+ generated .html siblings)
 │   ├── README.md
 │   ├── 00-project-setup.md
+│   ├── expansion-analysis.md               # gap analysis behind the Mastery Track
 │   ├── phase-1-http-backend-foundations.md
 │   ├── … (phases 2–6)
 │   └── future-roadmap.md
+├── scripts/build-docs.mjs                  # optional generator: docs/*.md → styled .html
 ├── CLAUDE.md                               # guidance for Claude Code / contributors
 └── README.md
+```
+
+### Two tracks
+
+- **Core phases (1–6)** — the ordered "build & run a system" journey.
+- **Mastery Track** — 11 cross-cutting modules (named, not numbered) covering
+  observability, security, testing, APIs, IaC, leadership, CI/CD, event-driven
+  systems, data engineering, performance, and cloud cost. Each has **inline
+  runnable code** (copy + ▶ Run buttons) and stays zero-dependency.
+
+### Docs as HTML
+
+The `docs/*.md` files are the source of truth and render on GitHub. Styled,
+site-matching HTML versions are generated with a zero-dependency script:
+
+```bash
+node scripts/build-docs.mjs    # regenerate docs/*.html after editing any .md
 ```
 
 ## Hosting

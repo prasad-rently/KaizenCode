@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Roadmap Summary · KaizenCode</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fbfbfd;color:#1a1a1a;padding:32px 20px 64px;max-width:740px;margin:0 auto;line-height:1.65}@media(prefers-color-scheme:dark){body{background:#0c0c0e;color:#e8e8e8}}.nav{display:flex;gap:14px;font-size:12.5px;font-weight:600;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid #ececf0}@media(prefers-color-scheme:dark){.nav{border-color:#222226}}.nav a{color:#5350B4;text-decoration:none}@media(prefers-color-scheme:dark){.nav a{color:#8f8cff}}.nav a:hover{text-decoration:underline}h1{font-size:30px;font-weight:700;letter-spacing:-.8px;margin:18px 0 10px;line-height:1.15}h2{font-size:21px;font-weight:700;letter-spacing:-.4px;margin:34px 0 10px;padding-top:18px;border-top:1px solid #ececf0}@media(prefers-color-scheme:dark){h2{border-color:#1d1d20}}h3{font-size:16px;font-weight:700;margin:22px 0 8px}p{font-size:15px;color:#33333a;margin:10px 0}@media(prefers-color-scheme:dark){p{color:#c4c4cc}}a{color:#5350B4}@media(prefers-color-scheme:dark){a{color:#8f8cff}}strong{color:#1a1a1a;font-weight:650}@media(prefers-color-scheme:dark){strong{color:#fff}}ul,ol{margin:10px 0 10px 24px}li{font-size:15px;color:#33333a;margin:5px 0}@media(prefers-color-scheme:dark){li{color:#c4c4cc}}code{font-family:'SF Mono','Fira Code',ui-monospace,monospace;font-size:13px;background:#ececf1;padding:1.5px 6px;border-radius:5px}@media(prefers-color-scheme:dark){code{background:#1c1c20;color:#e8e8e8}}pre{background:#f4f4f7;border:1px solid #e6e6ec;border-radius:10px;padding:14px 16px;overflow-x:auto;margin:14px 0;font-size:13px;line-height:1.7;font-family:'SF Mono','Fira Code',ui-monospace,monospace}pre code{background:none;padding:0}@media(prefers-color-scheme:dark){pre{background:#141417;border-color:#26262b}}blockquote{border-left:3px solid #5350B4;background:#f3f2ff;padding:12px 16px;margin:16px 0;border-radius:0 10px 10px 0;font-size:14.5px;color:#444}@media(prefers-color-scheme:dark){blockquote{background:#16142a;color:#cfcfe6;border-color:#8f8cff}}table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0;display:block;overflow-x:auto}th{background:#f0f0f4;font-weight:650;text-align:left;padding:9px 12px;border:1px solid #e2e2ea}td{padding:9px 12px;border:1px solid #e6e6ec;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#17171b;border-color:#28282e}td{border-color:#222226}}hr{border:none;border-top:1px solid #ececf0;margin:26px 0}@media(prefers-color-scheme:dark){hr{border-color:#222226}}.footer{margin-top:48px;padding-top:20px;border-top:1px solid #ececf0;font-size:12.5px;color:#8a8a92}@media(prefers-color-scheme:dark){.footer{border-color:#222226}}</style></head><body>
+<nav class="nav"><a href="index.html">← KaizenCode</a><a href="docs/README.html">📚 All docs</a></nav>
+<h1>KaizenCode Learning Roadmap — Summary</h1>
+<blockquote>A 24-week self-study program for a 14+ year Mobile Engineer (iOS / React Native) transitioning toward a CTO / Engineering Manager role. All 6 phases are available as standalone HTML reference files.</blockquote>
+<hr>
+<h2>Overview</h2>
+<table><thead><tr><th>#</th><th>Phase</th><th>Duration</th><th>Key Technologies</th></tr></thead><tbody><tr><td>1</td><td>HTTP &amp; Backend Foundations</td><td>Weeks 1–4</td><td>HTTP, Node.js, Express, JWT, REST</td></tr><tr><td>2</td><td>Databases</td><td>Weeks 5–8</td><td>PostgreSQL, MongoDB, Prisma, SQL</td></tr><tr><td>3</td><td>Full Stack: Next.js &amp; MERN</td><td>Weeks 9–12</td><td>React, Next.js, MERN, Vercel</td></tr><tr><td>4</td><td>Docker &amp; DevOps</td><td>Weeks 13–16</td><td>Docker, Compose, GitHub Actions, Nginx</td></tr><tr><td>5</td><td>Cloud: AWS</td><td>Weeks 17–20</td><td>EC2, S3, RDS, Lambda, IAM, VPC</td></tr><tr><td>6</td><td>Distributed Systems &amp; Kafka</td><td>Weeks 21–24</td><td>Kafka, Redis, Microservices, CAP</td></tr></tbody></table>
+<p><strong>Daily commitment:</strong> 1–2 hrs/day (30 min concept + 30 min hands-on code)</p>
+<hr>
+<h2>Phase 1 — HTTP &amp; Backend Foundations</h2>
+<p><strong>File:</strong> <code>phase1_http_backend_foundations.html</code> · Weeks 1–4</p>
+<p>The building block for everything else. You've consumed REST APIs for 14 years — this phase teaches you to build them.</p>
+<h3>What you'll learn</h3>
+<ul><li><strong>HTTP protocol</strong> — request/response cycle, methods (GET POST PUT PATCH DELETE), status codes (2xx / 4xx / 5xx), headers, and body anatomy</li><li><strong>Node.js</strong> — JavaScript running on the server; no browser, no UI, just logic and I/O</li><li><strong>npm</strong> — package management, <code>package.json</code>, <code>node_modules</code>, scripts</li><li><strong>Express.js</strong> — routing, middleware pipeline, request/response helpers</li><li><strong>Middleware</strong> — logging, authentication guards, error handlers</li><li><strong>JWT Auth</strong> — stateless token-based authentication; issue on login, verify on every request</li><li><strong>REST API design</strong> — nouns in URLs, correct HTTP verbs, versioning, nested resources</li></ul>
+<h3>Mini project</h3>
+<p>Build a full CRUD REST API for a <code>tasks</code> resource using Express + JWT auth. Test with Postman or curl.</p>
+<hr>
+<h2>Phase 2 — Databases</h2>
+<p><strong>File:</strong> <code>phase2_databases.html</code> · Weeks 5–8</p>
+<p>Where your data lives permanently — queryable, relational, and built for scale.</p>
+<h3>What you'll learn</h3>
+<ul><li><strong>SQL vs NoSQL</strong> — when to use relational (transactions, relationships) vs document (flexible schema, high write volume)</li><li><strong>PostgreSQL</strong> — tables, columns, data types, <code>CREATE TABLE</code>, <code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code>, <code>DELETE</code></li><li><strong>SQL queries</strong> — <code>WHERE</code>, <code>ORDER BY</code>, <code>LIMIT OFFSET</code> (pagination), <code>GROUP BY</code>, <code>COUNT</code></li><li><strong>JOINs</strong> — <code>INNER JOIN</code>, <code>LEFT JOIN</code>, foreign keys, <code>ON DELETE CASCADE</code></li><li><strong>Indexes</strong> — why queries slow down at scale, how indexes work, which columns to index</li><li><strong>MongoDB</strong> — documents, collections, schema-free design, <code>find</code> / <code>create</code> / <code>findByIdAndUpdate</code></li><li><strong>Prisma ORM</strong> — type-safe database access, <code>schema.prisma</code>, auto-generated client, <code>include</code> for joins</li><li><strong>Migrations</strong> — versioned schema changes, <code>prisma migrate dev</code>, keeping environments in sync</li></ul>
+<h3>Mobile analogies</h3>
+<ul><li>SQL = Core Data with a strict managed object model</li><li>JOIN = Core Data relationship fetch (<code>user.posts</code>)</li><li>Migrations = Core Data lightweight migration policies</li></ul>
+<h3>Mini project</h3>
+<p>Replace the in-memory array from Phase 1 with PostgreSQL via Prisma. Add a <code>posts</code> table with a foreign key to <code>users</code>.</p>
+<hr>
+<h2>Phase 3 — Full Stack: Next.js &amp; MERN</h2>
+<p><strong>File:</strong> <code>phase3_nextjs_mern_fullstack.html</code> · Weeks 9–12</p>
+<p>React Native to React web is a small step. Full-stack is one more.</p>
+<h3>What you'll learn</h3>
+<ul><li><strong>React for web</strong> — same hooks, same component model; only primitives change (<code>&lt;View&gt;</code> → <code>&lt;div&gt;</code>, <code>StyleSheet</code> → Tailwind/CSS)</li><li><strong>Next.js</strong> — file-based routing (same as Expo Router), <code>app/</code> directory, <code>page.tsx</code>, dynamic <code>[id]</code> segments</li><li><strong>Rendering modes</strong></li><li><code>CSR</code> — client-side rendering; empty HTML shell, React hydrates in browser (dashboards, auth-gated pages)</li><li><code>SSG</code> — static generation at build time; fastest, CDN-cacheable (blogs, docs, marketing)</li><li><code>SSR</code> — server-side rendering per request; fresh data + SEO (product pages, feeds)</li><li><strong>API Routes</strong> — backend endpoints inside the same Next.js project (<code>app/api/users/route.ts</code>)</li><li><strong>MERN stack</strong> — MongoDB + Express + React + Node; one language end-to-end</li><li><strong>Environment variables</strong> — <code>.env.local</code>, <code>NEXT_PUBLIC_*</code> (browser-safe) vs private server-only vars</li><li><strong>Deployment</strong> — Vercel for Next.js (auto-deploy from GitHub), Render for Express backends, MongoDB Atlas for cloud DB</li></ul>
+<h3>Mobile analogies</h3>
+<ul><li>Next.js = Expo (React Native bare → full framework)</li><li>API Routes = a mini Express server baked into your Expo project</li><li><code>fetch()</code> calls are identical to React Native — zero learning curve</li></ul>
+<h3>Mini project</h3>
+<p>A personal link manager: add URL + title, list all links, delete a link. Stack: Next.js + MongoDB Atlas + Vercel.</p>
+<hr>
+<h2>Phase 4 — Docker &amp; DevOps</h2>
+<p><strong>File:</strong> <code>phase4_docker_devops.html</code> · Weeks 13–16</p>
+<p>Containerise your app, automate your pipeline, ship with confidence.</p>
+<h3>What you'll learn</h3>
+<ul><li><strong>Docker</strong> — containers vs VMs; why "works on my machine" is solved by packaging app + deps together</li><li><strong>Dockerfile</strong> — <code>FROM</code>, <code>WORKDIR</code>, <code>COPY</code>, <code>RUN</code>, <code>EXPOSE</code>, <code>CMD</code>; layer caching strategy</li><li><strong>Docker commands</strong> — <code>build</code>, <code>run</code>, <code>ps</code>, <code>logs</code>, <code>exec</code>, <code>stop</code>, <code>rm</code>, <code>system prune</code></li><li><strong>Docker Compose</strong> — multi-container orchestration; one <code>docker-compose.yml</code> boots API + database + Redis together</li><li><strong>CI/CD</strong> — Continuous Integration (run tests on every push) + Continuous Deployment (auto-deploy on green)</li><li><strong>GitHub Actions</strong> — <code>.github/workflows/*.yml</code>; <code>on: push</code>, jobs, steps, <code>actions/checkout</code>, <code>setup-node</code></li><li><strong>Nginx</strong> — reverse proxy in front of Node.js; handles SSL termination, forwards plain HTTP internally</li></ul>
+<h3>Mobile analogies</h3>
+<ul><li>Docker image = <code>.ipa</code> / <code>.apk</code> — app + runtime bundled, runs identically anywhere</li><li><code>docker-compose.yml</code> = <code>Podfile</code> / <code>Package.swift</code> for your entire runtime environment</li></ul>
+<h3>Mini project</h3>
+<p>Dockerise the Express API from Phase 1. Write a <code>docker-compose.yml</code> (API + PostgreSQL). Add a GitHub Actions CI workflow that runs tests on every push.</p>
+<hr>
+<h2>Phase 5 — Cloud: AWS</h2>
+<p><strong>File:</strong> <code>phase5_aws_cloud.html</code> · Weeks 17–20</p>
+<p>The infrastructure layer every CTO must own.</p>
+<h3>What you'll learn</h3>
+<ul><li><strong>Mental model</strong> — regions, availability zones; renting infrastructure via API instead of owning hardware</li><li><strong>EC2</strong> — virtual machines; SSH access, AMIs, security groups, Elastic IPs, instance types (<code>t3.micro</code> → <code>m6i.large</code>)</li><li><strong>S3</strong> — object storage for files; buckets, keys, public URLs; never store uploads on EC2 disk</li><li><strong>RDS</strong> — managed PostgreSQL/MySQL; automated backups, multi-AZ failover, read replicas; alternatives: Supabase, PlanetScale</li><li><strong>Lambda</strong> — serverless functions triggered by HTTP, S3 events, schedules; pay per invocation; watch cold starts</li><li><strong>IAM</strong> — users, roles, policies; principle of least privilege; never hardcode access keys in application code</li><li><strong>VPC</strong> — public subnets (load balancer) vs private subnets (app servers + databases); RDS always in private subnet</li><li><strong>CloudWatch</strong> — logs, metrics, alarms; first stop when production breaks</li><li><strong>Route 53</strong> — DNS, domain registration, health checks, failover routing</li></ul>
+<h3>Mobile analogies</h3>
+<ul><li>AWS = iCloud for everything; consume infrastructure via API without managing hardware</li><li>S3 = a global file server; store the URL in DB, serve files from S3 CDN</li></ul>
+<h3>Standard production architecture</h3>
+<pre>Route 53 → CloudFront (CDN) → ALB → EC2 (private subnet) → RDS (private subnet)
+                                                          → S3 (assets/uploads)
+                                                          → CloudWatch (monitoring)</pre>
+<hr>
+<h2>Phase 6 — Distributed Systems &amp; Kafka</h2>
+<p><strong>File:</strong> <code>phase6_distributed_systems_kafka.html</code> · Weeks 21–24</p>
+<p>How large-scale systems are really built. The CTO's mental model for architecture.</p>
+<h3>What you'll learn</h3>
+<ul><li><strong>Scaling</strong> — vertical (bigger server, ceiling exists) vs horizontal (more servers, requires coordination)</li><li><strong>Message queues</strong> — loose coupling via async messaging; producer drops event, consumer picks it up independently</li><li><strong>Apache Kafka</strong></li><li>Topics, partitions, producers, consumers, consumer groups, brokers, offsets</li><li>Message retention (7-day default) enables replay — new services can consume historical events</li><li>Kafka vs SQS/RabbitMQ: Kafka retains; SQS deletes on consume</li><li><strong>Redis</strong> — in-memory store; cache-aside pattern, rate limiting, session storage, leaderboards (sorted sets), pub/sub; complements DB, never replaces it</li><li><strong>Microservices vs Monolith</strong> — start with a monolith; split only when you have a proven, specific scale or team ownership problem</li><li><strong>CAP theorem</strong> — Consistency vs Availability during network partition; PostgreSQL = CP; Cassandra/DynamoDB = AP</li><li><strong>System design patterns</strong> — load balancing, multi-layer caching (CDN → Redis → DB), rate limiting, circuit breaker, database sharding, event sourcing</li></ul>
+<h3>Mobile analogies</h3>
+<ul><li>Kafka = APNs at massive scale; fire-and-forget, consumer processes when ready, supports replay</li><li>Message queue = the exact pattern behind every push notification you've ever implemented</li></ul>
+<h3>The CTO architecture lens (key questions)</h3>
+<ol><li>Where is the actual bottleneck?</li><li>What happens when any single component goes down?</li><li>Can we replay events if a consumer fails mid-processing?</li><li>How do we trace a request across multiple services?</li><li>Are we solving a problem we actually have, or one we imagine at scale?</li><li>Could a well-indexed Postgres + Redis solve this instead of Kafka?</li><li>What's the operational burden on a small team?</li></ol>
+<blockquote><strong>Rule of three:</strong> Add architectural complexity only after hitting the same limit three times.</blockquote>
+<hr>
+<h2>How to use these files</h2>
+<ol><li>Open any HTML file directly in your browser — no server needed</li><li>All files support <strong>dark mode</strong> automatically</li><li>Each file is self-contained — no external dependencies</li><li>Read sequentially (Phase 1 → 6) or use as reference during Q&amp;A</li></ol>
+<h2>Recommended learning rhythm</h2>
+<table><thead><tr><th>Time</th><th>Activity</th></tr></thead><tbody><tr><td>30 min</td><td>Read the phase section for the day</td></tr><tr><td>30 min</td><td>Write the code example by hand (don't copy-paste)</td></tr><tr><td>End of week</td><td>Build the mini project</td></tr><tr><td>Ongoing</td><td>Keep a "how would I architect this?" journal</td></tr></tbody></table>
+<h2>Files in this bundle</h2>
+<pre>KaizenCode/
+├── index.html                              # homepage
+├── phase1_http_backend_foundations.html
+├── phase2_databases.html
+├── phase3_nextjs_mern_fullstack.html
+├── phase4_docker_devops.html
+├── phase5_aws_cloud.html
+└── phase6_distributed_systems_kafka.html</pre>
+<hr>
+<p><em>Generated as part of a personalised CTO upskilling program for a 14+ year Mobile Engineer.</em></p>
+<div class="footer">改 KaizenCode — generated from <code>Roadmap Summary</code>. Edit the source <code>.md</code> and run <code>node scripts/build-docs.mjs</code> to regenerate.</div>
+</body></html>

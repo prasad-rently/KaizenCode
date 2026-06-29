@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Phase 6 — Distributed Systems &amp; Kafka · KaizenCode</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fbfbfd;color:#1a1a1a;padding:32px 20px 64px;max-width:740px;margin:0 auto;line-height:1.65}@media(prefers-color-scheme:dark){body{background:#0c0c0e;color:#e8e8e8}}.nav{display:flex;gap:14px;font-size:12.5px;font-weight:600;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid #ececf0}@media(prefers-color-scheme:dark){.nav{border-color:#222226}}.nav a{color:#5350B4;text-decoration:none}@media(prefers-color-scheme:dark){.nav a{color:#8f8cff}}.nav a:hover{text-decoration:underline}h1{font-size:30px;font-weight:700;letter-spacing:-.8px;margin:18px 0 10px;line-height:1.15}h2{font-size:21px;font-weight:700;letter-spacing:-.4px;margin:34px 0 10px;padding-top:18px;border-top:1px solid #ececf0}@media(prefers-color-scheme:dark){h2{border-color:#1d1d20}}h3{font-size:16px;font-weight:700;margin:22px 0 8px}p{font-size:15px;color:#33333a;margin:10px 0}@media(prefers-color-scheme:dark){p{color:#c4c4cc}}a{color:#5350B4}@media(prefers-color-scheme:dark){a{color:#8f8cff}}strong{color:#1a1a1a;font-weight:650}@media(prefers-color-scheme:dark){strong{color:#fff}}ul,ol{margin:10px 0 10px 24px}li{font-size:15px;color:#33333a;margin:5px 0}@media(prefers-color-scheme:dark){li{color:#c4c4cc}}code{font-family:'SF Mono','Fira Code',ui-monospace,monospace;font-size:13px;background:#ececf1;padding:1.5px 6px;border-radius:5px}@media(prefers-color-scheme:dark){code{background:#1c1c20;color:#e8e8e8}}pre{background:#f4f4f7;border:1px solid #e6e6ec;border-radius:10px;padding:14px 16px;overflow-x:auto;margin:14px 0;font-size:13px;line-height:1.7;font-family:'SF Mono','Fira Code',ui-monospace,monospace}pre code{background:none;padding:0}@media(prefers-color-scheme:dark){pre{background:#141417;border-color:#26262b}}blockquote{border-left:3px solid #5350B4;background:#f3f2ff;padding:12px 16px;margin:16px 0;border-radius:0 10px 10px 0;font-size:14.5px;color:#444}@media(prefers-color-scheme:dark){blockquote{background:#16142a;color:#cfcfe6;border-color:#8f8cff}}table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0;display:block;overflow-x:auto}th{background:#f0f0f4;font-weight:650;text-align:left;padding:9px 12px;border:1px solid #e2e2ea}td{padding:9px 12px;border:1px solid #e6e6ec;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#17171b;border-color:#28282e}td{border-color:#222226}}hr{border:none;border-top:1px solid #ececf0;margin:26px 0}@media(prefers-color-scheme:dark){hr{border-color:#222226}}.footer{margin-top:48px;padding-top:20px;border-top:1px solid #ececf0;font-size:12.5px;color:#8a8a92}@media(prefers-color-scheme:dark){.footer{border-color:#222226}}</style></head><body>
+<nav class="nav"><a href="../index.html">← KaizenCode</a><a href="README.html">📚 All docs</a></nav>
+<h1>Phase 6 — Distributed Systems &amp; Kafka</h1>
+<p><strong>Weeks 21–24</strong> · <code>phase6_distributed_systems_kafka.html</code></p>
+<blockquote>How large-scale systems are really built. The CTO's mental model for architecture.</blockquote>
+<h2>What you'll learn</h2>
+<ul><li><strong>Scaling</strong> — vertical (bigger server, hard ceiling) vs horizontal (more</li></ul>
+<p>  servers, requires coordination).</p>
+<ul><li><strong>Message queues</strong> — loose coupling via async messaging: producer drops an</li></ul>
+<p>  event, consumer picks it up independently.</p>
+<ul><li><strong>Apache Kafka</strong></li><li>Topics, partitions, producers, consumers, consumer groups, brokers, offsets.</li><li>Message retention (7-day default) enables <strong>replay</strong> — new services can</li></ul>
+<p>    consume historical events.</p>
+<ul><li>Kafka vs SQS/RabbitMQ: Kafka <em>retains</em>; SQS <em>deletes on consume</em>.</li><li><strong>Redis</strong> — in-memory store; cache-aside, rate limiting, session storage,</li></ul>
+<p>  leaderboards (sorted sets), pub/sub. Complements the DB, never replaces it.</p>
+<ul><li><strong>Microservices vs monolith</strong> — start with a monolith; split only for a proven,</li></ul>
+<p>  specific scale or team-ownership problem.</p>
+<ul><li><strong>CAP theorem</strong> — Consistency vs Availability during a network partition.</li></ul>
+<p>  PostgreSQL = CP; Cassandra/DynamoDB = AP.</p>
+<ul><li><strong>System-design patterns</strong> — load balancing, multi-layer caching</li></ul>
+<p>  (CDN → Redis → DB), rate limiting, circuit breaker, sharding, event sourcing.</p>
+<h2>Mobile analogies</h2>
+<ul><li><strong>Kafka</strong> ≈ APNs at massive scale — fire-and-forget, consumer processes when</li></ul>
+<p>  ready, supports replay.</p>
+<ul><li><strong>Message queue</strong> ≈ the exact pattern behind every push notification you've</li></ul>
+<p>  ever implemented.</p>
+<h2>The CTO architecture lens (ask these)</h2>
+<ol><li>Where is the actual bottleneck?</li><li>What happens when any single component goes down?</li><li>Can we replay events if a consumer fails mid-processing?</li><li>How do we trace a request across multiple services?</li><li>Are we solving a problem we <em>have</em>, or one we <em>imagine</em> at scale?</li><li>Could a well-indexed Postgres + Redis solve this instead of Kafka?</li><li>What's the operational burden on a small team?</li></ol>
+<blockquote><strong>Rule of three:</strong> add architectural complexity only after hitting the same limit three times.</blockquote>
+<h2>Self-check</h2>
+<ul><li>Explain CAP using PostgreSQL and DynamoDB as the two examples.</li><li>Why does Kafka's retention enable use cases SQS can't?</li><li>Give one thing Redis should do and one thing it should never be the system of</li></ul>
+<p>  record for.</p>
+<div class="footer">改 KaizenCode — generated from <code>Phase 6 — Distributed Systems &amp; Kafka</code>. Edit the source <code>.md</code> and run <code>node scripts/build-docs.mjs</code> to regenerate.</div>
+</body></html>
