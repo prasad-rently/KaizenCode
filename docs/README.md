@@ -7,7 +7,21 @@ meta-docs on how the project was built and where it's going.
 ## Meta
 
 - [`00-project-setup.md`](00-project-setup.md) — how KaizenCode is structured, how it's hosted free, and a comparison of static-hosting platforms.
+- [`expansion-analysis.md`](expansion-analysis.md) — deeper gap analysis and the new **Mastery Track** modules.
 - [`future-roadmap.md`](future-roadmap.md) — analysis of the project and ideas to explore next.
+
+## Mastery Track (new modules)
+
+Cross-cutting skills beyond the core six, with **inline runnable code** (copy + ▶ Run):
+
+| Module | Topic |
+|--------|-------|
+| 🗼 [The Watchtower](../mastery_watchtower_observability.html) | Observability — logs, metrics, tracing, SLOs |
+| 🔐 [The Vault](../mastery_vault_security.html) | Security & auth — OWASP, hashing, JWT, secrets |
+| 🪢 [The Safety Net](../mastery_safety_net_testing.html) | Testing — pyramid, TDD, mocking, coverage |
+| 🚪 [The Gateway](../mastery_gateway_apis.html) | API design — GraphQL, N+1, pagination, rate limiting |
+| 📐 [The Blueprint](../mastery_blueprint_iac.html) | Infrastructure as Code — Terraform, state, GitOps |
+| 🧭 [The Compass](../mastery_compass_leadership.html) | Engineering leadership — system design, ADRs, on-call |
 
 ## Phase notes
 

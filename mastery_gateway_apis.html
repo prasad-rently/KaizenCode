@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Gateway — GraphQL &amp; Modern APIs</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · API Design</span>
+<h1>🚪 The Gateway</h1>
+<p class="sub">Phase 1 taught you REST. Real systems also speak GraphQL and gRPC, sit behind gateways, and must paginate, rate-limit, and version gracefully. This is the front door done right.</p>
+
+<h2><span class="sn">1</span>REST vs GraphQL vs gRPC</h2>
+<table>
+<tr><th></th><th>REST</th><th>GraphQL</th><th>gRPC</th></tr>
+<tr><td>Shape</td><td>Many URLs</td><td>One endpoint, you ask for fields</td><td>Binary RPC over HTTP/2</td></tr>
+<tr><td>Over/under-fetch</td><td>Common</td><td>Client picks exact fields</td><td>Schema-defined</td></tr>
+<tr><td>Best for</td><td>Public, cacheable APIs</td><td>Rich mobile/web clients</td><td>Service-to-service, low latency</td></tr>
+</table>
+<div class="tip"><strong>Mobile analogy:</strong> with REST you often hit <code>/user</code> then <code>/user/posts</code> then <code>/posts/comments</code> — three round trips. GraphQL lets the app request the whole tree in <em>one</em> query, asking only for the fields the screen renders.</div>
+
+<h2><span class="sn">2</span>How a resolver actually works</h2>
+<p>GraphQL isn't magic — a <strong>resolver</strong> is just a function per field. Run a tiny GraphQL-style engine: ask for specific fields, get back exactly those.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Resolvers: one function per field</span>
+<span class="kw">const</span> db = { <span class="num">42</span>: { id: <span class="num">42</span>, name: <span class="str">'Gokul'</span>, email: <span class="str">'g@x.io'</span>, secret: <span class="str">'hidden'</span> } };
+<span class="kw">const</span> resolvers = {
+  <span class="fn">user</span>: ({ id }) =&gt; db[id],
+  <span class="fn">name</span>: (u) =&gt; u.name,
+  <span class="fn">email</span>: (u) =&gt; u.email,
+};
+<span class="cm">// the "query": give me name + email for user 42 (not secret)</span>
+<span class="kw">const</span> user = resolvers.<span class="fn">user</span>({ id: <span class="num">42</span> });
+<span class="kw">const</span> result = {
+  name: resolvers.<span class="fn">name</span>(user),
+  email: resolvers.<span class="fn">email</span>(user),
+};
+console.<span class="fn">log</span>(result); <span class="cm">// exactly the fields asked for</span></pre><div class="out"></div></div>
+
+<h2><span class="sn">3</span>The N+1 problem (GraphQL's classic trap)</h2>
+<p>Naively resolving a list + a nested field fires 1 query for the list, then N more — one per item. At scale this melts your database. Run it to see 1+N vs the batched fix.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Simulated DB hits</span>
+<span class="kw">let</span> naive = <span class="num">0</span>, batched = <span class="num">0</span>;
+<span class="kw">const</span> postIds = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>];
+
+<span class="cm">// ❌ N+1: 1 query for posts + 1 per author</span>
+naive++;                              <span class="cm">// fetch posts</span>
+postIds.<span class="fn">forEach</span>(() =&gt; naive++);      <span class="cm">// fetch each author</span>
+
+<span class="cm">// ✅ batched (DataLoader): 1 for posts + 1 for ALL authors</span>
+batched++;                            <span class="cm">// fetch posts</span>
+batched++;                            <span class="cm">// fetch authors WHERE id IN (...)</span>
+
+console.<span class="fn">log</span>(<span class="str">'naive queries:  '</span>, naive,   <span class="str">'(1 + N)'</span>);
+console.<span class="fn">log</span>(<span class="str">'batched queries:'</span>, batched, <span class="str">'(constant)'</span>);
+console.<span class="fn">log</span>(<span class="str">'fix → DataLoader: collect ids, one IN-query per tick'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">4</span>Cursor pagination (do this, not OFFSET)</h2>
+<p>Phase 2 used <code>LIMIT/OFFSET</code>. It breaks on live data: insert a row and page 2 shifts, showing duplicates. <strong>Cursor</strong> pagination ("everything after id X") is stable and fast.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Keyset / cursor pagination</span>
+<span class="kw">const</span> rows = [{id:<span class="num">10</span>},{id:<span class="num">9</span>},{id:<span class="num">8</span>},{id:<span class="num">7</span>},{id:<span class="num">6</span>},{id:<span class="num">5</span>}];
+<span class="kw">function</span> <span class="fn">page</span>(afterId, size) {
+  <span class="kw">const</span> start = afterId == <span class="kw">null</span>
+    ? <span class="num">0</span>
+    : rows.<span class="fn">findIndex</span>(r =&gt; r.id === afterId) + <span class="num">1</span>;
+  <span class="kw">const</span> slice = rows.<span class="fn">slice</span>(start, start + size);
+  <span class="kw">return</span> { items: slice, nextCursor: slice.length ? slice[slice.length-<span class="num">1</span>].id : <span class="kw">null</span> };
+}
+<span class="kw">const</span> p1 = <span class="fn">page</span>(<span class="kw">null</span>, <span class="num">2</span>);
+console.<span class="fn">log</span>(<span class="str">'page 1:'</span>, p1);
+console.<span class="fn">log</span>(<span class="str">'page 2:'</span>, <span class="fn">page</span>(p1.nextCursor, <span class="num">2</span>)); <span class="cm">// stable even if rows inserted</span></pre><div class="out"></div></div>
+
+<h2><span class="sn">5</span>Rate limiting (the token bucket)</h2>
+<p>An API gateway's job: protect the backend. The <strong>token bucket</strong> allows bursts up to a cap, then throttles to a steady refill rate. Run it — the 4th rapid request gets blocked.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Token bucket: capacity 3</span>
+<span class="kw">function</span> <span class="fn">makeBucket</span>(capacity) {
+  <span class="kw">let</span> tokens = capacity;
+  <span class="kw">return</span> () =&gt; {
+    <span class="kw">if</span> (tokens &gt; <span class="num">0</span>) { tokens--; <span class="kw">return</span> <span class="str">'200 OK   (tokens left: '</span> + tokens + <span class="str">')'</span>; }
+    <span class="kw">return</span> <span class="str">'429 Too Many Requests'</span>;
+  };
+}
+<span class="kw">const</span> allow = <span class="fn">makeBucket</span>(<span class="num">3</span>);
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt;= <span class="num">5</span>; i++)
+  console.<span class="fn">log</span>(<span class="str">'req '</span> + i + <span class="str">': '</span> + <span class="fn">allow</span>());</pre><div class="out"></div></div>
+
+<h2><span class="sn">6</span>API gateways &amp; versioning</h2>
+<ul>
+<li><strong>Gateway</strong> = one front door (Kong, AWS API Gateway, Nginx) handling auth, rate limiting, routing, and TLS — so each service doesn't reimplement them.</li>
+<li><strong>Versioning</strong> — never break existing clients. Add <code>/api/v2</code> alongside <code>v1</code>; deprecate with a sunset header and a timeline.</li>
+<li><strong>Idempotency keys</strong> — let clients safely retry <code>POST</code> (payments!) without double-charging.</li>
+</ul>
+
+<div class="ok"><strong>Try it:</strong> Put the Phase 1 REST API behind a GraphQL layer — one <code>user(id)</code> query with <code>name</code> and nested <code>tasks</code>, using a DataLoader to dodge N+1. Then add token-bucket rate limiting as Express middleware.</div>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>

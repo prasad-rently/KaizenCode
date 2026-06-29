@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Watchtower — Observability</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Observability</span>
+<h1>🗼 The Watchtower</h1>
+<p class="sub">You can't operate what you can't see. When production breaks at 2am, observability is the difference between a five-minute fix and a five-hour outage.</p>
+
+<h2><span class="sn">1</span>The three pillars</h2>
+<p>Observability is built from three signal types. Logs tell you <em>what happened</em>, metrics tell you <em>how much / how often</em>, traces tell you <em>where the time went</em> across services.</p>
+<table>
+<tr><th>Pillar</th><th>Answers</th><th>Mobile analogy</th></tr>
+<tr><td><strong>Logs</strong></td><td>"What exactly happened on this request?"</td><td>Xcode console / <code>os_log</code></td></tr>
+<tr><td><strong>Metrics</strong></td><td>"How many requests/sec? p99 latency?"</td><td>MetricKit / crash-free rate</td></tr>
+<tr><td><strong>Traces</strong></td><td>"Which service made this slow?"</td><td>Instruments time profiler</td></tr>
+</table>
+
+<h2><span class="sn">2</span>Structured logging</h2>
+<p>Stop logging strings. Log <strong>JSON objects</strong> with consistent fields — they're searchable, filterable, and aggregatable. A <code>requestId</code> ties every line of one request together.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// A tiny structured logger — run it</span>
+<span class="kw">const</span> <span class="fn">log</span> = (level, msg, meta = {}) =&gt; {
+  console.<span class="fn">log</span>(JSON.<span class="fn">stringify</span>({
+    ts: <span class="kw">new</span> <span class="fn">Date</span>().<span class="fn">toISOString</span>(),
+    level, msg, ...meta
+  }));
+};
+
+<span class="kw">const</span> requestId = <span class="str">'req_8f2a'</span>;
+<span class="fn">log</span>(<span class="str">'info'</span>, <span class="str">'request received'</span>, { requestId, route: <span class="str">'/users/42'</span> });
+<span class="fn">log</span>(<span class="str">'warn'</span>, <span class="str">'slow query'</span>, { requestId, ms: <span class="num">812</span> });
+<span class="fn">log</span>(<span class="str">'error'</span>, <span class="str">'db timeout'</span>, { requestId, code: <span class="str">'ETIMEDOUT'</span> });</pre><div class="out"></div></div>
+<div class="tip"><strong>Rule:</strong> never log secrets, tokens, passwords, or full PII. Log a user <em>id</em>, never their email/password.</div>
+
+<h2><span class="sn">3</span>Metrics — RED &amp; USE</h2>
+<p>Two cheat-sheets tell you what to measure. <strong>RED</strong> for services you serve, <strong>USE</strong> for resources you consume.</p>
+<ul>
+<li><strong>RED</strong> — <strong>R</strong>ate (req/s), <strong>E</strong>rrors (failed req/s), <strong>D</strong>uration (latency distribution)</li>
+<li><strong>USE</strong> — <strong>U</strong>tilization (% busy), <strong>S</strong>aturation (queue depth), <strong>E</strong>rrors (faults)</li>
+</ul>
+<div class="warn"><strong>Averages lie.</strong> A 200ms <em>average</em> latency can hide that 1% of users wait 4 seconds. Always look at percentiles — p50, p95, p99.</div>
+
+<h2><span class="sn">4</span>Why percentiles beat averages</h2>
+<p>Run this to feel it: most requests are fast, a few are terrible. The average looks fine; the p99 tells the truth your users actually experience.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// 990 fast requests + 10 awful ones</span>
+<span class="kw">const</span> latencies = [
+  ...Array(<span class="num">990</span>).<span class="fn">fill</span>(<span class="num">0</span>).<span class="fn">map</span>(() =&gt; <span class="num">40</span> + Math.<span class="fn">random</span>() * <span class="num">60</span>),
+  ...Array(<span class="num">10</span>).<span class="fn">fill</span>(<span class="num">3500</span>)
+];
+
+<span class="kw">const</span> <span class="fn">pct</span> = (arr, p) =&gt; {
+  <span class="kw">const</span> s = [...arr].<span class="fn">sort</span>((a, b) =&gt; a - b);
+  <span class="kw">return</span> s[Math.<span class="fn">floor</span>((p / <span class="num">100</span>) * s.length)];
+};
+<span class="kw">const</span> avg = latencies.<span class="fn">reduce</span>((a, b) =&gt; a + b) / latencies.length;
+
+console.<span class="fn">log</span>(<span class="str">'average:'</span>, Math.<span class="fn">round</span>(avg), <span class="str">'ms — looks fine'</span>);
+console.<span class="fn">log</span>(<span class="str">'p50:'</span>, Math.<span class="fn">round</span>(<span class="fn">pct</span>(latencies, <span class="num">50</span>)), <span class="str">'ms'</span>);
+console.<span class="fn">log</span>(<span class="str">'p95:'</span>, Math.<span class="fn">round</span>(<span class="fn">pct</span>(latencies, <span class="num">95</span>)), <span class="str">'ms'</span>);
+console.<span class="fn">log</span>(<span class="str">'p99:'</span>, Math.<span class="fn">round</span>(<span class="fn">pct</span>(latencies, <span class="num">99</span>)), <span class="str">'ms — the truth'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">5</span>Distributed tracing</h2>
+<p>One user action can touch five services. A <strong>trace</strong> stitches them together with a shared <code>traceId</code>; each hop is a <strong>span</strong> with its own timing. This is how you find <em>which</em> service ate the latency.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Minimal span timer — propagate one traceId</span>
+<span class="kw">const</span> traceId = <span class="str">'trace_a1b2'</span>;
+<span class="kw">const</span> spans = [];
+<span class="kw">async function</span> <span class="fn">span</span>(name, work) {
+  <span class="kw">const</span> start = Date.<span class="fn">now</span>();
+  <span class="kw">await</span> work();
+  spans.<span class="fn">push</span>({ traceId, name, ms: Date.<span class="fn">now</span>() - start });
+}
+<span class="kw">const</span> <span class="fn">sleep</span> = ms =&gt; <span class="kw">new</span> <span class="fn">Promise</span>(r =&gt; <span class="fn">setTimeout</span>(r, ms));
+
+<span class="kw">await</span> <span class="fn">span</span>(<span class="str">'auth'</span>,    () =&gt; <span class="fn">sleep</span>(<span class="num">20</span>));
+<span class="kw">await</span> <span class="fn">span</span>(<span class="str">'db.query'</span>,() =&gt; <span class="fn">sleep</span>(<span class="num">140</span>));  <span class="cm">// the culprit</span>
+<span class="kw">await</span> <span class="fn">span</span>(<span class="str">'render'</span>,  () =&gt; <span class="fn">sleep</span>(<span class="num">15</span>));
+console.<span class="fn">table</span>(spans);</pre><div class="out"></div></div>
+
+<h2><span class="sn">6</span>SLOs &amp; error budgets</h2>
+<p>A <strong>Service Level Objective</strong> is a target like "99.9% of requests succeed". Its inverse is your <strong>error budget</strong> — the allowed failure you can "spend" on risk. Burn the budget → freeze features, fix reliability.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// How much downtime does each "nines" SLO allow per month?</span>
+<span class="kw">const</span> minutesInMonth = <span class="num">30</span> * <span class="num">24</span> * <span class="num">60</span>;
+[<span class="num">99</span>, <span class="num">99.9</span>, <span class="num">99.99</span>].<span class="fn">forEach</span>(slo =&gt; {
+  <span class="kw">const</span> budget = minutesInMonth * (<span class="num">1</span> - slo / <span class="num">100</span>);
+  console.<span class="fn">log</span>(slo + <span class="str">'% → '</span> + budget.<span class="fn">toFixed</span>(<span class="num">1</span>) + <span class="str">' min downtime/month'</span>);
+});</pre><div class="out"></div></div>
+
+<div class="ok"><strong>Try it:</strong> Add structured logging (with a per-request <code>requestId</code>) to the Express API from Phase 1. Then expose a <code>/metrics</code> endpoint counting requests and errors. You now have the two cheapest, highest-value observability wins.</div>
+
+<h2>The tools (for real systems)</h2>
+<p>Logs → <strong>Loki / ELK / CloudWatch Logs</strong>. Metrics → <strong>Prometheus + Grafana</strong>. Traces → <strong>OpenTelemetry + Jaeger / Tempo</strong>. The vendor-neutral standard to learn is <strong>OpenTelemetry</strong> — instrument once, export anywhere.</p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>
