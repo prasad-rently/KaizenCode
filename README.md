@@ -58,7 +58,7 @@ KaizenCode/
 ├── phase5_aws_cloud.html
 ├── phase6_distributed_systems_kafka.html
 ├── roadmap_summary_md.md                   # full text summary of all phases
-├── mastery_*.html                          # 11 Mastery Track modules (inline runnable code)
+├── mastery_*.html                          # 16 Mastery Track modules (inline runnable code)
 ├── roadmap_summary_md.md                   # full text summary of all phases
 ├── docs/                                   # markdown companion docs (+ generated .html siblings)
 │   ├── README.md
@@ -75,9 +75,10 @@ KaizenCode/
 ### Two tracks
 
 - **Core phases (1–6)** — the ordered "build & run a system" journey.
-- **Mastery Track** — 11 cross-cutting modules (named, not numbered) covering
+- **Mastery Track** — 16 cross-cutting modules (named, not numbered) covering
   observability, security, testing, APIs, IaC, leadership, CI/CD, event-driven
-  systems, data engineering, performance, and cloud cost. Each has **inline
+  systems, data engineering, performance, cloud cost, AI/LLM apps, concurrency,
+  resilience, database internals, and systems algorithms. Each has **inline
   runnable code** (copy + ▶ Run buttons) and stays zero-dependency.
 
 ### Docs as HTML

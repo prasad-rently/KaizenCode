@@ -22,6 +22,16 @@ Cross-cutting skills beyond the core six, with **inline runnable code** (copy + 
 | 🚪 [The Gateway](../mastery_gateway_apis.html) | API design — GraphQL, N+1, pagination, rate limiting |
 | 📐 [The Blueprint](../mastery_blueprint_iac.html) | Infrastructure as Code — Terraform, state, GitOps |
 | 🧭 [The Compass](../mastery_compass_leadership.html) | Engineering leadership — system design, ADRs, on-call |
+| 🔥 [The Forge](../mastery_forge_cicd.html) | CI/CD — pipeline, canary/blue-green, feature flags, SBOM |
+| 🌊 [The Streaming Mind](../mastery_streaming_mind_eventdriven.html) | Event-driven — pub/sub, event sourcing, CQRS, idempotency |
+| 📒 [The Ledger](../mastery_ledger_data_engineering.html) | Data engineering — OLTP/OLAP, ETL/ELT, star schema |
+| ⚡ [The Edge](../mastery_edge_performance.html) | Performance — latency, caching hierarchy, Web Vitals, edge |
+| 💰 [The Wallet](../mastery_wallet_finops.html) | FinOps — on-demand/reserved/spot, rightsizing, build-vs-buy |
+| 🔮 [The Oracle](../mastery_oracle_ai_llm.html) | AI/LLM apps — tokens, embeddings, RAG, prompting, agents |
+| 🤹 [The Juggler](../mastery_juggler_concurrency.html) | Concurrency — event loop, parallelism, semaphores, races |
+| 🛡️ [The Bulwark](../mastery_bulwark_resilience.html) | Resilience — timeouts, retries, circuit breaker, bulkheads |
+| ⚙️ [The Engine Room](../mastery_engine_room_db_internals.html) | DB internals — B-trees, WAL, ACID, isolation, MVCC, pooling |
+| 🧰 [The Foundry](../mastery_foundry_algorithms.html) | Systems algorithms — LRU, Bloom filter, consistent hashing |
 
 ## Phase notes
 

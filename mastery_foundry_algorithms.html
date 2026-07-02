@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Foundry — Systems Algorithms</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Algorithms &amp; Data Structures</span>
+<h1>🧰 The Foundry</h1>
+<p class="sub">The handful of data structures that show up again and again in real systems and design interviews. Not leetcode for its own sake — these are the exact tools behind caches, rate limiters, and sharding (Phases 5–6, The Edge).</p>
+
+<h2><span class="sn">1</span>LRU cache — evict the Least Recently Used</h2>
+<p>A cache has finite memory, so when it fills you must evict something. <strong>LRU</strong> drops whatever hasn't been touched longest. A JS <code>Map</code> preserves insertion order, which makes this beautifully short:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">class</span> <span class="tn">LRU</span> {
+  <span class="fn">constructor</span>(cap) { <span class="kw">this</span>.cap = cap; <span class="kw">this</span>.m = <span class="kw">new</span> <span class="fn">Map</span>(); }
+  <span class="fn">get</span>(k) {
+    <span class="kw">if</span> (!<span class="kw">this</span>.m.<span class="fn">has</span>(k)) <span class="kw">return</span> <span class="kw">null</span>;
+    <span class="kw">const</span> v = <span class="kw">this</span>.m.<span class="fn">get</span>(k);
+    <span class="kw">this</span>.m.<span class="fn">delete</span>(k); <span class="kw">this</span>.m.<span class="fn">set</span>(k, v);  <span class="cm">// mark most-recent</span>
+    <span class="kw">return</span> v;
+  }
+  <span class="fn">set</span>(k, v) {
+    <span class="kw">if</span> (<span class="kw">this</span>.m.<span class="fn">has</span>(k)) <span class="kw">this</span>.m.<span class="fn">delete</span>(k);
+    <span class="kw">this</span>.m.<span class="fn">set</span>(k, v);
+    <span class="kw">if</span> (<span class="kw">this</span>.m.size &gt; <span class="kw">this</span>.cap)
+      <span class="kw">this</span>.m.<span class="fn">delete</span>(<span class="kw">this</span>.m.<span class="fn">keys</span>().<span class="fn">next</span>().value); <span class="cm">// oldest</span>
+  }
+}
+<span class="kw">const</span> c = <span class="kw">new</span> <span class="tn">LRU</span>(<span class="num">2</span>);
+c.<span class="fn">set</span>(<span class="str">'a'</span>, <span class="num">1</span>); c.<span class="fn">set</span>(<span class="str">'b'</span>, <span class="num">2</span>); c.<span class="fn">get</span>(<span class="str">'a'</span>); <span class="cm">// touch 'a' → 'b' now oldest</span>
+c.<span class="fn">set</span>(<span class="str">'c'</span>, <span class="num">3</span>);                     <span class="cm">// evicts 'b'</span>
+console.<span class="fn">log</span>(<span class="str">'b evicted?'</span>, c.<span class="fn">get</span>(<span class="str">'b'</span>) === <span class="kw">null</span>, <span class="str">'| a kept?'</span>, c.<span class="fn">get</span>(<span class="str">'a'</span>) === <span class="num">1</span>);</pre><div class="out"></div></div>
+<div class="tip"><strong>This is Redis' <code>allkeys-lru</code> policy</strong> (Phase 6 / The Edge). Now you know exactly what it does when memory fills.</div>
+
+<h2><span class="sn">2</span>Bloom filter — "definitely no, probably yes"</h2>
+<p>Need to check membership in a huge set using tiny memory? A <strong>Bloom filter</strong> hashes each item to a few bits. It can give <em>false positives</em> but never <em>false negatives</em> — perfect for "have we seen this URL / is this username taken?" before hitting the DB.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">class</span> <span class="tn">Bloom</span> {
+  <span class="fn">constructor</span>(size = <span class="num">64</span>) { <span class="kw">this</span>.size = size; <span class="kw">this</span>.bits = <span class="kw">new</span> <span class="fn">Uint8Array</span>(size); }
+  <span class="fn">hashes</span>(s) {
+    <span class="kw">let</span> h1 = <span class="num">0</span>, h2 = <span class="num">0</span>;
+    <span class="kw">for</span> (<span class="kw">const</span> ch <span class="kw">of</span> s) { h1 = (h1 * <span class="num">31</span> + ch.<span class="fn">charCodeAt</span>(<span class="num">0</span>)) &gt;&gt;&gt; <span class="num">0</span>;
+                            h2 = (h2 * <span class="num">57</span> + ch.<span class="fn">charCodeAt</span>(<span class="num">0</span>)) &gt;&gt;&gt; <span class="num">0</span>; }
+    <span class="kw">return</span> [h1 % <span class="kw">this</span>.size, h2 % <span class="kw">this</span>.size];
+  }
+  <span class="fn">add</span>(s) { <span class="kw">for</span> (<span class="kw">const</span> i <span class="kw">of</span> <span class="kw">this</span>.<span class="fn">hashes</span>(s)) <span class="kw">this</span>.bits[i] = <span class="num">1</span>; }
+  <span class="fn">has</span>(s) { <span class="kw">return</span> <span class="kw">this</span>.<span class="fn">hashes</span>(s).<span class="fn">every</span>(i =&gt; <span class="kw">this</span>.bits[i]); }
+}
+<span class="kw">const</span> b = <span class="kw">new</span> <span class="tn">Bloom</span>();
+[<span class="str">'gokul'</span>, <span class="str">'admin'</span>, <span class="str">'root'</span>].<span class="fn">forEach</span>(u =&gt; b.<span class="fn">add</span>(u));
+console.<span class="fn">log</span>(<span class="str">"'admin' seen? "</span>, b.<span class="fn">has</span>(<span class="str">'admin'</span>)); <span class="cm">// true (correct)</span>
+console.<span class="fn">log</span>(<span class="str">"'alice' seen? "</span>, b.<span class="fn">has</span>(<span class="str">'alice'</span>)); <span class="cm">// false (or rare false positive)</span></pre><div class="out"></div></div>
+
+<h2><span class="sn">3</span>Consistent hashing — shard without reshuffling</h2>
+<p>Sharding by <code>hash(key) % N</code> (Phase 6) breaks when <em>N</em> changes: adding one server remaps almost <em>every</em> key. <strong>Consistent hashing</strong> places servers on a ring so adding/removing a node moves only a small slice of keys. Prove it:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">const</span> <span class="fn">hash</span> = s =&gt; { <span class="kw">let</span> h = <span class="num">0</span>; <span class="kw">for</span> (<span class="kw">const</span> c <span class="kw">of</span> s) h = (h * <span class="num">31</span> + c.<span class="fn">charCodeAt</span>(<span class="num">0</span>)) &gt;&gt;&gt; <span class="num">0</span>; <span class="kw">return</span> h % <span class="num">360</span>; };
+<span class="kw">function</span> <span class="fn">place</span>(keys, nodes) {                 <span class="cm">// nearest node clockwise on a 0-360 ring</span>
+  <span class="kw">const</span> ring = nodes.<span class="fn">map</span>(n =&gt; ({ n, pos: <span class="fn">hash</span>(n) })).<span class="fn">sort</span>((a, b) =&gt; a.pos - b.pos);
+  <span class="kw">const</span> map = {};
+  <span class="kw">for</span> (<span class="kw">const</span> k <span class="kw">of</span> keys) {
+    <span class="kw">const</span> h = <span class="fn">hash</span>(k);
+    map[k] = (ring.<span class="fn">find</span>(r =&gt; r.pos &gt;= h) || ring[<span class="num">0</span>]).n;
+  }
+  <span class="kw">return</span> map;
+}
+<span class="kw">const</span> keys = [<span class="str">'user:42'</span>, <span class="str">'cart:7'</span>, <span class="str">'order:1093'</span>, <span class="str">'photo:x9'</span>, <span class="str">'token:abcd'</span>, <span class="str">'post:557'</span>, <span class="str">'job:queue'</span>, <span class="str">'sess:kp3'</span>];
+<span class="kw">const</span> nodes = [<span class="str">'cache-tokyo'</span>, <span class="str">'cache-paris'</span>, <span class="str">'cache-ohio'</span>];
+<span class="kw">const</span> before = <span class="fn">place</span>(keys, nodes);
+<span class="kw">const</span> after  = <span class="fn">place</span>(keys, [...nodes, <span class="str">'cache-mumbai'</span>]); <span class="cm">// add a 4th node</span>
+<span class="kw">const</span> moved = keys.<span class="fn">filter</span>(k =&gt; before[k] !== after[k]);
+console.<span class="fn">log</span>(<span class="str">'keys that moved when adding a node:'</span>, moved);
+console.<span class="fn">log</span>(<span class="str">'only'</span>, moved.length, <span class="str">'of'</span>, keys.length, <span class="str">'remapped (mod-N would move ~all)'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">4</span>Sliding-window rate limiter</h2>
+<p>The Gateway showed a token bucket. Here's the other classic: a <strong>sliding window</strong> that counts requests in the last <em>T</em> ms and rejects over the cap — smoother than fixed windows at the boundary.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">function</span> <span class="fn">limiter</span>(max, windowMs) {
+  <span class="kw">let</span> hits = [];
+  <span class="kw">return</span> (now) =&gt; {
+    hits = hits.<span class="fn">filter</span>(t =&gt; now - t &lt; windowMs); <span class="cm">// drop old</span>
+    <span class="kw">if</span> (hits.length &gt;= max) <span class="kw">return</span> <span class="str">'429 blocked'</span>;
+    hits.<span class="fn">push</span>(now);
+    <span class="kw">return</span> <span class="str">'200 ok ('</span> + hits.length + <span class="str">'/'</span> + max + <span class="str">')'</span>;
+  };
+}
+<span class="kw">const</span> allow = <span class="fn">limiter</span>(<span class="num">3</span>, <span class="num">1000</span>);   <span class="cm">// 3 per second</span>
+<span class="kw">let</span> t = <span class="num">0</span>;
+<span class="kw">for</span> (<span class="kw">const</span> dt <span class="kw">of</span> [<span class="num">0</span>, <span class="num">100</span>, <span class="num">100</span>, <span class="num">100</span>, <span class="num">900</span>]) { t += dt; console.<span class="fn">log</span>(<span class="str">'t='</span> + t + <span class="str">'ms → '</span> + <span class="fn">allow</span>(t)); }</pre><div class="out"></div></div>
+
+<h2><span class="sn">5</span>Counting the huge: HyperLogLog</h2>
+<p>How do you count <em>unique</em> visitors across a billion events without storing every id? <strong>HyperLogLog</strong> estimates cardinality using tiny memory (KBs) by tracking the longest run of leading zeros in item hashes — more leading zeros seen ⇒ more distinct items. Redis' <code>PFCOUNT</code> is this.</p>
+<div class="warn"><strong>The theme of this module:</strong> trade a little accuracy or a little structure for enormous savings in time or memory. Exactness is often the expensive luxury you don't need at scale.</div>
+
+<div class="ok"><strong>Try it:</strong> Replace an ad-hoc object cache in the Phase 1/3 app with the <code>LRU</code> above and give it a capacity. Then add a Bloom filter in front of a "username taken?" check so most negatives never touch the database. You've just applied two production-grade structures.</div>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>

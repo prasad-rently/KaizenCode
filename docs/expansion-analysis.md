@@ -61,20 +61,66 @@ Every module ships with the new **runnable snippet** component:
 Non-JS snippets (Terraform, SQL, shell) get a Copy button only, since they can't
 run in a browser.
 
-## Considered but deferred
+## Round 2 additions (delivery, data & scale)
 
-Strong candidates kept out of this batch to avoid bloat — good "next" additions:
+The first six Mastery modules covered the "run it well" concerns. Round 2 added
+five more that surfaced from the same gap analysis, all shipped and runnable:
 
-- **The Forge** — advanced CI/CD: blue-green & canary deploys, feature flags,
-  artifact registries, supply-chain security (SBOM, signing).
-- **The Streaming Mind** — deeper event-driven & real-time: WebSockets, SSE,
-  CQRS, event sourcing, exactly-once semantics.
-- **The Ledger** — data engineering: ETL/ELT, warehouses, analytics, OLAP vs
-  OLTP, data modelling.
-- **The Edge** — performance & frontend infra: CDNs, caching layers, Core Web
-  Vitals, edge functions.
-- **The Wallet** — cloud cost engineering: FinOps, rightsizing, spot instances,
-  build-vs-buy economics.
+- **The Forge** 🔥 — CI/CD: blue-green & canary deploys, feature flags, artifacts,
+  supply-chain security (SBOM, signing).
+- **The Streaming Mind** 🌊 — event-driven & real-time: WebSockets/SSE, event
+  sourcing, CQRS, delivery guarantees & idempotency.
+- **The Ledger** 📒 — data engineering: OLTP vs OLAP, ETL/ELT, warehouses/lakes,
+  star schemas, batch vs streaming.
+- **The Edge** ⚡ — performance: latency budgets, the caching hierarchy, Core Web
+  Vitals, edge compute.
+- **The Wallet** 💰 — cloud cost engineering: on-demand/reserved/spot, rightsizing,
+  serverless break-even, build-vs-buy.
+
+## Round 3 additions (AI + how things really work)
+
+A second-order gap analysis: the roadmap taught how to *build and operate*
+systems, but not the **timely skill of the moment** (LLM apps) nor the **depth**
+of how the primitives underneath actually work. Five new modules close that —
+all with inline runnable code:
+
+| Module | Catchy name | Why it's new / distinct | Runnable? |
+|--------|-------------|-------------------------|-----------|
+| AI/LLM apps | **The Oracle** 🔮 | The topic of the day. Nothing else covers tokens, embeddings, RAG, prompting, agents/tool-use | ✅ JS |
+| Concurrency | **The Juggler** 🤹 | Event loop, parallel vs sequential, semaphores, race conditions, debounce/throttle — orthogonal to all prior modules | ✅ JS |
+| Resilience | **The Bulwark** 🛡️ | Timeouts, retry+backoff+jitter, circuit breaker, bulkheads, graceful degradation, chaos | ✅ JS |
+| DB internals | **The Engine Room** ⚙️ | *How* Phase 2's database works: B-tree indexes, WAL, ACID, isolation anomalies, MVCC, pooling | ✅ JS |
+| Systems algorithms | **The Foundry** 🧰 | The structures behind caches/limiters/sharding: LRU, Bloom filter, consistent hashing, sliding window, HyperLogLog | ✅ JS |
+
+### Why these names
+
+- **The Oracle** — an oracle answers questions, sometimes cryptically (hello,
+  hallucinations); you learn to ground it (RAG) and constrain it (structured output).
+- **The Juggler** — one thread, many tasks in the air at once.
+- **The Bulwark** — the defensive wall that holds when dependencies fall.
+- **The Engine Room** — below deck, where the database machinery actually turns.
+- **The Foundry** — where you forge the core data structures by hand.
+
+### Design note
+
+The Oracle's API example uses the **Claude Messages API** with a current model id
+(`claude-sonnet-5`) and keeps the key server-side (cross-links **The Vault**). Its
+"ship responsibly" guidance links to **The Bulwark** (timeouts/retries) and **The
+Watchtower** (logging for eval) — the Mastery Track is increasingly a web of
+cross-references, not a list.
+
+## Considered but deferred (future rounds)
+
+Still-unbuilt candidates, for when the track grows again:
+
+- **The Cartographer** — domain-driven design: bounded contexts, aggregates,
+  hexagonal/clean architecture, ubiquitous language.
+- **The Switchboard** — networking internals: DNS, TLS handshake, TCP vs UDP,
+  HTTP/2 & /3, load-balancing algorithms.
+- **The Gatekeeper** — deep auth: OAuth2/OIDC flows, PKCE, sessions vs tokens,
+  refresh rotation, SSO (extends The Vault without overlapping it).
+- **The Green Thread** — sustainability/efficiency: carbon-aware scheduling,
+  energy-per-request, efficient runtimes.
 
 ## Recommendation
 
@@ -82,3 +128,9 @@ Start the Mastery Track with **The Safety Net** (testing) and **The Watchtower**
 (observability) — they pay off immediately on the projects built in Phases 1–4.
 Then **The Vault** before anything goes public. **The Compass** is the bridge into
 the leadership half of "Mobile Engineer → CTO".
+
+For the deeper/newer set: do **The Juggler** and **The Engine Room** right after
+Phases 1–2 (they explain *why* your code and queries behave as they do), reach for
+**The Bulwark** the moment you have more than one service, and treat **The Oracle**
+as the highest-leverage "today" skill — it composes with everything else you've
+built. **The Foundry** is the reference you'll open during system-design prep.

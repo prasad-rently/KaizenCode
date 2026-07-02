@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Oracle — AI &amp; LLM App Engineering</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · AI Engineering</span>
+<h1>🔮 The Oracle</h1>
+<p class="sub">The skill of the moment: wiring large language models into real products. You already call REST APIs (Phase 1) — an LLM is one more, except its output is <em>probabilistic</em>, not deterministic. That one difference changes everything.</p>
+
+<h2><span class="sn">1</span>An LLM is a probabilistic function</h2>
+<p>Same input, <em>possibly different output</em>. It predicts the next token over and over. Two consequences you must design around: <strong>you can't unit-test exact strings</strong>, and <strong>temperature</strong> tunes creativity vs determinism.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Toy next-token sampler: higher temperature = more random</span>
+<span class="kw">function</span> <span class="fn">sample</span>(logits, temp) {
+  <span class="kw">const</span> exps = logits.<span class="fn">map</span>(l =&gt; Math.<span class="fn">exp</span>(l / temp));
+  <span class="kw">const</span> sum = exps.<span class="fn">reduce</span>((a, b) =&gt; a + b, <span class="num">0</span>);
+  <span class="kw">return</span> exps.<span class="fn">map</span>(e =&gt; (e / sum * <span class="num">100</span>).<span class="fn">toFixed</span>(<span class="num">1</span>) + <span class="str">'%'</span>);
+}
+<span class="kw">const</span> logits = [<span class="num">2.0</span>, <span class="num">1.0</span>, <span class="num">0.2</span>]; <span class="cm">// scores for 3 candidate tokens</span>
+console.<span class="fn">log</span>(<span class="str">'temp 0.2 (focused): '</span>, <span class="fn">sample</span>(logits, <span class="num">0.2</span>));
+console.<span class="fn">log</span>(<span class="str">'temp 1.0 (balanced):'</span>, <span class="fn">sample</span>(logits, <span class="num">1.0</span>));
+console.<span class="fn">log</span>(<span class="str">'temp 2.0 (wild):    '</span>, <span class="fn">sample</span>(logits, <span class="num">2.0</span>));</pre><div class="out"></div></div>
+
+<h2><span class="sn">2</span>Tokens &amp; the context window</h2>
+<p>Models read <strong>tokens</strong> (~¾ of a word in English), not characters. Every model has a fixed <strong>context window</strong> — prompt + response must fit. You pay per token, so tokens are literally your budget.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Rough token estimate (real tokenizers are model-specific)</span>
+<span class="kw">const</span> <span class="fn">estTokens</span> = text =&gt; Math.<span class="fn">ceil</span>(text.length / <span class="num">4</span>);
+<span class="kw">const</span> prompt = <span class="str">'Summarise the quarterly report for the board in 3 bullets.'</span>;
+<span class="kw">const</span> window = <span class="num">200000</span>;               <span class="cm">// e.g. a large context window</span>
+
+<span class="kw">const</span> used = <span class="fn">estTokens</span>(prompt);
+console.<span class="fn">log</span>(<span class="str">'prompt ≈'</span>, used, <span class="str">'tokens'</span>);
+console.<span class="fn">log</span>(<span class="str">'room left ≈'</span>, window - used, <span class="str">'tokens for context + reply'</span>);
+console.<span class="fn">log</span>(<span class="str">'cost scales with tokens → trim prompts, cache system prompts'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">3</span>Calling a model (Claude Messages API)</h2>
+<p>The shape is a plain HTTPS POST — identical mental model to any API you've consumed. Default to the latest, most capable models (e.g. Claude Opus 4.8 / Sonnet 5) and keep the key server-side (The Vault).</p>
+<div class="snippet"><div class="bar"><span class="lang">JavaScript · copy</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'https://api.anthropic.com/v1/messages'</span>, {
+  method: <span class="str">'POST'</span>,
+  headers: {
+    <span class="str">'x-api-key'</span>: process.env.ANTHROPIC_API_KEY,   <span class="cm">// never in client code</span>
+    <span class="str">'anthropic-version'</span>: <span class="str">'2023-06-01'</span>,
+    <span class="str">'content-type'</span>: <span class="str">'application/json'</span>,
+  },
+  body: JSON.<span class="fn">stringify</span>({
+    model: <span class="str">'claude-sonnet-5'</span>,
+    max_tokens: <span class="num">1024</span>,
+    system: <span class="str">'You are a concise financial analyst.'</span>,
+    messages: [{ role: <span class="str">'user'</span>, content: <span class="str">'Summarise Q3 in 3 bullets.'</span> }],
+  }),
+});
+<span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();
+console.<span class="fn">log</span>(data.content[<span class="num">0</span>].text);</pre></div>
+
+<h2><span class="sn">4</span>Embeddings &amp; semantic search</h2>
+<p>An <strong>embedding</strong> turns text into a vector so that <em>similar meaning → nearby vectors</em>. Compare with <strong>cosine similarity</strong>. This is the engine of search, recommendations, and RAG.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Cosine similarity — how "aligned" two vectors are (1 = identical)</span>
+<span class="kw">const</span> <span class="fn">cosine</span> = (a, b) =&gt; {
+  <span class="kw">const</span> dot = a.<span class="fn">reduce</span>((s, x, i) =&gt; s + x * b[i], <span class="num">0</span>);
+  <span class="kw">const</span> mag = v =&gt; Math.<span class="fn">sqrt</span>(v.<span class="fn">reduce</span>((s, x) =&gt; s + x * x, <span class="num">0</span>));
+  <span class="kw">return</span> (dot / (<span class="fn">mag</span>(a) * <span class="fn">mag</span>(b))).<span class="fn">toFixed</span>(<span class="num">3</span>);
+};
+<span class="cm">// pretend these came from an embedding model</span>
+<span class="kw">const</span> query    = [<span class="num">0.9</span>, <span class="num">0.1</span>, <span class="num">0.0</span>];  <span class="cm">// "how do I reset my password"</span>
+<span class="kw">const</span> passwordDoc = [<span class="num">0.8</span>, <span class="num">0.2</span>, <span class="num">0.1</span>];
+<span class="kw">const</span> billingDoc  = [<span class="num">0.1</span>, <span class="num">0.2</span>, <span class="num">0.9</span>];
+console.<span class="fn">log</span>(<span class="str">'query ↔ password doc:'</span>, <span class="fn">cosine</span>(query, passwordDoc)); <span class="cm">// high</span>
+console.<span class="fn">log</span>(<span class="str">'query ↔ billing doc: '</span>, <span class="fn">cosine</span>(query, billingDoc));  <span class="cm">// low</span></pre><div class="out"></div></div>
+
+<h2><span class="sn">5</span>RAG — Retrieval-Augmented Generation</h2>
+<p>Models don't know your private data and can <strong>hallucinate</strong>. RAG fixes both: <em>retrieve</em> relevant chunks from your own corpus, then <em>stuff them into the prompt</em> as grounding. Build the retrieval core:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// A tiny RAG retriever: embed corpus, score vs query, take top-k</span>
+<span class="kw">const</span> <span class="fn">cos</span> = (a, b) =&gt; {
+  <span class="kw">const</span> d = a.<span class="fn">reduce</span>((s, x, i) =&gt; s + x * b[i], <span class="num">0</span>);
+  <span class="kw">const</span> m = v =&gt; Math.<span class="fn">sqrt</span>(v.<span class="fn">reduce</span>((s, x) =&gt; s + x * x, <span class="num">0</span>));
+  <span class="kw">return</span> d / (<span class="fn">m</span>(a) * <span class="fn">m</span>(b));
+};
+<span class="kw">const</span> corpus = [
+  { text: <span class="str">'Refunds are processed in 5-7 business days.'</span>, vec: [<span class="num">0.1</span>, <span class="num">0.9</span>, <span class="num">0.1</span>] },
+  { text: <span class="str">'Reset your password from Settings &gt; Security.'</span>, vec: [<span class="num">0.9</span>, <span class="num">0.1</span>, <span class="num">0.1</span>] },
+  { text: <span class="str">'Our office is open 9am to 6pm IST.'</span>,          vec: [<span class="num">0.1</span>, <span class="num">0.1</span>, <span class="num">0.9</span>] },
+];
+<span class="kw">const</span> queryVec = [<span class="num">0.85</span>, <span class="num">0.15</span>, <span class="num">0.05</span>];      <span class="cm">// "I forgot my password"</span>
+<span class="kw">const</span> topK = corpus
+  .<span class="fn">map</span>(c =&gt; ({ text: c.text, score: +<span class="fn">cos</span>(queryVec, c.vec).<span class="fn">toFixed</span>(<span class="num">2</span>) }))
+  .<span class="fn">sort</span>((a, b) =&gt; b.score - a.score)
+  .<span class="fn">slice</span>(<span class="num">0</span>, <span class="num">1</span>);
+console.<span class="fn">log</span>(<span class="str">'retrieved context:'</span>, topK);
+console.<span class="fn">log</span>(<span class="str">'→ inject that text into the prompt so the model answers from facts'</span>);</pre><div class="out"></div></div>
+<div class="tip"><strong>The RAG pipeline:</strong> chunk documents → embed each chunk → store vectors (pgvector, Pinecone, Weaviate) → at query time embed the question, retrieve top-k, and prepend them to the prompt. It's Phase 2 (a database) + section 4 (embeddings) combined.</div>
+
+<h2><span class="sn">6</span>Prompt engineering &amp; structured output</h2>
+<ul>
+<li><strong>Be specific</strong> — role, task, constraints, and the exact output format.</li>
+<li><strong>Few-shot</strong> — show 1–3 examples of input→output; models imitate patterns.</li>
+<li><strong>Ask for JSON</strong> — then <code>JSON.parse</code> it, so the LLM plugs into normal code.</li>
+</ul>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Treat the model like a typed function: prompt in, JSON out, parse, use</span>
+<span class="kw">const</span> promptTemplate = (review) =&gt; <span class="str">`Classify the sentiment of the review.
+Return ONLY JSON: {"sentiment":"positive|negative|neutral","score":0-1}
+Review: "${review}"`</span>;
+
+console.<span class="fn">log</span>(<span class="fn">promptTemplate</span>(<span class="str">'The app is fast but crashes on launch.'</span>));
+<span class="cm">// Model would reply with JSON; your code then does:</span>
+<span class="kw">const</span> fakeModelReply = <span class="str">'{"sentiment":"negative","score":0.7}'</span>;
+<span class="kw">const</span> parsed = JSON.<span class="fn">parse</span>(fakeModelReply);
+console.<span class="fn">log</span>(<span class="str">'parsed →'</span>, parsed.sentiment, parsed.score);</pre><div class="out"></div></div>
+
+<h2><span class="sn">7</span>Agents &amp; tool use</h2>
+<p>An <strong>agent</strong> is an LLM in a loop that can call <strong>tools</strong> (functions) to act, not just talk. You describe tools; the model decides which to call and with what arguments; you execute and feed the result back. Simulate the router:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Tools the agent may call</span>
+<span class="kw">const</span> tools = {
+  <span class="fn">getWeather</span>: (city) =&gt; <span class="str">`${city}: 31°C, humid`</span>,
+  <span class="fn">addNumbers</span>: (a, b) =&gt; a + b,
+};
+<span class="cm">// The model "decides" to emit a structured tool call (mocked here)</span>
+<span class="kw">const</span> toolCall = { name: <span class="str">'getWeather'</span>, args: [<span class="str">'Chennai'</span>] };
+
+<span class="cm">// Your runtime dispatches it and returns the observation to the model</span>
+<span class="kw">const</span> result = tools[toolCall.name](...toolCall.args);
+console.<span class="fn">log</span>(<span class="str">'tool:'</span>, toolCall.name, <span class="str">'→'</span>, result);
+console.<span class="fn">log</span>(<span class="str">'the observation is fed back; the loop continues until done'</span>);</pre><div class="out"></div></div>
+
+<div class="warn"><strong>Ship responsibly:</strong> validate/parse all model output (never <code>eval</code> it), set token &amp; spend limits, add timeouts + retries (The Bulwark), log prompts/outputs for eval (The Watchtower), and guard against prompt injection when user text enters the prompt.</div>
+
+<div class="ok"><strong>Try it:</strong> Add an <code>/ask</code> endpoint to the Phase 1 API that (1) embeds the question, (2) retrieves the top-k chunks from a small doc set, (3) calls a Claude model with those chunks as context, and (4) returns the answer. That's a complete RAG feature in ~40 lines.</div>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>

@@ -18,19 +18,39 @@
 <p>  function with a captured <code>console</code>, printing output inline under the snippet.</p>
 <ul><li>Pure vanilla JS, inline, zero dependencies — keeps the offline-first promise.</li></ul>
 <p>Non-JS snippets (Terraform, SQL, shell) get a Copy button only, since they can't run in a browser.</p>
-<h2>Considered but deferred</h2>
-<p>Strong candidates kept out of this batch to avoid bloat — good "next" additions:</p>
-<ul><li><strong>The Forge</strong> — advanced CI/CD: blue-green &amp; canary deploys, feature flags,</li></ul>
-<p>  artifact registries, supply-chain security (SBOM, signing).</p>
-<ul><li><strong>The Streaming Mind</strong> — deeper event-driven &amp; real-time: WebSockets, SSE,</li></ul>
-<p>  CQRS, event sourcing, exactly-once semantics.</p>
-<ul><li><strong>The Ledger</strong> — data engineering: ETL/ELT, warehouses, analytics, OLAP vs</li></ul>
-<p>  OLTP, data modelling.</p>
-<ul><li><strong>The Edge</strong> — performance &amp; frontend infra: CDNs, caching layers, Core Web</li></ul>
-<p>  Vitals, edge functions.</p>
-<ul><li><strong>The Wallet</strong> — cloud cost engineering: FinOps, rightsizing, spot instances,</li></ul>
-<p>  build-vs-buy economics.</p>
+<h2>Round 2 additions (delivery, data &amp; scale)</h2>
+<p>The first six Mastery modules covered the "run it well" concerns. Round 2 added five more that surfaced from the same gap analysis, all shipped and runnable:</p>
+<ul><li><strong>The Forge</strong> 🔥 — CI/CD: blue-green &amp; canary deploys, feature flags, artifacts,</li></ul>
+<p>  supply-chain security (SBOM, signing).</p>
+<ul><li><strong>The Streaming Mind</strong> 🌊 — event-driven &amp; real-time: WebSockets/SSE, event</li></ul>
+<p>  sourcing, CQRS, delivery guarantees &amp; idempotency.</p>
+<ul><li><strong>The Ledger</strong> 📒 — data engineering: OLTP vs OLAP, ETL/ELT, warehouses/lakes,</li></ul>
+<p>  star schemas, batch vs streaming.</p>
+<ul><li><strong>The Edge</strong> ⚡ — performance: latency budgets, the caching hierarchy, Core Web</li></ul>
+<p>  Vitals, edge compute.</p>
+<ul><li><strong>The Wallet</strong> 💰 — cloud cost engineering: on-demand/reserved/spot, rightsizing,</li></ul>
+<p>  serverless break-even, build-vs-buy.</p>
+<h2>Round 3 additions (AI + how things really work)</h2>
+<p>A second-order gap analysis: the roadmap taught how to <em>build and operate</em> systems, but not the <strong>timely skill of the moment</strong> (LLM apps) nor the <strong>depth</strong> of how the primitives underneath actually work. Five new modules close that — all with inline runnable code:</p>
+<table><thead><tr><th>Module</th><th>Catchy name</th><th>Why it's new / distinct</th><th>Runnable?</th></tr></thead><tbody><tr><td>AI/LLM apps</td><td><strong>The Oracle</strong> 🔮</td><td>The topic of the day. Nothing else covers tokens, embeddings, RAG, prompting, agents/tool-use</td><td>✅ JS</td></tr><tr><td>Concurrency</td><td><strong>The Juggler</strong> 🤹</td><td>Event loop, parallel vs sequential, semaphores, race conditions, debounce/throttle — orthogonal to all prior modules</td><td>✅ JS</td></tr><tr><td>Resilience</td><td><strong>The Bulwark</strong> 🛡️</td><td>Timeouts, retry+backoff+jitter, circuit breaker, bulkheads, graceful degradation, chaos</td><td>✅ JS</td></tr><tr><td>DB internals</td><td><strong>The Engine Room</strong> ⚙️</td><td><em>How</em> Phase 2's database works: B-tree indexes, WAL, ACID, isolation anomalies, MVCC, pooling</td><td>✅ JS</td></tr><tr><td>Systems algorithms</td><td><strong>The Foundry</strong> 🧰</td><td>The structures behind caches/limiters/sharding: LRU, Bloom filter, consistent hashing, sliding window, HyperLogLog</td><td>✅ JS</td></tr></tbody></table>
+<h3>Why these names</h3>
+<ul><li><strong>The Oracle</strong> — an oracle answers questions, sometimes cryptically (hello,</li></ul>
+<p>  hallucinations); you learn to ground it (RAG) and constrain it (structured output).</p>
+<ul><li><strong>The Juggler</strong> — one thread, many tasks in the air at once.</li><li><strong>The Bulwark</strong> — the defensive wall that holds when dependencies fall.</li><li><strong>The Engine Room</strong> — below deck, where the database machinery actually turns.</li><li><strong>The Foundry</strong> — where you forge the core data structures by hand.</li></ul>
+<h3>Design note</h3>
+<p>The Oracle's API example uses the <strong>Claude Messages API</strong> with a current model id (<code>claude-sonnet-5</code>) and keeps the key server-side (cross-links <strong>The Vault</strong>). Its "ship responsibly" guidance links to <strong>The Bulwark</strong> (timeouts/retries) and <strong>The Watchtower</strong> (logging for eval) — the Mastery Track is increasingly a web of cross-references, not a list.</p>
+<h2>Considered but deferred (future rounds)</h2>
+<p>Still-unbuilt candidates, for when the track grows again:</p>
+<ul><li><strong>The Cartographer</strong> — domain-driven design: bounded contexts, aggregates,</li></ul>
+<p>  hexagonal/clean architecture, ubiquitous language.</p>
+<ul><li><strong>The Switchboard</strong> — networking internals: DNS, TLS handshake, TCP vs UDP,</li></ul>
+<p>  HTTP/2 &amp; /3, load-balancing algorithms.</p>
+<ul><li><strong>The Gatekeeper</strong> — deep auth: OAuth2/OIDC flows, PKCE, sessions vs tokens,</li></ul>
+<p>  refresh rotation, SSO (extends The Vault without overlapping it).</p>
+<ul><li><strong>The Green Thread</strong> — sustainability/efficiency: carbon-aware scheduling,</li></ul>
+<p>  energy-per-request, efficient runtimes.</p>
 <h2>Recommendation</h2>
 <p>Start the Mastery Track with <strong>The Safety Net</strong> (testing) and <strong>The Watchtower</strong> (observability) — they pay off immediately on the projects built in Phases 1–4. Then <strong>The Vault</strong> before anything goes public. <strong>The Compass</strong> is the bridge into the leadership half of "Mobile Engineer → CTO".</p>
+<p>For the deeper/newer set: do <strong>The Juggler</strong> and <strong>The Engine Room</strong> right after Phases 1–2 (they explain <em>why</em> your code and queries behave as they do), reach for <strong>The Bulwark</strong> the moment you have more than one service, and treat <strong>The Oracle</strong> as the highest-leverage "today" skill — it composes with everything else you've built. <strong>The Foundry</strong> is the reference you'll open during system-design prep.</p>
 <div class="footer">改 KaizenCode — generated from <code>Expansion Analysis</code>. Edit the source <code>.md</code> and run <code>node scripts/build-docs.mjs</code> to regenerate.</div>
 </body></html>

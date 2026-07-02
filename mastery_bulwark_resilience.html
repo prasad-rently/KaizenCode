@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Bulwark — Resilience &amp; Fault Tolerance</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Resilience</span>
+<h1>🛡️ The Bulwark</h1>
+<p class="sub">In a distributed system, failure isn't an edge case — it's the steady state. Networks blip, dependencies die, disks fill. The Bulwark is the set of patterns that keep your service standing when the things around it fall over.</p>
+
+<h2><span class="sn">1</span>Assume everything fails</h2>
+<p>Every network call can hang, error, or return garbage. The senior mindset: for each external call, ask "what happens when this is slow, down, or wrong?" — and have an answer <em>before</em> it happens.</p>
+<table>
+<tr><th>Failure</th><th>Pattern that saves you</th></tr>
+<tr><td>Call hangs forever</td><td>Timeout</td></tr>
+<tr><td>Transient blip</td><td>Retry with backoff + jitter</td></tr>
+<tr><td>Dependency is down hard</td><td>Circuit breaker</td></tr>
+<tr><td>One slow dep starves the rest</td><td>Bulkhead isolation</td></tr>
+<tr><td>Non-critical feature fails</td><td>Graceful degradation / fallback</td></tr>
+</table>
+
+<h2><span class="sn">2</span>Timeouts — never wait forever</h2>
+<p>A call with no timeout can pin a request (and its thread/connection) indefinitely. Always bound it. <code>Promise.race</code> against a timer is the primitive:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">const</span> <span class="fn">timeout</span> = (p, ms) =&gt; Promise.<span class="fn">race</span>([
+  p,
+  <span class="kw">new</span> <span class="fn">Promise</span>((_, rej) =&gt; <span class="fn">setTimeout</span>(() =&gt; <span class="fn">rej</span>(<span class="kw">new</span> <span class="fn">Error</span>(<span class="str">'timeout'</span>)), ms)),
+]);
+<span class="kw">const</span> slow = <span class="kw">new</span> <span class="fn">Promise</span>(r =&gt; <span class="fn">setTimeout</span>(() =&gt; <span class="fn">r</span>(<span class="str">'ok'</span>), <span class="num">500</span>));
+<span class="kw">try</span> {
+  console.<span class="fn">log</span>(<span class="kw">await</span> <span class="fn">timeout</span>(slow, <span class="num">100</span>));   <span class="cm">// dep takes 500ms, we wait 100</span>
+} <span class="kw">catch</span> (e) {
+  console.<span class="fn">log</span>(<span class="str">'⛔ gave up:'</span>, e.message, <span class="str">'— fail fast, free the resource'</span>);
+}</pre><div class="out"></div></div>
+
+<h2><span class="sn">3</span>Retry with exponential backoff + jitter</h2>
+<p>Retrying immediately hammers a struggling service. Back off <em>exponentially</em> (1s, 2s, 4s…) and add <strong>jitter</strong> (randomness) so a thousand clients don't retry in lockstep — the "thundering herd".</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">async function</span> <span class="fn">retry</span>(fn, tries = <span class="num">5</span>) {
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; tries; i++) {
+    <span class="kw">try</span> { <span class="kw">return</span> <span class="kw">await</span> <span class="fn">fn</span>(); }
+    <span class="kw">catch</span> (e) {
+      <span class="kw">if</span> (i === tries - <span class="num">1</span>) <span class="kw">throw</span> e;
+      <span class="kw">const</span> base = <span class="num">2</span> ** i * <span class="num">100</span>;              <span class="cm">// 100, 200, 400, 800ms</span>
+      <span class="kw">const</span> wait = base + Math.<span class="fn">random</span>() * base; <span class="cm">// + jitter</span>
+      console.<span class="fn">log</span>(<span class="str">`attempt ${i+1} failed → wait ${wait.toFixed(0)}ms`</span>);
+      <span class="kw">await</span> <span class="kw">new</span> <span class="fn">Promise</span>(r =&gt; <span class="fn">setTimeout</span>(r, wait));
+    }
+  }
+}
+<span class="kw">let</span> n = <span class="num">0</span>;
+<span class="kw">const</span> flaky = () =&gt; (++n &lt; <span class="num">3</span> ? Promise.<span class="fn">reject</span>(<span class="kw">new</span> <span class="fn">Error</span>(<span class="str">'503'</span>)) : Promise.<span class="fn">resolve</span>(<span class="str">'✅ success'</span>));
+console.<span class="fn">log</span>(<span class="kw">await</span> <span class="fn">retry</span>(flaky));</pre><div class="out"></div></div>
+<div class="warn"><strong>Only retry idempotent operations</strong> (The Gateway / Streaming Mind). Retrying a non-idempotent <code>POST /charge</code> can bill the customer three times. Use an idempotency key.</div>
+
+<h2><span class="sn">4</span>The circuit breaker</h2>
+<p>If a dependency is clearly down, stop calling it — every doomed call wastes time and resources. A breaker trips <strong>OPEN</strong> after N failures, rejects instantly for a cooldown, then goes <strong>HALF-OPEN</strong> to test recovery.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">function</span> <span class="fn">breaker</span>(fn, threshold = <span class="num">3</span>) {
+  <span class="kw">let</span> fails = <span class="num">0</span>, state = <span class="str">'CLOSED'</span>;
+  <span class="kw">return</span> <span class="kw">async</span> () =&gt; {
+    <span class="kw">if</span> (state === <span class="str">'OPEN'</span>) <span class="kw">return</span> <span class="str">'⚡ rejected instantly (circuit OPEN)'</span>;
+    <span class="kw">try</span> {
+      <span class="kw">const</span> r = <span class="kw">await</span> <span class="fn">fn</span>();
+      fails = <span class="num">0</span>; <span class="kw">return</span> r;
+    } <span class="kw">catch</span> (e) {
+      <span class="kw">if</span> (++fails &gt;= threshold) state = <span class="str">'OPEN'</span>;
+      <span class="kw">return</span> <span class="str">'❌ failed ('</span> + fails + <span class="str">' in a row) — state: '</span> + state;
+    }
+  };
+}
+<span class="kw">const</span> down = () =&gt; Promise.<span class="fn">reject</span>(<span class="kw">new</span> <span class="fn">Error</span>(<span class="str">'dead'</span>));
+<span class="kw">const</span> call = <span class="fn">breaker</span>(down);
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) console.<span class="fn">log</span>(<span class="str">'call '</span> + (i+<span class="num">1</span>) + <span class="str">': '</span> + <span class="kw">await</span> <span class="fn">call</span>());
+<span class="cm">// after 3 failures it stops trying and fails fast</span></pre><div class="out"></div></div>
+
+<h2><span class="sn">5</span>Bulkheads &amp; graceful degradation</h2>
+<ul>
+<li><strong>Bulkhead</strong> — isolate resources per dependency (separate connection pools/thread limits) so one slow downstream can't consume every connection and sink the whole app. Named after a ship's watertight compartments.</li>
+<li><strong>Graceful degradation</strong> — when a non-critical dependency fails, serve a fallback instead of erroring. Recommendations down? Show popular items. Cache miss + DB slow? Serve slightly stale data.</li>
+<li><strong>Fail open vs fail closed</strong> — decide deliberately: a down auth service should fail <em>closed</em> (deny); a down "related articles" widget should fail <em>open</em> (hide it).</li>
+</ul>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Fallback: never let a non-critical failure break the page</span>
+<span class="kw">async function</span> <span class="fn">withFallback</span>(primary, fallback) {
+  <span class="kw">try</span> { <span class="kw">return</span> <span class="kw">await</span> <span class="fn">primary</span>(); }
+  <span class="kw">catch</span> { <span class="kw">return</span> fallback; }
+}
+<span class="kw">const</span> recos = () =&gt; Promise.<span class="fn">reject</span>(<span class="kw">new</span> <span class="fn">Error</span>(<span class="str">'reco service down'</span>));
+<span class="kw">const</span> result = <span class="kw">await</span> <span class="fn">withFallback</span>(recos, [<span class="str">'Popular item A'</span>, <span class="str">'Popular item B'</span>]);
+console.<span class="fn">log</span>(<span class="str">'shown to user:'</span>, result, <span class="str">'(degraded, but not broken)'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">6</span>Chaos engineering</h2>
+<p>Don't wait for prod to prove your resilience. <strong>Inject failure on purpose</strong> — kill instances, add latency, drop packets — in a controlled way, and verify the system copes. If you've never tested a failure, you haven't handled it.</p>
+<div class="tip"><strong>Mobile analogy:</strong> this is your app's offline/airplane-mode and flaky-network handling — retries, cached data, "you're offline" states — but applied to every server-to-server call. You already think this way for mobile; apply it to the backend.</div>
+
+<div class="ok"><strong>Try it:</strong> Wrap an outbound call in the Phase 3 app with (1) a 2s timeout, (2) 3 retries with backoff + jitter, and (3) a circuit breaker. Then add a fallback response so the page still renders when the dependency is down. Test it by pointing at a dead URL.</div>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>

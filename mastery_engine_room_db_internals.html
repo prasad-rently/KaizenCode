@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Engine Room — Database Internals</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Database Internals</span>
+<h1>⚙️ The Engine Room</h1>
+<p class="sub">Phase 2 taught you to <em>use</em> a database. The Engine Room shows you how one actually works underneath — indexes, transactions, isolation, the write path — so you can diagnose the slow query and the mysterious data race instead of guessing.</p>
+
+<h2><span class="sn">1</span>Why an index is fast (B-trees)</h2>
+<p>Without an index, finding a row means scanning every row — <strong>O(n)</strong>. An index keeps keys <em>sorted</em> in a balanced <strong>B-tree</strong>, so lookups are <strong>O(log n)</strong>: a handful of hops even in a billion rows. Feel the gap:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">const</span> N = <span class="num">1_000_000</span>;
+<span class="kw">const</span> sorted = Array.<span class="fn">from</span>({ length: N }, (_, i) =&gt; i); <span class="cm">// an "index"</span>
+<span class="kw">const</span> target = <span class="num">987654</span>;
+
+<span class="cm">// ❌ full table scan — check every row</span>
+<span class="kw">let</span> steps = <span class="num">0</span>;
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; N; i++) { steps++; <span class="kw">if</span> (sorted[i] === target) <span class="kw">break</span>; }
+console.<span class="fn">log</span>(<span class="str">'seq scan steps: '</span>, steps);
+
+<span class="cm">// ✅ B-tree-style binary search on the sorted index</span>
+<span class="kw">let</span> lo = <span class="num">0</span>, hi = N - <span class="num">1</span>, bsteps = <span class="num">0</span>;
+<span class="kw">while</span> (lo &lt;= hi) { bsteps++; <span class="kw">const</span> mid = (lo + hi) &gt;&gt; <span class="num">1</span>;
+  <span class="kw">if</span> (sorted[mid] === target) <span class="kw">break</span>;
+  sorted[mid] &lt; target ? lo = mid + <span class="num">1</span> : hi = mid - <span class="num">1</span>; }
+console.<span class="fn">log</span>(<span class="str">'index lookup steps:'</span>, bsteps, <span class="str">'— that is O(log n)'</span>);</pre><div class="out"></div></div>
+<div class="warn"><strong>Indexes aren't free.</strong> Every index must be updated on every <code>INSERT</code>/<code>UPDATE</code>/<code>DELETE</code>, and it costs storage. Index the columns you filter/join/sort on — not every column.</div>
+
+<h2><span class="sn">2</span>Reading the query plan</h2>
+<p><code>EXPLAIN ANALYZE</code> is how you see what the database <em>actually</em> did. The word you're hunting for is <strong>Seq Scan</strong> on a big table — it usually means a missing index.</p>
+<div class="snippet"><div class="bar"><span class="lang">SQL · copy</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="kw">EXPLAIN ANALYZE</span> <span class="kw">SELECT</span> * <span class="kw">FROM</span> orders <span class="kw">WHERE</span> user_id = <span class="num">42</span>;
+
+<span class="cm">-- ❌ before an index:</span>
+<span class="cm">--   Seq Scan on orders  (cost=0.00..18334) rows=1  (actual time=142ms)</span>
+
+<span class="kw">CREATE INDEX</span> idx_orders_user <span class="kw">ON</span> orders(user_id);
+
+<span class="cm">-- ✅ after:</span>
+<span class="cm">--   Index Scan using idx_orders_user  (actual time=0.03ms)  ← 4000x faster</span></pre></div>
+
+<h2><span class="sn">3</span>The write path — durability via the WAL</h2>
+<p>How does a DB survive a crash mid-write? It writes changes to an append-only <strong>Write-Ahead Log</strong> first (fast sequential disk write) and only later updates the actual data pages. On restart, it replays the WAL to recover. The "D" in ACID.</p>
+<div class="tip"><strong>You've seen this before:</strong> the WAL is exactly event sourcing (The Streaming Mind) applied to storage — the durable log is the source of truth, and the table is a materialized view of it. Kafka's log and Redis' AOF are the same idea.</div>
+
+<h2><span class="sn">4</span>Transactions &amp; ACID</h2>
+<p>A transaction groups statements into an all-or-nothing unit. <strong>A</strong>tomic (all or none), <strong>C</strong>onsistent (rules hold), <strong>I</strong>solated (concurrent txns don't corrupt each other), <strong>D</strong>urable (survives crashes).</p>
+<div class="snippet"><div class="bar"><span class="lang">SQL · copy</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="kw">BEGIN</span>;
+  <span class="kw">UPDATE</span> accounts <span class="kw">SET</span> balance = balance - <span class="num">100</span> <span class="kw">WHERE</span> id = <span class="num">1</span>;
+  <span class="kw">UPDATE</span> accounts <span class="kw">SET</span> balance = balance + <span class="num">100</span> <span class="kw">WHERE</span> id = <span class="num">2</span>;
+<span class="kw">COMMIT</span>;  <span class="cm">-- both happen, or (on error) ROLLBACK undoes everything</span>
+<span class="cm">-- money is never created or destroyed mid-transfer</span></pre></div>
+
+<h2><span class="sn">5</span>Isolation levels &amp; their anomalies</h2>
+<p>Full isolation is expensive, so databases offer levels that trade correctness for speed. Each weaker level permits specific anomalies:</p>
+<table>
+<tr><th>Level</th><th>Allows</th></tr>
+<tr><td>Read Uncommitted</td><td>Dirty reads (see uncommitted data)</td></tr>
+<tr><td>Read Committed <span class="cm">(PG default)</span></td><td>Non-repeatable reads</td></tr>
+<tr><td>Repeatable Read</td><td>Phantom reads</td></tr>
+<tr><td>Serializable</td><td>Nothing — as if txns ran one at a time</td></tr>
+</table>
+<p>Simulate a <strong>non-repeatable read</strong>: the same query returns different answers inside one transaction because another committed in between.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">let</span> row = { price: <span class="num">100</span> };            <span class="cm">// the committed database row</span>
+
+<span class="cm">// Transaction A reads twice; Transaction B commits in between</span>
+<span class="kw">const</span> readA1 = row.price;               <span class="cm">// A: first read</span>
+row = { price: <span class="num">130</span> };                 <span class="cm">// B: UPDATE ... COMMIT</span>
+<span class="kw">const</span> readA2 = row.price;               <span class="cm">// A: same query, second read</span>
+
+console.<span class="fn">log</span>(<span class="str">'read #1:'</span>, readA1);
+console.<span class="fn">log</span>(<span class="str">'read #2:'</span>, readA2, readA1 !== readA2 ? <span class="str">'← non-repeatable read!'</span> : <span class="str">''</span>);
+console.<span class="fn">log</span>(<span class="str">'fix → REPEATABLE READ / SERIALIZABLE isolation, or SELECT ... FOR UPDATE'</span>);</pre><div class="out"></div></div>
+<div class="tip"><strong>MVCC:</strong> Postgres avoids locking readers by keeping <em>multiple versions</em> of a row (Multi-Version Concurrency Control). Readers see a consistent snapshot; writers create new versions. It's why "readers don't block writers" — and why <code>VACUUM</code> exists to clean old versions.</div>
+
+<h2><span class="sn">6</span>Connection pooling</h2>
+<p>Opening a DB connection is expensive (TCP + TLS + auth). Each Postgres connection also costs real server memory, so thousands of them crush it. A <strong>pool</strong> keeps a small set of warm connections and hands them out — the single highest-leverage DB perf fix in most apps.</p>
+<div class="snippet"><div class="bar"><span class="lang">JavaScript · copy</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="kw">import</span> { Pool } <span class="kw">from</span> <span class="str">'pg'</span>;
+<span class="kw">const</span> pool = <span class="kw">new</span> <span class="fn">Pool</span>({ max: <span class="num">10</span> });  <span class="cm">// reuse up to 10 warm connections</span>
+
+<span class="cm">// borrow → query → auto-return to the pool</span>
+<span class="kw">const</span> { rows } = <span class="kw">await</span> pool.<span class="fn">query</span>(<span class="str">'SELECT * FROM users WHERE id = $1'</span>, [<span class="num">42</span>]);
+<span class="cm">// use a bounded pool (see The Juggler) so a spike can't open 10k connections</span></pre></div>
+
+<div class="ok"><strong>Try it:</strong> On the Phase 2 database, run <code>EXPLAIN ANALYZE</code> on a <code>WHERE</code> query over a large table, note the Seq Scan and time, add the index, and re-run to see the Index Scan. Then wrap a two-step balance transfer in <code>BEGIN/COMMIT</code> and prove a forced error rolls both steps back.</div>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>

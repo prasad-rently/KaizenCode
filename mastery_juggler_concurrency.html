@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Juggler — Concurrency &amp; Async</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Concurrency</span>
+<h1>🤹 The Juggler</h1>
+<p class="sub">One thread, many balls in the air. Node runs your JavaScript on a <em>single</em> thread — mastering the event loop, promises, and concurrency limits is what separates code that scales from code that stalls.</p>
+
+<h2><span class="sn">1</span>The event loop &amp; execution order</h2>
+<p>Synchronous code runs first. Then <strong>microtasks</strong> (resolved promises), then <strong>macrotasks</strong> (<code>setTimeout</code>). Predict the output before you run it — this trips up almost everyone.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre>console.<span class="fn">log</span>(<span class="str">'1 — sync'</span>);
+<span class="fn">setTimeout</span>(() =&gt; console.<span class="fn">log</span>(<span class="str">'4 — macrotask (setTimeout)'</span>), <span class="num">0</span>);
+Promise.<span class="fn">resolve</span>().<span class="fn">then</span>(() =&gt; console.<span class="fn">log</span>(<span class="str">'3 — microtask (promise)'</span>));
+console.<span class="fn">log</span>(<span class="str">'2 — sync'</span>);
+<span class="cm">// Order: 1, 2, 3, 4 — microtasks jump the setTimeout queue</span></pre><div class="out"></div></div>
+<div class="tip"><strong>Mobile analogy:</strong> the event loop is <code>DispatchQueue.main</code>. Blocking it (a heavy sync loop) freezes everything — the server's equivalent of a janky, frozen UI thread.</div>
+
+<h2><span class="sn">2</span>Sequential vs parallel</h2>
+<p>Awaiting in a loop runs tasks <em>one after another</em>. Independent async work should run <strong>concurrently</strong> with <code>Promise.all</code>. The time difference is dramatic.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">const</span> <span class="fn">task</span> = (ms) =&gt; <span class="kw">new</span> <span class="fn">Promise</span>(r =&gt; <span class="fn">setTimeout</span>(() =&gt; <span class="fn">r</span>(ms), ms));
+
+<span class="kw">const</span> t0 = Date.<span class="fn">now</span>();
+<span class="cm">// ❌ sequential: 100 + 100 + 100 ≈ 300ms</span>
+<span class="kw">for</span> (<span class="kw">const</span> ms <span class="kw">of</span> [<span class="num">100</span>, <span class="num">100</span>, <span class="num">100</span>]) <span class="kw">await</span> <span class="fn">task</span>(ms);
+console.<span class="fn">log</span>(<span class="str">'sequential:'</span>, Date.<span class="fn">now</span>() - t0, <span class="str">'ms'</span>);
+
+<span class="kw">const</span> t1 = Date.<span class="fn">now</span>();
+<span class="cm">// ✅ parallel: all at once ≈ 100ms</span>
+<span class="kw">await</span> Promise.<span class="fn">all</span>([<span class="fn">task</span>(<span class="num">100</span>), <span class="fn">task</span>(<span class="num">100</span>), <span class="fn">task</span>(<span class="num">100</span>)]);
+console.<span class="fn">log</span>(<span class="str">'parallel:  '</span>, Date.<span class="fn">now</span>() - t1, <span class="str">'ms'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">3</span>Bounded concurrency (a semaphore)</h2>
+<p><code>Promise.all</code> over 10,000 items fires 10,000 requests at once — and melts the DB or gets you rate-limited (The Gateway). Cap it: run at most <em>N</em> in flight.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Process items with at most `limit` running concurrently</span>
+<span class="kw">async function</span> <span class="fn">pool</span>(items, limit, worker) {
+  <span class="kw">const</span> results = [];
+  <span class="kw">let</span> i = <span class="num">0</span>, active = <span class="num">0</span>, peak = <span class="num">0</span>;
+  <span class="kw">return</span> <span class="kw">new</span> <span class="fn">Promise</span>(resolve =&gt; {
+    <span class="kw">const</span> <span class="fn">next</span> = () =&gt; {
+      <span class="kw">if</span> (i &gt;= items.length &amp;&amp; active === <span class="num">0</span>) <span class="kw">return</span> <span class="fn">resolve</span>({ results, peak });
+      <span class="kw">while</span> (active &lt; limit &amp;&amp; i &lt; items.length) {
+        <span class="kw">const</span> item = items[i++]; active++; peak = Math.<span class="fn">max</span>(peak, active);
+        Promise.<span class="fn">resolve</span>(<span class="fn">worker</span>(item)).<span class="fn">then</span>(r =&gt; { results.<span class="fn">push</span>(r); active--; <span class="fn">next</span>(); });
+      }
+    };
+    <span class="fn">next</span>();
+  });
+}
+<span class="kw">const</span> { peak } = <span class="kw">await</span> <span class="fn">pool</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>,<span class="num">6</span>,<span class="num">7</span>,<span class="num">8</span>], <span class="num">3</span>, x =&gt; x * x);
+console.<span class="fn">log</span>(<span class="str">'8 tasks, limit 3 → peak concurrency never exceeded'</span>, peak);</pre><div class="out"></div></div>
+
+<h2><span class="sn">4</span>Race conditions live in shared state</h2>
+<p>JS won't interrupt a function mid-line, but <code>await</code> is a yield point — state can change while you're "away". Two overlapping async operations reading-then-writing the same value corrupt it.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">let</span> balance = <span class="num">100</span>;
+<span class="kw">const</span> <span class="fn">sleep</span> = ms =&gt; <span class="kw">new</span> <span class="fn">Promise</span>(r =&gt; <span class="fn">setTimeout</span>(r, ms));
+
+<span class="kw">async function</span> <span class="fn">withdraw</span>(amt) {
+  <span class="kw">const</span> current = balance;   <span class="cm">// read</span>
+  <span class="kw">await</span> <span class="fn">sleep</span>(<span class="num">10</span>);            <span class="cm">// ← yield: the other withdraw runs here</span>
+  balance = current - amt;    <span class="cm">// write stale value</span>
+}
+<span class="kw">await</span> Promise.<span class="fn">all</span>([<span class="fn">withdraw</span>(<span class="num">100</span>), <span class="fn">withdraw</span>(<span class="num">100</span>)]);
+console.<span class="fn">log</span>(<span class="str">'balance:'</span>, balance, <span class="str">'— expected -100, got 0. Lost update!'</span>);
+console.<span class="fn">log</span>(<span class="str">'fix → serialize with a lock, or an atomic DB update (Phase 2)'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">5</span>Debounce &amp; throttle</h2>
+<p>Two rate-shaping tools you'll reach for constantly. <strong>Debounce</strong>: wait until activity stops (search-as-you-type). <strong>Throttle</strong>: at most once per interval (scroll handlers).</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">function</span> <span class="fn">debounce</span>(fn, ms) {
+  <span class="kw">let</span> t;
+  <span class="kw">return</span> (...a) =&gt; { <span class="fn">clearTimeout</span>(t); t = <span class="fn">setTimeout</span>(() =&gt; <span class="fn">fn</span>(...a), ms); };
+}
+<span class="kw">let</span> calls = <span class="num">0</span>;
+<span class="kw">const</span> search = <span class="fn">debounce</span>(q =&gt; { calls++; console.<span class="fn">log</span>(<span class="str">'🔍 API call for:'</span>, q); }, <span class="num">50</span>);
+
+<span class="cm">// user types 5 keystrokes quickly...</span>
+[<span class="str">'r'</span>,<span class="str">'re'</span>,<span class="str">'red'</span>,<span class="str">'redi'</span>,<span class="str">'redis'</span>].<span class="fn">forEach</span>(search);
+<span class="kw">await</span> <span class="kw">new</span> <span class="fn">Promise</span>(r =&gt; <span class="fn">setTimeout</span>(r, <span class="num">80</span>));
+console.<span class="fn">log</span>(<span class="str">'total API calls:'</span>, calls, <span class="str">'(only the last keystroke fired)'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">6</span>CPU work &amp; backpressure</h2>
+<ul>
+<li><strong>Don't block the loop.</strong> A heavy CPU task (image resize, big JSON, crypto) freezes <em>all</em> requests. Offload to <strong>worker threads</strong> or a queue (The Streaming Mind).</li>
+<li><strong>Backpressure</strong> — when producers outpace consumers, buffer and slow the source (streams' <code>pause()</code>/<code>drain</code>), or you'll exhaust memory.</li>
+<li><strong>Cancellation</strong> — use <code>AbortController</code> to cancel in-flight work when a request disconnects.</li>
+</ul>
+
+<div class="ok"><strong>Try it:</strong> In the Phase 1 API, take an endpoint that fetches from 3 sources sequentially and switch it to <code>Promise.all</code>; measure the latency drop. Then add a concurrency-limited <code>pool</code> to a bulk endpoint so it never opens more than N DB connections at once.</div>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>
