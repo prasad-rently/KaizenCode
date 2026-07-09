@@ -8,6 +8,9 @@ Thumbs.db
 *.swp
 *~
 
+# Local tooling (Claude Code preview config, etc.)
+.claude/
+
 # Node (in case mini-projects are added later)
 node_modules/
 npm-debug.log*

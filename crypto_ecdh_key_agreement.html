@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ECDH — Elliptic-Curve Key Agreement</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}.ascii{font-size:11.5px;line-height:1.5}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Cryptography · Key Agreement</span>
+<h1>🤝 ECDH — Elliptic-Curve Key Agreement</h1>
+<p class="sub">How two parties who have never met agree on a shared secret over a wide-open line — no password exchanged in advance, no eavesdropper able to reproduce it. The intuition, the math you can run by hand, and real browser-native demos.</p>
+
+<div class="tip">First in the <strong>Cryptography</strong> topic — a growing series that explains one method at a time from scratch. Generic and framework-free: everything here is standard cryptography you'll meet in TLS, Signal, SSH, WireGuard, and hardware-backed key stores.</div>
+
+<h2><span class="sn">1</span>The problem</h2>
+<p>Two parties — call them <strong>A</strong> and <strong>B</strong> — want a shared encryption key. But they've <strong>never shared a secret in advance</strong>, and everything they send crosses a line an attacker can read. How do they agree on a key an eavesdropper <em>can't</em> learn, using only public messages?</p>
+<p>The answer is <strong>Diffie–Hellman key agreement</strong> (Whitfield Diffie &amp; Martin Hellman, 1976). Its modern, elliptic-curve form is <strong>ECDH</strong>. The key insight: each side keeps its <em>own, different</em> private key and only ever publishes a <em>public</em> key derived from it — yet both independently arrive at the identical shared secret.</p>
+<div class="warn"><strong>Key agreement ≠ key transport.</strong> Nobody <em>encrypts a key and sends it</em>. The shared secret is never transmitted at all — both ends <em>compute</em> the same value locally from public inputs. That's the whole trick.</div>
+
+<h2><span class="sn">2</span>Intuition — mixing paint</h2>
+<p>Forget math for a second. Two people want a shared secret colour and have never met.</p>
+<ul>
+<li><strong>Public base colour</strong> everyone knows (including attackers): <strong>YELLOW</strong>.</li>
+<li>A secretly picks <strong>BLUE</strong> · B secretly picks <strong>RED</strong>. These are their private keys — <em>different</em>, and never revealed.</li>
+<li>Each mixes their private colour into yellow and sends the result out in the open: A sends <strong>GREEN</strong> (yellow+blue), B sends <strong>ORANGE</strong> (yellow+red). These are their public keys.</li>
+<li>Each adds their own private colour to the colour they received: A does orange+blue, B does green+red. <strong>Both get the same BROWN</strong> = yellow+red+blue.</li>
+</ul>
+<pre class="ascii"><span class="cm">        PUBLIC                A (private BLUE)          B (private RED)</span>
+<span class="cm">   base = YELLOW</span>
+                          YELLOW+BLUE = GREEN  ───▶  (B receives GREEN)
+   (B sends) ORANGE ◀───  YELLOW+RED  = ORANGE
+                          ORANGE+BLUE = BROWN        GREEN+RED = BROWN
+                                │                          │
+                                └──── SAME SECRET ─────────┘
+                                     BROWN = YELLOW+RED+BLUE
+
+   Eavesdropper saw YELLOW, GREEN, ORANGE  →  cannot produce BROWN
+   (never had BLUE or RED, and you can't un-mix paint)</pre>
+<p>The one-way step is "un-mixing paint" — easy to mix, practically impossible to reverse. Real crypto swaps paint for arithmetic with the same property.</p>
+
+<h2><span class="sn">3</span>The math, with tiny numbers</h2>
+<p>The number version uses modular exponentiation: easy one way, practically impossible to reverse (the <strong>discrete-logarithm</strong> problem). Meet <strong>Alice</strong> and <strong>Bob</strong> (cryptography's traditional stand-ins for "the two sides"). Public values everyone knows: a prime <code>p = 23</code> and a base <code>g = 5</code>. Each picks their own private number, computes <code>g^private mod p</code> as their public key, then raises the <em>received</em> public key to their <em>own</em> private number. Run it:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Diffie–Hellman by hand — public values everyone can see</span>
+<span class="kw">const</span> p = <span class="num">23n</span>, g = <span class="num">5n</span>;                <span class="cm">// prime + base (public)</span>
+<span class="kw">const</span> alicePrivate = <span class="num">6n</span>;              <span class="cm">// Alice's OWN secret number</span>
+<span class="kw">const</span> bobPrivate   = <span class="num">15n</span>;             <span class="cm">// Bob's OWN secret number — different!</span>
+
+<span class="kw">const</span> <span class="fn">modpow</span> = (base, exp, m) =&gt; {         <span class="cm">// fast (base^exp) mod m</span>
+  <span class="kw">let</span> r = <span class="num">1n</span>; base %= m;
+  <span class="kw">while</span> (exp &gt; <span class="num">0n</span>) {
+    <span class="kw">if</span> (exp &amp; <span class="num">1n</span>) r = r * base % m;
+    base = base * base % m; exp &gt;&gt;= <span class="num">1n</span>;
+  }
+  <span class="kw">return</span> r;
+};
+
+<span class="cm">// Each derives a PUBLIC key and sends it out in the open</span>
+<span class="kw">const</span> alicePublic = <span class="fn">modpow</span>(g, alicePrivate, p);
+<span class="kw">const</span> bobPublic   = <span class="fn">modpow</span>(g, bobPrivate, p);
+console.<span class="fn">log</span>(<span class="str">'Alice sends her public key →'</span>, alicePublic);
+console.<span class="fn">log</span>(<span class="str">'Bob   sends his public key →'</span>, bobPublic);
+
+<span class="cm">// Each raises the OTHER's public key to their own private number</span>
+<span class="kw">const</span> aliceSecret = <span class="fn">modpow</span>(bobPublic, alicePrivate, p);
+<span class="kw">const</span> bobSecret   = <span class="fn">modpow</span>(alicePublic, bobPrivate, p);
+console.<span class="fn">log</span>(<span class="str">'Alice computes (Bob’s key)^herPrivate →'</span>, aliceSecret);
+console.<span class="fn">log</span>(<span class="str">'Bob   computes (Alice’s key)^hisPrivate →'</span>, bobSecret);
+console.<span class="fn">log</span>(<span class="str">'Same shared secret?'</span>, aliceSecret === bobSecret, <span class="str">'→'</span>, aliceSecret);</pre><div class="out"></div></div>
+<p>Alice and Bob both land on the same number because each is really <code>g^(alicePrivate·bobPrivate) mod p</code>, just computed in a different order. An eavesdropper sees <code>p</code>, <code>g</code>, and both public keys but to recover either private number must solve <code>5^x mod 23 = (a public key)</code> — trivial at <code>p=23</code>, but with a 256-bit curve it is beyond every computer on Earth.</p>
+
+<h2><span class="sn">4</span>Why <em>elliptic-curve</em> DH</h2>
+<p>Classic DH raises a number to a power modulo a prime. ECDH replaces that with "add a point to itself on an elliptic curve." The structure is identical — private scalar, public point, shared point — but the underlying problem (elliptic-curve discrete log) is <strong>far harder per bit</strong>, so you get the same security with dramatically smaller keys.</p>
+<table>
+<tr><th>Security level</th><th>RSA / classic DH</th><th>Elliptic curve</th></tr>
+<tr><td>112-bit</td><td>2048-bit</td><td>224-bit</td></tr>
+<tr><td><strong>128-bit</strong></td><td><strong>3072-bit</strong></td><td><strong>256-bit (P-256)</strong></td></tr>
+<tr><td>192-bit</td><td>7680-bit</td><td>384-bit</td></tr>
+<tr><td>256-bit</td><td>15360-bit</td><td>521-bit</td></tr>
+</table>
+<p>Smaller keys mean faster math, less CPU/battery, and smaller payloads on the wire — which is why P-256 / Curve25519 dominate modern protocols. (Source: NIST SP 800-57 comparable-strength figures.)</p>
+
+<h2><span class="sn">5</span>From shared secret to an encrypted message (ECIES)</h2>
+<p>You don't encrypt with the raw shared secret. The standard flow — <strong>ECIES</strong> (Elliptic Curve Integrated Encryption Scheme) — is <em>hybrid</em>: use ECDH to agree a key, then a fast symmetric cipher to encrypt the data.</p>
+<ul>
+<li><strong>HKDF</strong> the shared secret into a clean AES key ("polish this into a proper key").</li>
+<li>Encrypt the payload with <strong>AES-256-GCM</strong> — fast, and its auth tag detects tampering.</li>
+</ul>
+<p>This is exactly how HTTPS/TLS works: asymmetric to agree a key, symmetric to move the bytes. Here's a real, end-to-end ECDH + HKDF + AES-GCM round-trip using the browser's own <code>crypto.subtle</code> — no libraries:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable (WebCrypto)</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Real P-256 ECDH in the browser, then ECIES-style encrypt/decrypt</span>
+<span class="kw">const</span> gen = () =&gt; crypto.subtle.<span class="fn">generateKey</span>(
+  { name: <span class="str">'ECDH'</span>, namedCurve: <span class="str">'P-256'</span> }, <span class="kw">false</span>, [<span class="str">'deriveBits'</span>]);
+<span class="kw">const</span> alice = <span class="kw">await</span> <span class="fn">gen</span>();      <span class="cm">// each party makes its OWN keypair</span>
+<span class="kw">const</span> bob   = <span class="kw">await</span> <span class="fn">gen</span>();
+<span class="kw">const</span> hex = u =&gt; [...<span class="kw">new</span> <span class="fn">Uint8Array</span>(u)]
+  .<span class="fn">map</span>(x =&gt; x.<span class="fn">toString</span>(<span class="num">16</span>).<span class="fn">padStart</span>(<span class="num">2</span>, <span class="str">'0'</span>)).<span class="fn">join</span>(<span class="str">''</span>);
+
+<span class="cm">// 1) Both derive the SAME 256-bit secret (own private + peer's public)</span>
+<span class="kw">const</span> bits = (priv, pub) =&gt;
+  crypto.subtle.<span class="fn">deriveBits</span>({ name: <span class="str">'ECDH'</span>, public: pub }, priv, <span class="num">256</span>);
+<span class="kw">const</span> sA = <span class="kw">await</span> <span class="fn">bits</span>(alice.privateKey, bob.publicKey);
+<span class="kw">const</span> sB = <span class="kw">await</span> <span class="fn">bits</span>(bob.privateKey, alice.publicKey);
+console.<span class="fn">log</span>(<span class="str">'A secret:'</span>, <span class="fn">hex</span>(sA).<span class="fn">slice</span>(<span class="num">0</span>, <span class="num">24</span>) + <span class="str">'…'</span>);
+console.<span class="fn">log</span>(<span class="str">'B secret:'</span>, <span class="fn">hex</span>(sB).<span class="fn">slice</span>(<span class="num">0</span>, <span class="num">24</span>) + <span class="str">'…'</span>);
+console.<span class="fn">log</span>(<span class="str">'Match?'</span>, <span class="fn">hex</span>(sA) === <span class="fn">hex</span>(sB));
+
+<span class="cm">// 2) ECIES: HKDF the secret into an AES-256-GCM key, then encrypt</span>
+<span class="kw">const</span> hk = <span class="kw">await</span> crypto.subtle.<span class="fn">importKey</span>(<span class="str">'raw'</span>, sA, <span class="str">'HKDF'</span>, <span class="kw">false</span>, [<span class="str">'deriveKey'</span>]);
+<span class="kw">const</span> aesKey = <span class="kw">await</span> crypto.subtle.<span class="fn">deriveKey</span>(
+  { name: <span class="str">'HKDF'</span>, hash: <span class="str">'SHA-256'</span>, salt: <span class="kw">new</span> <span class="fn">Uint8Array</span>(), info: <span class="kw">new</span> <span class="fn">Uint8Array</span>() },
+  hk, { name: <span class="str">'AES-GCM'</span>, length: <span class="num">256</span> }, <span class="kw">false</span>, [<span class="str">'encrypt'</span>, <span class="str">'decrypt'</span>]);
+<span class="kw">const</span> iv = crypto.<span class="fn">getRandomValues</span>(<span class="kw">new</span> <span class="fn">Uint8Array</span>(<span class="num">12</span>));
+<span class="kw">const</span> msg = <span class="kw">new</span> <span class="fn">TextEncoder</span>().<span class="fn">encode</span>(<span class="str">'API_KEY=super-secret-value'</span>);
+<span class="kw">const</span> ct = <span class="kw">await</span> crypto.subtle.<span class="fn">encrypt</span>({ name: <span class="str">'AES-GCM'</span>, iv }, aesKey, msg);
+<span class="kw">const</span> pt = <span class="kw">await</span> crypto.subtle.<span class="fn">decrypt</span>({ name: <span class="str">'AES-GCM'</span>, iv }, aesKey, ct);
+console.<span class="fn">log</span>(<span class="str">'ciphertext:'</span>, <span class="kw">new</span> <span class="fn">Uint8Array</span>(ct).length, <span class="str">'bytes (unreadable)'</span>);
+console.<span class="fn">log</span>(<span class="str">'decrypted :'</span>, <span class="kw">new</span> <span class="fn">TextDecoder</span>().<span class="fn">decode</span>(pt));</pre><div class="out"></div></div>
+
+<h2><span class="sn">6</span>Ephemeral keys &amp; forward secrecy</h2>
+<p>If at least one side generates a <strong>brand-new keypair for every exchange</strong> (an <em>ephemeral</em> key — the "E" in TLS's <code>ECDHE</code>), then every session has its own unique shared secret. Crack or leak one session's key and <strong>no other session is affected</strong>; an attacker who recorded past traffic still can't read it. This property is <strong>forward secrecy</strong>, and it's a big reason ephemeral ECDH replaced static RSA key-transport in TLS 1.3.</p>
+
+<h2><span class="sn">7</span>ECDH vs RSA — when to reach for which</h2>
+<table>
+<tr><th></th><th>ECDH (key agreement)</th><th>RSA (key transport)</th></tr>
+<tr><td>How a key is shared</td><td>Both sides <em>compute</em> it; never sent</td><td>One side encrypts a key and sends it</td></tr>
+<tr><td>Key size @128-bit</td><td>256-bit</td><td>3072-bit</td></tr>
+<tr><td>Forward secrecy</td><td>Free (with ephemeral keys)</td><td>No — leak the static key, all past traffic falls</td></tr>
+<tr><td>Direct payload encryption</td><td>N/A — always hybrid (ECIES)</td><td>Tiny only (&lt; key size); needs hybrid anyway</td></tr>
+<tr><td>Padding pitfalls</td><td>None of RSA's class</td><td>PKCS#1 v1.5 oracles; needs OAEP + care</td></tr>
+<tr><td>Hardware key stores</td><td>Supported (EC P-256)</td><td>Often <em>not</em> — e.g. iOS Secure Enclave is EC-only</td></tr>
+</table>
+<p><strong>Bottom line:</strong> for agreeing a session key, ECDH is smaller, faster, gives forward secrecy for free, and is the only asymmetric primitive some secure hardware supports. RSA still appears for signatures and legacy interop, but for key exchange, ephemeral ECDH is the modern default.</p>
+
+<h2><span class="sn">8</span>Where you'll meet ECDH in the wild</h2>
+<ul>
+<li><strong>TLS 1.3 / HTTPS</strong> — <code>ECDHE</code> is the default handshake; every request you make already uses it.</li>
+<li><strong>Signal / WhatsApp</strong> — X3DH and the Double Ratchet are built on chained ECDH (Curve25519).</li>
+<li><strong>SSH &amp; WireGuard</strong> — ECDH key exchange (Curve25519) underpins the tunnels.</li>
+<li><strong>Hardware-backed key delivery</strong> — a device keeps a non-extractable EC private key in a Secure Enclave (iOS) / StrongBox (Android); a server sends an ephemeral public key so only that one physical device can derive the secret and decrypt the payload.</li>
+</ul>
+
+<div class="warn"><strong>Crucial caveat: ECDH gives confidentiality, not authentication.</strong> On its own it agrees a secret with <em>whoever is on the other end</em> — it does not prove <em>who</em> that is. If the public keys aren't authenticated, an active attacker can sit in the middle, run one ECDH with each side, and relay (a man-in-the-middle attack). Real protocols authenticate the public keys — with certificates (TLS), pre-shared identity keys (Signal), or device attestation — <em>on top of</em> ECDH. Never ship raw ECDH and assume you know who you're talking to.</div>
+
+<div class="ok"><strong>Try it:</strong> (1) In the number demo, change <code>a</code> and <code>b</code> to any values <code>1..21</code> — the two sides should still agree. (2) In the WebCrypto demo, generate a <em>third</em> keypair and confirm its secret with Alice does <strong>not</strong> match Bob's — then you've felt why the private key can't be guessed from the public one. (3) Tamper with one byte of <code>ct</code> before decrypting and watch AES-GCM reject it.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Next in this topic: RSA, AES-GCM, hashing &amp; HMAC, and digital signatures. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>

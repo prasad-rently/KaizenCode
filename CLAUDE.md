@@ -15,13 +15,21 @@ incremental improvement.
 
 ## Project structure
 
-- `index.html` — the homepage; links to all six phases, the Mastery Track, and the docs.
+- `index.html` — the homepage; links to all six phases, the Mastery Track, the
+  Cryptography topic, and the docs.
 - `phaseN_*.html` — six standalone core learning docs (phases 1–6).
 - `mastery_*.html` — sixteen standalone Mastery Track modules (named, not numbered)
   covering cross-cutting topics. These add an **inline runnable-code component**:
   every `<pre>` is wrapped in `.snippet` with a Copy button, and JS snippets get a
   ▶ Run button driven by a small vanilla-JS runner inlined at the bottom of each
   file (sandboxed `new Function` + captured `console`). Keep it dependency-free.
+- `crypto_*.html` — the **Cryptography topic**: a growing series of standalone,
+  *generic* (project-independent) explainers, one cryptographic method per file
+  (e.g. `crypto_ecdh_key_agreement.html`). They reuse the exact Mastery module
+  shell — same CSS, `.snippet` Copy/▶ Run component, and highlight classes — but
+  are method-named, not whimsically named, and stay framework-free. Add new
+  methods (RSA, AES-GCM, hashing/HMAC, signatures) as new `crypto_*.html` files
+  and a card in the `#crypto` section of `index.html`.
 - `roadmap_summary_md.md` — full prose summary of all phases (source of truth for content).
 - `docs/` — markdown companion docs (per phase + meta). The `.md` files are the
   source of truth; `docs/*.html` and `roadmap_summary.html` are **generated** from
