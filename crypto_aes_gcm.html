@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>AES-GCM — Authenticated Symmetric Encryption</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}.ascii{font-size:11.5px;line-height:1.5}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Cryptography · Symmetric</span>
+<h1>🔒 AES-GCM — Authenticated Symmetric Encryption</h1>
+<p class="sub">The workhorse that actually encrypts your data. One shared key locks and unlocks the box, it's blisteringly fast, and a built-in tamper seal means a modified message is <em>rejected</em>, not silently mis-decrypted.</p>
+
+<div class="tip">Part of the <strong>Cryptography</strong> topic. <a class="back" href="crypto_ecdh_key_agreement.html">ECDH</a> <em>agrees</em> a shared key; <a class="back" href="crypto_hashing_hmac.html">HMAC</a> proves <em>integrity</em>. AES-GCM is where the bulk data actually gets encrypted — and it folds integrity in for free. It's the "symmetric" half of the hybrid encryption every HTTPS connection uses.</div>
+
+<h2><span class="sn">1</span>Symmetric vs asymmetric</h2>
+<p><strong>Symmetric</strong> encryption uses <em>one</em> key for both locking and unlocking — like a physical lockbox where both people hold a copy of the same key. It's fast and handles unlimited data, but both sides must already share that key.</p>
+<p><strong>Asymmetric</strong> (RSA, ECDH) uses a public/private key <em>pair</em> and solves the "how do we share a key without meeting" problem — but it's slow and can only handle tiny amounts of data.</p>
+<p>So real systems are <strong>hybrid</strong>: use asymmetric crypto once to agree a key, then symmetric AES-GCM for all the actual data. That's exactly the ECIES flow from the ECDH module.</p>
+
+<h2><span class="sn">2</span>What AES-GCM is made of</h2>
+<p><strong>AES</strong> is a block cipher — it scrambles data in 16-byte blocks using a key of 128, 192, or 256 bits. On its own it just transforms blocks; you need a <em>mode</em> to encrypt real-world messages. <strong>GCM</strong> (Galois/Counter Mode) is that mode, and it does two jobs at once:</p>
+<ul>
+<li><strong>Counter mode</strong> turns AES into a stream cipher, so you can encrypt data of any length efficiently and in parallel.</li>
+<li><strong>An authentication tag</strong> (16 bytes appended to the ciphertext) that acts as a tamper seal — this is what makes GCM an <strong>AEAD</strong> (Authenticated Encryption with Associated Data) cipher.</li>
+</ul>
+<p>Encrypting takes three inputs and produces two outputs:</p>
+<pre class="ascii"><span class="cm">   KEY  (secret, shared)          ─┐</span>
+<span class="cm">   IV / NONCE  (fresh per message) ├──▶  AES-GCM  ──▶  CIPHERTEXT + AUTH TAG</span>
+<span class="cm">   PLAINTEXT                      ─┘</span></pre>
+<p>The <strong>IV</strong> (initialization vector, a.k.a. <em>nonce</em> — "number used once") is a fresh 12-byte value per message. It's <em>not secret</em> — you send it alongside the ciphertext — but it must be <strong>unique</strong> for every message under a given key. Its job: make identical plaintexts encrypt to <em>different</em> ciphertexts, so an eavesdropper can't even tell you sent the same thing twice.</p>
+
+<h2><span class="sn">3</span>See it: encrypt, decrypt, and the IV's job</h2>
+<p>Below we encrypt the <em>same</em> message twice with two fresh IVs — the ciphertexts come out completely different — then decrypt one back. Run it:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable (WebCrypto)</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// AES-256-GCM: generate a key, encrypt, decrypt</span>
+<span class="kw">const</span> enc = <span class="kw">new</span> <span class="fn">TextEncoder</span>(), dec = <span class="kw">new</span> <span class="fn">TextDecoder</span>();
+<span class="kw">const</span> hex = u =&gt; [...<span class="kw">new</span> <span class="fn">Uint8Array</span>(u)]
+  .<span class="fn">map</span>(b =&gt; b.<span class="fn">toString</span>(<span class="num">16</span>).<span class="fn">padStart</span>(<span class="num">2</span>, <span class="str">'0'</span>)).<span class="fn">join</span>(<span class="str">''</span>);
+
+<span class="kw">const</span> key = <span class="kw">await</span> crypto.subtle.<span class="fn">generateKey</span>(
+  { name: <span class="str">'AES-GCM'</span>, length: <span class="num">256</span> }, <span class="kw">true</span>, [<span class="str">'encrypt'</span>, <span class="str">'decrypt'</span>]);
+
+<span class="kw">const</span> msg = <span class="str">'Meet at the docks at midnight'</span>;
+
+<span class="cm">// Encrypt the SAME message twice, each with its own fresh 96-bit IV</span>
+<span class="kw">const</span> iv1 = crypto.<span class="fn">getRandomValues</span>(<span class="kw">new</span> <span class="fn">Uint8Array</span>(<span class="num">12</span>));
+<span class="kw">const</span> iv2 = crypto.<span class="fn">getRandomValues</span>(<span class="kw">new</span> <span class="fn">Uint8Array</span>(<span class="num">12</span>));
+<span class="kw">const</span> c1 = <span class="kw">await</span> crypto.subtle.<span class="fn">encrypt</span>({ name: <span class="str">'AES-GCM'</span>, iv: iv1 }, key, enc.<span class="fn">encode</span>(msg));
+<span class="kw">const</span> c2 = <span class="kw">await</span> crypto.subtle.<span class="fn">encrypt</span>({ name: <span class="str">'AES-GCM'</span>, iv: iv2 }, key, enc.<span class="fn">encode</span>(msg));
+console.<span class="fn">log</span>(<span class="str">'ciphertext #1:'</span>, <span class="fn">hex</span>(c1).<span class="fn">slice</span>(<span class="num">0</span>, <span class="num">40</span>) + <span class="str">'…'</span>);
+console.<span class="fn">log</span>(<span class="str">'ciphertext #2:'</span>, <span class="fn">hex</span>(c2).<span class="fn">slice</span>(<span class="num">0</span>, <span class="num">40</span>) + <span class="str">'…'</span>);
+console.<span class="fn">log</span>(<span class="str">'same plaintext → different ciphertext?'</span>, <span class="fn">hex</span>(c1) !== <span class="fn">hex</span>(c2));
+console.<span class="fn">log</span>(<span class="str">'ciphertext bytes:'</span>, <span class="kw">new</span> <span class="fn">Uint8Array</span>(c1).length, <span class="str">'(plaintext + 16-byte tag)'</span>);
+
+<span class="cm">// Decrypt #1 — needs the same key AND the matching IV</span>
+<span class="kw">const</span> back = <span class="kw">await</span> crypto.subtle.<span class="fn">decrypt</span>({ name: <span class="str">'AES-GCM'</span>, iv: iv1 }, key, c1);
+console.<span class="fn">log</span>(<span class="str">'decrypted #1 :'</span>, dec.<span class="fn">decode</span>(back));</pre><div class="out"></div></div>
+
+<h2><span class="sn">4</span>The tamper seal (AEAD) — and "associated data"</h2>
+<p>Because GCM authenticates the ciphertext, flipping even a single bit makes decryption <strong>fail loudly</strong> rather than return corrupted plaintext. You can also bind extra <strong>associated data (AAD)</strong> to the ciphertext — data that travels in the clear but is <em>authenticated</em>, like a message header or a user ID. Change the AAD and decryption also fails. Run it:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable (WebCrypto)</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// AES-GCM rejects any tampering — with the ciphertext OR the associated data</span>
+<span class="kw">const</span> enc = <span class="kw">new</span> <span class="fn">TextEncoder</span>(), dec = <span class="kw">new</span> <span class="fn">TextDecoder</span>();
+<span class="kw">const</span> key = <span class="kw">await</span> crypto.subtle.<span class="fn">generateKey</span>(
+  { name: <span class="str">'AES-GCM'</span>, length: <span class="num">256</span> }, <span class="kw">false</span>, [<span class="str">'encrypt'</span>, <span class="str">'decrypt'</span>]);
+<span class="kw">const</span> iv = crypto.<span class="fn">getRandomValues</span>(<span class="kw">new</span> <span class="fn">Uint8Array</span>(<span class="num">12</span>));
+<span class="kw">const</span> aad = enc.<span class="fn">encode</span>(<span class="str">'user-id:42'</span>);        <span class="cm">// authenticated, NOT encrypted</span>
+
+<span class="kw">const</span> ct = <span class="kw">await</span> crypto.subtle.<span class="fn">encrypt</span>(
+  { name: <span class="str">'AES-GCM'</span>, iv, additionalData: aad }, key, enc.<span class="fn">encode</span>(<span class="str">'balance=100'</span>));
+
+<span class="cm">// 1) Flip one byte of the ciphertext (use .slice() to copy, not view!)</span>
+<span class="kw">const</span> tampered = <span class="kw">new</span> <span class="fn">Uint8Array</span>(ct).<span class="fn">slice</span>();
+tampered[<span class="num">0</span>] ^= <span class="num">0x01</span>;
+<span class="kw">try</span> {
+  <span class="kw">await</span> crypto.subtle.<span class="fn">decrypt</span>({ name: <span class="str">'AES-GCM'</span>, iv, additionalData: aad }, key, tampered);
+  console.<span class="fn">log</span>(<span class="str">'tampered ciphertext → SUCCEEDED (should never happen)'</span>);
+} <span class="kw">catch</span> (e) {
+  console.<span class="fn">log</span>(<span class="str">'tampered ciphertext → rejected:'</span>, e.name);
+}
+
+<span class="cm">// 2) Correct ciphertext but WRONG associated data</span>
+<span class="kw">try</span> {
+  <span class="kw">await</span> crypto.subtle.<span class="fn">decrypt</span>(
+    { name: <span class="str">'AES-GCM'</span>, iv, additionalData: enc.<span class="fn">encode</span>(<span class="str">'user-id:99'</span>) }, key, ct);
+  console.<span class="fn">log</span>(<span class="str">'wrong AAD → SUCCEEDED (should never happen)'</span>);
+} <span class="kw">catch</span> (e) {
+  console.<span class="fn">log</span>(<span class="str">'wrong AAD → rejected:'</span>, e.name);
+}
+
+<span class="cm">// 3) Intact ciphertext + correct AAD → decrypts cleanly</span>
+<span class="kw">const</span> ok = <span class="kw">await</span> crypto.subtle.<span class="fn">decrypt</span>({ name: <span class="str">'AES-GCM'</span>, iv, additionalData: aad }, key, ct);
+console.<span class="fn">log</span>(<span class="str">'intact + correct AAD →'</span>, dec.<span class="fn">decode</span>(ok));</pre><div class="out"></div></div>
+
+<h2><span class="sn">5</span>The one rule you must never break</h2>
+<div class="warn"><strong>Never reuse an IV/nonce with the same key.</strong> GCM's security collapses if you encrypt two different messages with the same (key, IV) pair: an attacker can XOR the two ciphertexts to strip the keystream and recover relationships between the plaintexts — <em>and</em> can forge the authentication tag for that key. This is the single most common way real systems using GCM get broken.</div>
+<p>Safe practice: generate a fresh random 12-byte IV with a CSPRNG (<code>crypto.getRandomValues</code>) for every message, or use a strict counter you're certain never repeats. The IV isn't secret — just unique. (If you can't guarantee uniqueness, use a nonce-misuse-resistant mode like AES-GCM-SIV instead.)</p>
+
+<h2><span class="sn">6</span>AES-GCM vs older modes</h2>
+<table>
+<tr><th>Mode</th><th>Authenticated?</th><th>Notes</th></tr>
+<tr><td><strong>AES-GCM</strong></td><td>✅ built-in (AEAD)</td><td>Fast, parallel, modern default. Needs a unique IV.</td></tr>
+<tr><td>AES-CBC</td><td>❌ needs a separate HMAC</td><td>Padding-oracle attacks if integrity is bolted on wrong (encrypt-then-MAC only).</td></tr>
+<tr><td>AES-ECB</td><td>❌</td><td>Never use — identical blocks encrypt identically, leaking patterns.</td></tr>
+<tr><td>ChaCha20-Poly1305</td><td>✅ AEAD</td><td>GCM's main alternative; faster on hardware without AES acceleration (mobile).</td></tr>
+</table>
+
+<h2><span class="sn">7</span>Where you'll meet AES-GCM</h2>
+<ul>
+<li><strong>TLS 1.3 / HTTPS</strong> — <code>AES_256_GCM</code> is a default cipher suite; it encrypts the actual bytes of every request after the ECDHE handshake.</li>
+<li><strong>Disk &amp; file encryption</strong> — FileVault, BitLocker, and mobile-device encryption.</li>
+<li><strong>The payload half of ECIES</strong> — the ECDH module derives an AES-GCM key with HKDF, then encrypts with exactly this.</li>
+<li><strong>At-rest encryption</strong> — S3 SSE, database and secrets-manager encryption, encrypted backups.</li>
+<li><strong>VPNs &amp; messaging</strong> — WireGuard and Signal use AEAD ciphers (ChaCha20-Poly1305, GCM's cousin).</li>
+</ul>
+
+<div class="ok"><strong>Try it:</strong> (1) In the first demo, try to decrypt <code>c1</code> using <code>iv2</code> instead of <code>iv1</code> — it fails, because the IV is part of what's authenticated. (2) In the second demo, comment out the tamper line and confirm the "tampered" branch then decrypts fine. (3) Change the key length to <code>128</code> and watch everything still work — that's AES-128, also perfectly secure.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">More in this topic: key derivation (HKDF/PBKDF2), RSA, and digital signatures. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>
