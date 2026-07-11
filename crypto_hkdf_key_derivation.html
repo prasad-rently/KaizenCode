@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>HKDF &amp; PBKDF2 — Key Derivation</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}.ascii{font-size:11.5px;line-height:1.5}.calc{border:1px solid #e8e8e8;border-radius:8px;padding:14px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.calc{border-color:#2a2a2a;background:#141416}}.calc button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;transition:background .15s}.calc button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.calc button{background:#8f8cff;color:#111}.calc button:hover{background:#a6a3ff}}.calc-out{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:10px 12px;border-radius:6px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:360px;overflow:auto}.calc-out.show{display:block}@media(prefers-color-scheme:dark){.calc-out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}.calc-full{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:10px;width:100%}@media(prefers-color-scheme:dark){.calc-full{color:#999}}.calc textarea{font:inherit;font-size:11.5px;font-family:'SF Mono','Fira Code',monospace;width:100%;padding:6px 8px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a;resize:vertical;word-break:break-all;line-height:1.5}.calc textarea:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.calc textarea{background:#0d0d0d;border-color:#333;color:#e8e8e8}.calc textarea:focus{border-color:#8f8cff}}.calc .hint{font-size:11px;font-weight:400;color:#888;margin:0 0 10px}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Cryptography · Key Derivation</span>
+<h1>🧪 HKDF &amp; PBKDF2 — Key Derivation</h1>
+<p class="sub">Raw key material — an ECDH shared secret, or a human password — is rarely a good key as-is. Key derivation functions refine it into clean, full-strength, purpose-specific keys. This is the quiet step that sits between "agree a secret" and "encrypt the data."</p>
+
+<div class="tip">Part of the <strong>Cryptography</strong> topic. It's the missing middle of the <a class="back" href="crypto_ecdh_key_agreement.html">ECDH</a> → <a class="back" href="crypto_aes_gcm.html">AES-GCM</a> pipeline: ECDH agrees a shared secret, a KDF turns it into an AES key, AES-GCM encrypts. Two jobs, two tools — <strong>HKDF</strong> for high-entropy secrets, <strong>PBKDF2</strong> (and friends) for passwords.</p></div>
+
+<h2><span class="sn">1</span>Why you can't use raw key material directly</h2>
+<p>A key for AES-GCM must be a uniform, unpredictable block of bits. But the material you start with usually isn't:</p>
+<ul>
+<li>An <strong>ECDH shared secret</strong> is a curve point — it's secret, but its bits aren't perfectly uniform, and it's a fixed size you may need to reshape.</li>
+<li>A <strong>password</strong> is worse: short, low-entropy, and guessable. Using it directly as a key would be trivially brute-forced.</li>
+</ul>
+<p>A KDF fixes this: it takes imperfect input and produces one or more keys that are indistinguishable from random — and, for passwords, deliberately expensive to compute.</p>
+
+<h2><span class="sn">2</span>HKDF = Extract, then Expand</h2>
+<p><strong>Analogy — an oil refinery.</strong> Crude oil (your raw secret) is useful but unrefined. HKDF works in two stages, just like a refinery:</p>
+<ul>
+<li><strong>Extract</strong> — condense the messy input (plus an optional <em>salt</em>) into one uniform, high-quality intermediate key, the <strong>PRK</strong> (pseudorandom key). This is "distil the crude into clean feedstock."</li>
+<li><strong>Expand</strong> — stretch the PRK into as many output keys as you need, each tagged with a distinct <strong>info</strong> label. This is "make gasoline, diesel, and jet fuel from the same feedstock."</li>
+</ul>
+<pre class="ascii"><span class="cm">   raw secret ─┐</span>
+<span class="cm">   salt ───────┼─▶ [EXTRACT] ─▶ PRK ─▶ [EXPAND] ─┬─▶ key "encryption"</span>
+<span class="cm">                                    (info label) ├─▶ key "authentication"</span>
+<span class="cm">                                                 └─▶ key "cookie-signing"</span></pre>
+<p>The magic is that all those output keys are <strong>cryptographically independent</strong> — learning one tells you nothing about the others.</p>
+
+<h2><span class="sn">3</span>See it: one secret → many independent keys</h2>
+<p>Below, a single shared secret produces two different 256-bit keys just by changing the <code>info</code> label — and re-deriving with the same inputs gives the identical key back. Run it:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable (WebCrypto)</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// HKDF: turn ONE secret into MANY purpose-specific keys</span>
+<span class="kw">const</span> TE = <span class="kw">new</span> <span class="fn">TextEncoder</span>();
+<span class="kw">const</span> hex = u =&gt; [...<span class="kw">new</span> <span class="fn">Uint8Array</span>(u)]
+  .<span class="fn">map</span>(x =&gt; x.<span class="fn">toString</span>(<span class="num">16</span>).<span class="fn">padStart</span>(<span class="num">2</span>, <span class="str">'0'</span>)).<span class="fn">join</span>(<span class="str">''</span>);
+
+<span class="cm">// pretend this came out of an ECDH key agreement</span>
+<span class="kw">const</span> prk = <span class="kw">await</span> crypto.subtle.<span class="fn">importKey</span>(
+  <span class="str">'raw'</span>, TE.<span class="fn">encode</span>(<span class="str">'shared-secret-from-ECDH'</span>), <span class="str">'HKDF'</span>, <span class="kw">false</span>, [<span class="str">'deriveBits'</span>]);
+
+<span class="kw">const</span> derive = (info) =&gt; crypto.subtle.<span class="fn">deriveBits</span>(
+  { name: <span class="str">'HKDF'</span>, hash: <span class="str">'SHA-256'</span>, salt: TE.<span class="fn">encode</span>(<span class="str">'app-salt'</span>), info: TE.<span class="fn">encode</span>(info) },
+  prk, <span class="num">256</span>);
+
+<span class="kw">const</span> encKey = hex(<span class="kw">await</span> <span class="fn">derive</span>(<span class="str">'app:encryption'</span>));
+<span class="kw">const</span> macKey = hex(<span class="kw">await</span> <span class="fn">derive</span>(<span class="str">'app:authentication'</span>));
+console.<span class="fn">log</span>(<span class="str">'encryption key   :'</span>, encKey.<span class="fn">slice</span>(<span class="num">0</span>, <span class="num">32</span>) + <span class="str">'…'</span>);
+console.<span class="fn">log</span>(<span class="str">'authentication key:'</span>, macKey.<span class="fn">slice</span>(<span class="num">0</span>, <span class="num">32</span>) + <span class="str">'…'</span>);
+console.<span class="fn">log</span>(<span class="str">'different keys from one secret?'</span>, encKey !== macKey);
+console.<span class="fn">log</span>(<span class="str">'re-derive encryption key → identical?'</span>, hex(<span class="kw">await</span> <span class="fn">derive</span>(<span class="str">'app:encryption'</span>)) === encKey);</pre><div class="out"></div></div>
+<p>The <code>info</code> label gives you <strong>domain separation</strong>: the same secret safely powers many keys, each bound to a purpose, so a key meant for signing can never accidentally be the key used for encryption. The <strong>salt</strong> is not secret and may be empty, but a random salt strengthens the Extract step.</p>
+
+<h2><span class="sn">4</span>Passwords are different — use PBKDF2 / scrypt / Argon2</h2>
+<p>HKDF assumes its input already has plenty of entropy. A <strong>password</strong> does not — so HKDF is the wrong tool for it. Password KDFs add one crucial property: they are <strong>deliberately slow</strong> (a tunable "work factor"), so that checking one guess is cheap for you but checking billions is ruinously expensive for an attacker with a stolen database.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable (WebCrypto)</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// PBKDF2: stretch a low-entropy PASSWORD into a key — slowly, on purpose</span>
+<span class="kw">const</span> TE = <span class="kw">new</span> <span class="fn">TextEncoder</span>();
+<span class="kw">const</span> hex = u =&gt; [...<span class="kw">new</span> <span class="fn">Uint8Array</span>(u)]
+  .<span class="fn">map</span>(x =&gt; x.<span class="fn">toString</span>(<span class="num">16</span>).<span class="fn">padStart</span>(<span class="num">2</span>, <span class="str">'0'</span>)).<span class="fn">join</span>(<span class="str">''</span>);
+<span class="kw">const</span> pw = <span class="kw">await</span> crypto.subtle.<span class="fn">importKey</span>(
+  <span class="str">'raw'</span>, TE.<span class="fn">encode</span>(<span class="str">'hunter2'</span>), <span class="str">'PBKDF2'</span>, <span class="kw">false</span>, [<span class="str">'deriveBits'</span>]);
+
+<span class="kw">const</span> derive = (salt, iters) =&gt; crypto.subtle.<span class="fn">deriveBits</span>(
+  { name: <span class="str">'PBKDF2'</span>, hash: <span class="str">'SHA-256'</span>, salt: TE.<span class="fn">encode</span>(salt), iterations: iters }, pw, <span class="num">256</span>);
+
+<span class="kw">const</span> t0 = performance.<span class="fn">now</span>();
+<span class="kw">const</span> k1 = hex(<span class="kw">await</span> <span class="fn">derive</span>(<span class="str">'alice-salt'</span>, <span class="num">600000</span>));   <span class="cm">// OWASP-recommended floor</span>
+<span class="kw">const</span> ms = Math.<span class="fn">round</span>(performance.<span class="fn">now</span>() - t0);
+console.<span class="fn">log</span>(<span class="str">'derived key:'</span>, k1.<span class="fn">slice</span>(<span class="num">0</span>, <span class="num">32</span>) + <span class="str">'…'</span>);
+console.<span class="fn">log</span>(<span class="num">600000</span> + <span class="str">' iterations took ~'</span> + ms + <span class="str">'ms — the slowness IS the defense'</span>);
+console.<span class="fn">log</span>(<span class="str">'same password + salt → same key?'</span>, hex(<span class="kw">await</span> <span class="fn">derive</span>(<span class="str">'alice-salt'</span>, <span class="num">600000</span>)) === k1);
+console.<span class="fn">log</span>(<span class="str">'different salt → different key?'</span>, hex(<span class="kw">await</span> <span class="fn">derive</span>(<span class="str">'bob-salt'</span>, <span class="num">600000</span>)) !== k1);</pre><div class="out"></div></div>
+<div class="warn"><strong>Iterations and salts matter.</strong> Use a high iteration count (OWASP suggests ≥600,000 for PBKDF2-HMAC-SHA256, tuned upward over time) and a unique random salt per password. For new systems, <strong>Argon2id</strong> is the modern first choice — it also resists GPU/ASIC cracking via memory hardness. PBKDF2 is fine and FIPS-approved; scrypt and Argon2 are stronger against specialized hardware.</div>
+
+<h2><span class="sn">5</span>HKDF vs PBKDF2 at a glance</h2>
+<table>
+<tr><th></th><th>HKDF</th><th>PBKDF2 / scrypt / Argon2</th></tr>
+<tr><td>Input</td><td>High-entropy secret (e.g. ECDH output)</td><td>Low-entropy password</td></tr>
+<tr><td>Speed</td><td>Fast (that's fine — input is already strong)</td><td>Deliberately slow (tunable work factor)</td></tr>
+<tr><td>Main goal</td><td>Shape &amp; split one secret into many keys</td><td>Make guessing a weak secret expensive</td></tr>
+<tr><td>Salt</td><td>Optional, strengthens Extract</td><td>Required, unique per password</td></tr>
+<tr><td>"Context" support</td><td>Yes — the <code>info</code> label</td><td>No (single output)</td></tr>
+</table>
+
+<h2><span class="sn">6</span>Where you'll meet key derivation</h2>
+<ul>
+<li><strong>TLS 1.3 key schedule</strong> — HKDF derives every traffic key from the handshake secret.</li>
+<li><strong>ECIES / your ECDH module</strong> — the shared secret is run through HKDF to get the AES-GCM key.</li>
+<li><strong>Signal</strong> — the Double Ratchet chains keys forward with HKDF on every message.</li>
+<li><strong>Login systems</strong> — passwords are stored as PBKDF2/scrypt/Argon2 outputs, never as the password itself.</li>
+<li><strong>Password-based encryption</strong> — encrypting a file with a passphrase derives the key with PBKDF2/Argon2 first.</li>
+</ul>
+
+<h3>Try it yourself — derive keys from a secret</h3>
+<p>Give one secret and two context labels. HKDF turns the secret into two full-strength keys — completely different from each other (domain separation), yet perfectly reproducible from the same inputs. Change a label and its key changes entirely; change the secret and both do.</p>
+<div class="calc">
+  <div class="calc-full">Input secret (e.g. an ECDH shared secret)
+    <textarea id="hkdf-secret" rows="1">shared-secret-from-ECDH</textarea>
+  </div>
+  <div class="calc-full">Salt <span style="font-weight:400;color:#999">(public, optional)</span>
+    <textarea id="hkdf-salt" rows="1">app-salt-v1</textarea>
+  </div>
+  <div class="calc-full">Context A — info label
+    <textarea id="hkdf-a" rows="1">app:encryption</textarea>
+  </div>
+  <div class="calc-full">Context B — info label
+    <textarea id="hkdf-b" rows="1">app:authentication</textarea>
+  </div>
+  <button id="hkdf-run">🧪 Derive both keys →</button>
+  <div id="hkdf-out" class="calc-out"></div>
+</div>
+
+<div class="ok"><strong>Try it:</strong> (1) In the panel, set Context A and Context B to the <em>same</em> value and re-derive — now both keys are identical, showing the label is what separates them. (2) In the HKDF demo, change <code>'app-salt'</code> and watch every key change. (3) In the PBKDF2 demo, drop the iterations to <code>1000</code> and see it finish almost instantly — then remember that's exactly what makes weak parameters dangerous.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">More in this topic: RSA and digital signatures. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){var run=document.getElementById('hkdf-run');if(!run)return;var TE=new TextEncoder();function hex(buf){var b=new Uint8Array(buf),s='';for(var i=0;i<b.length;i++)s+=b[i].toString(16).padStart(2,'0');return s;}function gv(id){return document.getElementById(id).value;}function derive(secret,salt,info){return crypto.subtle.importKey('raw',TE.encode(secret),'HKDF',false,['deriveBits']).then(function(prk){return crypto.subtle.deriveBits({name:'HKDF',hash:'SHA-256',salt:TE.encode(salt),info:TE.encode(info)},prk,256);}).then(hex);}var out=document.getElementById('hkdf-out');run.addEventListener('click',async function(){out.classList.add('show');out.textContent='deriving…';try{var secret=gv('hkdf-secret'),salt=gv('hkdf-salt'),a=gv('hkdf-a'),b=gv('hkdf-b');var kA=await derive(secret,salt,a);var kB=await derive(secret,salt,b);var kAagain=await derive(secret,salt,a);var L=[];L.push('From one secret + salt, HKDF derived two 256-bit keys:');L.push('');L.push('Context A ("'+a+'"):');L.push('   '+kA);L.push('Context B ("'+b+'"):');L.push('   '+kB);L.push('');L.push((kA!==kB?'✓':'✗')+' The two keys are '+(kA!==kB?'completely different':'identical')+' — '+(kA!==kB?'domain separation works.':'because both contexts are the same label.'));L.push((kA===kAagain?'✓':'✗')+' Re-deriving Context A gives the identical key — deterministic, so both parties compute the same thing.');out.textContent=L.join('\n');}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});})();</script>
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>
