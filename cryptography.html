@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Cryptography — Topic Guide · KaizenCode</title><meta name="description" content="A guided, runnable tour of applied cryptography: ECDH, AES-GCM, hashing/HMAC, HKDF, RSA, signatures, the TLS 1.3 handshake, Shamir's Secret Sharing, and zero-knowledge proofs.">
+<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px 60px;max-width:720px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:26px;font-weight:700;margin-bottom:4px;letter-spacing:-.6px}.sub{font-size:14px;color:#666;margin-bottom:20px;line-height:1.55}@media(prefers-color-scheme:dark){.sub{color:#999}}h2{font-size:16px;font-weight:600;margin:34px 0 8px;padding-top:10px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}}pre{font-size:11.5px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.55;padding:14px 16px;background:#f5f5f5;border:1px solid #e8e8e8;border-radius:10px;margin:12px 0;color:#333}@media(prefers-color-scheme:dark){pre{background:#161616;border-color:#2a2a2a;color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.group-label{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#5350B4;margin:24px 0 8px}@media(prefers-color-scheme:dark){.group-label{color:#8f8cff}}.path{display:flex;flex-direction:column;gap:10px}.step{display:flex;gap:14px;align-items:flex-start;text-decoration:none;color:inherit;border:1px solid #e8e8e8;border-radius:12px;padding:14px 16px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.03);transition:border-color .15s,transform .15s,box-shadow .15s}.step:hover{border-color:#5350B4;transform:translateY(-2px);box-shadow:0 8px 22px rgba(83,80,180,.12)}@media(prefers-color-scheme:dark){.step{background:#161616;border-color:#2a2a2a;box-shadow:none}.step:hover{border-color:#8f8cff}}.step .idx{flex:0 0 auto;width:32px;height:32px;border-radius:9px;background:#f3f2ff;color:#5350B4;display:grid;place-items:center;font-weight:800;font-size:14px}@media(prefers-color-scheme:dark){.step .idx{background:#1a1830;color:#8f8cff}}.step .body{flex:1;min-width:0}.step .t{font-size:14.5px;font-weight:700;margin-bottom:3px;letter-spacing:-.2px}.step .t .em{margin-right:6px}.step .d{font-size:12.5px;color:#666;line-height:1.5}@media(prefers-color-scheme:dark){.step .d{color:#9a9aa2}}.step .arrow{flex:0 0 auto;color:#5350B4;font-size:13px;font-weight:700;align-self:center}@media(prefers-color-scheme:dark){.step .arrow{color:#8f8cff}}.footer{margin-top:40px;padding-top:18px;border-top:1px solid #ececf0;font-size:12.5px;color:#8a8a92}@media(prefers-color-scheme:dark){.footer{border-color:#222226}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Cryptography · Topic Guide</span>
+<h1>🔐 Cryptography</h1>
+<p class="sub">A guided, runnable tour of the cryptography that secures real systems — each method from scratch, generic and framework-free, with code you execute right in the page. Work through it in order, or jump to what you need.</p>
+
+<div class="tip">Every module is self-contained and offline-capable: plain-English intuition, the math (often small enough to check by hand), and live <strong>▶ Run</strong> demos plus hands-on calculators using the browser's native WebCrypto — no libraries, no build step.</div>
+
+<h2>The through-line</h2>
+<p>The first six modules aren't a random list — they're the pieces of one machine. This is how every HTTPS connection actually protects your data, and the <strong>capstone</strong> assembles them end to end:</p>
+<pre>            agree a key          derive keys         encrypt data
+   ECDH ───────────────▶ HKDF ───────────▶ AES-GCM
+   (key agreement)      (key derivation)   (authenticated encryption)
+        │                                        ▲
+        │  Hashing/HMAC = integrity everywhere   │
+        └── RSA / Signatures = identity & trust ──┘
+
+               ⇓  all assembled in  ⇓
+                  TLS 1.3 handshake</pre>
+
+<div class="group-label">Core series · start here</div>
+<div class="path">
+  <a class="step" href="crypto_ecdh_key_agreement.html"><span class="idx">1</span><span class="body"><div class="t"><span class="em">🤝</span>ECDH — Key Agreement</div><div class="d">How two strangers agree on a shared secret over an open line. The foundation — includes a step-by-step number calculator, an ECIES encrypt→decrypt playground, and a man-in-the-middle attack you run yourself.</div></span><span class="arrow">→</span></a>
+  <a class="step" href="crypto_hashing_hmac.html"><span class="idx">2</span><span class="body"><div class="t"><span class="em">🧬</span>Hashing &amp; HMAC</div><div class="d">Digital fingerprints and keyed authentication — one-way hashes, the avalanche effect, and proving <em>who</em> sent a message. Live hash box and an HMAC sign→verify tool.</div></span><span class="arrow">→</span></a>
+  <a class="step" href="crypto_aes_gcm.html"><span class="idx">3</span><span class="body"><div class="t"><span class="em">🔒</span>AES-GCM</div><div class="d">The symmetric workhorse that actually encrypts the data — one key, a tamper seal, and the never-reuse-a-nonce rule. Encrypt and decrypt your own text.</div></span><span class="arrow">→</span></a>
+  <a class="step" href="crypto_hkdf_key_derivation.html"><span class="idx">4</span><span class="body"><div class="t"><span class="em">🧪</span>HKDF &amp; PBKDF2</div><div class="d">Turning a raw secret or a password into clean, purpose-specific keys — the missing middle between ECDH and AES-GCM. Derive your own keys and watch domain separation.</div></span><span class="arrow">→</span></a>
+  <a class="step" href="crypto_rsa_public_key.html"><span class="idx">5</span><span class="body"><div class="t"><span class="em">🔑</span>RSA</div><div class="d">Public-key encryption and signatures via the factoring problem — the classic contrast to elliptic curves. Tiny by-hand RSA plus a build-your-own-key calculator.</div></span><span class="arrow">→</span></a>
+  <a class="step" href="crypto_digital_signatures.html"><span class="idx">6</span><span class="body"><div class="t"><span class="em">✍️</span>Digital Signatures</div><div class="d">Proving authorship and integrity — sign with a private key, verify with the public one. ECDSA &amp; EdDSA, the nonce-reuse footgun, and a sign→verify playground.</div></span><span class="arrow">→</span></a>
+</div>
+
+<div class="group-label">Capstone</div>
+<div class="path">
+  <a class="step" href="crypto_tls13_handshake.html"><span class="idx">7</span><span class="body"><div class="t"><span class="em">🔗</span>TLS 1.3 Handshake</div><div class="d">Where it all comes together: ephemeral ECDHE, a transcript hash, the HKDF key schedule, a certificate signature, and AES-GCM records — the machinery behind every 🔒. Run a whole handshake and watch forward secrecy live.</div></span><span class="arrow">→</span></a>
+</div>
+
+<div class="group-label">Bonus modules</div>
+<div class="path">
+  <a class="step" href="crypto_shamir_secret_sharing.html"><span class="idx">8</span><span class="body"><div class="t"><span class="em">🧩</span>Shamir's Secret Sharing</div><div class="d">Split a secret into <em>n</em> shares so any <em>k</em> rebuild it and <em>k−1</em> reveal nothing — how wallet seeds and root keys are guarded. Split and recombine your own secret.</div></span><span class="arrow">→</span></a>
+  <a class="step" href="crypto_zero_knowledge_proofs.html"><span class="idx">9</span><span class="body"><div class="t"><span class="em">🎭</span>Zero-Knowledge Proofs</div><div class="d">Prove you know a secret while revealing nothing — the Ali Baba cave, the Schnorr protocol, and the idea behind zk-SNARKs. Prove honestly, then try (and fail) to fake it.</div></span><span class="arrow">→</span></a>
+</div>
+
+<h2>How to use this</h2>
+<p><strong>New to crypto?</strong> Go 1 → 6 in order; each builds on the last, and the capstone will click into place. <strong>Here for one topic?</strong> Jump straight to it — every module stands alone. <strong>Want the big picture first?</strong> Read the TLS 1.3 capstone, then follow its links back to any piece you want to understand more deeply.</p>
+
+<div class="footer">改 KaizenCode — the Cryptography topic. Dependency-free, offline-friendly, dark-mode everywhere. <a class="back" href="index.html">← Back to all topics</a></div>
+</body></html>
