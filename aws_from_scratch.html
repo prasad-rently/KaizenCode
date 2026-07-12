@@ -1,0 +1,407 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>AWS From Scratch — The Complete Novice's Deep Dive</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}
+/* table of contents */
+.toc{border:1px solid #e8e8e8;border-radius:10px;padding:14px 18px;margin:18px 0;font-size:12.5px;background:#fafafa}.toc a{color:#5350B4;text-decoration:none;font-weight:600}.toc li{margin-bottom:3px}@media(prefers-color-scheme:dark){.toc{background:#161616;border-color:#2a2a2a}.toc a{color:#8f8cff}}
+/* try-it lab */
+.lab{border:1px solid #0F6E56;border-radius:10px;margin:16px 0;overflow:hidden}.lab .lab-head{background:#f4fef8;padding:8px 14px;font-size:12px;font-weight:700;color:#0F6E56;letter-spacing:.3px}.lab .lab-body{padding:10px 14px}.lab ol li{font-size:13px;margin-bottom:6px}@media(prefers-color-scheme:dark){.lab{border-color:#1f5c49}.lab .lab-head{background:#0a1f14;color:#4cc9a4}}
+/* planner */
+.planner{border:1px solid #e8e8e8;border-radius:10px;margin:14px 0;overflow:hidden}@media(prefers-color-scheme:dark){.planner{border-color:#2a2a2a}}.planner .p-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#f5f5f5;font-size:13px;font-weight:700}@media(prefers-color-scheme:dark){.planner .p-head{background:#1a1a1a}}.planner .p-head .cnt{font-size:11px;font-weight:600;color:#888}.task{display:flex;gap:10px;padding:9px 14px;border-top:1px solid #f0f0f0;cursor:pointer;align-items:flex-start}.task:hover{background:#fafafa}@media(prefers-color-scheme:dark){.task{border-color:#222}.task:hover{background:#191919}}.task .box{width:16px;height:16px;min-width:16px;border:1.5px solid #bbb;border-radius:5px;margin-top:2px;display:grid;place-items:center;font-size:11px;color:#fff;transition:all .15s}.task.done .box{background:#0F6E56;border-color:#0F6E56}.task .t-body{font-size:12.5px;line-height:1.5}.task .t-day{font-size:10.5px;font-weight:700;color:#5350B4;letter-spacing:.5px;text-transform:uppercase}.task.done .t-body{opacity:.55;text-decoration:line-through}.task .t-proof{font-size:11.5px;color:#888}@media(prefers-color-scheme:dark){.task .box{border-color:#444}.task .t-day{color:#8f8cff}}
+.pbar{height:7px;border-radius:5px;background:#efeefc;overflow:hidden;margin:8px 0 4px}.pbar>div{height:100%;background:#5350B4;width:0%;transition:width .3s}@media(prefers-color-scheme:dark){.pbar{background:#1a1830}.pbar>div{background:#8f8cff}}
+.pbar-label{font-size:11.5px;color:#888;margin-bottom:6px}
+</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Topic · AWS · From Scratch</span>
+<h1>☁️ AWS From Scratch</h1>
+<p class="sub">The complete novice's deep dive. What AWS actually <em>is</em>, why it exists, how EC2, S3, IAM, VPC, RDS, Lambda and the rest really work under the hood — with runnable demos, hands-on labs, and a 4-week work planner that tracks your progress in this page. Zero assumed knowledge.</p>
+
+<div class="toc"><strong>On this page</strong>
+<ol>
+<li><a href="#what">What is AWS, really?</a></li>
+<li><a href="#map">The map: regions, AZs, edge</a></li>
+<li><a href="#use">Three ways to use AWS</a></li>
+<li><a href="#money">Money first: free tier &amp; billing alarms</a></li>
+<li><a href="#iam">IAM — who may do what</a></li>
+<li><a href="#ec2">EC2 — renting computers</a></li>
+<li><a href="#s3">S3 — infinite object storage</a></li>
+<li><a href="#vpc">VPC — your private network</a></li>
+<li><a href="#rds">RDS — managed databases</a></li>
+<li><a href="#lambda">Lambda — serverless functions</a></li>
+<li><a href="#dns">Route 53, CloudFront &amp; CloudWatch</a></li>
+<li><a href="#cast">The supporting cast</a></li>
+<li><a href="#together">How it all fits together</a></li>
+<li><a href="#planner">The 4-week work planner ✅</a></li>
+<li><a href="#teardown">Teardown — don't get billed</a></li>
+</ol></div>
+
+<h2 id="what"><span class="sn">1</span>What is AWS, really?</h2>
+<p>Strip away the jargon and AWS (Amazon Web Services) is this: <strong>Amazon owns millions of computers in giant buildings around the world, and rents them to you by the second.</strong> Everything else — all 200+ services — is packaging around that one idea.</p>
+<p>Before the cloud, launching an app meant buying physical servers, racking them in a data center, wiring power and networking, and guessing capacity months ahead. Guess low and your app dies on launch day; guess high and you burn money on idle metal. AWS turned all of that into an API call: ask for a computer, get one in 60 seconds, pay only while it runs, hand it back when done.</p>
+<p><strong>The mobile analogy you already live:</strong> you don't run your own push-notification servers — you use APNs. You don't build your own crash reporting — you drop in a framework. AWS applies that same move to <em>everything</em>: computing, storage, databases, networking. It's "someone else's data center" behind clean APIs, the way APNs is "someone else's push infrastructure".</p>
+<p>Three properties make it more than a hosting company:</p>
+<ul>
+<li><strong>Elasticity</strong> — go from 1 server to 100 for launch day, back to 1 on Monday. You can't do that with metal you own.</li>
+<li><strong>Pay-as-you-go</strong> — no upfront cost, no contracts (unless you want discounts). A side project costs pennies; you pay for what you use, metered per second/GB/request.</li>
+<li><strong>Managed services</strong> — beyond raw computers, AWS runs databases, queues, and DNS <em>for</em> you: they patch, back up, and failover, you just use the endpoint. That's the real time-saver.</li>
+</ul>
+<div class="tip"><strong>Mental model for the whole page:</strong> every AWS service answers one question. EC2: "where does my code run?" · S3: "where do my files live?" · RDS: "where does my data live?" · IAM: "who's allowed to do what?" · VPC: "how is it all networked?" · Route 53: "how do users find it?" · CloudWatch: "how do I know it's working?"</div>
+
+<h2 id="map"><span class="sn">2</span>The map — regions, availability zones, edge</h2>
+<p>AWS's physical world has three layers. Understanding them explains half of AWS's vocabulary:</p>
+<table>
+<tr><th>Layer</th><th>What it physically is</th><th>Why it exists</th></tr>
+<tr><td><strong>Region</strong> (e.g. <code>us-east-1</code>, <code>ap-south-1</code> Mumbai)</td><td>A cluster of data centers in one geographic area. ~35 worldwide.</td><td>Put servers near your users (latency) and satisfy data-residency law (e.g. Indian user data staying in India).</td></tr>
+<tr><td><strong>Availability Zone</strong> (AZ, e.g. <code>ap-south-1a</code>)</td><td>One or more <em>separate buildings</em> inside a region — own power, cooling, network — linked by fast private fiber.</td><td>Survive a fire or power cut in one building. Run in 2+ AZs and one building can literally burn down without downtime.</td></tr>
+<tr><td><strong>Edge location</strong></td><td>Small cache sites in 400+ cities.</td><td>Serve static files (CloudFront CDN) and DNS (Route 53) from a few ms away, even where there's no full region.</td></tr>
+</table>
+<p>Almost everything you create lives <em>in one region you choose</em>. Pick the region closest to your users and stay in it while learning — resources in one region are invisible from another console view, which is the #1 "where did my server go?!" beginner panic.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Why regions matter: speed of light is a real constraint.</span>
+<span class="cm">// Round-trip time ≈ distance / speed of light in fiber (~200,000 km/s), × 2</span>
+<span class="kw">const</span> regions = [
+  { name: <span class="str">'ap-south-1 (Mumbai)'</span>,    km: <span class="num">1200</span> },  <span class="cm">// from Chennai</span>
+  { name: <span class="str">'ap-southeast-1 (Singapore)'</span>, km: <span class="num">2900</span> },
+  { name: <span class="str">'eu-west-1 (Ireland)'</span>,    km: <span class="num">8600</span> },
+  { name: <span class="str">'us-east-1 (Virginia)'</span>,   km: <span class="num">13500</span> },
+];
+<span class="kw">for</span> (<span class="kw">const</span> r <span class="kw">of</span> regions) {
+  <span class="kw">const</span> rttMs = (r.km / <span class="num">200000</span>) * <span class="num">2</span> * <span class="num">1000</span>;
+  console.<span class="fn">log</span>(r.name.<span class="fn">padEnd</span>(<span class="num">28</span>), <span class="str">'~'</span> + rttMs.<span class="fn">toFixed</span>(<span class="num">0</span>) + <span class="str">'ms minimum round trip'</span>);
+}
+console.<span class="fn">log</span>(<span class="str">'\nNo code optimization beats picking the right region.'</span>);</pre><div class="out"></div></div>
+
+<h2 id="use"><span class="sn">3</span>Three ways to use AWS</h2>
+<ul>
+<li><strong>The Console</strong> — the web UI at <code>console.aws.amazon.com</code>. Best for learning and looking around. You'll start here.</li>
+<li><strong>The CLI</strong> — <code>aws</code> in your terminal. Every button in the console is also a command. Scriptable, repeatable, and what this page's labs use once you're comfortable.</li>
+<li><strong>SDKs &amp; Infrastructure-as-Code</strong> — call AWS from code (<code>@aws-sdk/client-s3</code> in Node) or declare whole environments in Terraform/CDK (that's <a href="mastery_blueprint_iac.html">The Blueprint</a>). Real teams live here; clicking doesn't scale.</li>
+</ul>
+<div class="snippet"><div class="bar"><span class="lang">Shell · copy</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="cm"># Install the AWS CLI (macOS), then connect it to your account</span>
+brew install awscli
+aws configure
+<span class="cm">#  → paste an Access Key ID + Secret (created in IAM, section 5)</span>
+<span class="cm">#  → default region: ap-south-1 (or yours)   → output: json</span>
+
+aws sts get-caller-identity   <span class="cm"># "who am I?" — your first API call</span></pre></div>
+
+<h2 id="money"><span class="sn">4</span>Money first — free tier &amp; the billing alarm</h2>
+<p>Do this before creating anything else. AWS bills for what you leave running, and novices get burned by forgotten resources, not by usage.</p>
+<ul>
+<li><strong>Free tier:</strong> new accounts get 12 months of a small server (750 hrs/month of <code>t2.micro</code>/<code>t3.micro</code> EC2 — enough to run one 24/7), 5 GB of S3, 750 hrs of a small RDS database, and 1M Lambda requests/month <em>forever</em>. Everything in this page's planner fits in it.</li>
+<li><strong>The two rules:</strong> ① always know what you have running (<em>one region!</em>), ② delete what you're done with — the <a href="#teardown">teardown checklist</a> is part of the planner.</li>
+</ul>
+<div class="warn"><strong>Non-negotiable first task:</strong> in the console → Billing → Budgets, create a budget with an email alert at <strong>$5</strong>. Five minutes of work; converts every future mistake from a scary invoice into a polite email. The planner makes this Day 1.</div>
+<p><strong>Shared responsibility</strong> — one more orientation idea: AWS secures the <em>cloud</em> (buildings, hardware, hypervisor); you secure what's <em>in</em> it (your OS patches, your open ports, your IAM keys, your data). When something leaks from an S3 bucket in the news, it's almost always the customer's half.</p>
+
+<h2 id="iam"><span class="sn">5</span>IAM — who may do what</h2>
+<p><strong>What it is:</strong> Identity and Access Management — AWS's permission system. Every single API call (console click, CLI command, SDK call) is checked against IAM: <em>is this identity allowed to do this action on this resource?</em></p>
+<h3>The four nouns</h3>
+<table>
+<tr><th>Noun</th><th>What it is</th><th>Mobile analogy</th></tr>
+<tr><td><strong>Root account</strong></td><td>The email you signed up with. Can do anything, including delete the account.</td><td>Your Apple ID — you don't paste it into every tool; you lock it away with MFA and stop using it day-to-day.</td></tr>
+<tr><td><strong>User</strong></td><td>A person identity with a password and/or access keys.</td><td>A team member's App Store Connect login.</td></tr>
+<tr><td><strong>Role</strong></td><td>An identity <em>with no password</em> that a service or user temporarily <em>assumes</em>. How an EC2 server gets S3 access without any stored secret.</td><td>A provisioning profile — the app carries a capability, no human credential embedded.</td></tr>
+<tr><td><strong>Policy</strong></td><td>A JSON document listing allowed/denied actions. Attach to users/roles.</td><td>The entitlements file.</td></tr>
+</table>
+<h3>Anatomy of a policy</h3>
+<div class="snippet"><div class="bar"><span class="lang">JSON · copy</span><span class="acts"><button class="copy">Copy</button></span></div><pre>{
+  <span class="str">"Version"</span>: <span class="str">"2012-10-17"</span>,
+  <span class="str">"Statement"</span>: [{
+    <span class="str">"Effect"</span>:   <span class="str">"Allow"</span>,
+    <span class="str">"Action"</span>:   [<span class="str">"s3:GetObject"</span>, <span class="str">"s3:PutObject"</span>],   <span class="cm">// which API calls</span>
+    <span class="str">"Resource"</span>: <span class="str">"arn:aws:s3:::my-app-uploads/*"</span>       <span class="cm">// on which things</span>
+  }]
+}</pre></div>
+<p><strong>How evaluation works</strong> (this ordering is the whole trick): start from <em>deny everything</em> → an <code>Allow</code> anywhere grants it → but an explicit <code>Deny</code> anywhere <strong>always wins</strong>, even over an Allow. Run it:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// A miniature IAM evaluator — the real one works exactly like this</span>
+<span class="kw">const</span> policies = [
+  { effect: <span class="str">'Allow'</span>, action: <span class="str">'s3:GetObject'</span>, resource: <span class="str">'my-app-uploads/*'</span> },
+  { effect: <span class="str">'Allow'</span>, action: <span class="str">'s3:PutObject'</span>, resource: <span class="str">'my-app-uploads/*'</span> },
+  { effect: <span class="str">'Deny'</span>,  action: <span class="str">'s3:*'</span>,         resource: <span class="str">'my-app-uploads/secrets/*'</span> },
+];
+<span class="kw">const</span> match = (pat, val) =&gt; <span class="kw">new</span> <span class="tn">RegExp</span>(<span class="str">'^'</span> + pat.<span class="fn">replace</span>(/[.+?^${}()|[\]\\]/g,<span class="str">'\\$&amp;'</span>).<span class="fn">replace</span>(/\*/g,<span class="str">'.*'</span>) + <span class="str">'$'</span>).<span class="fn">test</span>(val);
+
+<span class="kw">function</span> <span class="fn">evaluate</span>(action, resource) {
+  <span class="kw">const</span> hits = policies.<span class="fn">filter</span>(p =&gt; match(p.action, action) &amp;&amp; match(p.resource, resource));
+  <span class="kw">if</span> (hits.<span class="fn">some</span>(p =&gt; p.effect === <span class="str">'Deny'</span>))  <span class="kw">return</span> <span class="str">'⛔ DENY (explicit deny wins)'</span>;
+  <span class="kw">if</span> (hits.<span class="fn">some</span>(p =&gt; p.effect === <span class="str">'Allow'</span>)) <span class="kw">return</span> <span class="str">'✅ ALLOW'</span>;
+  <span class="kw">return</span> <span class="str">'⛔ DENY (default — nothing allowed it)'</span>;
+}
+console.<span class="fn">log</span>(<span class="str">'read a photo   →'</span>, <span class="fn">evaluate</span>(<span class="str">'s3:GetObject'</span>, <span class="str">'my-app-uploads/photos/1.jpg'</span>));
+console.<span class="fn">log</span>(<span class="str">'read a secret  →'</span>, <span class="fn">evaluate</span>(<span class="str">'s3:GetObject'</span>, <span class="str">'my-app-uploads/secrets/key.pem'</span>));
+console.<span class="fn">log</span>(<span class="str">'delete a photo →'</span>, <span class="fn">evaluate</span>(<span class="str">'s3:DeleteObject'</span>, <span class="str">'my-app-uploads/photos/1.jpg'</span>));</pre><div class="out"></div></div>
+<div class="tip"><strong>Least privilege:</strong> grant the narrowest permission that works — <code>s3:GetObject</code> on one bucket, not <code>s3:*</code> on everything. It feels pedantic until leaked keys can only read one bucket instead of deleting your company.</div>
+<div class="lab"><div class="lab-head">🧪 TRY IT — 15 min, free</div><div class="lab-body"><ol>
+<li>Sign in as root → enable <strong>MFA</strong> on the root account (IAM dashboard tells you to).</li>
+<li>IAM → Users → Create user <code>admin-you</code>, console access, attach the <code>AdministratorAccess</code> policy. Sign out of root, in as this user. Root now retires to a drawer.</li>
+<li>Create an <strong>access key</strong> for CLI use, run <code>aws configure</code>, then <code>aws sts get-caller-identity</code> — seeing your user's ARN means the whole chain works.</li>
+</ol></div></div>
+
+<h2 id="ec2"><span class="sn">6</span>EC2 — renting computers</h2>
+<p><strong>What it is:</strong> Elastic Compute Cloud — the original AWS service. An EC2 <em>instance</em> is a virtual computer: you pick its size, choose an operating system, press launch, and ~40 seconds later you can SSH into a Linux box that lives in an AWS building.</p>
+<h3>How it actually works</h3>
+<p>AWS doesn't give you a whole physical machine. A physical server runs a <strong>hypervisor</strong> (AWS's is called Nitro) that slices it into isolated virtual machines. Your "computer" is one slice: the hypervisor gives it dedicated vCPUs and memory and enforces that neighbors can't see each other. Virtualization is why your instance boots in seconds (it's just a process starting, not hardware powering on) and why you can resize it (your slice is re-carved elsewhere).</p>
+<p>The pieces that make up one instance:</p>
+<table>
+<tr><th>Piece</th><th>What it is</th></tr>
+<tr><td><strong>AMI</strong> (Amazon Machine Image)</td><td>The disk template it boots from — OS + pre-installed software. "Amazon Linux 2023" or "Ubuntu 24.04" to start. You can snapshot your configured box into your own AMI and stamp out clones.</td></tr>
+<tr><td><strong>Instance type</strong></td><td>The size. The name encodes it: <code>t3.micro</code> = family <code>t</code> (burstable, cheap) · generation <code>3</code> · size <code>micro</code> (2 vCPU, 1 GB RAM). Families: <code>t</code>/<code>m</code> general, <code>c</code> compute-heavy, <code>r</code> memory-heavy, <code>g</code>/<code>p</code> GPU.</td></tr>
+<tr><td><strong>EBS volume</strong></td><td>Its hard drive — network-attached, so it survives the instance and can detach/reattach like an external SSD.</td></tr>
+<tr><td><strong>Key pair</strong></td><td>SSH keys. AWS keeps the public key, you download the private <code>.pem</code> — the only way in. Lose it and you're locked out.</td></tr>
+<tr><td><strong>Security group</strong></td><td>A firewall around the instance: "allow TCP 22 from my IP, TCP 443 from anywhere". <em>Stateful</em> — replies to allowed traffic flow back automatically. Default inbound: block everything.</td></tr>
+</table>
+<h3>Lifecycle &amp; pricing</h3>
+<p><strong>Stop</strong> an instance and compute billing stops (the EBS disk still costs ~$0.08/GB-month; your files survive). <strong>Terminate</strong> deletes it, disk and all. Pricing has three flavors — on-demand (default), reserved/savings plans (commit 1–3 yrs, ~40% off), and spot (spare capacity, ~70% off, reclaimable with 2-min warning — fine for batch work, wrong for your only web server). <a href="mastery_wallet_finops.html">The Wallet</a> goes deeper.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// What does a server actually cost? (ap-south-1, on-demand, rough $/hr)</span>
+<span class="kw">const</span> types = [
+  { name: <span class="str">'t3.micro  (2 vCPU, 1 GB)'</span>,  hr: <span class="num">0.0116</span>, note: <span class="str">'free tier — your lab box'</span> },
+  { name: <span class="str">'t3.medium (2 vCPU, 4 GB)'</span>,  hr: <span class="num">0.0464</span>, note: <span class="str">'small real API'</span> },
+  { name: <span class="str">'m7g.large (2 vCPU, 8 GB)'</span>,  hr: <span class="num">0.0904</span>, note: <span class="str">'steady production'</span> },
+  { name: <span class="str">'c7g.4xlarge (16 vCPU, 32 GB)'</span>, hr: <span class="num">0.58</span>,  note: <span class="str">'compute-heavy'</span> },
+];
+<span class="kw">const</span> HRS = <span class="num">730</span>; <span class="cm">// hours in a month</span>
+<span class="kw">for</span> (<span class="kw">const</span> t <span class="kw">of</span> types)
+  console.<span class="fn">log</span>(t.name.<span class="fn">padEnd</span>(<span class="num">30</span>), (<span class="str">'$'</span>+(t.hr*HRS).<span class="fn">toFixed</span>(<span class="num">0</span>)+<span class="str">'/mo'</span>).<span class="fn">padEnd</span>(<span class="num">8</span>), <span class="str">'· '</span> + t.note);
+console.<span class="fn">log</span>(<span class="str">'\nStopped instance: $0 compute — you pay only ~$0.08/GB-mo for its disk.'</span>);</pre><div class="out"></div></div>
+<div class="lab"><div class="lab-head">🧪 TRY IT — your first server, 30 min, free tier</div><div class="lab-body"><ol>
+<li>Console → EC2 → Launch instance: name <code>lab-1</code>, Amazon Linux 2023, <code>t3.micro</code>, create a key pair (download the <code>.pem</code>), security group allowing <strong>SSH (22) from My IP</strong> only.</li>
+<li>Connect: <code>chmod 400 lab-1.pem &amp;&amp; ssh -i lab-1.pem ec2-user@&lt;public-ip&gt;</code>. That prompt is a computer in an AWS building.</li>
+<li>Make it a web server:
+<div class="snippet"><div class="bar"><span class="lang">Shell · on the instance · copy</span><span class="acts"><button class="copy">Copy</button></span></div><pre>sudo dnf install -y nodejs
+node -e <span class="str">'require("http").createServer((q,s)=>s.end("hello from EC2\n")).listen(3000)'</span> &amp;
+curl localhost:3000   <span class="cm"># works from inside…</span></pre></div></li>
+<li>From your laptop, <code>curl http://&lt;public-ip&gt;:3000</code> — it <strong>hangs</strong>. That's the security group doing its job. Add an inbound rule for TCP 3000 from My IP, retry, and watch it answer. You've just <em>felt</em> what a firewall is.</li>
+<li><strong>Stop</strong> the instance when done (planner reminds you).</li>
+</ol></div></div>
+
+<h2 id="s3"><span class="sn">7</span>S3 — infinite object storage</h2>
+<p><strong>What it is:</strong> Simple Storage Service — a place to put <em>files</em> (S3 calls them <em>objects</em>): images, videos, backups, logs, entire static websites. You don't provision size; it holds one file or a trillion, billed ~$0.023/GB-month for what you actually store.</p>
+<h3>How it actually works</h3>
+<ul>
+<li><strong>Not a hard drive.</strong> S3 is a key→value store over HTTP. A <strong>bucket</strong> (name globally unique across all AWS customers) holds <strong>objects</strong>, each identified by a <strong>key</strong> like <code>users/42/avatar.png</code>. There are no real folders — the console just draws slashes as folders. You <code>PUT</code>, <code>GET</code>, <code>DELETE</code> whole objects; you can't edit byte 5 of a file in place.</li>
+<li><strong>The famous 11 nines:</strong> 99.999999999% durability. Every object is automatically copied across <em>at least 3 availability zones</em> — three separate buildings must fail simultaneously to lose your file. This is why "put it in S3" is the answer to "where do backups go?".</li>
+<li><strong>Storage classes</strong> trade retrieval speed for price: Standard (hot) → Standard-IA (rarely read, ~45% cheaper) → Glacier (archives, ~90% cheaper, minutes–hours to retrieve). Lifecycle rules move objects automatically as they age.</li>
+<li><strong>Access:</strong> buckets are <strong>private by default</strong>. Grant access via IAM policies, or hand out a <strong>presigned URL</strong> — a time-limited signed link that lets anyone holding it download/upload exactly one object. That's how apps do user uploads without proxying bytes through their server.</li>
+</ul>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// S3 in 25 lines — a bucket is literally a Map with prefix queries</span>
+<span class="kw">class</span> <span class="tn">Bucket</span> {
+  #objects = <span class="kw">new</span> <span class="tn">Map</span>();
+  <span class="fn">put</span>(key, body)  { <span class="kw">this</span>.#objects.<span class="fn">set</span>(key, { body, size: body.length }); }
+  <span class="fn">get</span>(key)        { <span class="kw">return</span> <span class="kw">this</span>.#objects.<span class="fn">get</span>(key)?.body ?? <span class="str">'404 NoSuchKey'</span>; }
+  <span class="fn">list</span>(prefix=<span class="str">''</span>) { <span class="kw">return</span> [...<span class="kw">this</span>.#objects.<span class="fn">keys</span>()].<span class="fn">filter</span>(k =&gt; k.<span class="fn">startsWith</span>(prefix)); }
+}
+<span class="kw">const</span> b = <span class="kw">new</span> <span class="tn">Bucket</span>();
+b.<span class="fn">put</span>(<span class="str">'users/42/avatar.png'</span>, <span class="str">'…png bytes…'</span>);
+b.<span class="fn">put</span>(<span class="str">'users/42/cover.jpg'</span>,  <span class="str">'…jpg bytes…'</span>);
+b.<span class="fn">put</span>(<span class="str">'logs/2026-07-12.txt'</span>,  <span class="str">'GET /health 200'</span>);
+
+console.<span class="fn">log</span>(<span class="str">'GET users/42/avatar.png →'</span>, b.<span class="fn">get</span>(<span class="str">'users/42/avatar.png'</span>));
+console.<span class="fn">log</span>(<span class="str">'LIST users/42/ →'</span>, b.<span class="fn">list</span>(<span class="str">'users/42/'</span>));
+console.<span class="fn">log</span>(<span class="str">'GET missing.txt →'</span>, b.<span class="fn">get</span>(<span class="str">'missing.txt'</span>));
+console.<span class="fn">log</span>(<span class="str">'\n"Folders" are a lie — users/42/ is just a key prefix.'</span>);</pre><div class="out"></div></div>
+<div class="lab"><div class="lab-head">🧪 TRY IT — host a website for pennies, 20 min</div><div class="lab-body"><ol>
+<li>S3 → Create bucket <code>yourname-first-site</code> (pick your region, leave "block public access" ON for now).</li>
+<li>Upload any file from the console, then fetch it from your terminal with the CLI:
+<div class="snippet"><div class="bar"><span class="lang">Shell · copy</span><span class="acts"><button class="copy">Copy</button></span></div><pre>echo <span class="str">'&lt;h1&gt;deployed from my laptop&lt;/h1&gt;'</span> &gt; index.html
+aws s3 cp index.html s3://yourname-first-site/
+aws s3 ls s3://yourname-first-site/          <span class="cm"># there it is</span>
+aws s3 presign s3://yourname-first-site/index.html --expires-in 300</pre></div></li>
+<li>Open the presigned URL it prints — you're reading a private object through a 5-minute signed link. Wait 5 minutes, refresh: <code>AccessDenied</code>. That's presigning.</li>
+<li>Bonus: enable "Static website hosting" on the bucket (and disable block-public-access + add a public-read bucket policy) and your <code>index.html</code> is a live website. This exact setup — S3 + CloudFront in front — serves half the internet's landing pages, including this site via GitHub Pages' equivalent.</li>
+</ol></div></div>
+
+<h2 id="vpc"><span class="sn">8</span>VPC — your private network</h2>
+<p><strong>What it is:</strong> Virtual Private Cloud — your own private network inside AWS, where EC2 instances and RDS databases actually live. Every account gets a default VPC (which is why the EC2 lab "just worked"), but understanding it is what separates copy-pasters from engineers.</p>
+<h3>Networking from absolute scratch</h3>
+<ul>
+<li>Every device on a network has an <strong>IP address</strong> (<code>10.0.1.17</code>). A <strong>subnet</strong> is a contiguous block of them.</li>
+<li>Blocks are written in <strong>CIDR</strong> notation: <code>10.0.0.0/16</code> means "the first 16 bits are fixed" → 65,536 addresses (10.0.<em>x.x</em>). A <code>/24</code> fixes 24 bits → 256 addresses. Smaller suffix = bigger block.</li>
+<li>A VPC is one big block (say <code>10.0.0.0/16</code>) that you slice into subnets, each pinned to <strong>one availability zone</strong>.</li>
+</ul>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// CIDR decoder — the mystery notation, demystified</span>
+<span class="kw">function</span> <span class="fn">cidr</span>(block) {
+  <span class="kw">const</span> [ip, bits] = block.<span class="fn">split</span>(<span class="str">'/'</span>);
+  <span class="kw">const</span> hostBits = <span class="num">32</span> - <span class="tn">Number</span>(bits);
+  <span class="kw">const</span> total = <span class="num">2</span> ** hostBits;
+  <span class="kw">return</span> { block, usable: total - <span class="num">5</span>, note: <span class="str">'AWS reserves 5 per subnet'</span> };
+}
+[<span class="str">'10.0.0.0/16'</span>, <span class="str">'10.0.1.0/24'</span>, <span class="str">'10.0.2.0/28'</span>].<span class="fn">forEach</span>(b =&gt;
+  console.<span class="fn">log</span>(b.<span class="fn">padEnd</span>(14), <span class="str">'→'</span>, <span class="fn">cidr</span>(b).usable.<span class="fn">toLocaleString</span>().<span class="fn">padStart</span>(<span class="num">6</span>), <span class="str">'usable IPs'</span>));
+console.<span class="fn">log</span>(<span class="str">'\nTypical layout: VPC /16, one public + one private /24 per AZ.'</span>);</pre><div class="out"></div></div>
+<h3>Public vs private — the pattern behind every real architecture</h3>
+<table>
+<tr><th>Piece</th><th>Job</th></tr>
+<tr><td><strong>Internet Gateway</strong> (IGW)</td><td>The VPC's door to the internet.</td></tr>
+<tr><td><strong>Route table</strong></td><td>Each subnet's signpost. A <strong>public subnet</strong>'s table routes <code>0.0.0.0/0</code> (everywhere) → IGW. A <strong>private subnet</strong> has no such route — nothing outside can reach it, ever.</td></tr>
+<tr><td><strong>NAT Gateway</strong></td><td>Lets private machines dial <em>out</em> (for updates, APIs) while remaining unreachable from outside. (~$32/mo — the classic surprise bill; skip it while learning.)</td></tr>
+<tr><td><strong>Security group vs NACL</strong></td><td>SG = stateful firewall on the <em>instance</em> (your main tool). NACL = stateless filter on the <em>subnet</em> (leave at default until you need it).</td></tr>
+</table>
+<div class="tip"><strong>The golden pattern:</strong> load balancer in public subnets; app servers and the database in private subnets. Your database should not have a public IP address. Most real-world breaches trace to someone violating this one sentence.</div>
+
+<h2 id="rds"><span class="sn">9</span>RDS — managed databases</h2>
+<p><strong>What it is:</strong> Relational Database Service — AWS runs PostgreSQL/MySQL <em>for</em> you. You could install Postgres on an EC2 box yourself (it's just Linux), so RDS's entire value is in what you stop doing:</p>
+<table>
+<tr><th>Self-hosted on EC2 (you do it)</th><th>RDS (a checkbox)</th></tr>
+<tr><td>Install, patch, upgrade Postgres</td><td>Automatic during a maintenance window you pick</td></tr>
+<tr><td>Cron nightly <code>pg_dump</code>, test restores, store offsite</td><td>Continuous backups; point-in-time restore to any second in the last 35 days</td></tr>
+<tr><td>Build failover: replica, health checks, promotion scripts, 3am pager</td><td><strong>Multi-AZ</strong>: a hot standby in another building; automatic failover in ~60s, same DNS name</td></tr>
+<tr><td>Scale reads yourself with replication config</td><td><strong>Read replicas</strong> — a checkbox, up to 15</td></tr>
+</table>
+<p>This is "managed services" in its purest form, and the general cloud trade: <strong>pay ~30% more per hour, delete an entire category of ops work</strong>. For a small team, it's the difference between having a DBA and not needing one. (What Core Data is to writing your own SQLite threading layer, RDS is to running your own database server.)</p>
+<div class="lab"><div class="lab-head">🧪 TRY IT — 30 min, free tier</div><div class="lab-body"><ol>
+<li>RDS → Create database → PostgreSQL → <strong>Free tier template</strong> (<code>db.t3.micro</code>, single-AZ, 20 GB). Set a master password. <strong>Public access: No.</strong></li>
+<li>Note it has no public IP — by design. Reach it from your EC2 lab box instead: add an inbound rule on the DB's security group allowing TCP 5432 <em>from the EC2 instance's security group</em> (SGs can reference each other — this is the idiomatic pattern).</li>
+<li>From the EC2 box: <code>sudo dnf install -y postgresql16 &amp;&amp; psql -h &lt;rds-endpoint&gt; -U postgres</code> → <code>CREATE TABLE hello(id int);</code> You're using a database that backs itself up and can survive a building failure.</li>
+<li><strong>Delete it when done</strong> (planner). Skip the final snapshot for a lab.</li>
+</ol></div></div>
+
+<h2 id="lambda"><span class="sn">10</span>Lambda — serverless functions</h2>
+<p><strong>What it is:</strong> upload a function; AWS runs it <em>when something happens</em> — an HTTP request, a file landing in S3, a queue message, a timer. No server to create, patch, or pay for while idle. Billed per invocation and per millisecond of runtime; 1M requests/month free forever.</p>
+<h3>How it actually works</h3>
+<p>There is a server, of course — you just never see it. On invocation AWS spins up a <strong>Firecracker microVM</strong> (a tiny VM that boots in ~125ms), loads your code, runs the handler, then keeps the warm VM around a few minutes for reuse. First hit pays the <strong>cold start</strong>; subsequent hits are warm and fast. Traffic spike? AWS just starts more microVMs in parallel — scaling is automatic and effectively unbounded.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Feel the cold-start / warm-start difference</span>
+<span class="kw">let</span> warmVM = <span class="kw">null</span>;
+<span class="kw">async function</span> <span class="fn">invoke</span>(n) {
+  <span class="kw">const</span> t0 = performance.<span class="fn">now</span>();
+  <span class="kw">if</span> (!warmVM) {                       <span class="cm">// cold: boot microVM + load code</span>
+    <span class="kw">await new</span> <span class="tn">Promise</span>(r =&gt; <span class="fn">setTimeout</span>(r, <span class="num">180</span>));
+    warmVM = { loadedAt: n };
+  }
+  <span class="kw">await new</span> <span class="tn">Promise</span>(r =&gt; <span class="fn">setTimeout</span>(r, <span class="num">8</span>));  <span class="cm">// your actual handler work</span>
+  <span class="kw">return</span> (performance.<span class="fn">now</span>() - t0).<span class="fn">toFixed</span>(<span class="num">0</span>);
+}
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt;= <span class="num">4</span>; i++)
+  console.<span class="fn">log</span>(<span class="str">'request'</span>, i, <span class="str">'→'</span>, <span class="kw">await</span> <span class="fn">invoke</span>(i) + <span class="str">'ms'</span>, i === <span class="num">1</span> ? <span class="str">'  ← cold start'</span> : <span class="str">'  (warm)'</span>);
+console.<span class="fn">log</span>(<span class="str">'\nRule: great for spiky/event work; a 24/7 hot API path may prefer EC2.'</span>);</pre><div class="out"></div></div>
+<p>A real handler is just this — and with a <strong>Function URL</strong> enabled, it's a public HTTPS endpoint with zero other infrastructure:</p>
+<div class="snippet"><div class="bar"><span class="lang">JavaScript · Lambda handler · copy</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="kw">export const</span> handler = <span class="kw">async</span> (event) =&gt; {
+  <span class="kw">const</span> name = event.queryStringParameters?.name ?? <span class="str">'world'</span>;
+  <span class="kw">return</span> { statusCode: <span class="num">200</span>, body: <span class="tn">JSON</span>.<span class="fn">stringify</span>({ hello: name }) };
+};</pre></div>
+<div class="lab"><div class="lab-head">🧪 TRY IT — an API with no server, 15 min, free</div><div class="lab-body"><ol>
+<li>Lambda → Create function <code>hello-api</code>, Node.js runtime. Paste the handler above into the inline editor, Deploy.</li>
+<li>Configuration → Function URL → create one (auth type NONE for the lab).</li>
+<li><code>curl "&lt;function-url&gt;?name=you"</code> — an HTTPS API that costs $0 while idle. Invoke it 100× in a loop and notice request 1 is slower: your cold start, live.</li>
+</ol></div></div>
+
+<h2 id="dns"><span class="sn">11</span>Route 53, CloudFront &amp; CloudWatch — finding it, speeding it, watching it</h2>
+<h3>Route 53 — DNS</h3>
+<p>DNS is the internet's phone book: it turns <code>api.yourapp.com</code> into an IP address. Route 53 hosts your domain's records: <strong>A</strong> (name → IP), <strong>CNAME</strong> (name → another name), and AWS's special <strong>Alias</strong> (name → an AWS resource like a load balancer or CloudFront). Beyond the basics it does health-checked failover (stop routing to a dead region) and latency-based routing (send each user to the nearest one).</p>
+<h3>CloudFront — the CDN</h3>
+<p>A layer of 400+ edge caches in front of your site. A user in Chennai hits the Chennai edge, which serves cached copies of your S3 files or API responses instead of crossing the ocean — the ~200ms physics tax from section 2 drops to ~10ms. S3 + CloudFront is <em>the</em> canonical static-site stack; it also terminates HTTPS with a free certificate.</p>
+<h3>CloudWatch — eyes on everything</h3>
+<p>Every AWS service emits <strong>metrics</strong> (CPU, request counts, errors) into CloudWatch; your apps ship <strong>logs</strong> to it; <strong>alarms</strong> watch any metric and act — email you, or trigger autoscaling. The starter kit: a CPU alarm on your EC2 box, and the billing alarm from section 4 (which is itself a CloudWatch alarm). <a href="mastery_watchtower_observability.html">The Watchtower</a> turns this into a discipline.</p>
+
+<h2 id="cast"><span class="sn">12</span>The supporting cast — one-liners you'll meet next</h2>
+<table>
+<tr><th>Service</th><th>In one sentence</th></tr>
+<tr><td><strong>DynamoDB</strong></td><td>Serverless NoSQL key-value DB — single-digit-ms reads at any scale, pairs naturally with Lambda (Phase 2's MongoDB thinking, minus the servers).</td></tr>
+<tr><td><strong>SQS / SNS</strong></td><td>Queues and pub/sub notifications — how services hand work to each other without being up at the same time (Phase 6 / <a href="mastery_streaming_mind_eventdriven.html">The Streaming Mind</a>).</td></tr>
+<tr><td><strong>ECS / Fargate</strong></td><td>Run Docker containers (Phase 4) without managing the EC2 boxes underneath — Fargate is "containers, serverless-style".</td></tr>
+<tr><td><strong>EKS</strong></td><td>Managed Kubernetes, when you graduate to it.</td></tr>
+<tr><td><strong>Elastic Beanstalk / App Runner / Amplify</strong></td><td>"Just deploy my app" wrappers that create EC2/ALB/scaling for you — great training wheels, and you now know what they're wrapping.</td></tr>
+<tr><td><strong>ECR</strong></td><td>Your private Docker image registry.</td></tr>
+<tr><td><strong>Secrets Manager / Parameter Store</strong></td><td>Where DB passwords and API keys live instead of in code (<a href="mastery_vault_security.html">The Vault</a>).</td></tr>
+<tr><td><strong>CloudTrail</strong></td><td>The audit log of every API call in the account — who did what, when. Turn it on and forget it until you desperately need it.</td></tr>
+<tr><td><strong>Cost Explorer</strong></td><td>Where the money went, by service, by day (<a href="mastery_wallet_finops.html">The Wallet</a>).</td></tr>
+</table>
+
+<h2 id="together"><span class="sn">13</span>How it all fits together</h2>
+<p>The classic three-tier architecture — what "deployed on AWS" means for most real products, and exactly what Phase 5's capstone builds:</p>
+<div class="snippet"><div class="bar"><span class="lang">Architecture · the canonical stack</span><span class="acts"><button class="copy">Copy</button></span></div><pre>                        user's phone
+                             │  https://yourapp.com
+                       <span class="fn">Route 53</span> (DNS)
+                             │
+                       <span class="fn">CloudFront</span> (CDN) ──── static assets from <span class="fn">S3</span>
+                             │  /api/*
+              ┌─── public subnets (2 AZs) ───┐
+              │   <span class="fn">Application Load Balancer</span> │
+              └──────────────┬───────────────┘
+              ┌── private subnets (2 AZs) ───┐
+              │   <span class="fn">EC2</span> auto-scaling group    │──▶ <span class="fn">CloudWatch</span> logs/metrics/alarms
+              │   (your Node API, Phase 1)   │──▶ <span class="fn">S3</span> user uploads (presigned)
+              └──────────────┬───────────────┘
+              ┌── private subnets (2 AZs) ───┐
+              │   <span class="fn">RDS</span> Postgres (Multi-AZ)   │
+              └──────────────────────────────┘
+   <span class="fn">IAM roles</span> glue it: instances assume a role → touch S3/RDS, zero stored keys</pre></div>
+<p>Walk one request through it and every section of this page clicks into place:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// One request's journey through the whole stack</span>
+<span class="kw">const</span> hops = [
+  [<span class="str">'Route 53'</span>,   <span class="str">'yourapp.com → 13.235.x.x (the CloudFront edge near the user)'</span>],
+  [<span class="str">'CloudFront'</span>, <span class="str">'/logo.png? cached at edge, done in 10ms. /api/orders? pass through'</span>],
+  [<span class="str">'ALB'</span>,        <span class="str">'terminates HTTPS, health-checks targets, picks a live instance'</span>],
+  [<span class="str">'Sec. group'</span>, <span class="str">'allows :3000 only from the ALB — the internet cannot hit the box'</span>],
+  [<span class="str">'EC2'</span>,        <span class="str">'your Express handler runs (Phase 1!)'</span>],
+  [<span class="str">'IAM role'</span>,   <span class="str">'instance signs an S3 presign call — no keys on disk anywhere'</span>],
+  [<span class="str">'RDS'</span>,        <span class="str">'SELECT * FROM orders … over the private subnet'</span>],
+  [<span class="str">'CloudWatch'</span>, <span class="str">'request logged, latency metric recorded, alarms watching'</span>],
+];
+<span class="kw">for</span> (<span class="kw">const</span> [svc, what] <span class="kw">of</span> hops) console.<span class="fn">log</span>(svc.<span class="fn">padEnd</span>(11), <span class="str">'│'</span>, what);
+console.<span class="fn">log</span>(<span class="str">'\nTotal: ~40ms. Every hop is a section of this page.'</span>);</pre><div class="out"></div></div>
+
+<h2 id="planner"><span class="sn">14</span>The 4-week work planner</h2>
+<p>Roughly 1 hour a day, entirely inside the free tier. Tap a task to check it off — progress is saved in your browser (same trick as the <a href="upcoming.html">Upcoming board</a>). Each task says what "done" looks like, so you always know you actually did it.</p>
+<div class="pbar" id="aws-pbar"><div></div></div>
+<div class="pbar-label" id="aws-pbar-label">0 of 23 tasks done</div>
+
+<div class="planner" data-week>
+  <div class="p-head"><span>Week 1 — Account, safety rails &amp; first storage</span><span class="cnt"></span></div>
+  <div class="task" data-t="w1d1"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 1</div>Create the AWS account, enable MFA on root, set the <strong>$5 billing budget + email alert</strong>.<div class="t-proof">Proof: the budget email confirmation in your inbox.</div></div></div>
+  <div class="task" data-t="w1d2"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 2</div>IAM lab (§5): create <code>admin-you</code> with MFA, retire root, install the CLI, <code>aws configure</code>.<div class="t-proof">Proof: <code>aws sts get-caller-identity</code> prints your user's ARN.</div></div></div>
+  <div class="task" data-t="w1d3"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 3</div>Read §2–4 again in the console: find your region selector, the Billing page, and Cost Explorer. Click around — you can't break anything by looking.<div class="t-proof">Proof: you can say what region you're in and why.</div></div></div>
+  <div class="task" data-t="w1d4"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 4</div>S3 lab part 1 (§7): create your bucket, upload via console <em>and</em> CLI.<div class="t-proof">Proof: <code>aws s3 ls</code> shows your file.</div></div></div>
+  <div class="task" data-t="w1d5"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 5</div>S3 lab part 2: presign a URL, watch it expire; enable static hosting and load your page.<div class="t-proof">Proof: your HTML renders from an S3 URL; the expired link 403s.</div></div></div>
+  <div class="task" data-t="w1d6"><div class="box">✓</div><div class="t-body"><div class="t-day">Weekend</div>Journal (Kaizen habit): write 5 sentences — what is a region, an AZ, a bucket, a policy, the shared-responsibility split?<div class="t-proof">Proof: the 5 sentences exist and you didn't peek.</div></div></div>
+</div>
+
+<div class="planner" data-week>
+  <div class="p-head"><span>Week 2 — Your first server</span><span class="cnt"></span></div>
+  <div class="task" data-t="w2d1"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 1</div>EC2 lab steps 1–2 (§6): launch <code>t3.micro</code>, SSH in.<div class="t-proof">Proof: a shell prompt that isn't your laptop.</div></div></div>
+  <div class="task" data-t="w2d2"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 2</div>EC2 lab steps 3–4: Node server on :3000, feel the security group block, open the port, curl from outside.<div class="t-proof">Proof: "hello from EC2" in your laptop's terminal.</div></div></div>
+  <div class="task" data-t="w2d3"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 3</div>Deploy your real Phase 1 Express API to the instance (git clone, <code>npm i</code>, run it under <code>tmux</code> or pm2).<div class="t-proof">Proof: your own API answers on the public IP.</div></div></div>
+  <div class="task" data-t="w2d4"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 4</div>Stop the instance; watch it keep its EBS disk but lose its public IP; start it again.<div class="t-proof">Proof: you can explain stop vs terminate and why the IP changed.</div></div></div>
+  <div class="task" data-t="w2d5"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 5</div>VPC on paper (§8): draw your default VPC — its CIDR, subnets per AZ, the IGW, the route table. All visible in the VPC console.<div class="t-proof">Proof: the drawing, with the public-subnet route <code>0.0.0.0/0 → igw</code> on it.</div></div></div>
+  <div class="task" data-t="w2d6"><div class="box">✓</div><div class="t-body"><div class="t-day">Weekend</div>Run the CIDR + cost snippets on this page; price a <code>t3.medium</code> for a month from memory, then check.<div class="t-proof">Proof: within 20% without looking.</div></div></div>
+</div>
+
+<div class="planner" data-week>
+  <div class="p-head"><span>Week 3 — Database &amp; serverless</span><span class="cnt"></span></div>
+  <div class="task" data-t="w3d1"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 1</div>RDS lab steps 1–2 (§9): create the free-tier Postgres, private, SG-to-SG rule from your EC2 box.<div class="t-proof">Proof: the DB has no public IP and you consider that correct.</div></div></div>
+  <div class="task" data-t="w3d2"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 2</div>RDS lab step 3: <code>psql</code> from the EC2 box, create a table, insert, select. Point your deployed API at it.<div class="t-proof">Proof: an API endpoint returns rows from RDS.</div></div></div>
+  <div class="task" data-t="w3d3"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 3</div>Lambda lab (§10): <code>hello-api</code> with a Function URL; hammer it and spot the cold start.<div class="t-proof">Proof: curl output, and request 1 measurably slower.</div></div></div>
+  <div class="task" data-t="w3d4"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 4</div>Event wiring: add an S3 trigger — upload to your bucket runs the Lambda (log the object key).<div class="t-proof">Proof: the key appears in CloudWatch Logs seconds after upload.</div></div></div>
+  <div class="task" data-t="w3d5"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 5</div>CloudWatch (§11): create a CPU&gt;70% alarm on your instance; stress it (<code>yes &gt; /dev/null</code>) until the email arrives.<div class="t-proof">Proof: the alarm email.</div></div></div>
+  <div class="task" data-t="w3d6"><div class="box">✓</div><div class="t-body"><div class="t-day">Weekend</div><strong>Teardown drill</strong> (§15): delete the RDS instance and any stopped extras. Check Cost Explorer's damage (should be ≈ ₹0).<div class="t-proof">Proof: Cost Explorer shows pennies.</div></div></div>
+</div>
+
+<div class="planner" data-week>
+  <div class="p-head"><span>Week 4 — Put it all together</span><span class="cnt"></span></div>
+  <div class="task" data-t="w4d1"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 1–2</div>Capstone: re-deploy your API + fresh RDS, static frontend on S3, security groups tight (ALB optional — it's ~$16/mo; fronting with the instance is fine for the lab).<div class="t-proof">Proof: frontend on S3 calls API on EC2 calls DB on RDS.</div></div></div>
+  <div class="task" data-t="w4d3"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 3</div>Give the instance an <strong>IAM role</strong> with <code>PutObject</code> on one bucket; make an upload endpoint that presigns. Delete any access keys from the box.<div class="t-proof">Proof: uploads work with zero credentials stored on the server.</div></div></div>
+  <div class="task" data-t="w4d4"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 4</div>Run the §13 walkthrough against <em>your</em> stack: trace one real request hop by hop in an architecture diagram of your own.<div class="t-proof">Proof: your diagram names every AWS piece it touches.</div></div></div>
+  <div class="task" data-t="w4d5"><div class="box">✓</div><div class="t-body"><div class="t-day">Day 5</div>Full teardown (§15), then the Phase 5 doc + <a href="mastery_wallet_finops.html">The Wallet</a> as your victory lap — they'll read completely differently now.<div class="t-proof">Proof: EC2/RDS dashboards empty; bill ≈ $0; billing alarm silent.</div></div></div>
+  <div class="task" data-t="w4d6"><div class="box">✓</div><div class="t-body"><div class="t-day">Weekend</div>Journal: "How would I architect <em>my current app's backend</em> on AWS?" — one page, with the services chosen and why.<div class="t-proof">Proof: the page exists. Congratulations — that's architect thinking.</div></div></div>
+</div>
+
+<h2 id="teardown"><span class="sn">15</span>Teardown — the don't-get-billed checklist</h2>
+<div class="warn"><strong>The bill comes from what you forget, not what you use.</strong> After any lab session, sweep this list (in <em>your one region</em>):</div>
+<ul>
+<li><strong>EC2</strong> → Instances: terminate labs (or stop, accepting ~$0.80/mo per 10 GB disk). Check <strong>Elastic IPs</strong> — an <em>unattached</em> one costs money; release it.</li>
+<li><strong>RDS</strong> → delete lab databases (skip final snapshot for throwaways).</li>
+<li><strong>EBS</strong> → Volumes: delete anything "available" (= orphaned disk).</li>
+<li><strong>NAT Gateways / Load balancers</strong> → the two classic ~$20–30/mo stowaways; delete if you experimented.</li>
+<li><strong>S3</strong> → pennies; fine to keep, or empty + delete the bucket.</li>
+<li><strong>Lambda / IAM / security groups</strong> → free to keep.</li>
+<li>Finally: <strong>Cost Explorer</strong> → confirm the daily spend graph is flat at ~zero, and trust your $5 alarm as the backstop.</li>
+</ul>
+
+<div class="ok"><strong>Where to next:</strong> <a href="phase5_aws_cloud.html">Phase 5</a> is the architecture-level view of everything here · <a href="mastery_blueprint_iac.html">The Blueprint</a> recreates your whole capstone as code with <code>terraform apply</code> · <a href="mastery_wallet_finops.html">The Wallet</a> teaches the money layer · <a href="mastery_watchtower_observability.html">The Watchtower</a> the operations layer.</div>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});
+// --- work planner ---
+var KEY='kaizencode-aws-planner';var saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+var tasks=Array.prototype.slice.call(document.querySelectorAll('.task'));
+function refresh(){var done=0;document.querySelectorAll('[data-week]').forEach(function(w){var t=w.querySelectorAll('.task'),d=w.querySelectorAll('.task.done').length;w.querySelector('.cnt').textContent=d+'/'+t.length;done+=d;});
+document.querySelector('#aws-pbar>div').style.width=(done/tasks.length*100)+'%';
+document.getElementById('aws-pbar-label').textContent=done+' of '+tasks.length+' tasks done'+(done===tasks.length?' — 改善 complete! 🎉':'');}
+tasks.forEach(function(t){if(saved[t.getAttribute('data-t')])t.classList.add('done');t.addEventListener('click',function(){t.classList.toggle('done');var out={};tasks.forEach(function(x){if(x.classList.contains('done'))out[x.getAttribute('data-t')]=1;});try{localStorage.setItem(KEY,JSON.stringify(out))}catch(e){}refresh();});});
+refresh();})();</script>
+</body></html>
