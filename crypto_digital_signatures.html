@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Digital Signatures — ECDSA &amp; EdDSA</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}.ascii{font-size:11.5px;line-height:1.5}.calc{border:1px solid #e8e8e8;border-radius:8px;padding:14px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.calc{border-color:#2a2a2a;background:#141416}}.calc button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;transition:background .15s}.calc button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.calc button{background:#8f8cff;color:#111}.calc button:hover{background:#a6a3ff}}.calc-out{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:10px 12px;border-radius:6px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:360px;overflow:auto}.calc-out.show{display:block}@media(prefers-color-scheme:dark){.calc-out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}.calc-full{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:10px;width:100%}@media(prefers-color-scheme:dark){.calc-full{color:#999}}.calc textarea{font:inherit;font-size:11.5px;font-family:'SF Mono','Fira Code',monospace;width:100%;padding:6px 8px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a;resize:vertical;word-break:break-all;line-height:1.5}.calc textarea:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.calc textarea{background:#0d0d0d;border-color:#333;color:#e8e8e8}.calc textarea:focus{border-color:#8f8cff}}.calc .hint{font-size:11px;font-weight:400;color:#888;margin:0 0 10px}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Cryptography · Signatures</span>
+<h1>✍️ Digital Signatures — ECDSA &amp; EdDSA</h1>
+<p class="sub">Encryption keeps a message secret. A signature does the opposite job: it makes a message <em>public but provable</em> — anyone can confirm who wrote it and that not one byte has changed. Sign with your private key; the whole world verifies with your public key.</p>
+
+<div class="tip">Part of the <strong>Cryptography</strong> topic — and the mirror image of <a class="back" href="crypto_rsa_public_key.html">RSA encryption</a>. Encryption uses the <em>recipient's</em> public key to hide data; signing uses the <em>sender's</em> private key to prove authorship. Same key-pair idea, roles reversed.</p></div>
+
+<h2><span class="sn">1</span>What a signature proves</h2>
+<p><strong>Analogy — a wax seal that reshapes itself to the letter.</strong> A signature is bound to the exact content: change a single character and the seal no longer matches. It gives you three guarantees at once:</p>
+<ul>
+<li><strong>Authenticity</strong> — it came from the holder of the private key.</li>
+<li><strong>Integrity</strong> — the message hasn't been altered since signing.</li>
+<li><strong>Non-repudiation</strong> — the signer can't later deny it (only they hold the key).</li>
+</ul>
+<p>Crucially, <strong>anyone</strong> can verify with the public key — unlike HMAC, where only holders of the shared secret can check. That's what makes signatures work for public trust: certificates, app stores, software updates.</p>
+
+<h2><span class="sn">2</span>How it works</h2>
+<p>Two steps, mirroring encryption:</p>
+<pre class="ascii"><span class="cm">   SIGN (private key)                 VERIFY (public key)</span>
+<span class="cm">   message → hash → sign(hash) = 𝗌𝗂𝗀   message → hash ┐</span>
+<span class="cm">                                          𝗌𝗂𝗀 ────────┴→ valid? ✓ / ✗</span></pre>
+<p>You never sign the whole message directly — you hash it first (fast, fixed-size), then apply the private-key math to that hash. Verification re-hashes the received message and checks the signature against it with the public key. If the message changed, the hashes differ and verification fails.</p>
+
+<h2><span class="sn">3</span>See it: ECDSA over P-256</h2>
+<p><strong>ECDSA</strong> is the elliptic-curve signature scheme — same curves as <a class="back" href="crypto_ecdh_key_agreement.html">ECDH</a>, used for signing. Generate a key pair, sign a message, verify it, then tamper and watch it fail:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable (WebCrypto)</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// ECDSA (P-256): sign with the PRIVATE key, verify with the PUBLIC key</span>
+<span class="kw">const</span> TE = <span class="kw">new</span> <span class="fn">TextEncoder</span>();
+<span class="kw">const</span> kp = <span class="kw">await</span> crypto.subtle.<span class="fn">generateKey</span>(
+  { name: <span class="str">'ECDSA'</span>, namedCurve: <span class="str">'P-256'</span> }, <span class="kw">true</span>, [<span class="str">'sign'</span>, <span class="str">'verify'</span>]);
+
+<span class="kw">const</span> msg = TE.<span class="fn">encode</span>(<span class="str">'transfer 5 BTC to Alice'</span>);
+<span class="kw">const</span> sig = <span class="kw">await</span> crypto.subtle.<span class="fn">sign</span>({ name: <span class="str">'ECDSA'</span>, hash: <span class="str">'SHA-256'</span> }, kp.privateKey, msg);
+
+<span class="kw">const</span> check = (m) =&gt; crypto.subtle.<span class="fn">verify</span>({ name: <span class="str">'ECDSA'</span>, hash: <span class="str">'SHA-256'</span> }, kp.publicKey, sig, m);
+console.<span class="fn">log</span>(<span class="str">'signature bytes :'</span>, <span class="kw">new</span> <span class="fn">Uint8Array</span>(sig).length, <span class="str">'(P-256 → 64)'</span>);
+console.<span class="fn">log</span>(<span class="str">'verify original message :'</span>, <span class="kw">await</span> <span class="fn">check</span>(msg));
+console.<span class="fn">log</span>(<span class="str">'verify tampered message :'</span>, <span class="kw">await</span> <span class="fn">check</span>(TE.<span class="fn">encode</span>(<span class="str">'transfer 5 BTC to Eve'</span>)));</pre><div class="out"></div></div>
+<p>A 64-byte signature vs RSA's 256 bytes for comparable security — the same size advantage elliptic curve gives everywhere.</p>
+
+<h3>Try it yourself — sign, then verify with the public key</h3>
+<p><strong>Step 1</strong> plays the signer: type a message, and the page generates a key pair and signs it — handing you the <strong>public key</strong> and the <strong>signature</strong>. <strong>Step 2</strong> plays anyone in the world: it verifies using only that public key (the private key never leaves Step 1). Change the message, the signature, or the key and verification fails.</p>
+<div class="calc">
+  <div class="calc-full">Message to sign
+    <textarea id="sig-msg" rows="2">I approve the release of v2.0</textarea>
+  </div>
+  <button id="sig-sign">✍️ Generate key &amp; sign →</button>
+  <div id="sig-sign-out" class="calc-out"></div>
+  <div id="sig-stage2" style="display:none;margin-top:16px;border-top:1px dashed #d8d8d8;padding-top:14px">
+    <p class="hint">Verification needs only the public values below — no private key. All three came from Step 1; edit any of them to see verification fail.</p>
+    <div class="calc-full">Message (received)
+      <textarea id="sig-vmsg" rows="2"></textarea>
+    </div>
+    <div class="calc-full">Public key (base64)
+      <textarea id="sig-vkey" rows="1"></textarea>
+    </div>
+    <div class="calc-full">Signature (base64)
+      <textarea id="sig-vsig" rows="1"></textarea>
+    </div>
+    <button id="sig-verify">✅ Verify →</button>
+    <div id="sig-verify-out" class="calc-out"></div>
+  </div>
+</div>
+
+<h2><span class="sn">4</span>EdDSA (Ed25519) — the modern default</h2>
+<p><strong>EdDSA</strong>, usually over the Ed25519 curve, is the newer scheme now preferred for new systems. It's faster, has simple fixed-size keys, and is <strong>deterministic</strong> — it doesn't need a fresh random number per signature, which sidesteps ECDSA's most dangerous footgun (below).</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable (WebCrypto)</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// EdDSA (Ed25519): modern, deterministic, fast — recent browsers only</span>
+<span class="kw">const</span> TE = <span class="kw">new</span> <span class="fn">TextEncoder</span>();
+<span class="kw">try</span> {
+  <span class="kw">const</span> kp = <span class="kw">await</span> crypto.subtle.<span class="fn">generateKey</span>(<span class="str">'Ed25519'</span>, <span class="kw">true</span>, [<span class="str">'sign'</span>, <span class="str">'verify'</span>]);
+  <span class="kw">const</span> msg = TE.<span class="fn">encode</span>(<span class="str">'release build 42'</span>);
+  <span class="kw">const</span> sig = <span class="kw">await</span> crypto.subtle.<span class="fn">sign</span>(<span class="str">'Ed25519'</span>, kp.privateKey, msg);
+  console.<span class="fn">log</span>(<span class="str">'Ed25519 signature bytes:'</span>, <span class="kw">new</span> <span class="fn">Uint8Array</span>(sig).length);
+  console.<span class="fn">log</span>(<span class="str">'verify original :'</span>, <span class="kw">await</span> crypto.subtle.<span class="fn">verify</span>(<span class="str">'Ed25519'</span>, kp.publicKey, sig, msg));
+  console.<span class="fn">log</span>(<span class="str">'verify tampered :'</span>, <span class="kw">await</span> crypto.subtle.<span class="fn">verify</span>(<span class="str">'Ed25519'</span>, kp.publicKey, sig, TE.<span class="fn">encode</span>(<span class="str">'release build 43'</span>)));
+} <span class="kw">catch</span> (e) {
+  console.<span class="fn">log</span>(<span class="str">'Ed25519 not available in this browser:'</span>, e.name);
+  console.<span class="fn">log</span>(<span class="str">'(Chrome 137+, Safari 17+, Firefox 129+. The ECDSA demo above works everywhere.)'</span>);
+}</pre><div class="out"></div></div>
+
+<h2><span class="sn">5</span>Signatures vs HMAC vs encryption</h2>
+<table>
+<tr><th></th><th>Signature (ECDSA/EdDSA/RSA)</th><th>HMAC</th><th>Encryption</th></tr>
+<tr><td>Who can produce it?</td><td>Only the private-key holder</td><td>Any shared-key holder</td><td>Anyone (public-key) / key-holder</td></tr>
+<tr><td>Who can verify it?</td><td><strong>Anyone</strong> (public key)</td><td>Only shared-key holders</td><td>N/A</td></tr>
+<tr><td>Proves authorship?</td><td>Yes — non-repudiable</td><td>Yes, but any holder could have</td><td>No</td></tr>
+<tr><td>Hides the message?</td><td>No</td><td>No</td><td>Yes</td></tr>
+</table>
+<p>Rule of thumb: <strong>public trust → signature</strong> (you publish a verifiable key); <strong>a shared secret between two parties → HMAC</strong> (cheaper, symmetric).</p>
+
+<h2><span class="sn">6</span>Where you'll meet signatures</h2>
+<ul>
+<li><strong>TLS certificates</strong> — a CA signs a site's certificate; your browser verifies the chain.</li>
+<li><strong>JWTs</strong> — <code>ES256</code> (ECDSA) and <code>EdDSA</code> tokens are signed, so a server can trust them without a shared secret.</li>
+<li><strong>Software &amp; OS updates</strong> — signed so a device installs only genuine, unaltered builds.</li>
+<li><strong>Crypto wallets</strong> — every blockchain transaction is an ECDSA/EdDSA signature authorizing a transfer.</li>
+<li><strong>Git &amp; packages</strong> — signed commits/tags and signed package releases (npm provenance, Sigstore).</li>
+</ul>
+
+<div class="warn"><strong>ECDSA's footgun: never reuse (or leak) the per-signature random <code>k</code>.</strong> ECDSA needs a fresh random nonce for every signature. Reuse the same <code>k</code> for two messages — or use a predictable one — and anyone can solve for your <strong>private key</strong> from the two signatures. This exact bug broke the Sony PlayStation 3's code signing in 2010. Mitigations: use deterministic ECDSA (RFC 6979), or prefer <strong>EdDSA</strong>, which is deterministic by design and immune to this class of mistake.</div>
+
+<div class="ok"><strong>Try it:</strong> (1) In the panel, sign a message, then in Step 2 change one character of the message and verify — <code>INVALID</code>. (2) Restore the message but flip a character of the signature — still <code>INVALID</code>. (3) Note that Step 2 only ever uses the <em>public</em> key: that's why the whole world can check your signature but only you can make it.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">That completes the current Cryptography series — ECDH, AES-GCM, hashing/HMAC, HKDF, RSA, and signatures. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){var signBtn=document.getElementById('sig-sign');if(!signBtn)return;var TE=new TextEncoder();function ab2b64(b){var u=new Uint8Array(b),s='';for(var i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s);}function b642u8(s){var bin=atob((s||'').trim()),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u;}function gv(id){return document.getElementById(id).value;}function sv(id,v){document.getElementById(id).value=v;}var ALG={name:'ECDSA',hash:'SHA-256'},CURVE={name:'ECDSA',namedCurve:'P-256'};var so=document.getElementById('sig-sign-out'),st2=document.getElementById('sig-stage2'),vo=document.getElementById('sig-verify-out');signBtn.addEventListener('click',async function(){so.classList.add('show');so.textContent='generating key & signing…';try{var msg=gv('sig-msg');var kp=await crypto.subtle.generateKey(CURVE,true,['sign','verify']);var sig=await crypto.subtle.sign(ALG,kp.privateKey,TE.encode(msg));var pub=ab2b64(await crypto.subtle.exportKey('raw',kp.publicKey));var sigB=ab2b64(sig);var L=[];L.push('✓ Signed with a fresh ECDSA P-256 private key.');L.push('');L.push('📢 Public key (base64) — share with anyone:');L.push('   '+pub);L.push('✍️ Signature (base64):');L.push('   '+sigB);L.push('');L.push('The private key stays here in Step 1 and is never shown — only it could have produced this signature.');so.textContent=L.join('\n');sv('sig-vmsg',msg);sv('sig-vkey',pub);sv('sig-vsig',sigB);st2.style.display='block';vo.classList.remove('show');}catch(e){so.textContent='⛔ '+(e&&e.message?e.message:e);}});document.getElementById('sig-verify').addEventListener('click',async function(){vo.classList.add('show');vo.textContent='verifying…';try{var pubKey=await crypto.subtle.importKey('raw',b642u8(gv('sig-vkey')),CURVE,true,['verify']);var ok=await crypto.subtle.verify(ALG,pubKey,b642u8(gv('sig-vsig')),TE.encode(gv('sig-vmsg')));vo.textContent=ok?'✅ VALID — the signature matches this message and public key. It is authentic and unaltered, and only the private-key holder could have signed it.':'✗ INVALID — the signature does not match. The message, the signature, or the public key differs from what was signed. Reject it.';}catch(e){vo.textContent='✗ INVALID — '+(e&&e.name?e.name:e)+' (a value is malformed).';}});})();</script>
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>
