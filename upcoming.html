@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Upcoming — KaizenCode's Road to CTO</title>
+<meta name="description" content="The build-and-track board for KaizenCode's next 32 modules: five stages taking the roadmap from Staff-level engineering through people leadership, delivery, business fluency and the CTO craft.">
+<meta property="og:title" content="Upcoming — KaizenCode's Road to CTO">
+<meta property="og:description" content="32 planned modules across 5 stages — the technical and non-technical second half of Mobile Engineer → CTO. Track what's planned, building and shipped.">
+<meta property="og:type" content="website">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fbfbfd;--fg:#1a1a1a;--muted:#6b6b70;--line:#ececf0;--card:#fff;
+  --accent:#5350B4;--accent-soft:#f3f2ff;
+  --green:#0F6E56;--green-soft:#e6f4ef;--amber:#BA7517;--amber-soft:#fdf3e4;--red:#993C1D;--blue:#185FA5;
+  --shadow:0 1px 3px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#0c0c0e;--fg:#ededed;--muted:#8a8a92;--line:#222226;--card:#141417;
+    --accent:#8f8cff;--accent-soft:#1a1830;
+    --green:#4cc9a4;--green-soft:#122a23;--amber:#e0a75a;--amber-soft:#2b2113;
+    --shadow:0 1px 3px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.4);
+  }
+}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px}
+
+/* hero */
+header.hero{padding:64px 0 44px;text-align:center;position:relative;overflow:hidden}
+.glow{position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:680px;height:420px;background:radial-gradient(closest-side,var(--accent-soft),transparent);filter:blur(12px);z-index:0;pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.2px;margin-bottom:26px;color:inherit;text-decoration:none}
+.mark{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--accent),#7a77e0);display:grid;place-items:center;color:#fff;font-size:14px;font-weight:800;box-shadow:0 4px 12px rgba(83,80,180,.35)}
+.kana{display:block;font-size:14px;font-weight:500;color:var(--muted);letter-spacing:2px;margin-bottom:14px;text-transform:uppercase}
+h1{font-size:clamp(30px,5.5vw,46px);font-weight:700;letter-spacing:-1.3px;line-height:1.08;margin-bottom:16px}
+h1 .accent{background:linear-gradient(135deg,var(--accent),#9b98f0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lede{font-size:17px;color:var(--muted);max-width:640px;margin:0 auto 14px;line-height:1.55}
+.note{font-size:13px;color:var(--muted);max-width:560px;margin:0 auto}
+.note b{color:var(--fg)}
+
+/* stat strip */
+.stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:36px 0 8px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 22px;min-width:110px;box-shadow:var(--shadow)}
+.stat .n{font-size:24px;font-weight:700;letter-spacing:-.5px}
+.stat .n.green{color:var(--green)}
+.stat .n.amber{color:var(--amber)}
+.stat .l{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* overall progress */
+.progress-wrap{max-width:560px;margin:26px auto 0}
+.bar{height:8px;border-radius:6px;background:var(--accent-soft);overflow:hidden;display:flex}
+.bar .fill-shipped{background:var(--green);height:100%;transition:width .3s ease}
+.bar .fill-building{background:var(--amber);height:100%;transition:width .3s ease}
+.bar-label{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* legend */
+.legend{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:18px;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.swatch{width:10px;height:10px;border-radius:3px;display:inline-block}
+.swatch.planned{background:var(--line)}
+.swatch.building{background:var(--amber)}
+.swatch.shipped{background:var(--green)}
+
+/* stage sections */
+section{padding:46px 0 12px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);text-align:center;margin-bottom:8px}
+.sec-title{font-size:26px;font-weight:700;letter-spacing:-.7px;text-align:center;margin-bottom:8px}
+.sec-sub{font-size:14.5px;color:var(--muted);text-align:center;max-width:640px;margin:0 auto 18px}
+.stage-bar{max-width:420px;margin:0 auto 32px}
+.stage-bar .bar{height:6px}
+.stage-bar .bar-label{text-align:center}
+
+/* module grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.module{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:border-color .18s ease}
+.module::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;opacity:0;transition:opacity .18s}
+.module[data-status="building"]{border-color:var(--amber)}
+.module[data-status="building"]::before{background:linear-gradient(90deg,var(--amber),transparent);opacity:1}
+.module[data-status="shipped"]{border-color:var(--green)}
+.module[data-status="shipped"]::before{background:linear-gradient(90deg,var(--green),transparent);opacity:1}
+.m-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.m-ic{width:34px;height:34px;border-radius:9px;background:var(--accent-soft);display:grid;place-items:center;font-size:17px}
+.status{font-size:11px;font-weight:700;letter-spacing:.3px;padding:5px 12px;border-radius:20px;border:1px solid var(--line);background:var(--bg);color:var(--muted);cursor:pointer;font-family:inherit;transition:background .15s,color .15s,border-color .15s}
+.status:hover{border-color:var(--accent);color:var(--accent)}
+.module[data-status="building"] .status{background:var(--amber-soft);color:var(--amber);border-color:transparent}
+.module[data-status="shipped"] .status{background:var(--green-soft);color:var(--green);border-color:transparent}
+.m-title{font-size:17px;font-weight:700;letter-spacing:-.3px;margin-bottom:6px}
+.m-desc{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:12px}
+.m-deliver{font-size:12px;line-height:1.5;background:var(--accent-soft);border-radius:9px;padding:9px 12px;margin-bottom:12px}
+.m-deliver b{color:var(--accent)}
+.m-tags{display:flex;flex-wrap:wrap;gap:6px}
+.m-tag{font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:6px;background:var(--accent-soft);color:var(--accent)}
+
+/* how tracking works */
+.how{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;box-shadow:var(--shadow);font-size:13.5px;color:var(--muted);line-height:1.65;max-width:720px;margin:0 auto}
+.how b{color:var(--fg)}
+
+footer{padding:48px 0 60px;text-align:center;border-top:1px solid var(--line);margin-top:56px}
+footer p{font-size:13px;color:var(--muted);margin-bottom:6px}
+footer a{color:var(--accent);text-decoration:none}
+.dot{color:var(--line);margin:0 8px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="glow"></div>
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="mark">改</span> KaizenCode</a>
+    <span class="kana">Upcoming · The Second Half of the Journey</span>
+    <h1>The Road to <span class="accent">CTO</span> — What We Build Next</h1>
+    <p class="lede">The first 24 weeks built the technical foundation. These <b>32 upcoming modules</b> across <b>5 stages</b> cover the rest of the arc — deeper systems, then people, delivery, business fluency and the CTO craft itself.</p>
+    <p class="note">This page is the <b>build-and-track board</b>: tap a module's status chip to cycle <b>Planned → Building → Shipped</b>. Progress is saved in your browser. When a module ships for real, it moves onto the homepage.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">32</div><div class="l">Modules planned</div></div>
+      <div class="stat"><div class="n">5</div><div class="l">Stages</div></div>
+      <div class="stat"><div class="n">~72</div><div class="l">Weeks (25–96)</div></div>
+      <div class="stat"><div class="n amber" id="stat-building">0</div><div class="l">Building</div></div>
+      <div class="stat"><div class="n green" id="stat-shipped">0</div><div class="l">Shipped</div></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="bar" id="overall-bar"><div class="fill-shipped" style="width:0%"></div><div class="fill-building" style="width:0%"></div></div>
+      <div class="bar-label" id="overall-label">0 of 32 shipped</div>
+    </div>
+    <div class="legend">
+      <span><span class="swatch planned"></span> Planned</span>
+      <span><span class="swatch building"></span> Building</span>
+      <span><span class="swatch shipped"></span> Shipped</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ STAGE 1 ============ -->
+<section id="stage1" data-stage>
+  <div class="wrap">
+    <p class="eyebrow">Stage 1 · Weeks 25–40 · Senior → Staff</p>
+    <h2 class="sec-title">Complete the Technical Foundation</h2>
+    <p class="sec-sub">The last 15% of the technical half — the deferred backlog plus the systems a staff engineer is expected to own: orchestration, mobile at scale, platforms, tenancy, disaster recovery, migrations and compliance.</p>
+    <div class="stage-bar"><div class="bar"><div class="fill-shipped" style="width:0%"></div><div class="fill-building" style="width:0%"></div></div><div class="bar-label">0 of 10 shipped</div></div>
+    <div class="grid">
+
+      <div class="module" data-id="switchboard">
+        <div class="m-top"><div class="m-ic">🔀</div><button class="status">Planned</button></div>
+        <div class="m-title">The Switchboard</div>
+        <div class="m-desc">Networking internals — DNS resolution, TCP vs UDP, HTTP/1.1 → 2 → 3 &amp; QUIC, load-balancing algorithms, anycast, connection pooling.</div>
+        <div class="m-deliver"><b>Deliverable:</b> trace one real request end-to-end with dig/curl/devtools and write it up.</div>
+        <div class="m-tags"><span class="m-tag">DNS</span><span class="m-tag">TCP/UDP</span><span class="m-tag">HTTP/3</span><span class="m-tag">Load balancing</span></div>
+      </div>
+
+      <div class="module" data-id="gatekeeper">
+        <div class="m-top"><div class="m-ic">🎫</div><button class="status">Planned</button></div>
+        <div class="m-title">The Gatekeeper</div>
+        <div class="m-desc">Deep auth — OAuth2 flows, OIDC, PKCE, sessions vs tokens, refresh rotation, SSO with SAML &amp; SCIM, passkeys/WebAuthn. Extends The Vault.</div>
+        <div class="m-deliver"><b>Deliverable:</b> implement a full OAuth2 + PKCE flow against a real identity provider.</div>
+        <div class="m-tags"><span class="m-tag">OAuth2</span><span class="m-tag">OIDC</span><span class="m-tag">SSO</span><span class="m-tag">Passkeys</span></div>
+      </div>
+
+      <div class="module" data-id="cartographer">
+        <div class="m-top"><div class="m-ic">🗺️</div><button class="status">Planned</button></div>
+        <div class="m-title">The Cartographer</div>
+        <div class="m-desc">Domain-driven design — bounded contexts, aggregates, hexagonal/clean architecture, ubiquitous language, context maps.</div>
+        <div class="m-deliver"><b>Deliverable:</b> re-draw an app you've built as a context map.</div>
+        <div class="m-tags"><span class="m-tag">DDD</span><span class="m-tag">Bounded contexts</span><span class="m-tag">Hexagonal</span></div>
+      </div>
+
+      <div class="module" data-id="helmsman">
+        <div class="m-top"><div class="m-ic">☸️</div><button class="status">Planned</button></div>
+        <div class="m-title">The Helmsman</div>
+        <div class="m-desc">Kubernetes &amp; orchestration — pods, deployments, services, autoscaling, service mesh, GitOps with Argo — and when K8s is overkill.</div>
+        <div class="m-deliver"><b>Deliverable:</b> deploy a phase project to a local cluster with a canary rollout.</div>
+        <div class="m-tags"><span class="m-tag">Kubernetes</span><span class="m-tag">Autoscaling</span><span class="m-tag">Service mesh</span><span class="m-tag">GitOps</span></div>
+      </div>
+
+      <div class="module" data-id="homecoming">
+        <div class="m-top"><div class="m-ic">📱</div><button class="status">Planned</button></div>
+        <div class="m-title">The Homecoming</div>
+        <div class="m-desc">Mobile systems at scale — the BFF pattern, offline-first sync &amp; CRDTs, push-notification infrastructure, release trains, phased rollouts, mobile observability. Your home turf, from the backend side.</div>
+        <div class="m-deliver"><b>Deliverable:</b> design doc for the backend of an offline-first mobile app.</div>
+        <div class="m-tags"><span class="m-tag">BFF</span><span class="m-tag">Offline sync</span><span class="m-tag">CRDTs</span><span class="m-tag">Push infra</span></div>
+      </div>
+
+      <div class="module" data-id="paved-road">
+        <div class="m-top"><div class="m-ic">🛤️</div><button class="status">Planned</button></div>
+        <div class="m-title">The Paved Road</div>
+        <div class="m-desc">Platform engineering &amp; DevEx — internal developer platforms, golden paths, monorepos &amp; build systems, measuring productivity with DORA and SPACE.</div>
+        <div class="m-deliver"><b>Deliverable:</b> measure the four DORA metrics on your own repo.</div>
+        <div class="m-tags"><span class="m-tag">IDP</span><span class="m-tag">Golden paths</span><span class="m-tag">Monorepo</span><span class="m-tag">DORA</span></div>
+      </div>
+
+      <div class="module" data-id="landlord">
+        <div class="m-top"><div class="m-ic">🏢</div><button class="status">Planned</button></div>
+        <div class="m-title">The Landlord</div>
+        <div class="m-desc">Multi-tenancy &amp; SaaS architecture — pool vs silo vs bridge isolation, noisy neighbors, per-tenant cost attribution, the enterprise-readiness checklist.</div>
+        <div class="m-deliver"><b>Deliverable:</b> add tenant isolation to a phase project.</div>
+        <div class="m-tags"><span class="m-tag">Multi-tenant</span><span class="m-tag">Isolation</span><span class="m-tag">Enterprise-ready</span></div>
+      </div>
+
+      <div class="module" data-id="ark">
+        <div class="m-top"><div class="m-ic">🛟</div><button class="status">Planned</button></div>
+        <div class="m-title">The Ark</div>
+        <div class="m-desc">Disaster recovery &amp; scale patterns — sharding strategies, cell-based architecture, multi-region active-active, RTO/RPO, backup drills, capacity planning, load testing.</div>
+        <div class="m-deliver"><b>Deliverable:</b> run a restore-from-backup fire drill and document it.</div>
+        <div class="m-tags"><span class="m-tag">Sharding</span><span class="m-tag">Multi-region</span><span class="m-tag">RTO/RPO</span><span class="m-tag">Capacity</span></div>
+      </div>
+
+      <div class="module" data-id="renovator">
+        <div class="m-top"><div class="m-ic">🔨</div><button class="status">Planned</button></div>
+        <div class="m-title">The Renovator</div>
+        <div class="m-desc">Migrations &amp; legacy modernization — the strangler fig, zero-downtime schema changes, dual-writes, rewrite-vs-refactor economics. CTOs inherit systems more often than they green-field them.</div>
+        <div class="m-deliver"><b>Deliverable:</b> execute a zero-downtime column migration with traffic running.</div>
+        <div class="m-tags"><span class="m-tag">Strangler fig</span><span class="m-tag">Zero-downtime</span><span class="m-tag">Dual-writes</span></div>
+      </div>
+
+      <div class="module" data-id="registrar">
+        <div class="m-top"><div class="m-ic">📋</div><button class="status">Planned</button></div>
+        <div class="m-title">The Registrar</div>
+        <div class="m-desc">Privacy &amp; compliance engineering — GDPR &amp; India DPDP, deletion pipelines, retention policies, SOC 2 / ISO 27001 controls as code, audit trails. Distinct from The Vault's appsec focus.</div>
+        <div class="m-deliver"><b>Deliverable:</b> map SOC 2 controls onto a phase project.</div>
+        <div class="m-tags"><span class="m-tag">GDPR</span><span class="m-tag">DPDP</span><span class="m-tag">SOC 2</span><span class="m-tag">Audit logs</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE 2 ============ -->
+<section id="stage2" data-stage>
+  <div class="wrap">
+    <p class="eyebrow">Stage 2 · Weeks 41–56 · Staff → Engineering Manager</p>
+    <h2 class="sec-title">Leading People</h2>
+    <p class="sec-sub">The career fork. Management isn't a promotion — it's a career change. Every module here is about humans: growing them, hiring them, giving them hard feedback, and building a culture they stay for.</p>
+    <div class="stage-bar"><div class="bar"><div class="fill-shipped" style="width:0%"></div><div class="fill-building" style="width:0%"></div></div><div class="bar-label">0 of 6 shipped</div></div>
+    <div class="grid">
+
+      <div class="module" data-id="first-follower">
+        <div class="m-top"><div class="m-ic">🤝</div><button class="status">Planned</button></div>
+        <div class="m-title">The First Follower</div>
+        <div class="m-desc">The IC → manager transition — why it's a career change, the manager's schedule vs the maker's schedule, letting go of the code, your new definition of "done".</div>
+        <div class="m-deliver"><b>Deliverable:</b> write your own "manager README".</div>
+        <div class="m-tags"><span class="m-tag">Transition</span><span class="m-tag">Maker vs manager</span><span class="m-tag">Identity</span></div>
+      </div>
+
+      <div class="module" data-id="gardener">
+        <div class="m-top"><div class="m-ic">🌱</div><button class="status">Planned</button></div>
+        <div class="m-title">The Gardener</div>
+        <div class="m-desc">Growing engineers — 1:1s that aren't status updates, feedback with the SBI model, coaching vs directing, delegation ladders, motivation (autonomy, mastery, purpose).</div>
+        <div class="m-deliver"><b>Deliverable:</b> run four weekly 1:1s (or mock them) with notes.</div>
+        <div class="m-tags"><span class="m-tag">1:1s</span><span class="m-tag">Feedback</span><span class="m-tag">Coaching</span><span class="m-tag">Delegation</span></div>
+      </div>
+
+      <div class="module" data-id="scout">
+        <div class="m-top"><div class="m-ic">🔭</div><button class="status">Planned</button></div>
+        <div class="m-title">The Scout</div>
+        <div class="m-desc">Hiring &amp; talent — sourcing, structured interviews with rubrics, debriefs, closing candidates, compensation &amp; equity conversations, onboarding plans, employer brand.</div>
+        <div class="m-deliver"><b>Deliverable:</b> design a full interview loop with rubrics for a backend role.</div>
+        <div class="m-tags"><span class="m-tag">Interviews</span><span class="m-tag">Rubrics</span><span class="m-tag">Comp</span><span class="m-tag">Onboarding</span></div>
+      </div>
+
+      <div class="module" data-id="referee">
+        <div class="m-top"><div class="m-ic">⚖️</div><button class="status">Planned</button></div>
+        <div class="m-title">The Referee</div>
+        <div class="m-desc">Performance management — setting expectations with levels, career ladders, calibration, PIPs, firing with dignity, managing former peers.</div>
+        <div class="m-deliver"><b>Deliverable:</b> write a career ladder for engineers L3–L6.</div>
+        <div class="m-tags"><span class="m-tag">Levels</span><span class="m-tag">Calibration</span><span class="m-tag">PIPs</span></div>
+      </div>
+
+      <div class="module" data-id="diplomat">
+        <div class="m-top"><div class="m-ic">🕊️</div><button class="status">Planned</button></div>
+        <div class="m-title">The Diplomat</div>
+        <div class="m-desc">Hard conversations — difficult feedback, conflict mediation, negotiation (BATNA, interests vs positions), influence without authority, actually listening.</div>
+        <div class="m-deliver"><b>Deliverable:</b> write role-play scripts for three hard conversations.</div>
+        <div class="m-tags"><span class="m-tag">Conflict</span><span class="m-tag">Negotiation</span><span class="m-tag">Influence</span></div>
+      </div>
+
+      <div class="module" data-id="torchbearer">
+        <div class="m-top"><div class="m-ic">🔦</div><button class="status">Planned</button></div>
+        <div class="m-title">The Torchbearer</div>
+        <div class="m-desc">Culture — values that mean something, psychological safety, blameless postmortems, remote &amp; hybrid practices, retention and regretted attrition.</div>
+        <div class="m-deliver"><b>Deliverable:</b> draft engineering values plus a postmortem template.</div>
+        <div class="m-tags"><span class="m-tag">Values</span><span class="m-tag">Psych safety</span><span class="m-tag">Retention</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE 3 ============ -->
+<section id="stage3" data-stage>
+  <div class="wrap">
+    <p class="eyebrow">Stage 3 · Weeks 57–72 · EM → Director / VP</p>
+    <h2 class="sec-title">Leading Delivery &amp; Organizations</h2>
+    <p class="sec-sub">From leading a team to leading teams-of-teams: shipping predictably, prioritizing ruthlessly, designing the org itself, and communicating so executives actually listen.</p>
+    <div class="stage-bar"><div class="bar"><div class="fill-shipped" style="width:0%"></div><div class="fill-building" style="width:0%"></div></div><div class="bar-label">0 of 6 shipped</div></div>
+    <div class="grid">
+
+      <div class="module" data-id="conductor">
+        <div class="m-top"><div class="m-ic">🎼</div><button class="status">Planned</button></div>
+        <div class="m-title">The Conductor</div>
+        <div class="m-desc">Delivery management — agile, scrum &amp; kanban without the religion, estimation &amp; probabilistic forecasting, WIP limits, cycle time as the honest metric.</div>
+        <div class="m-deliver"><b>Deliverable:</b> forecast a real project with Monte Carlo instead of story points.</div>
+        <div class="m-tags"><span class="m-tag">Kanban</span><span class="m-tag">Forecasting</span><span class="m-tag">Cycle time</span></div>
+      </div>
+
+      <div class="module" data-id="mapmaker">
+        <div class="m-top"><div class="m-ic">📍</div><button class="status">Planned</button></div>
+        <div class="m-title">The Mapmaker</div>
+        <div class="m-desc">Roadmapping &amp; prioritization — OKRs, RICE &amp; WSJF, cost of delay, now/next/later, managing up on scope, and the executive art of saying no.</div>
+        <div class="m-deliver"><b>Deliverable:</b> build a two-quarter roadmap with explicit cut lines.</div>
+        <div class="m-tags"><span class="m-tag">OKRs</span><span class="m-tag">RICE</span><span class="m-tag">Cost of delay</span></div>
+      </div>
+
+      <div class="module" data-id="architect-of-teams">
+        <div class="m-top"><div class="m-ic">🏗️</div><button class="status">Planned</button></div>
+        <div class="m-title">The Architect of Teams</div>
+        <div class="m-desc">Org design — Team Topologies in depth, spans &amp; layers, Conway maneuvers, platform vs product teams, reorgs that don't destroy trust, managing managers.</div>
+        <div class="m-deliver"><b>Deliverable:</b> design the engineering org chart at 10 → 30 → 100 people.</div>
+        <div class="m-tags"><span class="m-tag">Team topologies</span><span class="m-tag">Conway's law</span><span class="m-tag">Reorgs</span></div>
+      </div>
+
+      <div class="module" data-id="weathervane">
+        <div class="m-top"><div class="m-ic">🌤️</div><button class="status">Planned</button></div>
+        <div class="m-title">The Weathervane</div>
+        <div class="m-desc">Risk &amp; stakeholder management — risk registers, pre-mortems, RACI, status communication that executives actually read, escalating early without crying wolf.</div>
+        <div class="m-deliver"><b>Deliverable:</b> run a pre-mortem on a planned project.</div>
+        <div class="m-tags"><span class="m-tag">Pre-mortems</span><span class="m-tag">RACI</span><span class="m-tag">Escalation</span></div>
+      </div>
+
+      <div class="module" data-id="product-whisperer">
+        <div class="m-top"><div class="m-ic">🎯</div><button class="status">Planned</button></div>
+        <div class="m-title">The Product Whisperer</div>
+        <div class="m-desc">Product thinking — discovery, north-star metrics, activation &amp; retention funnels, A/B experimentation, working with PMs and designers as peers, MVP scoping.</div>
+        <div class="m-deliver"><b>Deliverable:</b> define a north-star metric plus supporting metrics for one of your apps.</div>
+        <div class="m-tags"><span class="m-tag">North star</span><span class="m-tag">A/B tests</span><span class="m-tag">Funnels</span></div>
+      </div>
+
+      <div class="module" data-id="storyteller">
+        <div class="m-top"><div class="m-ic">📖</div><button class="status">Planned</button></div>
+        <div class="m-title">The Storyteller</div>
+        <div class="m-desc">Communication mastery — the one-page memo, the pyramid principle, board-deck structure, storytelling with data, presenting to non-engineers, executive summaries.</div>
+        <div class="m-deliver"><b>Deliverable:</b> write a one-page memo pitching a technical investment to a CFO.</div>
+        <div class="m-tags"><span class="m-tag">Memos</span><span class="m-tag">Pyramid principle</span><span class="m-tag">Storytelling</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE 4 ============ -->
+<section id="stage4" data-stage>
+  <div class="wrap">
+    <p class="eyebrow">Stage 4 · Weeks 73–86 · VP → Executive</p>
+    <h2 class="sec-title">Business Fluency</h2>
+    <p class="sec-sub">The language of the boardroom. A CTO who can't read a P&amp;L, model a cap table, or defend a budget negotiates from weakness — these modules make the business side native, not foreign.</p>
+    <div class="stage-bar"><div class="bar"><div class="fill-shipped" style="width:0%"></div><div class="fill-building" style="width:0%"></div></div><div class="bar-label">0 of 5 shipped</div></div>
+    <div class="grid">
+
+      <div class="module" data-id="counting-house">
+        <div class="m-top"><div class="m-ic">🧮</div><button class="status">Planned</button></div>
+        <div class="m-title">The Counting House</div>
+        <div class="m-desc">Finance for CTOs — reading a P&amp;L, balance-sheet basics, gross margin &amp; COGS (your cloud bill lives here), unit economics, CAC/LTV, budgeting &amp; headcount planning.</div>
+        <div class="m-deliver"><b>Deliverable:</b> build a 12-month engineering budget with headcount and cloud costs.</div>
+        <div class="m-tags"><span class="m-tag">P&amp;L</span><span class="m-tag">COGS</span><span class="m-tag">CAC/LTV</span><span class="m-tag">Budgeting</span></div>
+      </div>
+
+      <div class="module" data-id="bazaar">
+        <div class="m-top"><div class="m-ic">🏪</div><button class="status">Planned</button></div>
+        <div class="m-title">The Bazaar</div>
+        <div class="m-desc">Business models &amp; pricing — SaaS metrics (ARR, NRR, churn, magic number), pricing &amp; packaging, freemium vs usage vs seats, how enterprise sales works, supporting go-to-market.</div>
+        <div class="m-deliver"><b>Deliverable:</b> tear down the pricing of three SaaS products.</div>
+        <div class="m-tags"><span class="m-tag">ARR/NRR</span><span class="m-tag">Pricing</span><span class="m-tag">Enterprise sales</span></div>
+      </div>
+
+      <div class="module" data-id="treasury">
+        <div class="m-top"><div class="m-ic">💎</div><button class="status">Planned</button></div>
+        <div class="m-title">The Treasury</div>
+        <div class="m-desc">Fundraising &amp; equity — venture math, cap tables, dilution, SAFEs, option pools, what investors ask a CTO in diligence, debt vs equity.</div>
+        <div class="m-deliver"><b>Deliverable:</b> model a cap table through seed → Series B.</div>
+        <div class="m-tags"><span class="m-tag">Cap tables</span><span class="m-tag">Dilution</span><span class="m-tag">SAFEs</span></div>
+      </div>
+
+      <div class="module" data-id="chessboard">
+        <div class="m-top"><div class="m-ic">♟️</div><button class="status">Planned</button></div>
+        <div class="m-title">The Chessboard</div>
+        <div class="m-desc">Technology strategy — writing strategy docs that guide real decisions, moats &amp; defensibility, build/buy/partner with real numbers, innovation portfolios, tech debt as a balance-sheet item, AI strategy.</div>
+        <div class="m-deliver"><b>Deliverable:</b> write a three-year technology strategy for a company you know.</div>
+        <div class="m-tags"><span class="m-tag">Strategy</span><span class="m-tag">Moats</span><span class="m-tag">Build/buy/partner</span></div>
+      </div>
+
+      <div class="module" data-id="fine-print">
+        <div class="m-top"><div class="m-ic">📜</div><button class="status">Planned</button></div>
+        <div class="m-title">The Fine Print</div>
+        <div class="m-desc">Legal &amp; vendor — contracts, MSAs, SLAs &amp; DPAs, open-source licensing in your dependency tree, IP &amp; invention assignment, procurement &amp; vendor negotiation, cyber insurance.</div>
+        <div class="m-deliver"><b>Deliverable:</b> audit a real project's dependency licenses.</div>
+        <div class="m-tags"><span class="m-tag">MSA/SLA</span><span class="m-tag">Licensing</span><span class="m-tag">Vendors</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE 5 ============ -->
+<section id="stage5" data-stage>
+  <div class="wrap">
+    <p class="eyebrow">Stage 5 · Weeks 87–96 · The Last Mile</p>
+    <h2 class="sec-title">The CTO Craft</h2>
+    <p class="sec-sub">The parts of the job nobody teaches: being a genuine executive peer, surviving due diligence, leading through crises, building a public presence — and managing yourself so the role doesn't consume you.</p>
+    <div class="stage-bar"><div class="bar"><div class="fill-shipped" style="width:0%"></div><div class="fill-building" style="width:0%"></div></div><div class="bar-label">0 of 5 shipped</div></div>
+    <div class="grid">
+
+      <div class="module" data-id="round-table">
+        <div class="m-top"><div class="m-ic">👑</div><button class="status">Planned</button></div>
+        <div class="m-title">The Round Table</div>
+        <div class="m-desc">Being an executive peer — CEO/CFO/CPO dynamics, board meetings &amp; board decks, investor relations, disagree-and-commit at exec level, when the role splits into CTO vs VP Eng.</div>
+        <div class="m-deliver"><b>Deliverable:</b> prepare a mock board deck — an engineering update plus one big ask.</div>
+        <div class="m-tags"><span class="m-tag">Board</span><span class="m-tag">Exec team</span><span class="m-tag">CTO vs VPE</span></div>
+      </div>
+
+      <div class="module" data-id="magistrate">
+        <div class="m-top"><div class="m-ic">🏛️</div><button class="status">Planned</button></div>
+        <div class="m-title">The Magistrate</div>
+        <div class="m-desc">Technical due diligence — running it as the acquirer, surviving it as the target, M&amp;A tech integration, acquihires, and what actually kills deals.</div>
+        <div class="m-deliver"><b>Deliverable:</b> write a DD checklist and run it honestly against your own project.</div>
+        <div class="m-tags"><span class="m-tag">Due diligence</span><span class="m-tag">M&amp;A</span><span class="m-tag">Integration</span></div>
+      </div>
+
+      <div class="module" data-id="storm-keeper">
+        <div class="m-top"><div class="m-ic">⛈️</div><button class="status">Planned</button></div>
+        <div class="m-title">The Storm Keeper</div>
+        <div class="m-desc">Crisis leadership — security-breach response across technical, legal and PR fronts, catastrophic outages, layoffs done humanely, communicating when everything is on fire.</div>
+        <div class="m-deliver"><b>Deliverable:</b> write a breach-response runbook including comms templates.</div>
+        <div class="m-tags"><span class="m-tag">Breach response</span><span class="m-tag">Outages</span><span class="m-tag">Crisis comms</span></div>
+      </div>
+
+      <div class="module" data-id="beacon">
+        <div class="m-top"><div class="m-ic">📡</div><button class="status">Planned</button></div>
+        <div class="m-title">The Beacon</div>
+        <div class="m-desc">Public presence — the engineering blog, conference talks, dev-rel, hiring through visibility, social-media judgment for executives.</div>
+        <div class="m-deliver"><b>Deliverable:</b> publish one technical post publicly.</div>
+        <div class="m-tags"><span class="m-tag">Eng blog</span><span class="m-tag">Talks</span><span class="m-tag">Dev-rel</span></div>
+      </div>
+
+      <div class="module" data-id="keeper-of-the-flame">
+        <div class="m-top"><div class="m-ic">🕯️</div><button class="status">Planned</button></div>
+        <div class="m-title">The Keeper of the Flame</div>
+        <div class="m-desc">Self-management — calendar &amp; energy audits, staying technical enough (and no more), mentors, coaches &amp; peer groups, executive presence, avoiding burnout, knowing when to leave.</div>
+        <div class="m-deliver"><b>Deliverable:</b> do a two-week calendar audit against your stated priorities.</div>
+        <div class="m-tags"><span class="m-tag">Calendar audit</span><span class="m-tag">Coaching</span><span class="m-tag">Burnout</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">How this board works</p>
+    <div class="how">
+      <b>Build:</b> pick the next module (Stage 2 first — the leadership half is where "→ CTO" is still a promise), flip it to <b>Building</b>, and write it as a standalone <code>.html</code> file in the site's format. Technical modules get the ▶ Run snippet component; people/business modules get scenario panels instead.
+      <br><br>
+      <b>Track:</b> statuses live in your browser's <code>localStorage</code> — this page stays static and dependency-free. When a module actually ships, flip it to <b>Shipped</b> here <i>and</i> add its card to the homepage, same as the Mastery and Cryptography tracks.
+      <br><br>
+      <b>Kaizen:</b> one module at a time. Ship, learn, repeat — the same cadence that built the first 31.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><span class="mark" style="display:inline-grid;vertical-align:middle;margin-right:6px">改</span> <b>KaizenCode</b> — continuous, incremental improvement.</p>
+    <p>32 upcoming modules · 5 stages · the second half of Mobile Engineer → CTO.</p>
+    <p style="margin-top:10px"><a href="index.html">Home</a><span class="dot">·</span><a href="index.html#mastery">Mastery Track</a><span class="dot">·</span><a href="cryptography.html">Cryptography</a><span class="dot">·</span><a href="docs/README.html">Docs</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY='kaizencode-upcoming-status';
+  var STATES=['planned','building','shipped'];
+  var LABELS={planned:'Planned',building:'Building',shipped:'Shipped'};
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+
+  var modules=Array.prototype.slice.call(document.querySelectorAll('.module'));
+
+  function setStatus(mod,status){
+    mod.setAttribute('data-status',status);
+    mod.querySelector('.status').textContent=LABELS[status];
+  }
+  function persist(){
+    var out={};
+    modules.forEach(function(m){
+      var s=m.getAttribute('data-status');
+      if(s&&s!=='planned')out[m.getAttribute('data-id')]=s;
+    });
+    try{localStorage.setItem(KEY,JSON.stringify(out))}catch(e){}
+  }
+  function paintBar(bar,label,shipped,building,total){
+    bar.querySelector('.fill-shipped').style.width=(shipped/total*100)+'%';
+    bar.querySelector('.fill-building').style.width=(building/total*100)+'%';
+    label.textContent=shipped+' of '+total+' shipped'+(building?' · '+building+' building':'');
+  }
+  function refresh(){
+    var totShipped=0,totBuilding=0;
+    document.querySelectorAll('[data-stage]').forEach(function(sec){
+      var mods=sec.querySelectorAll('.module');
+      var s=0,b=0;
+      mods.forEach(function(m){
+        var st=m.getAttribute('data-status');
+        if(st==='shipped')s++;else if(st==='building')b++;
+      });
+      totShipped+=s;totBuilding+=b;
+      paintBar(sec.querySelector('.stage-bar .bar'),sec.querySelector('.stage-bar .bar-label'),s,b,mods.length);
+    });
+    paintBar(document.getElementById('overall-bar'),document.getElementById('overall-label'),totShipped,totBuilding,modules.length);
+    document.getElementById('stat-shipped').textContent=totShipped;
+    document.getElementById('stat-building').textContent=totBuilding;
+  }
+
+  modules.forEach(function(m){
+    setStatus(m,saved[m.getAttribute('data-id')]||'planned');
+    m.querySelector('.status').addEventListener('click',function(){
+      var next=STATES[(STATES.indexOf(m.getAttribute('data-status'))+1)%STATES.length];
+      setStatus(m,next);
+      persist();
+      refresh();
+    });
+  });
+  refresh();
+})();
+</script>
+
+</body>
+</html>
