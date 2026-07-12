@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Cloud Toolbox — Every Tool From Laptop to Production</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:760px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* necessity badges */
+.t-must,.t-rec,.t-sit{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;letter-spacing:.3px}
+.t-must{background:#fdeeee;color:#993C1D}.t-rec{background:#fdf3e4;color:#BA7517}.t-sit{background:#eef4fb;color:#185FA5}
+@media(prefers-color-scheme:dark){.t-must{background:#2b1512;color:#e8907a}.t-rec{background:#2b2113;color:#e0a75a}.t-sit{background:#12202e;color:#7ab5e8}}
+/* filter chips */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0;position:sticky;top:0;background:inherit;padding:8px 0;z-index:2}
+.fbtn{font:inherit;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:5px 14px;border-radius:20px;transition:all .15s}
+.fbtn:hover{border-color:#5350B4;color:#5350B4}.fbtn.on{background:#5350B4;border-color:#5350B4;color:#fff}
+@media(prefers-color-scheme:dark){.fbtn{background:#1a1a1a;border-color:#333;color:#bbb}.fbtn.on{background:#8f8cff;border-color:#8f8cff;color:#111}}
+tr.hide{display:none}
+.toc{border:1px solid #e8e8e8;border-radius:10px;padding:14px 18px;margin:18px 0;font-size:12.5px;background:#fafafa}.toc a{color:#5350B4;text-decoration:none;font-weight:600}.toc li{margin-bottom:3px}@media(prefers-color-scheme:dark){.toc{background:#161616;border-color:#2a2a2a}.toc a{color:#8f8cff}}
+td b{font-size:12.5px}td .alt{color:#888;font-size:11.5px;display:block;margin-top:3px}
+pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px;background:#f5f5f5;border:1px solid #e8e8e8;border-radius:8px;margin:12px 0}@media(prefers-color-scheme:dark){pre{background:#1a1a1a;border-color:#2a2a2a}}.fn{color:#185FA5}.cm{color:#999}
+</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Topic · AWS · The Toolbox</span>
+<h1>🧰 The Cloud Toolbox</h1>
+<p class="sub">Every tool, service and utility a real application touches on its way from your laptop to a production cloud server — what each one is <em>for</em>, what it replaces, its alternatives, and whether you actually need it. Companion to <a class="x" href="aws_from_scratch.html">AWS From Scratch</a>, which explains the core services in depth.</p>
+
+<div class="toc"><strong>On this page</strong>
+<ol>
+<li><a href="#tiers">How to read this (the three tiers)</a></li>
+<li><a href="#foundation">Foundation — account, identity &amp; secrets</a></li>
+<li><a href="#ship">Shipping — source → build → deploy</a></li>
+<li><a href="#run">Running — compute, network &amp; delivery</a></li>
+<li><a href="#data">Data — databases, caches, queues &amp; search</a></li>
+<li><a href="#watch">Watching — observability &amp; on-call</a></li>
+<li><a href="#guard">Guarding — security, audit &amp; cost</a></li>
+<li><a href="#desk">At your desk — daily developer utilities</a></li>
+<li><a href="#minimal">The minimal viable production stack</a></li>
+<li><a href="#day">A day in the life — activity → tool map</a></li>
+</ol></div>
+
+<h2 id="tiers"><span class="sn">1</span>How to read this</h2>
+<p>Every tool below is tagged with how badly you need it. The trap for beginners is treating everything as required — real stacks start tiny and add tools <em>when a specific pain appears</em>:</p>
+<ul>
+<li><span class="t-must">MUST</span> — production is irresponsible without it. There are 17 of these across the whole page — that's the entire mandatory surface.</li>
+<li><span class="t-rec">RECOMMENDED</span> — add in your first months; each one removes a whole class of 3am problems.</li>
+<li><span class="t-sit">SITUATIONAL</span> — solves a specific problem. Adopting it before you have that problem is how stacks become unmaintainable. The description says exactly when the moment arrives.</li>
+</ul>
+<p>Filter the tables:</p>
+<div class="filters">
+  <button class="fbtn on" data-f="all">All tools</button>
+  <button class="fbtn" data-f="must">Must-have</button>
+  <button class="fbtn" data-f="rec">Recommended</button>
+  <button class="fbtn" data-f="sit">Situational</button>
+</div>
+
+<h2 id="foundation"><span class="sn">2</span>Foundation — account, identity &amp; secrets</h2>
+<p>Before an app can exist, someone has to answer: who are we in the cloud, who can touch what, and where do passwords live?</p>
+<table>
+<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
+<tr data-tier="must"><td><b>AWS IAM</b></td><td>The permission system checking every API call. Daily: you assume roles, debug <code>AccessDenied</code>, and write least-privilege policies for services. Explained fully in <a class="x" href="aws_from_scratch.html#iam">From Scratch §5</a>.<span class="alt">Alternatives: none — it's mandatory. GCP IAM / Azure RBAC are the same idea elsewhere.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="must"><td><b>AWS CLI</b></td><td>Every console button as a terminal command. Daily: <code>aws logs tail</code>, <code>aws s3 sync</code>, checking what's running without leaving your editor.<span class="alt">Alternatives: the console (slower), SDKs (for code, not hands).</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="must"><td><b>Secrets Manager / SSM Parameter Store</b></td><td>The vault for DB passwords, API keys and tokens. Apps fetch secrets at boot via IAM role — <em>no secret ever sits in code, git, or a Slack message</em>. Secrets Manager adds automatic rotation (~$0.40/secret/mo); Parameter Store is the free 90% version — start there. Daily: adding a key for a new integration, rotating one after an employee leaves.<span class="alt">Alternatives: HashiCorp Vault (self-hosted, powerful, heavy), Doppler / Infisical (developer-friendly SaaS), 1Password for humans. A <code>.env</code> file on a server is the thing these all replace.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="rec"><td><b>IAM Identity Center (SSO) + AWS Organizations</b></td><td>One login for many AWS accounts, with dev/staging/prod as <em>separate accounts</em> so a dev mistake can't touch prod. Daily: <code>aws sso login</code> in the morning, switching roles between accounts.<span class="alt">Alternatives: Okta/Entra as the IdP in front. Solo learners: one account + IAM user is fine.</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="rec"><td><b>ACM (Certificate Manager)</b></td><td>Free, auto-renewing TLS certificates for your load balancer and CDN. Set once per domain, then forget certificates exist — which is the entire point.<span class="alt">Alternatives: Let's Encrypt + certbot (when you manage your own web server), Cloudflare's edge certs.</span></td><td><span class="t-rec">REC</span></td></tr>
+</table>
+
+<h2 id="ship"><span class="sn">3</span>Shipping — source → build → deploy</h2>
+<p>The pipeline: code leaves a laptop, becomes an artifact, and lands in production without a human copying files. This whole stage is <a class="x" href="mastery_forge_cicd.html">The Forge</a>'s territory.</p>
+<table>
+<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
+<tr data-tier="must"><td><b>Git + GitHub</b></td><td>Source of truth. Everything downstream is triggered by a push or merge. Daily: PRs, reviews, the merge button as your deploy button.<span class="alt">Alternatives: GitLab (integrated CI), Bitbucket. AWS CodeCommit is deprecated — don't start there.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="must"><td><b>GitHub Actions (CI/CD)</b></td><td>Robot that runs on every push: tests → build → docker image → deploy. The YAML file in <code>.github/workflows/</code> <em>is</em> your release process. Daily: watching a deploy go green, re-running a flaky job, adding a step.<span class="alt">Alternatives: GitLab CI, CircleCI, Buildkite; AWS-native CodePipeline/CodeBuild (clunkier, IAM-native); Jenkins (self-hosted, legacy gravity).</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="must"><td><b>Docker</b></td><td>Packages your app + runtime + OS deps into one image that runs identically on your laptop and in prod — ends "works on my machine" (Phase 4). Daily: <code>docker build</code>, <code>docker compose up</code> for local dev, writing the occasional Dockerfile.<span class="alt">Alternatives: Podman (drop-in), Nixpacks/buildpacks (Dockerfile-free builds). Running Node directly on EC2 is the thing it replaces.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="must"><td><b>ECR (Elastic Container Registry)</b></td><td>Private shelf where built images live, versioned by tag; ECS/EKS pull from it. Daily: mostly invisible — CI pushes, compute pulls; you visit to check tags or clean old images with a lifecycle rule.<span class="alt">Alternatives: Docker Hub, GitHub Container Registry (ghcr.io) — fine, but cross-cloud pulls cost latency and egress.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="rec"><td><b>Terraform (IaC)</b></td><td>Your whole infrastructure — VPC, ECS, RDS, DNS — declared in files, reviewed in PRs, applied with one command. The cure for "we're afraid to touch the console" (<a class="x" href="mastery_blueprint_iac.html">The Blueprint</a>). Daily: <code>terraform plan</code> on infra PRs, occasional state surgery.<span class="alt">Alternatives: OpenTofu (open-source fork), AWS CDK (infra in TypeScript), Pulumi (any language), CloudFormation (raw YAML underneath). Any is fine; pick one and never click-create prod resources again.</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="sit"><td><b>Convox / Heroku-style PaaS on AWS</b></td><td>An opinionated platform that runs <em>in your AWS account</em> and hides the assembly: <code>convox deploy</code> creates the load balancer, ECS services, scaling, logs and secrets wiring for you — Heroku ergonomics, AWS bill. Daily (if adopted): it <em>is</em> your deploy tool, dashboard and log viewer.<span class="alt">Alternatives on-AWS: Elastic Beanstalk, App Runner, Copilot CLI, SST (serverless apps), Flightcontrol, Porter. Off-AWS: Heroku, Render, Fly.io, Railway — genuinely great until traffic/cost/compliance pull you onto raw AWS. <b>When:</b> small team, no infra engineer, standard web app. <b>When not:</b> you need custom networking or you've outgrown the abstraction — the classic arc is PaaS → raw AWS + Terraform around year 2–3.</span></td><td><span class="t-sit">SIT</span></td></tr>
+<tr data-tier="sit"><td><b>Feature flags (LaunchDarkly / Unleash / Flagsmith)</b></td><td>Turn features on/off per user at runtime, separating <em>deploy</em> from <em>release</em>. Daily: wrapping risky code in a flag, one-click kill switch when it misbehaves.<span class="alt">Alternatives: a flags table in your own DB (fine at first), AWS AppConfig. <b>When:</b> the first time you wish you could undo a release without redeploying.</span></td><td><span class="t-sit">SIT</span></td></tr>
+</table>
+
+<h2 id="run"><span class="sn">4</span>Running — compute, network &amp; delivery</h2>
+<p>Where the app actually executes, and how a user's packet finds it. (Each core service explained from zero in <a class="x" href="aws_from_scratch.html">From Scratch</a>.)</p>
+<table>
+<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
+<tr data-tier="must"><td><b>Compute: ECS + Fargate (or EC2 / Lambda / EKS)</b></td><td>Something must run the container. The pragmatic default: <b>ECS on Fargate</b> — you say "run 3 copies of this image", AWS finds the machines; no servers to patch. Daily: watching a deploy roll, scaling a service, reading a stopped-task's reason.<span class="alt">Alternatives: EC2 (cheapest, most control, most toil — the learning box), Lambda (event-driven/spiky), EKS/Kubernetes (when you have a platform team, not before), Beanstalk/App Runner (training wheels). One of these is MUST; Fargate is the default answer.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="must"><td><b>VPC</b></td><td>The private network everything sits in: public subnets for the load balancer, private for app + DB. Set up once (in Terraform), then it's invisible until a connectivity bug drags you back in.<span class="alt">Alternatives: none — only how much you customize the default.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="must"><td><b>ALB (Application Load Balancer)</b></td><td>The front door: terminates HTTPS (with the ACM cert), health-checks instances, spreads traffic, enables zero-downtime deploys. ~$16/mo+. Daily: invisible; you check its target-group health when something's down.<span class="alt">Alternatives: API Gateway (for Lambda), nginx/Caddy on one box (single-server stage), Cloudflare in front.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="must"><td><b>Route 53</b></td><td>DNS — points <code>yourapp.com</code> at the ALB/CDN. Touched a few times a year; critical every second.<span class="alt">Alternatives: Cloudflare DNS (free, fast, pairs with its CDN), your registrar's DNS (fine for simple setups).</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="rec"><td><b>CloudFront (CDN)</b></td><td>400+ edge caches serving your static assets (and cacheable API responses) from near the user, cutting latency and your servers' load; also your DDoS buffer and free TLS at the edge. Daily: invalidating a cache after a bad asset ships.<span class="alt">Alternatives: Cloudflare (free tier is genuinely good — common to run Cloudflare in front of AWS), Fastly. <b>When MUST:</b> any real static frontend or global users.</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="rec"><td><b>Auto Scaling</b></td><td>Rules that add/remove app copies with load ("keep CPU ≈ 60%"). Set once; it quietly pays for itself every traffic spike and every quiet night.<span class="alt">Alternatives: overprovisioning (money) or manual scaling (sleep).</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="sit"><td><b>API Gateway</b></td><td>Managed front door for <em>Lambda-based</em> APIs: routing, auth (JWT/Cognito), rate limiting, per-request pricing. <b>When:</b> serverless architecture. Container apps behind an ALB don't need it.<span class="alt">Alternatives: ALB (cheaper at volume), Kong/Tyk (self-hosted gateways — <a class="x" href="mastery_gateway_apis.html">The Gateway</a>).</span></td><td><span class="t-sit">SIT</span></td></tr>
+</table>
+
+<h2 id="data"><span class="sn">5</span>Data — databases, caches, queues &amp; search</h2>
+<table>
+<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
+<tr data-tier="must"><td><b>RDS Postgres (or Aurora)</b></td><td>The system of record. Managed backups, patching, Multi-AZ failover, read replicas (<a class="x" href="aws_from_scratch.html#rds">From Scratch §9</a>). Daily: slow-query hunting, the occasional migration, checking replica lag. Aurora = AWS's re-engineered Postgres/MySQL — faster and pricier; start plain RDS.<span class="alt">Alternatives: Neon / Supabase / PlanetScale (serverless DBaaS, lovely DX), MongoDB Atlas (if document-shaped), self-hosted on EC2 (don't, until you have a reason and a DBA).</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="must"><td><b>S3</b></td><td>Files: uploads, builds, backups, logs, data lake — everything that isn't a database row ends up here. Daily: presigning upload URLs, lifecycle rules aging logs to Glacier.<span class="alt">Alternatives: Cloudflare R2 (zero egress fees — interesting for serving big files), GCS/Azure Blob elsewhere.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="rec"><td><b>ElastiCache Redis</b></td><td>In-memory store for the hot path: sessions, rate-limit counters, cached queries, pub/sub, job queues (BullMQ). Usually the first infra added after the DB, the moment something is slow or needs sharing across instances.<span class="alt">Alternatives: Upstash (serverless Redis, per-request pricing), Valkey (open-source fork), Memcached (pure cache). In-process memory works until instance #2 exists.</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="rec"><td><b>SQS (+ SNS / EventBridge)</b></td><td>Queues — the shock absorber. Web tier enqueues slow work (emails, resizing, webhooks); workers chew through it at their own pace; traffic spikes become queue depth instead of timeouts. SNS fans one event to many listeners; EventBridge routes events by pattern and runs cron. Daily: watching queue depth, draining a dead-letter queue after a bad deploy.<span class="alt">Alternatives: Redis + BullMQ (simpler start), RabbitMQ, Kafka/MSK (event <em>streaming</em> at scale — Phase 6, <a class="x" href="mastery_streaming_mind_eventdriven.html">The Streaming Mind</a>).</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="sit"><td><b>DynamoDB</b></td><td>Serverless NoSQL: single-digit-ms key-value lookups at any scale, zero maintenance. <b>When:</b> Lambda-native stacks, or a table with brutal scale and simple access patterns (sessions, carts, device state). Modeling is unforgiving — design access patterns first.<span class="alt">Alternatives: Redis (hot ephemeral), Postgres JSONB (honestly fine for most "NoSQL" needs), MongoDB Atlas.</span></td><td><span class="t-sit">SIT</span></td></tr>
+<tr data-tier="sit"><td><b>OpenSearch / a search engine</b></td><td>Full-text search, fuzzy matching, relevance ranking, log analytics — what <code>LIKE '%…%'</code> can't do. <b>When:</b> search becomes a feature users notice.<span class="alt">Alternatives: Postgres full-text search (surprisingly far), Algolia (best DX, $$), Meilisearch/Typesense (light, self-hostable), Elastic Cloud.</span></td><td><span class="t-sit">SIT</span></td></tr>
+<tr data-tier="sit"><td><b>Data warehouse (Redshift / BigQuery / Snowflake)</b></td><td>Analytics home — dashboards and "how many users did X" queries run here, not on your production DB. <b>When:</b> the first time an analyst's query slows production (<a class="x" href="mastery_ledger_data_engineering.html">The Ledger</a>).<span class="alt">Alternatives: a read replica + Metabase is the honest first step; DuckDB over S3 for small scale.</span></td><td><span class="t-sit">SIT</span></td></tr>
+</table>
+
+<h2 id="watch"><span class="sn">6</span>Watching — observability &amp; on-call</h2>
+<p>Production without observability is a car with the windshield painted black (<a class="x" href="mastery_watchtower_observability.html">The Watchtower</a>).</p>
+<table>
+<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
+<tr data-tier="must"><td><b>CloudWatch (logs + metrics + alarms)</b></td><td>Built-in eyes: every service emits metrics here, containers ship logs here, alarms page you. Daily: <code>aws logs tail --follow</code> during a deploy, checking a latency graph, tuning an alarm threshold. It's nobody's favorite UI, but it's already there and already integrated.<span class="alt">Alternatives/upgrades: Datadog (best-in-class, watch the bill), Grafana + Loki + Prometheus (open-source stack), New Relic, Better Stack.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="must"><td><b>Sentry (error tracking)</b></td><td>Catches every unhandled exception with stack trace, user, release, and breadcrumbs; groups duplicates; tells you <em>which deploy</em> broke it. The single highest value-per-dollar tool on this page. Daily: triaging the morning's new issues, linking one to a PR.<span class="alt">Alternatives: Rollbar, Bugsnag, Honeybadger, self-hosted GlitchTip. Grepping logs is the thing it replaces.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="rec"><td><b>Uptime monitoring (UptimeRobot / Better Stack / Pingdom)</b></td><td>Something <em>outside</em> your cloud that curls your health endpoint every minute and screams if it fails — because when your region is down, so is your monitoring. Five minutes to set up.<span class="alt">Alternatives: CloudWatch Synthetics (inside AWS — misses whole-account outages), cron + curl somewhere else.</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="sit"><td><b>Tracing (X-Ray / OpenTelemetry + Jaeger/Honeycomb)</b></td><td>Follows one request across services showing where the milliseconds went. <b>When:</b> more than ~3 services and "which hop is slow?" stops being answerable from logs.<span class="alt">Standardize on OpenTelemetry instrumentation regardless of backend — it keeps you portable.</span></td><td><span class="t-sit">SIT</span></td></tr>
+<tr data-tier="sit"><td><b>PagerDuty / Opsgenie (on-call)</b></td><td>Turns alerts into an escalating phone call to whoever's on rotation, with schedules and handoffs. <b>When:</b> more than ~3 engineers share production responsibility.<span class="alt">Alternatives: CloudWatch → SNS → phone/Slack (fine for a solo app), Grafana OnCall (free).</span></td><td><span class="t-sit">SIT</span></td></tr>
+<tr data-tier="sit"><td><b>Status page (Atlassian Statuspage / Instatus / Better Stack)</b></td><td>Public "is it down?" page that cuts support tickets in half during incidents. <b>When:</b> paying customers exist.</td><td><span class="t-sit">SIT</span></td></tr>
+</table>
+
+<h2 id="guard"><span class="sn">7</span>Guarding — security, audit &amp; cost</h2>
+<table>
+<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
+<tr data-tier="must"><td><b>CloudTrail</b></td><td>The account's flight recorder: every API call — who, what, when, from where. Turn on once, forget until an incident or audit, then thank yourself. Effectively free.<span class="alt">Alternatives: none. This is the audit trail.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="must"><td><b>Budgets + Cost Explorer</b></td><td>The $-alarm and the where-did-it-go dashboard. Daily-ish: a Friday five-minute glance at the daily-spend graph catches every mistake before it compounds (<a class="x" href="mastery_wallet_finops.html">The Wallet</a>).<span class="alt">Alternatives/upgrades: Vantage, CloudZero (multi-account cost SaaS) — later, at org scale.</span></td><td><span class="t-must">MUST</span></td></tr>
+<tr data-tier="rec"><td><b>Dependabot / Renovate + a scanner (Snyk/Trivy)</b></td><td>Robots that PR your dependency updates and flag known-vulnerable packages and images. Supply-chain security on autopilot (<a class="x" href="mastery_forge_cicd.html">The Forge</a>).<span class="alt">Dependabot is free in GitHub — no excuse. Trivy scans Docker images in CI.</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="rec"><td><b>GuardDuty</b></td><td>AWS's threat detector: watches CloudTrail/VPC/DNS telemetry for cryptominers, leaked-key usage, port scans. One click on, ~dollars/month, zero maintenance.<span class="alt">Alternatives: none as cheap for the coverage. SIEMs come much later.</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="sit"><td><b>WAF (+ Shield)</b></td><td>HTTP firewall on your ALB/CloudFront: blocks SQL-injection patterns, bad bots, per-IP floods. <b>When:</b> public forms, login endpoints, or the first scraping/DDoS scare. Shield Standard (DDoS) is free and automatic.<span class="alt">Alternatives: Cloudflare WAF (often simpler and cheaper in front of everything).</span></td><td><span class="t-sit">SIT</span></td></tr>
+<tr data-tier="sit"><td><b>Security Hub / Inspector / Config</b></td><td>Continuous compliance: benchmark checks ("S3 buckets public?", "MFA everywhere?"), resource-change history, finding aggregation. <b>When:</b> SOC 2 / ISO audits appear on the horizon — auditors ask for exactly these reports.</td><td><span class="t-sit">SIT</span></td></tr>
+</table>
+
+<h2 id="desk"><span class="sn">8</span>At your desk — daily developer utilities</h2>
+<table>
+<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
+<tr data-tier="rec"><td><b>SSM Session Manager</b></td><td>Shell into any instance/container <em>through IAM</em> — no SSH keys, no port 22 open, every session audited. The modern replacement for the <code>.pem</code> file workflow you learned with.<span class="alt">Alternatives: SSH + bastion host (the classic), Tailscale SSH, EC2 Instance Connect.</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="rec"><td><b>aws-vault / Granted / Leapp</b></td><td>Keeps AWS credentials encrypted in your OS keychain and issues short-lived session tokens per shell — instead of plaintext keys in <code>~/.aws/credentials</code> waiting to be exfiltrated. Daily: <code>assume prod-readonly</code>.<span class="alt">With SSO configured, <code>aws sso login</code> covers much of this natively.</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="rec"><td><b>Docker Compose (local stack)</b></td><td>One <code>docker compose up</code> starts your app + Postgres + Redis on your laptop, mirroring prod's shape. The daily inner loop.<span class="alt">Alternatives: running services natively via brew (drift city), devcontainers, Tilt (at k8s scale).</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr data-tier="sit"><td><b>LocalStack</b></td><td>A fake AWS (S3, SQS, Lambda, DynamoDB…) running in a container so integration tests don't need a real account. <b>When:</b> your test suite starts touching AWS APIs.<span class="alt">Alternatives: a dedicated sandbox AWS account (more real, more risk), MinIO for just-S3.</span></td><td><span class="t-sit">SIT</span></td></tr>
+<tr data-tier="sit"><td><b>k6 / Artillery (load testing)</b></td><td>Scripted fake traffic to find your breaking point <em>before</em> launch day does. <b>When:</b> before any launch you're nervous about (<a class="x" href="mastery_edge_performance.html">The Edge</a>).</td><td><span class="t-sit">SIT</span></td></tr>
+<tr data-tier="sit"><td><b>ngrok / Cloudflare Tunnel</b></td><td>Public URL for your laptop — testing webhooks (Stripe, GitHub) against local code without deploying.</td><td><span class="t-sit">SIT</span></td></tr>
+<tr data-tier="sit"><td><b>infracost</b></td><td>Prints the monthly cost delta of a Terraform PR right in the review — "this change adds $340/mo" as a review comment. <b>When:</b> IaC is established and bills matter.</td><td><span class="t-sit">SIT</span></td></tr>
+</table>
+
+<h2 id="minimal"><span class="sn">9</span>The minimal viable production stack</h2>
+<p>Strip away everything situational and this is the honest day-one shopping list — <strong>13 pieces</strong> run a real production web app responsibly:</p>
+<pre><span class="cm"># identity & safety</span>
+IAM + CLI            <span class="fn">→ who may do what</span>
+Parameter Store      <span class="fn">→ where secrets live</span>
+CloudTrail + Budgets <span class="fn">→ audit log + $-alarm</span>
+
+<span class="cm"># shipping</span>
+GitHub + Actions     <span class="fn">→ source + robot that deploys</span>
+Docker + ECR         <span class="fn">→ the artifact + its shelf</span>
+
+<span class="cm"># running</span>
+VPC + ALB (+ACM)     <span class="fn">→ network + HTTPS front door</span>
+ECS on Fargate       <span class="fn">→ runs the containers</span>
+Route 53             <span class="fn">→ the name</span>
+
+<span class="cm"># state</span>
+RDS Postgres         <span class="fn">→ the data</span>
+S3                   <span class="fn">→ the files</span>
+
+<span class="cm"># eyes</span>
+CloudWatch + Sentry  <span class="fn">→ metrics/logs/alarms + every exception</span></pre>
+<p>Everything else on this page earns its place later, when its specific pain shows up: Redis when something's slow, SQS when work goes async, CloudFront when users are far away, WAF after the first bot swarm, PagerDuty when the team shares the pager, Terraform the moment two environments drift.</p>
+<div class="warn"><strong>The anti-pattern</strong> is adopting the whole page on day one. Every tool is surface area: something to configure, secure, update and pay for. Great stacks are grown, not installed.</div>
+
+<h2 id="day"><span class="sn">10</span>A day in the life — activity → tool map</h2>
+<p>What "using all this" actually feels like across an ordinary week:</p>
+<table>
+<tr><th style="width:34%">You're doing…</th><th>You touch…</th></tr>
+<tr><td>Morning: check overnight health</td><td>Sentry (new issues?) → CloudWatch dashboard (latency/error graphs) → queue depth if you run SQS</td></tr>
+<tr><td>Build a feature locally</td><td>Docker Compose (app+DB+Redis), ngrok if webhooks involved</td></tr>
+<tr><td>Ship it</td><td><code>git push</code> → PR review → merge → GitHub Actions: tests, <code>docker build</code>, push to ECR, ECS rolling deploy behind the ALB → watch Sentry's release tab for 10 min</td></tr>
+<tr><td>Add a third-party API key</td><td>Secrets/Parameter Store (never <code>.env</code>, never Slack) → app reads it via IAM role at boot</td></tr>
+<tr><td>"The site is slow"</td><td>CloudWatch metrics (which layer?) → ALB target health → RDS slow-query log → add index, or cache it in Redis, or offload work to SQS</td></tr>
+<tr><td>"User can't upload"</td><td>CloudWatch logs (<code>aws logs tail</code>) → S3 presign expiry? CORS? IAM role missing <code>PutObject</code>?</td></tr>
+<tr><td>Infra change (new queue, bigger DB)</td><td>Terraform PR → infracost comment → <code>plan</code> reviewed → <code>apply</code> from CI</td></tr>
+<tr><td>Debug a box directly</td><td>SSM Session Manager (no SSH keys, audited)</td></tr>
+<tr><td>3am: alarm fires</td><td>PagerDuty call → CloudWatch alarm → runbook → often: roll back the deploy or flip the feature flag off</td></tr>
+<tr><td>Friday: money & hygiene</td><td>Cost Explorer daily-spend glance → merge Dependabot PRs → check GuardDuty findings (usually empty)</td></tr>
+</table>
+
+<div class="ok"><strong>Go deeper:</strong> each layer of this page has a full module — <a class="x" href="aws_from_scratch.html">AWS From Scratch</a> (the core services + hands-on planner) · <a class="x" href="mastery_forge_cicd.html">The Forge</a> (CI/CD) · <a class="x" href="mastery_blueprint_iac.html">The Blueprint</a> (Terraform) · <a class="x" href="mastery_watchtower_observability.html">The Watchtower</a> (observability) · <a class="x" href="mastery_vault_security.html">The Vault</a> (security) · <a class="x" href="mastery_wallet_finops.html">The Wallet</a> (cost).</div>
+
+<script>(function(){
+var btns=document.querySelectorAll('.fbtn');
+btns.forEach(function(b){b.addEventListener('click',function(){
+  btns.forEach(function(x){x.classList.remove('on')});b.classList.add('on');
+  var f=b.getAttribute('data-f');
+  document.querySelectorAll('tr[data-tier]').forEach(function(r){
+    r.classList.toggle('hide',f!=='all'&&r.getAttribute('data-tier')!==f);
+  });
+});});
+})();</script>
+</body></html>
