@@ -18,7 +18,7 @@ incremental improvement.
 - `index.html` — the homepage; links to all six phases, the Mastery Track, the
   Cryptography topic, and the docs.
 - `phaseN_*.html` — six standalone core learning docs (phases 1–6).
-- `mastery_*.html` — sixteen standalone Mastery Track modules (named, not numbered)
+- `mastery_*.html` — seventeen standalone Mastery Track modules (named, not numbered)
   covering cross-cutting topics. These add an **inline runnable-code component**:
   every `<pre>` is wrapped in `.snippet` with a Copy button, and JS snippets get a
   ▶ Run button driven by a small vanilla-JS runner inlined at the bottom of each

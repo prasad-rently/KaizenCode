@@ -150,12 +150,13 @@ footer a{color:var(--accent);text-decoration:none}
         <div class="m-tags"><span class="m-tag">DNS</span><span class="m-tag">TCP/UDP</span><span class="m-tag">HTTP/3</span><span class="m-tag">Load balancing</span></div>
       </div>
 
-      <div class="module" data-id="gatekeeper">
+      <div class="module" data-id="gatekeeper" data-default="shipped">
         <div class="m-top"><div class="m-ic">🎫</div><button class="status">Planned</button></div>
         <div class="m-title">The Gatekeeper</div>
         <div class="m-desc">Deep auth — OAuth2 flows, OIDC, PKCE, sessions vs tokens, refresh rotation, SSO with SAML &amp; SCIM, passkeys/WebAuthn. Extends The Vault.</div>
         <div class="m-deliver"><b>Deliverable:</b> implement a full OAuth2 + PKCE flow against a real identity provider.</div>
         <div class="m-tags"><span class="m-tag">OAuth2</span><span class="m-tag">OIDC</span><span class="m-tag">SSO</span><span class="m-tag">Passkeys</span></div>
+        <a href="mastery_gatekeeper_auth.html" style="display:inline-block;margin-top:12px;font-size:12.5px;font-weight:600;color:var(--accent);text-decoration:none">Open shipped module →</a>
       </div>
 
       <div class="module" data-id="cartographer">
@@ -520,7 +521,7 @@ footer a{color:var(--accent);text-decoration:none}
   }
 
   modules.forEach(function(m){
-    setStatus(m,saved[m.getAttribute('data-id')]||'planned');
+    setStatus(m,saved[m.getAttribute('data-id')]||m.getAttribute('data-default')||'planned');
     m.querySelector('.status').addEventListener('click',function(){
       var next=STATES[(STATES.indexOf(m.getAttribute('data-status'))+1)%STATES.length];
       setStatus(m,next);

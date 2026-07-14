@@ -58,7 +58,7 @@ KaizenCode/
 ├── phase5_aws_cloud.html
 ├── phase6_distributed_systems_kafka.html
 ├── roadmap_summary_md.md                   # full text summary of all phases
-├── mastery_*.html                          # 16 Mastery Track modules (inline runnable code)
+├── mastery_*.html                          # 17 Mastery Track modules (inline runnable code)
 ├── crypto_*.html                           # Cryptography topic — generic, per-method explainers
 ├── docs/                                   # markdown companion docs (+ generated .html siblings)
 │   ├── README.md
@@ -75,11 +75,11 @@ KaizenCode/
 ### Three tracks
 
 - **Core phases (1–6)** — the ordered "build & run a system" journey.
-- **Mastery Track** — 16 cross-cutting modules (named, not numbered) covering
-  observability, security, testing, APIs, IaC, leadership, CI/CD, event-driven
-  systems, data engineering, performance, cloud cost, AI/LLM apps, concurrency,
-  resilience, database internals, and systems algorithms. Each has **inline
-  runnable code** (copy + ▶ Run buttons) and stays zero-dependency.
+- **Mastery Track** — 17 cross-cutting modules (named, not numbered) covering
+  observability, security, deep auth, testing, APIs, IaC, leadership, CI/CD,
+  event-driven systems, data engineering, performance, cloud cost, AI/LLM apps,
+  concurrency, resilience, database internals, and systems algorithms. Each has
+  **inline runnable code** (copy + ▶ Run buttons) and stays zero-dependency.
 - **Cryptography** — a growing topic of **generic, project-independent**
   explainers, one cryptographic method per file (`crypto_*.html`), reusing the
   Mastery module's runnable-code shell. Starts with **ECDH key agreement**; RSA,
