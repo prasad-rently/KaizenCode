@@ -30,6 +30,17 @@ incremental improvement.
   are method-named, not whimsically named, and stay framework-free. Add new
   methods (RSA, AES-GCM, hashing/HMAC, signatures) as new `crypto_*.html` files
   and a card in the `#crypto` section of `index.html`.
+- `upcoming.html` — the **build-and-track board**: 32 planned modules across 5
+  stages (weeks 25–96, the "Road to CTO" second half). Status chips cycle
+  Planned→Building→Shipped and persist in `localStorage`; a module can be marked
+  shipped-by-default with `data-default="shipped"` on its `.module` (plus an
+  "Open shipped module →" link). When a board module ships, build the file, flip
+  it here, and add its homepage card.
+- `leadership_*.html` — the **Leadership track** (Stage 2+ board modules that are
+  people/business, not technical): same shell but **scenario panels** and
+  builders instead of `▶ Run` code (e.g. `leadership_first_follower.html`).
+  Cards go in the `#leadership` section. (Technical board modules like deep auth
+  instead join the Mastery Track as `mastery_*.html`.)
 - `roadmap_summary_md.md` — full prose summary of all phases (source of truth for content).
 - `docs/` — markdown companion docs (per phase + meta). The `.md` files are the
   source of truth; `docs/*.html` and `roadmap_summary.html` are **generated** from

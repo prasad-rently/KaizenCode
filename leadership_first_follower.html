@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The First Follower — IC → Manager</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* maker vs manager schedule */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.25}.blk.make{background:#e6f0fb;color:#185FA5}.blk.mtg{background:#f3f2ff;color:#5350B4}.blk.gap{background:#f0f0f0;color:#999}@media(prefers-color-scheme:dark){.blk.make{background:#122236;color:#79b0e6}.blk.mtg{background:#1a1830;color:#a6a3ff}.blk.gap{background:#1c1c1c;color:#777}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* readme builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.readme-out{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:400px;overflow:auto}.readme-out.show{display:block}@media(prefers-color-scheme:dark){.readme-out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 41–56</span>
+<h1>🤝 The First Follower</h1>
+<p class="sub">The move from writing the code to leading the people who write it. It looks like the next rung on the same ladder — it isn't. It's a different job you start as a beginner, and the instincts that made you a great engineer will quietly work against you.</p>
+
+<div class="tip">First module of the <strong>Leadership</strong> track — the people half of Mobile Engineer → CTO. No runnable code here; instead, decision scenarios to pressure-test your instincts, and a builder for this module's deliverable: your own <strong>manager README</strong>.</p></div>
+
+<h2><span class="sn">1</span>It's a career change, not a promotion</h2>
+<p>Becoming a manager is often framed as a reward for being a strong senior engineer. That framing is the trap. Management is a <strong>lateral move into a new profession</strong> — one where your years of hard-won engineering expertise no longer directly produce the outcome. You were an expert; now, on day one, you're a novice again.</p>
+<p>The clue is in the name of this module. A leader with no followers is just a person with a title. Your authority now comes not from being the best coder in the room, but from people <em>choosing</em> to follow — because you make them more effective, not because the org chart says so.</p>
+
+<h2><span class="sn">2</span>The maker's schedule vs the manager's schedule</h2>
+<p>Paul Graham's classic observation: makers and managers live on different clocks. A maker needs long, unbroken blocks — a single meeting at 2pm can wreck a whole afternoon of deep work. A manager's day is <em>designed</em> to be sliced into 30-minute units. When you switch roles, your calendar inverts, and mourning your lost maker time is part of the transition.</p>
+<div class="sched">
+  <div class="col"><h4>🛠️ Maker's day (old you)</h4>
+    <div class="blk make">09:00 — Deep work: feature</div>
+    <div class="blk make">10:00 — …still in flow…</div>
+    <div class="blk make">11:00 — …still in flow…</div>
+    <div class="blk mtg">12:00 — Standup</div>
+    <div class="blk make">13:00 — Deep work: feature</div>
+    <div class="blk make">14:00 — …still in flow…</div>
+    <div class="blk make">15:00 — …still in flow…</div>
+    <div class="blk make">16:00 — Code review, ship</div>
+  </div>
+  <div class="col"><h4>🧭 Manager's day (new you)</h4>
+    <div class="blk mtg">09:00 — 1:1 with Priya</div>
+    <div class="blk mtg">09:30 — 1:1 with Sam</div>
+    <div class="blk gap">10:00 — Unblock, Slack, review</div>
+    <div class="blk mtg">10:30 — Planning sync</div>
+    <div class="blk mtg">12:00 — Standup</div>
+    <div class="blk gap">13:00 — Hiring debrief + notes</div>
+    <div class="blk mtg">14:00 — Stakeholder 1:1</div>
+    <div class="blk gap">15:00 — Firefighting / context</div>
+  </div>
+</div>
+<p>Notice the manager's day has no two-hour block anywhere. If you keep committing to real coding tasks on the critical path, you'll do them at night and resent it. Which leads to the hardest lesson…</p>
+
+<h2><span class="sn">3</span>Letting go of the code</h2>
+<p>Your leverage just inverted. As an IC, your impact was <em>what you built</em>. As a manager, your impact is <strong>what your team builds</strong> — and if you're on the critical path for delivery, you've become the bottleneck, not the multiplier.</p>
+<p>The pull to "just do it myself" is enormous, because it's <em>faster right now</em> and it feels good — it's the one part of the job you're already expert at. But every time you take the interesting problem, you deny someone else the growth, and you make the team dependent on you. Staying a little bit technical (reading code, pairing, prototyping, keeping credibility) is healthy; owning shipping tasks is not.</p>
+<div class="warn"><strong>The rule of thumb:</strong> if a task is on the critical path and only you can do it, the org is fragile and it's your job to fix that — by teaching, not by hoarding the task. Your new success metric is whether the team ships <em>when you're on vacation</em>.</div>
+
+<h2><span class="sn">4</span>Your new definition of "done"</h2>
+<p>The job is no longer "close tickets." Your actual work now looks like:</p>
+<ul>
+<li><strong>Multiply</strong> — make each person more effective than they'd be without you (context, unblocking, removing friction).</li>
+<li><strong>Grow</strong> — develop people; a year from now they should be visibly more capable.</li>
+<li><strong>Direct</strong> — make sure the team is working on the <em>right</em> things, and knows <em>why</em>.</li>
+<li><strong>Shield &amp; connect</strong> — absorb organizational noise; carry context in and results out.</li>
+</ul>
+<p>These have long, invisible feedback loops. You'll end weeks unsure you did anything — no green squares, no merged PRs. Learning to feel productive from <em>other people's</em> output is the core identity shift of this role.</p>
+
+<h2><span class="sn">5</span>Pressure-test your instincts</h2>
+<p>First-time managers fail in predictable ways, almost always by reflexively doing the <em>engineer's</em> thing. Pick what you'd actually do in each situation, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<h2><span class="sn">6</span>The impostor phase is normal</h2>
+<p>You will feel like a fraud for a while — that's the expertise reversal, not a personal failing. You traded a domain you'd mastered for one you're just starting. Give yourself the same patience you'd give a new grad on your team: find a mentor or peer manager group, read widely (<em>The Manager's Path</em>, <em>An Elegant Puzzle</em>, <em>High Output Management</em>), and treat management as a craft you improve at deliberately — the Kaizen way.</p>
+
+<h2><span class="sn">7</span>Deliverable — write your manager README</h2>
+<p>A "manager README" (or "user manual for working with me") is a short doc you share with your team: how you see your role, what you value, how you give feedback, how you run 1:1s. It shortcuts months of guesswork and models the vulnerability you want from them. Draft yours now — fill in what you can and generate a clean copy:</p>
+<div class="builder">
+  <div class="fld">Your name / role <span style="font-weight:400;color:#999">(optional)</span><input id="r-name" type="text" placeholder="e.g. Alex — Engineering Manager, Payments"></div>
+  <div class="fld">How I see my role as your manager<textarea id="r-role" rows="2" placeholder="e.g. My job is to make you effective and help you grow — not to be the smartest person in the room. Your success is my scoreboard."></textarea></div>
+  <div class="fld">What I value in how we work<textarea id="r-values" rows="2" placeholder="e.g. Directness over politeness-theatre, writing things down, disagree-and-commit, no heroics at the cost of sustainability."></textarea></div>
+  <div class="fld">How I give — and want — feedback<textarea id="r-feedback" rows="2" placeholder="e.g. Feedback early and specific (SBI). I'll never save it for review season. Tell me when I'm wrong — I mean it."></textarea></div>
+  <div class="fld">How I run 1:1s<textarea id="r-oneonones" rows="2" placeholder="e.g. Weekly, 30 min, your agenda first. It's your meeting, not a status update — bring what's on your mind."></textarea></div>
+  <div class="fld">Communication &amp; availability<textarea id="r-comms" rows="2" placeholder="e.g. Async by default; I check Slack in batches. Ping me directly if it's urgent. I protect focus time 9–11am."></textarea></div>
+  <div class="fld">My quirks / blind spots<textarea id="r-quirks" rows="2" placeholder="e.g. I ask a lot of 'why' questions — it's curiosity, not doubt. I can over-index on speed; call it out."></textarea></div>
+  <button id="r-generate">📝 Generate my manager README →</button>
+  <button id="r-copy" class="copy">Copy</button>
+  <div id="r-out" class="readme-out"></div>
+</div>
+
+<div class="ok"><strong>Try it:</strong> (1) Work through all four scenarios — notice how often the "multiplier" answer means <em>not</em> doing the work yourself. (2) Fill in the README builder and generate it; share the real version with your team (or future team). (3) Do a one-week audit: how many hours did you spend making others effective vs doing IC work? That ratio is the truest signal of the transition.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 2 · the people half of the road to CTO. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'A senior engineer opens a PR with a real design flaw. What do you do?',
+     opts:[
+       {t:'Rewrite the code yourself and push it — fastest fix.',v:'poor',fb:'Fast today, corrosive tomorrow. You skipped their growth, signalled you don’t trust them, and made yourself the bottleneck for quality. This is the IC reflex you’re here to unlearn.'},
+       {t:'Ask questions in review that lead them to spot the flaw.',v:'best',fb:'The multiplier move. They learn to catch it next time, keep ownership, and the fix is theirs. Coaching &gt; correcting. Costs more minutes now, saves the whole team later.'},
+       {t:'Leave a detailed comment with the exact fix to apply.',v:'ok',fb:'Fine, and sometimes right under time pressure — but it teaches less than questions do, and habitual "here’s the answer" reviews keep people dependent on you.'},
+       {t:'Approve it to avoid friction; fix it quietly later.',v:'poor',fb:'You traded quality and honesty for comfort. Avoiding hard feedback is the most common new-manager failure — it erodes both the codebase and their trust in your judgement.'}
+     ]},
+    {q:'A P1 bug lands Friday 5pm. You could fix it fastest yourself. The on-call engineer is capable but slower.',
+     opts:[
+       {t:'Grab it and fix it yourself — speed matters in a crisis.',v:'ok',fb:'Defensible in a true, rare emergency — rolling up your sleeves builds credibility. But if this is your default, you’re training the team to escalate everything to you and staying on the critical path.'},
+       {t:'Pair with the on-call engineer while they drive.',v:'best',fb:'Best of both: the incident gets resolved AND capability transfers. Next time they handle it without you. You led without becoming the single point of failure.'},
+       {t:'Assign it and log off — they own on-call.',v:'poor',fb:'Correct in principle, cold in practice. A visible P1 is exactly when presence and support matter; disappearing reads as abandonment, not empowerment.'},
+       {t:'Call an all-hands to coordinate.',v:'poor',fb:'Over-response. You’ve pulled a dozen people off their evening for a one-engineer fix and added coordination overhead to an urgent task. Match the response to the size of the problem.'}
+     ]},
+    {q:'You delegated a project to a mid-level engineer. Two weeks in, it’s clearly drifting off-track.',
+     opts:[
+       {t:'Take the project back and run it yourself.',v:'poor',fb:'The single most trust-destroying move available. They’ll never stretch again, and everyone watching learns that delegation is fake here. Reclaiming work should be a last resort, not a first reflex.'},
+       {t:'Increase support: tighter check-ins, clearer goal, unblock.',v:'best',fb:'Delegation isn’t abdication. You set the outcome, then adjust the <em>support</em> level to the person and the situation — more scaffolding now, less as they find their feet. The project and the person both recover.'},
+       {t:'Let them fail fully so they learn the lesson.',v:'poor',fb:'"Sink or swim" is negligence dressed as growth. Real stakes make failure expensive for the business and demoralizing for them. Let people struggle productively — don’t let them drown.'},
+       {t:'Correct them publicly in standup so the team learns too.',v:'poor',fb:'Praise in public, correct in private. Public correction humiliates, kills psychological safety, and teaches the whole team to hide problems from you.'}
+     ]},
+    {q:'You’re now managing your former peers — including a close friend on the team.',
+     opts:[
+       {t:'Keep treating them exactly as before; nothing changes.',v:'poor',fb:'Something did change — pretending otherwise creates confusion and the appearance of favouritism. The relationship needs an explicit, honest reset conversation.'},
+       {t:'Name the change openly and set clear, consistent expectations for everyone.',v:'best',fb:'Acknowledge it directly ("our working relationship is changing, here’s how"), then be scrupulously consistent. Fairness that everyone can see is what earns you the room’s trust.'},
+       {t:'Overcompensate by being harder on your friend than others.',v:'poor',fb:'Bending over backwards to avoid the <em>appearance</em> of favouritism is just favouritism in reverse — it’s unfair to them and equally corrosive. Aim for consistent, not compensating.'},
+       {t:'Avoid giving them any hard feedback to keep the friendship.',v:'poor',fb:'You can’t be their manager and conflict-avoidant friend at once. Withholding feedback protects your comfort, not their career — and the team notices the double standard.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Multiplier move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // manager README builder
+  function line(label,val,fallback){var v=(val||'').trim();return '## '+label+'\n'+(v||'_'+fallback+'_')+'\n';}
+  var gen=document.getElementById('r-generate'),out=document.getElementById('r-out');
+  function g(id){return document.getElementById(id).value;}
+  gen.addEventListener('click',function(){
+    var name=g('r-name').trim();
+    var title=name?('# Working with '+name):'# Working with me — a manager README';
+    var md=[title,'',
+      line('How I see my role',g('r-role'),'(add: whose success are you responsible for?)'),
+      line('What I value',g('r-values'),'(add: the 3–4 behaviours you reward)'),
+      line('Feedback',g('r-feedback'),'(add: how and when I give it, and that I want it back)'),
+      line('Our 1:1s',g('r-oneonones'),'(add: cadence, whose agenda, what it’s for)'),
+      line('Communication & availability',g('r-comms'),'(add: async vs sync, urgency, focus time)'),
+      line('My quirks & blind spots',g('r-quirks'),'(add: what to expect, what to call me out on)'),
+      '---','_This is a living doc — tell me where it’s wrong._'
+    ].join('\n');
+    out.textContent=md;out.classList.add('show');
+  });
+  document.getElementById('r-copy').addEventListener('click',function(){
+    if(!out.classList.contains('show'))gen.click();
+    var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
