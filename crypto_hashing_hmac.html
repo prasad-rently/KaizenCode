@@ -56,9 +56,35 @@ console.<span class="fn">log</span>(<span class="str">'hex chars different:'</sp
 <li><strong>Deduplication</strong> — identical files hash identically, so you store the bytes once.</li>
 <li><strong>Commitment</strong> — publish a hash now to prove you knew something, reveal the input later.</li>
 </ul>
-<div class="warn"><strong>Plain hashing is not for passwords.</strong> SHA-256 is <em>too fast</em> — an attacker tries billions of guesses per second against a stolen database. Passwords need a deliberately <strong>slow, salted</strong> function (bcrypt / scrypt / Argon2). That's a whole topic of its own — coming later in this series.</div>
+<div class="warn"><strong>Plain hashing is not for passwords.</strong> SHA-256 is <em>too fast</em> — an attacker tries billions of guesses per second against a stolen database. Passwords need a deliberately <strong>slow, salted</strong> function (bcrypt / scrypt / Argon2) — see §5 below.</div>
 
-<h2><span class="sn">4</span>HMAC — a fingerprint only a key-holder can make</h2>
+<h2><span class="sn">4</span>The SHA family — SHA-2, SHA-3, and hedging</h2>
+<p>SHA-256 belongs to the <strong>SHA-2</strong> family (SHA-224/256/384/512) — the general-purpose standard behind file integrity, digital signatures, and content addressing (Git commit IDs, blockchains).</p>
+<p><strong>SHA-3</strong> (Keccak) is <em>not</em> a patch to SHA-2 — it's a deliberately <strong>different internal design</strong> (a "sponge" construction instead of SHA-2's Merkle–Damgård). It was standardised as a <strong>hedge</strong>: if a structural weakness were ever found in SHA-2, the world would already have a mature alternative built on entirely different math. Both are current and secure — SHA-3 is an alternative, not a replacement.</p>
+
+<h2><span class="sn">5</span>Password hashing — why "fast" is dangerous</h2>
+<p>Here's the counter-intuitive part: for passwords, a <em>fast</em> hash is a <strong>liability</strong>. SHA-256 is built to be blazing fast — exactly what an attacker with a stolen password database wants, because they can try enormous numbers of guesses. Measure your own browser (single-threaded, via Web Crypto):</p>
+<div class="calc">
+  <button id="hps-run">⚡ How many SHA-256 hashes/sec can this browser do? →</button>
+  <div id="hps-out" class="calc-out"></div>
+</div>
+<p>The fix is a <strong>password hashing function</strong> that's deliberately slow and tunable:</p>
+<ul>
+<li><strong>Salt</strong> — a unique random value per password, stored next to the hash. It defeats precomputed "rainbow tables" and makes two users with the same password store different hashes. But salt alone doesn't stop a targeted brute-force — you also need slowness.</li>
+<li><strong>bcrypt / scrypt / Argon2</strong> — built with a <strong>work factor</strong> you dial up over time so each single guess costs real CPU (and, for scrypt/Argon2, real memory). <strong>Argon2id</strong> is the modern recommendation: it's <em>memory-hard</em>, which blunts the GPU/ASIC rigs that would otherwise parallelise millions of guesses.</li>
+</ul>
+<div class="warn"><strong>Rule:</strong> never store passwords with plain SHA-256/512. Use Argon2id (or bcrypt/scrypt) with a tuned work factor. The <a class="back" href="crypto_hkdf_key_derivation.html">key-derivation module</a> shows the same slow-KDF idea (PBKDF2) with a runnable demo.</div>
+
+<h2><span class="sn">6</span>MD5 &amp; SHA-1 — why they're dead</h2>
+<p>Collision resistance erodes as attacks improve. These two are broken and must never be used for security:</p>
+<table>
+<tr><th>Hash</th><th>Why it's dead</th><th>Named attack</th></tr>
+<tr><td><strong>MD5</strong></td><td>Practical collisions — two different inputs with the same hash — can be produced in seconds, so an MD5 "fingerprint" is forgeable. Acceptable only as a non-security checksum against accidental corruption.</td><td>Collisions since 2004; a forged CA certificate in 2008.</td></tr>
+<tr><td><strong>SHA-1</strong></td><td>Collisions demonstrated with two real, different PDFs sharing one hash; retired from TLS certificates and code signing, and being phased out of Git.</td><td>SHAttered (2017).</td></tr>
+</table>
+<p>Both are absent from Web Crypto's modern surface (SHA-1 lingers only as legacy). The lesson: a hash being "standard" is a snapshot, not a guarantee — which is why we follow NIST guidance and migrate off algorithms as attacks mature.</p>
+
+<h2><span class="sn">7</span>HMAC — a fingerprint only a key-holder can make</h2>
 <p>A plain hash proves data is <em>unchanged</em>, but anyone can compute it — so anyone can change the data <em>and</em> recompute a matching hash. To prove a message came from someone who holds a shared secret, you use <strong>HMAC</strong> (Hash-based Message Authentication Code): a hash mixed with a secret key.</p>
 <p><strong>Analogy.</strong> A plain hash is a wax impression anyone can make. HMAC is a wax seal stamped with <em>your signet ring</em> — others can check it matches your ring, but can't produce it without the ring.</p>
 <div class="warn"><strong>Don't roll your own.</strong> The naïve <code>hash(key + message)</code> is vulnerable to <em>length-extension attacks</em>. HMAC's specific two-pass construction (<code>hash(key ⊕ opad ‖ hash(key ⊕ ipad ‖ msg))</code>) exists precisely to prevent that. Always use the library's HMAC.</div>
@@ -113,7 +139,7 @@ console.<span class="fn">log</span>(<span class="str">'verify tampered message �
   </div>
 </div>
 
-<h2><span class="sn">5</span>Hashing vs HMAC vs encryption</h2>
+<h2><span class="sn">8</span>Hashing vs HMAC vs encryption</h2>
 <table>
 <tr><th></th><th>Plain hash</th><th>HMAC</th><th>Encryption</th></tr>
 <tr><td>Needs a key?</td><td>No</td><td>Yes (shared secret)</td><td>Yes</td></tr>
@@ -124,7 +150,7 @@ console.<span class="fn">log</span>(<span class="str">'verify tampered message �
 </table>
 <p>They solve <em>different</em> problems and are routinely combined — e.g. encrypt for secrecy, then HMAC (or use AEAD like AES-GCM) for integrity.</p>
 
-<h2><span class="sn">6</span>Where you'll meet HMAC in the wild</h2>
+<h2><span class="sn">9</span>Where you'll meet HMAC in the wild</h2>
 <ul>
 <li><strong>JWTs (<code>HS256</code>)</strong> — the signature on a JSON Web Token is literally HMAC-SHA256 over the header + payload.</li>
 <li><strong>Webhook verification</strong> — Stripe, GitHub, Slack sign each webhook with HMAC so you can confirm it really came from them.</li>
@@ -141,5 +167,6 @@ console.<span class="fn">log</span>(<span class="str">'verify tampered message �
 <script>(function(){var TE=new TextEncoder();function hexOf(buf){var b=new Uint8Array(buf),s='';for(var i=0;i<b.length;i++)s+=b[i].toString(16).padStart(2,'0');return s;}function hexToU8(h){h=(h||'').trim().toLowerCase().replace(/[^0-9a-f]/g,'');var u=new Uint8Array(Math.floor(h.length/2));for(var i=0;i<u.length;i++)u[i]=parseInt(h.substr(i*2,2),16);return u;}function sha256hex(t){return crypto.subtle.digest('SHA-256',TE.encode(t)).then(hexOf);}function hmacKey(str){return crypto.subtle.importKey('raw',TE.encode(str),{name:'HMAC',hash:'SHA-256'},false,['sign','verify']);}function gv(id){return document.getElementById(id).value;}function sv(id,v){document.getElementById(id).value=v;}
 var hin=document.getElementById('hash-in'),hout=document.getElementById('hash-out');if(hin){var upd=function(){sha256hex(hin.value).then(function(h){hout.textContent=h;}).catch(function(e){hout.textContent='⛔ '+e;});};hin.addEventListener('input',upd);upd();}
 var hs=document.getElementById('hmac-sign');if(hs){var so=document.getElementById('hmac-sign-out'),st2=document.getElementById('hmac-stage2'),vo=document.getElementById('hmac-verify-out');hs.addEventListener('click',async function(){so.classList.add('show');so.textContent='signing…';try{var msg=gv('hmac-msg'),key=gv('hmac-key');var tag=hexOf(await crypto.subtle.sign('HMAC',await hmacKey(key),TE.encode(msg)));so.textContent='✓ Tag (HMAC-SHA256):\n\n   '+tag+'\n\nThis tag depends on BOTH the message and the key — nobody without the key can produce it.';sv('hmac-vmsg',msg);sv('hmac-vkey',key);sv('hmac-vtag',tag);st2.style.display='block';vo.classList.remove('show');}catch(e){so.textContent='⛔ '+(e&&e.message?e.message:e);}});document.getElementById('hmac-verify').addEventListener('click',async function(){vo.classList.add('show');vo.textContent='verifying…';try{var ok=await crypto.subtle.verify('HMAC',await hmacKey(gv('hmac-vkey')),hexToU8(gv('hmac-vtag')),TE.encode(gv('hmac-vmsg')));vo.textContent=ok?'✅ VALID — the tag matches. The message is authentic and unchanged, and was produced by someone holding the key.':'✗ INVALID — the tag does not match. The message, the key, or the tag differs from what was signed. Reject it.';}catch(e){vo.textContent='✗ INVALID — '+(e&&e.name?e.name:e)+'.';}});}})();</script>
+<script>(function(){var btn=document.getElementById('hps-run');if(!btn)return;var out=document.getElementById('hps-out'),TE=new TextEncoder();btn.addEventListener('click',async function(){out.classList.add('show');out.textContent='benchmarking…';try{var n=3000,t0=performance.now();for(var i=0;i<n;i++){await crypto.subtle.digest('SHA-256',TE.encode('guess#'+i));}var secs=(performance.now()-t0)/1000,rate=Math.round(n/secs);out.textContent='This browser : ~'+rate.toLocaleString()+' SHA-256 hashes/sec (single-threaded, Web Crypto).\nA GPU rig    : BILLIONS of SHA-256/sec.\nArgon2id     : ~4 hashes/sec when tuned to ~0.25s/guess — on purpose.\n\nThat gap is the whole defense: a fast hash is cheap to brute-force,\nwhile a slow, memory-hard password hash makes each guess cost real\ntime and memory. Speed is a feature for integrity — and a bug for passwords.';}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});})();</script>
 <script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
 </body></html>
