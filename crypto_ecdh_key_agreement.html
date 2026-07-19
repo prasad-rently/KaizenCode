@@ -120,7 +120,8 @@ console.<span class="fn">log</span>(<span class="str">'   (both equal g^(a·b) m
 
 <span class="kw">const</span> G = [<span class="num">5n</span>, <span class="num">1n</span>];
 <span class="kw">const</span> show = P =&gt; P === O ? <span class="str">'O'</span> : <span class="str">`(${P[0]}, ${P[1]})`</span>;
-console.<span class="fn">log</span>(<span class="str">'G, 2G, 3G, 4G ='</span>, <span class="fn">show</span>(<span class="fn">mul</span>(<span class="num">1n</span>, G)), <span class="fn">show</span>(<span class="fn">mul</span>(<span class="num">2n</span>, G)), <span class="fn">show</span>(<span class="fn">mul</span>(<span class="num">3n</span>, G)), <span class="fn">show</span>(<span class="fn">mul</span>(<span class="num">4n</span>, G)));
+console.<span class="fn">log</span>(<span class="str">'Where each number of hops from G lands you:'</span>);
+<span class="kw">for</span> (<span class="kw">let</span> k = <span class="num">1n</span>; k &lt;= <span class="num">8n</span>; k++) console.<span class="fn">log</span>(<span class="str">'  '</span> + k + <span class="str">'·G = '</span> + <span class="fn">show</span>(<span class="fn">mul</span>(k, G)) + (k === <span class="num">3n</span> ? <span class="str">'   ← Alice'</span> : k === <span class="num">7n</span> ? <span class="str">'   ← Bob'</span> : <span class="str">''</span>));
 
 <span class="cm">// ECDH: private = a secret number of hops, public = that many hops of G</span>
 <span class="kw">const</span> aPriv = <span class="num">3n</span>, bPriv = <span class="num">7n</span>;
