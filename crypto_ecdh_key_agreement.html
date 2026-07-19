@@ -80,6 +80,47 @@ console.<span class="fn">log</span>(<span class="str">'   (both equal g^(a·b) m
 
 <h2><span class="sn">4</span>Why <em>elliptic-curve</em> DH</h2>
 <p>Classic DH raises a number to a power modulo a prime. ECDH replaces that with "add a point to itself on an elliptic curve." The structure is identical — private scalar, public point, shared point — but the underlying problem (elliptic-curve discrete log) is <strong>far harder per bit</strong>, so you get the same security with dramatically smaller keys.</p>
+<p>So what <em>is</em> an elliptic curve? Just the set of points <code>(x, y)</code> that satisfy an equation like <code>y² = x³ + ax + b</code> — a smooth, symmetric curve. The magic is that you can define a way to <strong>"add" two points</strong> on it, and that operation behaves enough like ordinary addition to build Diffie–Hellman on top of:</p>
+<pre class="ascii"><span class="cm">   Adding two points  P + Q  on the curve:
+     1. draw the straight line through P and Q
+     2. it crosses the curve at exactly one more point
+     3. reflect that point across the x-axis  →  P + Q
+   (if P = Q, use the tangent line at P instead — that's "doubling")</span></pre>
+<p>Doing that repeatedly — "adding a point to itself" over and over — is <strong>scalar multiplication</strong>: <code>k·G</code> means start at a public base point <code>G</code> and take <code>k</code> hops. Going forward (compute <code>k·G</code>) is easy; going backward (recover <code>k</code> from <code>k·G</code>) is the <strong>elliptic-curve discrete-log problem</strong>, and nobody knows how to do it efficiently. That one-way street is the trapdoor.</p>
+<p>ECDH is then the paint trick with points instead of numbers: your <strong>private key is a secret scalar <code>d</code></strong>, your <strong>public key is the point <code>d·G</code></strong>, and both sides independently compute the same shared point <code>d<sub>A</sub>·d<sub>B</sub>·G</code>. Watch the real point arithmetic on a deliberately tiny curve — <code>y² = x³ + 2x + 2</code> over the field of 17:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// A tiny elliptic curve: y² = x³ + 2x + 2 over F₁₇, base point G = (5,1)</span>
+<span class="kw">const</span> p = <span class="num">17n</span>, a = <span class="num">2n</span>;
+<span class="kw">const</span> mod = x =&gt; ((x % p) + p) % p;
+<span class="kw">const</span> inv = x =&gt; { <span class="kw">let</span> [o, r, os, s] = [mod(x), p, <span class="num">1n</span>, <span class="num">0n</span>]; <span class="kw">while</span> (r) { <span class="kw">const</span> q = o / r; [o, r] = [r, o - q * r]; [os, s] = [s, os - q * s]; } <span class="kw">return</span> mod(os); };
+
+<span class="cm">// "add" two points with the chord-and-tangent rule (O = point at infinity)</span>
+<span class="kw">const</span> O = <span class="kw">null</span>;
+<span class="kw">function</span> <span class="fn">add</span>(P, Q) {
+  <span class="kw">if</span> (P === O) <span class="kw">return</span> Q; <span class="kw">if</span> (Q === O) <span class="kw">return</span> P;
+  <span class="kw">const</span> [x1, y1] = P, [x2, y2] = Q;
+  <span class="kw">if</span> (x1 === x2 &amp;&amp; mod(y1 + y2) === <span class="num">0n</span>) <span class="kw">return</span> O;
+  <span class="kw">const</span> s = (x1 === x2 &amp;&amp; y1 === y2)
+    ? mod((<span class="num">3n</span> * x1 * x1 + a) * <span class="fn">inv</span>(<span class="num">2n</span> * y1))   <span class="cm">// doubling: tangent slope</span>
+    : mod((y2 - y1) * <span class="fn">inv</span>(x2 - x1));           <span class="cm">// chord slope</span>
+  <span class="kw">const</span> x3 = mod(s * s - x1 - x2), y3 = mod(s * (x1 - x3) - y1);
+  <span class="kw">return</span> [x3, y3];
+}
+<span class="cm">// scalar mult k·P = P added to itself k times (double-and-add)</span>
+<span class="kw">const</span> mul = (k, P) =&gt; { <span class="kw">let</span> R = O, N = P; <span class="kw">while</span> (k &gt; <span class="num">0n</span>) { <span class="kw">if</span> (k &amp; <span class="num">1n</span>) R = <span class="fn">add</span>(R, N); N = <span class="fn">add</span>(N, N); k &gt;&gt;= <span class="num">1n</span>; } <span class="kw">return</span> R; };
+
+<span class="kw">const</span> G = [<span class="num">5n</span>, <span class="num">1n</span>];
+<span class="kw">const</span> show = P =&gt; P === O ? <span class="str">'O'</span> : <span class="str">`(${P[0]}, ${P[1]})`</span>;
+console.<span class="fn">log</span>(<span class="str">'G, 2G, 3G, 4G ='</span>, <span class="fn">show</span>(<span class="fn">mul</span>(<span class="num">1n</span>, G)), <span class="fn">show</span>(<span class="fn">mul</span>(<span class="num">2n</span>, G)), <span class="fn">show</span>(<span class="fn">mul</span>(<span class="num">3n</span>, G)), <span class="fn">show</span>(<span class="fn">mul</span>(<span class="num">4n</span>, G)));
+
+<span class="cm">// ECDH: private = a secret number of hops, public = that many hops of G</span>
+<span class="kw">const</span> aPriv = <span class="num">3n</span>, bPriv = <span class="num">7n</span>;
+<span class="kw">const</span> A = <span class="fn">mul</span>(aPriv, G), B = <span class="fn">mul</span>(bPriv, G);
+console.<span class="fn">log</span>(<span class="str">'Alice public  A = 3·G ='</span>, <span class="fn">show</span>(A));
+console.<span class="fn">log</span>(<span class="str">'Bob   public  B = 7·G ='</span>, <span class="fn">show</span>(B));
+console.<span class="fn">log</span>(<span class="str">'Alice shared  3·B ='</span>, <span class="fn">show</span>(<span class="fn">mul</span>(aPriv, B)));
+console.<span class="fn">log</span>(<span class="str">'Bob   shared  7·A ='</span>, <span class="fn">show</span>(<span class="fn">mul</span>(bPriv, A)));
+console.<span class="fn">log</span>(<span class="str">'both reached 3·7·G = 21·G — the same shared point ✓'</span>);</pre><div class="out"></div></div>
+<p>Real curves (P-256, Curve25519) are this <em>exact</em> construction over a ~256-bit field instead of 17 — the same handful of formulas, just an unimaginably larger set of points. That steep difficulty-per-bit is why elliptic curves need far smaller keys than RSA or classic DH for the same security:</p>
 <table>
 <tr><th>Security level</th><th>RSA / classic DH</th><th>Elliptic curve</th></tr>
 <tr><td>112-bit</td><td>2048-bit</td><td>224-bit</td></tr>
