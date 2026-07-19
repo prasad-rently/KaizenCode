@@ -79,65 +79,74 @@ console.<span class="fn">log</span>(<span class="str">'   (both equal g^(a·b) m
 </div>
 
 <h2><span class="sn">4</span>Why <em>elliptic-curve</em> DH</h2>
-<p>Here's the reassuring part: ECDH is the <em>same handshake</em> you just ran in §3 — swap public keys, both sides land on the same shared secret. Only the one-way math underneath changes. §3 used "raise a number to a power." ECDH uses <strong>"hop along points on a curve."</strong> You can understand the whole thing with no math at all.</p>
-<h3>Picture stepping stones</h3>
-<p>Imagine a pond full of stepping stones. Everyone agrees on one <strong>starting stone</strong>, <code>G</code>, and one fixed <strong>rule for hopping</strong> from a stone to the next one. Keep applying the rule and you bounce around the pond:</p>
-<pre class="ascii">   G ──hop──▶ 2G ──hop──▶ 3G ──hop──▶ 4G ──hop──▶ …
-   the stones you land on scatter everywhere — in no order you could guess</pre>
+<p>Here's the reassuring part: ECDH is the <em>same handshake</em> you just ran in §3 — swap public keys, both sides land on the same shared secret. Only the one-way math underneath changes. §3 used "raise a number to a power." ECDH uses <strong>"copy a point on a curve, over and over."</strong> You can understand the whole thing with no equations at all.</p>
+<h3>Picture a pond of stepping stones</h3>
+<p>Everyone shares one <strong>starting stone</strong> called <code>G</code>, and one fixed rule for turning any stone into the "next" one. Follow that rule to make <strong>copies</strong> of the starting stone: do it 3 times and you land on the stone we call <code>3·G</code>; do it 7 times and you're on <code>7·G</code>. The stones scatter all over the pond in no order you could guess:</p>
+<pre class="ascii">   1·G      2·G      3·G      4·G      5·G   …   ← "G copied that many times"
+  (5,1)    (6,3)   (10,6)   (3,1)   (9,16)  …   ← scattered, no pattern to follow</pre>
 <ul>
-<li>Your <strong>private key</strong> is a secret number: <em>how many hops</em> you take.</li>
-<li>Your <strong>public key</strong> is the stone you <em>end up standing on</em>.</li>
+<li>Your <strong>private key</strong> is just a <em>secret whole number</em> — how many copies you make.</li>
+<li>Your <strong>public key</strong> is the <em>stone you land on</em> after that many copies.</li>
 </ul>
-<p>Hopping <em>forward</em> is easy — just keep going. Working <em>backward</em> is hopeless: show someone the stone you finished on and they can't figure out how many hops it took, because the stones scatter with no trail to follow. Easy one way, impossible the other — the same "you can't un-mix paint" lock from the opening analogy.</p>
-<h3>The handshake, in hops</h3>
-<ul>
-<li>Alice hops <strong>her</strong> secret number of times from <code>G</code>, and shares the stone she lands on.</li>
-<li>Bob does the same with <strong>his</strong> secret number.</li>
-<li>Each then takes their own secret number of <em>extra</em> hops, starting from the <em>other</em> person's stone.</li>
-</ul>
-<p>They finish on the <strong>same stone</strong> — because "3 hops, then 7 more" ends up exactly where "7 hops, then 3 more" does. That shared stone is the secret, and neither of them ever said how many hops they took.</p>
+<p>Making copies <em>forward</em> is easy — keep applying the rule. Going <em>backward</em> is hopeless: hand someone the stone <code>7·G</code> and they can't tell it took 7 copies, because the stones jump around with no trail to follow. Easy one way, impossible the other — the same "you can't un-mix paint" lock from the very first analogy.</p>
+<h3>The handshake — and why it works</h3>
+<p>Say Alice's secret number is <strong>3</strong> and Bob's is <strong>7</strong>:</p>
+<ol>
+<li>Alice makes <strong>3 copies</strong> of <code>G</code> and shares the result, <code>3·G</code>. Bob shares <code>7·G</code>.</li>
+<li>Alice takes <em>Bob's</em> stone and copies it <strong>her</strong> 3 times → <code>3·(7·G)</code>.</li>
+<li>Bob takes <em>Alice's</em> stone and copies it <strong>his</strong> 7 times → <code>7·(3·G)</code>.</li>
+</ol>
+<p>They land on the <strong>exact same stone</strong> — because <code>3 × 7</code> and <code>7 × 3</code> are the same number, <strong>21</strong>. Both quietly end up on <code>21·G</code>, yet neither ever said their secret number out loud. The eavesdropper watched <code>3·G</code> and <code>7·G</code> go past but can't undo them back to 3 and 7, so <code>21·G</code> stays out of reach. That's the entire handshake.</p>
 <h3>What the curve — and the "stones" — actually look like</h3>
-<p>On the left is the curve over ordinary numbers: the smooth, symmetric shape it's named for. On the right is the <em>same</em> curve over the field of 17 — it stops being a line and becomes a scatter of just <strong>18 dots</strong>. Those dots are our stepping stones, and <code>G = (5, 1)</code> is where every hop begins.</p>
+<p>On the left is the curve over ordinary numbers: the smooth, symmetric shape it's named for. On the right is the <em>same</em> curve over the field of 17 — it stops being a line and becomes a scatter of just <strong>18 dots</strong>. Those dots are our stepping stones, and <code>G = (5, 1)</code> is where every copy starts.</p>
 <div class="figrow">
   <figure><svg id="ec-real" class="ecsvg" viewBox="0 0 220 200" role="img" aria-label="Smooth elliptic curve y squared equals x cubed plus 2x plus 2"></svg><figcaption>y² = x³ + 2x + 2 over real numbers — the smooth curve.</figcaption></figure>
-  <figure><svg id="ec-field" class="ecsvg" viewBox="0 0 220 200" role="img" aria-label="The same curve over the field of 17, shown as 18 scattered points"></svg><figcaption>The same curve over F₁₇ — 18 scattered "stones." G and its first hops are labelled.</figcaption></figure>
+  <figure><svg id="ec-field" class="ecsvg" viewBox="0 0 220 200" role="img" aria-label="The same curve over the field of 17, shown as 18 scattered points"></svg><figcaption>The same curve over F₁₇ — 18 scattered "stones." G and a few of its copies are labelled.</figcaption></figure>
 </div>
 <h3>See it on a real (tiny) curve</h3>
-<p>Below is a genuine elliptic curve, shrunk to just 17 points so it fits on screen. <strong>You don't need to read the "hop rule" math — skim right past it.</strong> Just press Run and watch the two things that matter: the landing stones scatter, and Alice and Bob end up on the same point.</p>
-<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// A tiny elliptic curve: y² = x³ + 2x + 2 over F₁₇, base point G = (5,1)</span>
-<span class="kw">const</span> p = <span class="num">17n</span>, a = <span class="num">2n</span>;
-<span class="kw">const</span> mod = x =&gt; ((x % p) + p) % p;
-<span class="kw">const</span> inv = x =&gt; { <span class="kw">let</span> [o, r, os, s] = [mod(x), p, <span class="num">1n</span>, <span class="num">0n</span>]; <span class="kw">while</span> (r) { <span class="kw">const</span> q = o / r; [o, r] = [r, o - q * r]; [os, s] = [s, os - q * s]; } <span class="kw">return</span> mod(os); };
-
-<span class="cm">// "add" two points with the chord-and-tangent rule (O = point at infinity)</span>
-<span class="kw">const</span> O = <span class="kw">null</span>;
-<span class="kw">function</span> <span class="fn">add</span>(P, Q) {
-  <span class="kw">if</span> (P === O) <span class="kw">return</span> Q; <span class="kw">if</span> (Q === O) <span class="kw">return</span> P;
-  <span class="kw">const</span> [x1, y1] = P, [x2, y2] = Q;
-  <span class="kw">if</span> (x1 === x2 &amp;&amp; mod(y1 + y2) === <span class="num">0n</span>) <span class="kw">return</span> O;
-  <span class="kw">const</span> s = (x1 === x2 &amp;&amp; y1 === y2)
-    ? mod((<span class="num">3n</span> * x1 * x1 + a) * <span class="fn">inv</span>(<span class="num">2n</span> * y1))   <span class="cm">// doubling: tangent slope</span>
-    : mod((y2 - y1) * <span class="fn">inv</span>(x2 - x1));           <span class="cm">// chord slope</span>
-  <span class="kw">const</span> x3 = mod(s * s - x1 - x2), y3 = mod(s * (x1 - x3) - y1);
-  <span class="kw">return</span> [x3, y3];
+<p>Below is a genuine elliptic curve, shrunk to just 17 points so it fits on screen — and written with plain names. <strong>The first box is the rule for combining two stones; you can skim right past it.</strong> The second box is the part to read. Press Run and watch: the copies scatter, and Alice and Bob end up on the same stone.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// ══ Box 1: the rule for combining two stones (real curve math — skim it) ══</span>
+<span class="kw">const</span> <span class="fn">wrap</span> = n =&gt; ((n % <span class="num">17</span>) + <span class="num">17</span>) % <span class="num">17</span>;        <span class="cm">// stay on the "17-clock": keep numbers in 0…16</span>
+<span class="kw">const</span> <span class="fn">undoMultiply</span> = x =&gt; {                    <span class="cm">// the number that multiplies x back to 1 — just try all</span>
+  <span class="kw">for</span> (<span class="kw">let</span> k = <span class="num">1</span>; k &lt; <span class="num">17</span>; k++) <span class="kw">if</span> (<span class="fn">wrap</span>(x * k) === <span class="num">1</span>) <span class="kw">return</span> k;
+};
+<span class="kw">const</span> OFF = <span class="kw">null</span>;                               <span class="cm">// the special "off the board" stone</span>
+<span class="kw">function</span> <span class="fn">combine</span>(P, Q) {                        <span class="cm">// add two stones together → a third stone</span>
+  <span class="kw">if</span> (P === OFF) <span class="kw">return</span> Q;
+  <span class="kw">if</span> (Q === OFF) <span class="kw">return</span> P;
+  <span class="kw">const</span> [px, py] = P, [qx, qy] = Q;
+  <span class="kw">if</span> (px === qx &amp;&amp; <span class="fn">wrap</span>(py + qy) === <span class="num">0</span>) <span class="kw">return</span> OFF;
+  <span class="kw">const</span> line = (px === qx &amp;&amp; py === qy)
+    ? <span class="fn">wrap</span>((<span class="num">3</span> * px * px + <span class="num">2</span>) * <span class="fn">undoMultiply</span>(<span class="num">2</span> * py))   <span class="cm">// same stone → the tangent line</span>
+    : <span class="fn">wrap</span>((qy - py) * <span class="fn">undoMultiply</span>(qx - px));           <span class="cm">// two stones → the line through them</span>
+  <span class="kw">const</span> x = <span class="fn">wrap</span>(line * line - px - qx);
+  <span class="kw">const</span> y = <span class="fn">wrap</span>(line * (px - x) - py);
+  <span class="kw">return</span> [x, y];
 }
-<span class="cm">// scalar mult k·P = P added to itself k times (double-and-add)</span>
-<span class="kw">const</span> mul = (k, P) =&gt; { <span class="kw">let</span> R = O, N = P; <span class="kw">while</span> (k &gt; <span class="num">0n</span>) { <span class="kw">if</span> (k &amp; <span class="num">1n</span>) R = <span class="fn">add</span>(R, N); N = <span class="fn">add</span>(N, N); k &gt;&gt;= <span class="num">1n</span>; } <span class="kw">return</span> R; };
 
-<span class="kw">const</span> G = [<span class="num">5n</span>, <span class="num">1n</span>];
-<span class="kw">const</span> show = P =&gt; P === O ? <span class="str">'O'</span> : <span class="str">`(${P[0]}, ${P[1]})`</span>;
-console.<span class="fn">log</span>(<span class="str">'Where each number of hops from G lands you:'</span>);
-<span class="kw">for</span> (<span class="kw">let</span> k = <span class="num">1n</span>; k &lt;= <span class="num">8n</span>; k++) console.<span class="fn">log</span>(<span class="str">'  '</span> + k + <span class="str">'·G = '</span> + <span class="fn">show</span>(<span class="fn">mul</span>(k, G)) + (k === <span class="num">3n</span> ? <span class="str">'   ← Alice'</span> : k === <span class="num">7n</span> ? <span class="str">'   ← Bob'</span> : <span class="str">''</span>));
+<span class="cm">// ══ Box 2: the part to actually read ══</span>
+<span class="kw">const</span> G = [<span class="num">5</span>, <span class="num">1</span>];                            <span class="cm">// the starting stone everyone shares</span>
+<span class="cm">// copies(n, stone) = that stone added to itself n times  →  n·stone</span>
+<span class="kw">const</span> <span class="fn">copies</span> = (n, stone) =&gt; {
+  <span class="kw">let</span> here = stone;
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt; n; i++) here = <span class="fn">combine</span>(here, stone);
+  <span class="kw">return</span> here;
+};
+<span class="kw">const</span> <span class="fn">show</span> = P =&gt; P === OFF ? <span class="str">'off-board'</span> : <span class="str">`(${P[0]}, ${P[1]})`</span>;
 
-<span class="cm">// ECDH: private = a secret number of hops, public = that many hops of G</span>
-<span class="kw">const</span> aPriv = <span class="num">3n</span>, bPriv = <span class="num">7n</span>;
-<span class="kw">const</span> A = <span class="fn">mul</span>(aPriv, G), B = <span class="fn">mul</span>(bPriv, G);
-console.<span class="fn">log</span>(<span class="str">'Alice public  A = 3·G ='</span>, <span class="fn">show</span>(A));
-console.<span class="fn">log</span>(<span class="str">'Bob   public  B = 7·G ='</span>, <span class="fn">show</span>(B));
-console.<span class="fn">log</span>(<span class="str">'Alice shared  3·B ='</span>, <span class="fn">show</span>(<span class="fn">mul</span>(aPriv, B)));
-console.<span class="fn">log</span>(<span class="str">'Bob   shared  7·A ='</span>, <span class="fn">show</span>(<span class="fn">mul</span>(bPriv, A)));
-console.<span class="fn">log</span>(<span class="str">'both reached 3·7·G = 21·G — the same shared point ✓'</span>);</pre><div class="out"></div></div>
-<p>Real curves (P-256, Curve25519) are this <em>exact</em> idea, just with a pond of about 10<sup>77</sup> stones instead of 17 — the same hopping, an unimaginably bigger pond. Because there's no shortcut back through all those stones, elliptic curves need far smaller keys than RSA or classic DH for the same strength:</p>
+<span class="cm">// Where 1…8 copies of G land — watch the stones scatter</span>
+<span class="kw">for</span> (<span class="kw">let</span> n = <span class="num">1</span>; n &lt;= <span class="num">8</span>; n++)
+  console.<span class="fn">log</span>(n + <span class="str">'·G = '</span> + <span class="fn">show</span>(<span class="fn">copies</span>(n, G)) + (n === <span class="num">3</span> ? <span class="str">'   ← Alice'</span> : n === <span class="num">7</span> ? <span class="str">'   ← Bob'</span> : <span class="str">''</span>));
+
+<span class="cm">// The handshake — Alice's secret number is 3, Bob's is 7 (never shared)</span>
+<span class="kw">const</span> alicePublic = <span class="fn">copies</span>(<span class="num">3</span>, G);         <span class="cm">// = 3·G, sent in the open</span>
+<span class="kw">const</span> bobPublic   = <span class="fn">copies</span>(<span class="num">7</span>, G);         <span class="cm">// = 7·G, sent in the open</span>
+console.<span class="fn">log</span>(<span class="str">'Alice shares 3·G ='</span>, <span class="fn">show</span>(alicePublic));
+console.<span class="fn">log</span>(<span class="str">'Bob   shares 7·G ='</span>, <span class="fn">show</span>(bobPublic));
+console.<span class="fn">log</span>(<span class="str">'Alice makes 3 copies of Bob’s stone  →'</span>, <span class="fn">show</span>(<span class="fn">copies</span>(<span class="num">3</span>, bobPublic)));
+console.<span class="fn">log</span>(<span class="str">'Bob   makes 7 copies of Alice’s stone →'</span>, <span class="fn">show</span>(<span class="fn">copies</span>(<span class="num">7</span>, alicePublic)));
+console.<span class="fn">log</span>(<span class="str">'Same stone! both are 21·G, because 3 × 7 = 7 × 3 ✓'</span>);</pre><div class="out"></div></div>
+<p>Real curves (P-256, Curve25519) are this <em>exact</em> idea, just with a pond of about 10<sup>77</sup> stones instead of 17 — the same copying, an unimaginably bigger pond. Because there's no shortcut back through all those stones, elliptic curves need far smaller keys than RSA or classic DH for the same strength:</p>
 <table>
 <tr><th>Security level</th><th>RSA / classic DH</th><th>Elliptic curve</th></tr>
 <tr><td>112-bit</td><td>2048-bit</td><td>224-bit</td></tr>
