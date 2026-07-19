@@ -243,16 +243,25 @@ console.<span class="fn">log</span>(<span class="str">'decrypted :'</span>, <spa
 <li><strong>Hardware-backed key delivery</strong> — a device keeps a non-extractable EC private key in a Secure Enclave (iOS) / StrongBox (Android); a server sends an ephemeral public key so only that one physical device can derive the secret and decrypt the payload.</li>
 </ul>
 
-<div class="warn"><strong>Crucial caveat: ECDH gives confidentiality, not authentication.</strong> On its own it agrees a secret with <em>whoever is on the other end</em> — it does not prove <em>who</em> that is. If the public keys aren't authenticated, an active attacker can sit in the middle, run one ECDH with each side, and relay (a man-in-the-middle attack). Real protocols authenticate the public keys — with certificates (TLS), pre-shared identity keys (Signal), or device attestation — <em>on top of</em> ECDH. Never ship raw ECDH and assume you know who you're talking to.</div>
+<p>Everything so far solves one problem — <strong>secrecy</strong> — and quietly skips another. ECDH guarantees that whatever you agree on stays hidden from anyone <em>watching</em> the wire. It says nothing about <em>who you actually agreed it with.</em> Those are two different guarantees, and confusing them is one of the most common — and most dangerous — mistakes in security.</p>
+<div class="warn"><strong>Crucial caveat: ECDH gives confidentiality, not authentication.</strong> On its own it agrees a secret with <em>whoever is on the other end</em> — it never checks <em>who</em> that is. If the public keys aren't verified, an active attacker can sit in the middle, quietly run one ECDH with each side, and relay between them. Both ends feel perfectly secure while the attacker reads and rewrites everything.</div>
+<p><strong>An everyday picture.</strong> Imagine sealing a letter in an unbreakable, tamper-proof envelope and handing it to a courier. You're certain nobody can read it in transit — that's confidentiality, and it's genuinely airtight. But you never checked the courier's ID. If the courier is an impostor, they just open your envelope, read it, reseal your words (or <em>different</em> ones) in <em>their own</em> unbreakable envelope, and pass it along. The envelope did its job flawlessly. The mistake was trusting an unverified messenger.</p>
+<p><strong>A real scenario — the café's "free WiFi".</strong> You open your banking app on the free WiFi at a coffee shop. What you don't know: the <code>Free_Cafe_WiFi</code> network is a laptop run by the person two tables over — an "evil twin" hotspot. Your app begins an ECDH exchange with your bank:</p>
+<ul>
+<li>Your app sends its public key toward the bank. <strong>The fake hotspot grabs it</strong> and hands your app <em>its own</em> public key instead, pretending to be the bank.</li>
+<li>It plays the mirror trick toward the bank, pretending to be you.</li>
+<li>Now it shares one secret with your app and a <em>different</em> secret with the bank — sitting in the middle, decrypting each message, reading it, re-encrypting, and forwarding.</li>
+</ul>
+<p>Your app shows a reassuring "secure connection." The bank sees a perfectly normal session. Neither can tell the middleman is there — because ECDH proved the channel was <em>private</em>, never that the far end was really the bank.</p>
 
 <h3>Try it yourself — become the attacker</h3>
-<p>Play <strong>Mallory</strong>, sitting on the wire between Alice and Bob. Because raw ECDH never authenticates the public keys, Mallory can quietly run <em>two</em> key exchanges — one with Alice, one with Bob — and relay between them. Alice and Bob each think they share a private channel; in reality Mallory reads (and can rewrite) every message. Type what Alice sends and what Mallory secretly swaps it to, then run it:</p>
+<p>Step into the middleman's shoes. Here <strong>Alice is your banking app</strong>, <strong>Bob is the bank</strong>, and <strong>you're the fake café hotspot</strong> ("Mallory") sitting between them. Because raw ECDH never verifies whose public key is whose, you run <em>two</em> separate key exchanges — one with the app, one with the bank — and relay between them, secretly rewriting the payment as it passes through. Type what the app sends and what you swap it to, then run it:</p>
 <div class="calc">
-  <div class="calc-full">Alice's message to Bob
-    <textarea id="mitm-msg" rows="1">Pay Bob $100</textarea>
+  <div class="calc-full">What the banking app sends to the bank
+    <textarea id="mitm-msg" rows="1">Transfer $500 to my landlord</textarea>
   </div>
-  <div class="calc-full">What Mallory secretly rewrites it to
-    <textarea id="mitm-tamper" rows="1">Pay Mallory $9000</textarea>
+  <div class="calc-full">What you (the fake hotspot) secretly change it to
+    <textarea id="mitm-tamper" rows="1">Transfer $5000 to account MALLORY-99</textarea>
   </div>
   <button id="mitm-run">🕵️ Run the man-in-the-middle attack →</button>
   <div id="mitm-out" class="calc-out"></div>
@@ -260,6 +269,13 @@ console.<span class="fn">log</span>(<span class="str">'decrypted :'</span>, <spa
   <button id="mitm-honest">✅ Run without an attacker →</button>
   <div id="mitm-honest-out" class="calc-out"></div>
 </div>
+<p><strong>So what actually stops this?</strong> You <em>authenticate the public keys</em> — make the courier show ID you already trust — layered on top of ECDH:</p>
+<ul>
+<li><strong>TLS / HTTPS certificates.</strong> The bank's public key arrives wrapped in a certificate <em>signed</em> by a Certificate Authority your device already trusts. The fake hotspot can relay bytes, but it can't forge that signature — so your app rejects the impostor key and either refuses to connect or throws a big warning. This is exactly what the 🔒 in your browser is quietly checking on every request.</li>
+<li><strong>Signal's "safety numbers".</strong> Two people can compare a short code in person or by voice; if a middleman had swapped keys, the codes wouldn't match.</li>
+<li><strong>Device attestation.</strong> An app can demand the far end prove it's a genuine, untampered device before trusting its key at all.</li>
+</ul>
+<p>The takeaway: ECDH is a superb lock, but a lock only helps once you're sure whose door you're locking. <strong>Confidentiality without authentication is a false sense of security</strong> — and closing that exact gap is the whole job of the next topic, digital signatures and certificates.</p>
 
 <div class="ok"><strong>Try it:</strong> (1) In the number demo, change <code>a</code> and <code>b</code> to any values <code>1..21</code> — the two sides should still agree. (2) In the WebCrypto demo, generate a <em>third</em> keypair and confirm its secret with Alice does <strong>not</strong> match Bob's — then you've felt why the private key can't be guessed from the public one. (3) Tamper with one byte of <code>ct</code> before decrypting and watch AES-GCM reject it.</div>
 
