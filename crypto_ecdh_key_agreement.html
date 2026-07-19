@@ -79,15 +79,25 @@ console.<span class="fn">log</span>(<span class="str">'   (both equal g^(a·b) m
 </div>
 
 <h2><span class="sn">4</span>Why <em>elliptic-curve</em> DH</h2>
-<p>Classic DH raises a number to a power modulo a prime. ECDH replaces that with "add a point to itself on an elliptic curve." The structure is identical — private scalar, public point, shared point — but the underlying problem (elliptic-curve discrete log) is <strong>far harder per bit</strong>, so you get the same security with dramatically smaller keys.</p>
-<p>So what <em>is</em> an elliptic curve? Just the set of points <code>(x, y)</code> that satisfy an equation like <code>y² = x³ + ax + b</code> — a smooth, symmetric curve. The magic is that you can define a way to <strong>"add" two points</strong> on it, and that operation behaves enough like ordinary addition to build Diffie–Hellman on top of:</p>
-<pre class="ascii"><span class="cm">   Adding two points  P + Q  on the curve:
-     1. draw the straight line through P and Q
-     2. it crosses the curve at exactly one more point
-     3. reflect that point across the x-axis  →  P + Q
-   (if P = Q, use the tangent line at P instead — that's "doubling")</span></pre>
-<p>Doing that repeatedly — "adding a point to itself" over and over — is <strong>scalar multiplication</strong>: <code>k·G</code> means start at a public base point <code>G</code> and take <code>k</code> hops. Going forward (compute <code>k·G</code>) is easy; going backward (recover <code>k</code> from <code>k·G</code>) is the <strong>elliptic-curve discrete-log problem</strong>, and nobody knows how to do it efficiently. That one-way street is the trapdoor.</p>
-<p>ECDH is then the paint trick with points instead of numbers: your <strong>private key is a secret scalar <code>d</code></strong>, your <strong>public key is the point <code>d·G</code></strong>, and both sides independently compute the same shared point <code>d<sub>A</sub>·d<sub>B</sub>·G</code>. Watch the real point arithmetic on a deliberately tiny curve — <code>y² = x³ + 2x + 2</code> over the field of 17:</p>
+<p>Here's the reassuring part: ECDH is the <em>same handshake</em> you just ran in §3 — swap public keys, both sides land on the same shared secret. Only the one-way math underneath changes. §3 used "raise a number to a power." ECDH uses <strong>"hop along points on a curve."</strong> You can understand the whole thing with no math at all.</p>
+<h3>Picture stepping stones</h3>
+<p>Imagine a pond full of stepping stones. Everyone agrees on one <strong>starting stone</strong>, <code>G</code>, and one fixed <strong>rule for hopping</strong> from a stone to the next one. Keep applying the rule and you bounce around the pond:</p>
+<pre class="ascii">   G ──hop──▶ 2G ──hop──▶ 3G ──hop──▶ 4G ──hop──▶ …
+   the stones you land on scatter everywhere — in no order you could guess</pre>
+<ul>
+<li>Your <strong>private key</strong> is a secret number: <em>how many hops</em> you take.</li>
+<li>Your <strong>public key</strong> is the stone you <em>end up standing on</em>.</li>
+</ul>
+<p>Hopping <em>forward</em> is easy — just keep going. Working <em>backward</em> is hopeless: show someone the stone you finished on and they can't figure out how many hops it took, because the stones scatter with no trail to follow. Easy one way, impossible the other — the same "you can't un-mix paint" lock from the opening analogy.</p>
+<h3>The handshake, in hops</h3>
+<ul>
+<li>Alice hops <strong>her</strong> secret number of times from <code>G</code>, and shares the stone she lands on.</li>
+<li>Bob does the same with <strong>his</strong> secret number.</li>
+<li>Each then takes their own secret number of <em>extra</em> hops, starting from the <em>other</em> person's stone.</li>
+</ul>
+<p>They finish on the <strong>same stone</strong> — because "3 hops, then 7 more" ends up exactly where "7 hops, then 3 more" does. That shared stone is the secret, and neither of them ever said how many hops they took.</p>
+<h3>See it on a real (tiny) curve</h3>
+<p>Below is a genuine elliptic curve, shrunk to just 17 points so it fits on screen. <strong>You don't need to read the "hop rule" math — skim right past it.</strong> Just press Run and watch the two things that matter: the landing stones scatter, and Alice and Bob end up on the same point.</p>
 <div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// A tiny elliptic curve: y² = x³ + 2x + 2 over F₁₇, base point G = (5,1)</span>
 <span class="kw">const</span> p = <span class="num">17n</span>, a = <span class="num">2n</span>;
 <span class="kw">const</span> mod = x =&gt; ((x % p) + p) % p;
@@ -120,7 +130,7 @@ console.<span class="fn">log</span>(<span class="str">'Bob   public  B = 7·G ='
 console.<span class="fn">log</span>(<span class="str">'Alice shared  3·B ='</span>, <span class="fn">show</span>(<span class="fn">mul</span>(aPriv, B)));
 console.<span class="fn">log</span>(<span class="str">'Bob   shared  7·A ='</span>, <span class="fn">show</span>(<span class="fn">mul</span>(bPriv, A)));
 console.<span class="fn">log</span>(<span class="str">'both reached 3·7·G = 21·G — the same shared point ✓'</span>);</pre><div class="out"></div></div>
-<p>Real curves (P-256, Curve25519) are this <em>exact</em> construction over a ~256-bit field instead of 17 — the same handful of formulas, just an unimaginably larger set of points. That steep difficulty-per-bit is why elliptic curves need far smaller keys than RSA or classic DH for the same security:</p>
+<p>Real curves (P-256, Curve25519) are this <em>exact</em> idea, just with a pond of about 10<sup>77</sup> stones instead of 17 — the same hopping, an unimaginably bigger pond. Because there's no shortcut back through all those stones, elliptic curves need far smaller keys than RSA or classic DH for the same strength:</p>
 <table>
 <tr><th>Security level</th><th>RSA / classic DH</th><th>Elliptic curve</th></tr>
 <tr><td>112-bit</td><td>2048-bit</td><td>224-bit</td></tr>
