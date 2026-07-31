@@ -41,6 +41,11 @@ incremental improvement.
   builders instead of `▶ Run` code (e.g. `leadership_first_follower.html`).
   Cards go in the `#leadership` section. (Technical board modules like deep auth
   instead join the Mastery Track as `mastery_*.html`.)
+- `mobile_*.html` — the **Mobile Development** track: blog-style, generic articles on
+  mobile-specific topics (push, offline, sync, device constraints), using the standard
+  module shell with `.snippet` Copy blocks (e.g. `mobile_silent_push_notifications.html`).
+  Cards go in the `#mobile` section. Keep them vendor- and project-neutral — never reveal
+  internal project or PoC details.
 - `roadmap_summary_md.md` — full prose summary of all phases (source of truth for content).
 - `docs/` — markdown companion docs (per phase + meta). The `.md` files are the
   source of truth; `docs/*.html` and `roadmap_summary.html` are **generated** from
