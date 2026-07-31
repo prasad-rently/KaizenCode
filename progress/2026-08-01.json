@@ -1,0 +1,25 @@
+{
+  "date": "2026-08-01",
+  "modulesLive": 36,
+  "tracks": {
+    "mastery": 17,
+    "cryptography": 9,
+    "foundations": 6,
+    "aws": 2,
+    "mobile": 1,
+    "leadership": 1
+  },
+  "cryptographyGuide": 1,
+  "roadmap": {
+    "total": 32,
+    "shipped": 2,
+    "remaining": 30,
+    "stages": {
+      "1_technical_foundation": { "total": 10, "shipped": 1 },
+      "2_leading_people": { "total": 6, "shipped": 1 },
+      "3_delivery_and_orgs": { "total": 6, "shipped": 0 },
+      "4_business_fluency": { "total": 5, "shipped": 0 },
+      "5_the_cto_craft": { "total": 5, "shipped": 0 }
+    }
+  }
+}
