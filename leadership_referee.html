@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Referee — Performance Management</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* ladder */
+.ladder{border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;margin:14px 0}@media(prefers-color-scheme:dark){.ladder{border-color:#2a2a2a}}.rung{display:flex;gap:11px;align-items:flex-start;padding:9px 12px;border-top:1px solid #f0f0f0;font-size:12.5px;background:#fafafa}.rung:first-child{border-top:0}@media(prefers-color-scheme:dark){.rung{border-color:#202020;background:#151515}}.rung .lv{flex:0 0 auto;padding:0 8px;height:20px;border-radius:6px;color:#fff;font-size:10.5px;font-weight:700;display:grid;place-items:center;white-space:nowrap}.rung b{color:#333}.rung span{color:#666}@media(prefers-color-scheme:dark){.rung b{color:#e2e2e2}.rung span{color:#999}}.lcap{display:flex;justify-content:space-between;font-size:10.5px;color:#888;font-weight:600;margin:2px 2px 0}
+/* 2x2 matrix */
+.matrix{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 4px}.cell{border:1px solid #e8e8e8;border-radius:10px;padding:10px 12px;background:#fafafa}@media(prefers-color-scheme:dark){.cell{border-color:#2a2a2a;background:#151515}}.cell h5{font-size:11.5px;font-weight:700;margin-bottom:3px;color:#333}.cell p{font-size:11.5px;color:#666;margin:0;line-height:1.45}@media(prefers-color-scheme:dark){.cell h5{color:#e2e2e2}.cell p{color:#999}}.maxis{font-size:10.5px;color:#888;font-weight:600;text-align:center;margin:2px 0}
+/* builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:460px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 41–56 · Stage 2</span>
+<h1>⚖️ The Referee</h1>
+<p class="sub">A referee doesn't play the game — they hold everyone to the same rules, consistently, and make the hard calls out in the open. Performance management is the part of leading people where "be liked" and "be fair" collide hardest. Done well, it's not about catching people out; it's about making expectations so clear, and standards so even, that <em>no one is ever surprised</em> by where they stand.</p>
+
+<div class="tip">Fourth module of the <strong>Leadership</strong> track. No runnable code — instead: a level ladder, a skill/will diagnostic, decision scenarios, and a builder for this module's deliverable: a <strong>career ladder for engineers L3–L6</strong>.</p></div>
+
+<h2><span class="sn">1</span>Fairness, not friendship — the no-surprises promise</h2>
+<p>Performance management is where new managers freeze, because it puts their need to be liked in direct tension with their duty to be fair. Your job here isn't to be everyone's friend; it's to be the one person who applies the <em>same standard to everyone</em>, visibly, and tells the truth about it early.</p>
+<p>Everything in this module serves one promise: <strong>no one should ever be surprised.</strong> Not by a review rating, not by a low bonus, and above all not by being let go. A surprise means you failed to give feedback in time — the outcome may be right, but you delivered it cruelly. If a review or a firing shocks someone, that's a bug in <em>your</em> process, not theirs.</p>
+
+<h2><span class="sn">2</span>The career ladder — what "good" means at each level</h2>
+<p>You can't hold someone to a bar they can't see. A <strong>career ladder</strong> writes the bar down: what's expected at each level, in behaviors and impact rather than vibes. The single most important idea in any ladder — and the one people get wrong — is what actually rises as you climb:</p>
+<div class="lcap"><span>↑ senior</span><span>bigger scope · more ambiguity · less direction</span></div>
+<div class="ladder">
+  <div class="rung"><span class="lv" style="background:#185FA5">L3</span><div><b>Engineer</b> — delivers well-scoped tasks reliably, with guidance. <span>Scope: a task. Needs the "what"; owns the "how" of small work.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#3F7A70">L4</span><div><b>Senior Engineer</b> — owns features end-to-end, independently. <span>Scope: a project. Owns the "how"; needs only the "what" framed.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#2C7458">L5</span><div><b>Staff Engineer</b> — drives ambiguous, cross-cutting work; a force multiplier. <span>Scope: a team's domain. Finds the right "what" too.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#0F6E56">L6</span><div><b>Principal Engineer</b> — sets technical direction for an org. <span>Scope: an org. Creates clarity from ambiguity for others.</span></div></div>
+</div>
+<p>Notice what does <em>not</em> define the ladder: "writes better code." A senior engineer isn't just a faster junior — they operate at a larger <strong>scope of impact</strong> with less <strong>direction</strong>. You'll design a full version of this in the deliverable below.</p>
+<div class="warn"><strong>The dual ladder.</strong> From L5 up, the path forks: <em>IC</em> (Staff → Principal) and <em>Management</em> (Manager → Director) are equal in seniority, different in the work. Don't force your best engineers into management to "get promoted" — that loses a great builder and often makes a reluctant manager.</div>
+
+<h2><span class="sn">3</span>Expectations are set forward, not discovered</h2>
+<p>The ladder is only useful if people know where they stand against it <em>before</em> review season, not as a verdict at the end. Your ongoing job is to connect today's work to the level: <em>"Owning this project cleanly is exactly the L4 behavior — do it a few more times and that's your case."</em> Or, honestly: <em>"To hit L5 you'd need to be driving the direction here, not just executing it. Right now you're executing it well."</em></p>
+<p>Set the target forward, name the gap specifically, and revisit it in your 1:1s (that's what <a class="x" href="leadership_gardener.html">The Gardener</a>'s growth-focus line is for). A promotion should be the <em>documentation</em> of a level someone is already operating at — never a gamble that they'll grow into it.</p>
+
+<h2><span class="sn">4</span>Calibration — making a rating mean the same thing everywhere</h2>
+<p>Left alone, every manager rates differently. Some are lenient, some harsh; everyone is prone to the <strong>halo effect</strong> (one great trait colors everything), <strong>recency bias</strong> (last month outweighs the year), and <strong>affinity bias</strong> (people like me score higher). The result: an "exceeds" from one manager and an "exceeds" from another mean nothing in common — and someone's raise depends on whose team they landed on.</p>
+<p><strong>Calibration</strong> is the fix: managers put their ratings side by side and defend each one against the <em>same ladder, with evidence</em>. A rating only survives if the person's actual work matches what that level describes. It's uncomfortable — you sometimes have to lower your own report's rating — but it's the machinery that makes fairness real instead of rhetorical.</p>
+<div class="tip"><strong>The test for any rating:</strong> could you show a stranger the ladder and the evidence, and would they land on the same score? If it only makes sense because you know and like the person, it's not calibrated — it's biased.</p></div>
+
+<h2><span class="sn">5</span>Diagnose before you act — skill vs will</h2>
+<p>When someone underperforms, the reflex is to jump to consequences. Don't — first find out <em>why</em>, because the fix is completely different for each cause. A fast, honest diagnostic is skill (can they?) against will (do they want to?):</p>
+<div class="maxis">▲ high will</div>
+<div class="matrix">
+  <div class="cell"><h5>Low skill · high will</h5><p><b>Coach &amp; train.</b> Eager but not yet able. Teach, pair, give time and stretch — the most rewarding quadrant.</p></div>
+  <div class="cell"><h5>High skill · high will</h5><p><b>Delegate &amp; stretch.</b> Your stars. Give autonomy and bigger problems, then get out of the way.</p></div>
+  <div class="cell"><h5>Low skill · low will</h5><p><b>The hard road.</b> Often a fit or role problem. Direct feedback, a real chance — and honesty if it doesn't turn.</p></div>
+  <div class="cell"><h5>High skill · low will</h5><p><b>Re-motivate.</b> Capable but checked out — usually autonomy, purpose, or a life reason. Find the cause first.</p></div>
+</div>
+<div class="maxis">▼ low will　　　　low skill ◀　　　▶ high skill</div>
+<p>Also check <strong>context</strong> before concluding it's the person: unclear goals, a bad project, a blocker you haven't cleared, or something personal outside work. Plenty of "performance problems" are really management problems or temporary life storms in disguise. Ask, with genuine curiosity, before you reach for a process.</p>
+
+<h2><span class="sn">6</span>The PIP — an honest path back, not a paper trail</h2>
+<p>A Performance Improvement Plan is one of the most abused tools in management. Done honestly, it's a clear, time-boxed, <em>winnable</em> plan: specific goals, the support to hit them, and a genuine belief the person can. Done dishonestly, it's box-ticking cover for a decision already made — a cruelty dressed as a chance.</p>
+<div class="sched">
+  <div class="col"><h4>❌ Sham PIP</h4>
+    <div class="blk bad">Outcome already decided</div>
+    <div class="blk bad">Vague or impossible goals</div>
+    <div class="blk bad">No real support offered</div>
+    <div class="blk bad">First they've heard of the problem</div>
+    <div class="blk bad">Theater to satisfy HR / the paper trail</div>
+  </div>
+  <div class="col"><h4>✅ Honest PIP</h4>
+    <div class="blk good">You genuinely want them to pass</div>
+    <div class="blk good">Specific, measurable, achievable goals</div>
+    <div class="blk good">Concrete support &amp; check-ins</div>
+    <div class="blk good">Follows months of clear feedback</div>
+    <div class="blk good">A real, fair chance to turn it around</div>
+  </div>
+</div>
+<p>If the honest truth is that the decision is already made, a PIP is the wrong instrument — run a respectful exit instead of a fake process. And a PIP should <em>never</em> be someone's first news that they're struggling; if it is, you skipped step five and the no-surprises promise.</p>
+
+<h2><span class="sn">7</span>Letting someone go — with dignity</h2>
+<p>Sometimes, after honest feedback and a real chance, it still isn't working. Then the kindest thing — for the person, and for the team carrying them — is a clean, respectful exit. How you do it defines you as a leader, because <strong>the whole team is watching how you treat someone on the way out</strong>, and quietly deciding how safe <em>they</em> are.</p>
+<ul>
+<li><strong>No surprises.</strong> They should already know it's a real possibility from prior feedback. The meeting confirms; it doesn't ambush.</li>
+<li><strong>Be direct and brief.</strong> Say it clearly in the first minute — don't bury it in a soft-shoe preamble that makes them relax first. Kindness is clarity, not padding.</li>
+<li><strong>Own the decision.</strong> "This is my decision," not "HR made me." Don't outsource the responsibility to protect your own comfort.</li>
+<li><strong>Preserve their dignity.</strong> In private, never in anger, with as much generosity as you can (severance, an honest reference, a graceful story to tell). They're still a person with a life.</li>
+</ul>
+<div class="warn"><strong>The opposite failure is just as real:</strong> keeping a clearly-failing person out of conflict-avoidance. It's unfair to the teammates silently covering for them, unfair to the person denied the honest feedback that could help them elsewhere, and it quietly tells your best people that the bar is optional. Not acting <em>is</em> a decision — usually the wrong one.</div>
+
+<h2><span class="sn">8</span>Pressure-test your instincts</h2>
+<p>Performance management fails in predictable ways — usually by dodging a hard, kind conversation until it becomes a cruel one. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<h2><span class="sn">9</span>Deliverable — write a career ladder, L3–L6</h2>
+<p>A ladder you could actually publish: what's expected at each level, in scope, autonomy, craft and influence. Fill in a one-line essence per level (or take the defaults) and generate a full, usable engineering ladder to adapt for your team:</p>
+<div class="builder">
+  <div class="fld">Discipline / team<input id="d-team" type="text" placeholder="e.g. Backend Engineering"></div>
+  <div class="fld">L3 — Engineer, in one line<input id="d-l3" type="text" placeholder="e.g. delivers well-scoped work reliably, with guidance"></div>
+  <div class="fld">L4 — Senior Engineer, in one line<input id="d-l4" type="text" placeholder="e.g. owns features end-to-end, independently"></div>
+  <div class="fld">L5 — Staff Engineer, in one line<input id="d-l5" type="text" placeholder="e.g. drives ambiguous, cross-cutting work; a force multiplier"></div>
+  <div class="fld">L6 — Principal Engineer, in one line<input id="d-l6" type="text" placeholder="e.g. sets technical direction for an org"></div>
+  <button id="d-gen">⚖️ Generate my L3–L6 ladder →</button>
+  <button id="d-copy" class="copy">Copy</button>
+  <div id="d-out" class="out-box"></div>
+</div>
+
+<div class="ok"><strong>Try it:</strong> (1) Work through all five scenarios — notice how many traps are just a hard conversation postponed. (2) Generate the ladder, then place each person you manage on it honestly — and name, for anyone below their level, the one specific gap. (3) For your weakest performer, run the skill/will diagnostic before deciding anything. (4) Write down what "no surprises" would require you to say to someone this month — then say it.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 2 · the people half of the road to CTO. Completes the core trio with <a class="x" href="leadership_first_follower.html">The First Follower</a>, <a class="x" href="leadership_gardener.html">The Gardener</a> and <a class="x" href="leadership_scout.html">The Scout</a>. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'In calibration you realize you’ve rated your report higher than peers doing similar work. What do you do?',
+     opts:[
+       {t:'Recalibrate to the ladder + evidence — even if it means lowering yours — then be honest with them.',v:'best',fb:'This is the whole point of calibration. A rating has to mean the same thing across the org, or it means nothing. Adjusting to the evidence — and then telling your report the truth — is what fairness actually costs.'},
+       {t:'Bring specific evidence, argue the case, and accept the group’s call.',v:'ok',fb:'Exactly the right spirit — advocate hard with real evidence, then defer to the calibrated outcome. Just make sure your evidence maps to the <em>level</em>, not to how much you like them.'},
+       {t:'Hold firm — nobody knows your report’s work like you do.',v:'poor',fb:'That’s the bias calibration exists to catch. "I know them best" is how every manager quietly inflates their own team. If your rating only survives because you’re attached, it isn’t calibrated.'},
+       {t:'Inflate everyone a bit so your team isn’t disadvantaged.',v:'poor',fb:'Rating inflation to "protect" your team just breaks the currency for everyone and punishes honest managers. It also robs your people of the accurate signal they need to actually grow.'}
+     ]},
+    {q:'A well-liked report is clearly underperforming. They’re nice and trying hard. Reviews are in four months.',
+     opts:[
+       {t:'Give clear, specific feedback now — early honesty is the kindest thing.',v:'best',fb:'The no-surprises promise in action. Told now, they have four months to fix it; told at review, it’s an ambush and it’s already too late. Kindness is timely truth, not comfortable silence.'},
+       {t:'Start coaching and documenting now; formalize later if needed.',v:'ok',fb:'Good — quiet, supportive, early intervention with a paper trail is responsible. Just make sure "documenting" doesn’t become a substitute for the direct conversation; they must actually hear it.'},
+       {t:'Wait for the review to raise it through the formal process.',v:'poor',fb:'Saving feedback for review season is the classic failure. You’ve traded their chance to improve for your short-term comfort, and guaranteed the exact surprise you’re meant to prevent.'},
+       {t:'Give a soft "meets" to avoid the hard talk; hope they improve.',v:'poor',fb:'A dishonest rating to dodge a conversation corrupts the whole system and strands the person in a role they’re failing at, unaware. Being nice here is the opposite of being kind.'}
+     ]},
+    {q:'A normally-strong engineer’s output has dropped and they seem checked out.',
+     opts:[
+       {t:'Have a direct, curious conversation to diagnose the cause before acting.',v:'best',fb:'Skill? Will? Fit? A blocker? Something personal? The right response differs completely for each — and "strong engineer suddenly flat" is very often a will or life-context issue, not a competence one. Diagnose first.'},
+       {t:'Offer a stretch project to re-engage them.',v:'ok',fb:'A reasonable bet <em>if</em> the cause is boredom — but you’re guessing. If it’s burnout or a personal crisis, more challenge makes it worse. Confirm the cause, then prescribe.'},
+       {t:'Put them on a PIP — output is down, that’s the process.',v:'poor',fb:'Reaching for the heaviest instrument before you understand the problem. A PIP for someone whose real issue is a blocker, burnout, or a life event is both wrong and needlessly destructive.'},
+       {t:'Leave it — they’re senior, they’ll sort themselves out.',v:'poor',fb:'Disengagement rarely self-heals, and "they’re senior" is how you lose senior people. Ignoring it reads as not caring; a checked-out star is a five-alarm signal, not a non-issue.'}
+     ]},
+    {q:'HR says put a struggling report on a PIP, but adds "we all know they’re gone anyway." How do you run it?',
+     opts:[
+       {t:'Insist on a real, winnable PIP you’re genuinely open to them passing — or push for an honest exit instead of theater.',v:'best',fb:'A PIP whose outcome is pre-decided is cruelty with paperwork. Either give a true chance with real support and an open mind, or — if the call is genuinely final — part ways respectfully. Don’t run the fake process.'},
+       {t:'Run a rigorous PIP with clear goals and real support, staying genuinely open.',v:'ok',fb:'This is the honest version and often the right move — clarity, support, and a fair shot. The only risk is fooling yourself: if you’re truly not open to success, you’re back to theater.'},
+       {t:'Run the box-ticking PIP as instructed — it’s just process.',v:'poor',fb:'Knowingly running a sham to build a paper trail is dishonest to the person and corrosive to you. It also tends to backfire legally and reputationally — fake fairness fools no one, least of all the person living it.'},
+       {t:'Skip the PIP and fire them today to avoid the drama.',v:'poor',fb:'If there’s been no honest prior feedback, this violates no-surprises and blindsides them. Even when an exit is right, it has to be led up to and done with dignity — not sprung to save you an awkward month.'}
+     ]},
+    {q:'A long-tenured, well-liked engineer is now clearly below the bar; the team quietly carries them. You dread the talk.',
+     opts:[
+       {t:'Address it directly — carrying them is unfair to the team and dishonest to them.',v:'best',fb:'Avoidance feels kind but isn’t: your other engineers are silently absorbing the gap and learning the bar is optional, and the person is denied the honest feedback that could help them somewhere. Start with clear feedback and a real chance.'},
+       {t:'Reshape their role to something they can do well, if such a fit exists.',v:'ok',fb:'Sometimes genuinely right — a role fit can save a good person whose current scope has outgrown them. Just be honest it’s a real solution, not a quiet demotion you’re avoiding naming.'},
+       {t:'Leave it — they’re liked and raising it would be disruptive.',v:'poor',fb:'"Liked and long-tenured" is exactly how sub-bar performance goes unaddressed for years. Popularity isn’t performance, and protecting your comfort here quietly taxes everyone who’s meeting the bar.'},
+       {t:'Quietly route work away from them and hope they leave on their own.',v:'poor',fb:'Managing someone out by starving them of work is cowardice dressed as strategy — it’s humiliating, obvious to the team, and denies the person any honest chance to change. Have the conversation.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Referee call',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  function val(id){return (document.getElementById(id).value||'').trim();}
+  var out=document.getElementById('d-out');
+  function build(){
+    var team=val('d-team')||'Backend Engineering';
+    var l3=val('d-l3')||'delivers well-scoped work reliably, with guidance';
+    var l4=val('d-l4')||'owns features end-to-end, independently';
+    var l5=val('d-l5')||'drives ambiguous, cross-cutting work; a force multiplier';
+    var l6=val('d-l6')||'sets technical direction for an org';
+    return [
+      '# '+team+' career ladder · L3–L6','',
+      'Two things rise together at every level: the SCOPE of impact, and the',
+      'AUTONOMY to operate in ambiguity. Higher isn’t "better at coding" — it’s',
+      '"bigger problems, less direction."','',
+      '## L3 · Engineer — '+l3,
+      '- Scope:     a well-defined task or story',
+      '- Autonomy:  needs the "what"; owns the "how" of small work',
+      '- Craft:     correct, readable code; learning the codebase & standards',
+      '- Influence: own work; asks good questions, absorbs feedback',
+      '- Growing when: they need less and less review','',
+      '## L4 · Senior Engineer — '+l4,
+      '- Scope:     a feature or project, end-to-end',
+      '- Autonomy:  owns the "how"; needs only the "what" framed',
+      '- Craft:     designs components, sound tradeoffs, tests & operates well',
+      '- Influence: reviews and mentors; a reliable pair of hands',
+      '- Growing when: you stop worrying about their projects','',
+      '## L5 · Staff Engineer — '+l5,
+      '- Scope:     a team’s domain, or a hard cross-team problem',
+      '- Autonomy:  finds the right "what" as well as the "how"; works from goals',
+      '- Craft:     sets technical direction, owns architecture, de-risks the unknown',
+      '- Influence: levels up the whole team; drives cross-team alignment',
+      '- Growing when: the team is better because they’re on it, beyond their own output','',
+      '## L6 · Principal Engineer — '+l6,
+      '- Scope:     an org, or a company-level technical bet',
+      '- Autonomy:  defines what matters; creates clarity from ambiguity for others',
+      '- Craft:     sets standards & strategy others build on; deep and broad',
+      '- Influence: multiplies many teams; a trusted technical voice org-wide',
+      '- Impact:    shapes what the org works on and how it works','',
+      '---',
+      'Dual ladder: from L5, IC (Staff → Principal) and Management (Manager →',
+      'Director) are equal in seniority, different in the work. Don’t force great',
+      'engineers into management to "get promoted."','',
+      'Use it: rate against what the level DESCRIBES, with evidence — never against',
+      'how much you like someone. That is calibration.'
+    ].join('\n');
+  }
+  document.getElementById('d-gen').addEventListener('click',function(){out.textContent=build();out.classList.add('show');});
+  document.getElementById('d-copy').addEventListener('click',function(){
+    if(!out.classList.contains('show')){out.textContent=build();out.classList.add('show');}
+    var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
