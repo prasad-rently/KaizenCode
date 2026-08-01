@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Conductor — Delivery Management</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}.blk.neut{background:#eeedfb;color:#5350B4}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}.blk.neut{background:#1a1830;color:#a6a3ff}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* builder / simulator */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}
+.simout{display:none;margin-top:14px}.simout.show{display:block}.pcards{display:flex;gap:9px;flex-wrap:wrap;margin:4px 0 12px}.pcard{flex:1 1 100px;border:1px solid #e8e8e8;border-radius:10px;padding:9px 10px;background:#fff;text-align:center}@media(prefers-color-scheme:dark){.pcard{background:#0d0d0d;border-color:#2a2a2a}}.pcard .pv{font-size:21px;font-weight:700;line-height:1.1}.pcard .pl{font-size:10.5px;color:#888;margin-top:2px}.pcard.hl{border-color:#5350B4;background:#f5f3ff}@media(prefers-color-scheme:dark){.pcard.hl{border-color:#8f8cff;background:#191830}}
+.hist{font-size:10.5px;font-family:'SF Mono','Fira Code',monospace;margin:6px 0}.hrow{display:flex;align-items:center;gap:7px;margin-bottom:2px}.hlab{width:58px;text-align:right;color:#888;flex:0 0 auto}.hbar{height:11px;background:#cac7ef;border-radius:3px;min-width:1px}.hrow.mark .hbar{background:#5350B4}.hct{color:#999;font-size:10px}@media(prefers-color-scheme:dark){.hbar{background:#3a3768}.hrow.mark .hbar{background:#8f8cff}}
+.simsum{font-size:12.5px;line-height:1.55;margin-top:10px;padding:10px 12px;border-radius:8px;background:#f4fef8;border:1px dashed #a9dcc7;color:#0F6E56}@media(prefers-color-scheme:dark){.simsum{background:#0a1f14;border-color:#2f6d54;color:#7fd8b3}}.simerr{color:#993C1D;font-size:12px;margin-top:8px}@media(prefers-color-scheme:dark){.simerr{color:#e8907a}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 57–72 · Stage 3</span>
+<h1>🎼 The Conductor</h1>
+<p class="sub">A conductor doesn't play an instrument. They keep the whole orchestra in time and flowing together — reading the tempo, cueing entrances, never grabbing a violin mid-piece. Delivery management is the same: your job isn't to write the code or micromanage the notes, it's to make the work flow <em>predictably</em>, and to tell the truth about when it will land — with numbers, not wishes.</p>
+
+<div class="tip">First module of <strong>Stage 3 · Leading Delivery &amp; Organizations</strong>. This one gets quantitative: a real, in-browser <strong>Monte Carlo forecaster</strong> is the deliverable — forecast a project from data instead of story points.</p></div>
+
+<h2><span class="sn">1</span>The conductor's job — flow, not ceremony</h2>
+<p>Somewhere between senior engineer and executive, your job stops being "do the work" and becomes "make sure the work flows." Not faster keystrokes — smoother, more <em>predictable</em> delivery, and honest answers to the only two questions leadership ever really asks: <em>"When will it be done?"</em> and <em>"Why is it taking so long?"</em></p>
+<p>The trap is thinking the answer is more process — more meetings, more rituals, more Jira. It almost never is. The answer is understanding <strong>flow</strong>: how work actually moves through your team, where it piles up, and how to forecast it from evidence rather than optimism.</p>
+
+<h2><span class="sn">2</span>Agile without the religion</h2>
+<p>Agile started as a reaction against heavy, date-driven planning: work in small slices, ship often, learn, adjust. Somewhere along the way, many teams turned it into a <em>religion</em> — performing the ceremonies (standups, planning, retros) with total devotion while nothing about their delivery actually improves. That's cargo-cult agile: the rituals without the results.</p>
+<p>Scrum and Kanban are just two toolkits for the same goal — short feedback loops and steady flow. Pick pragmatically; neither is sacred:</p>
+<div class="sched">
+  <div class="col"><h4>Scrum — cadence</h4>
+    <div class="blk neut">Fixed-length sprints (1–2 weeks)</div>
+    <div class="blk neut">Commit to a sprint's worth of work</div>
+    <div class="blk neut">Planning · review · retro rhythm</div>
+    <div class="blk neut">Good for teams that need structure</div>
+  </div>
+  <div class="col"><h4>Kanban — flow</h4>
+    <div class="blk neut">Continuous flow, no sprints</div>
+    <div class="blk neut">Pull work as capacity frees up</div>
+    <div class="blk neut">WIP limits are the core rule</div>
+    <div class="blk neut">Good for interrupt-driven, mature teams</div>
+  </div>
+</div>
+<p>The test for any ceremony is brutally simple: <strong>does it change what we do next?</strong> A retro that never changes anything is theater; kill it or fix it. Keep the practices that create feedback and cut the ones that only create the <em>feeling</em> of control.</p>
+
+<h2><span class="sn">3</span>Why estimates lie</h2>
+<p>Humans are genuinely terrible at estimating how long work takes — the <strong>planning fallacy</strong> is one of the most robust findings in psychology. Story points tried to dodge this by estimating <em>relative</em> size instead of absolute time (a 5 is roughly five times a 1), which is a real improvement. But points get re-weaponized the moment someone multiplies them by "velocity" to manufacture a fake deadline, or compares them across teams.</p>
+<p>Here's the uncomfortable truth a good conductor internalizes: <strong>you cannot know a delivery date — you can only know a probability.</strong> "It'll be done March 3rd" is a lie with false precision. "We're 85% likely to finish within 11 weeks" is honest, defensible, and — crucially — you can compute it from data you already have. That's forecasting, and it beats estimation.</p>
+
+<h2><span class="sn">4</span>Flow: WIP limits &amp; Little's Law</h2>
+<p>Here's the most counterintuitive lever in delivery: <strong>the more things you start at once, the slower everything finishes.</strong> Work in Progress (WIP) is the silent killer of delivery — every parallel item adds context-switching, waiting, and half-done work that delivers zero value until it's <em>done</em>.</p>
+<div class="sched">
+  <div class="col"><h4>❌ Start everything (high WIP)</h4>
+    <div class="blk bad">8 tasks all "in progress"</div>
+    <div class="blk bad">Everyone context-switching</div>
+    <div class="blk bad">Lots of motion, nothing ships</div>
+    <div class="blk bad">Long, unpredictable cycle times</div>
+    <div class="blk bad">Looks busy; delivers little</div>
+  </div>
+  <div class="col"><h4>✅ Limit WIP, finish things</h4>
+    <div class="blk good">Cap: e.g. 3 items in progress</div>
+    <div class="blk good">Swarm to finish before starting</div>
+    <div class="blk good">A steady stream of "done"</div>
+    <div class="blk good">Short, predictable cycle times</div>
+    <div class="blk good">"Stop starting, start finishing"</div>
+  </div>
+</div>
+<p>This isn't a vibe — it's arithmetic. <strong>Little's Law:</strong> <code>Cycle Time = WIP ÷ Throughput</code>. With throughput roughly fixed by team capacity, cutting WIP in half cuts your average cycle time in half. The single fastest way to ship sooner is usually to <em>start less</em>, not work harder.</p>
+
+<h2><span class="sn">5</span>Cycle time — the honest metric</h2>
+<p>Velocity (points per sprint) is easy to game — inflate estimates and the number climbs while nothing ships faster. <strong>Cycle time</strong> — the wall-clock time from when an item is <em>started</em> to when it's <em>done</em> — can't be faked, because it's measured in real days, not invented units.</p>
+<ul>
+<li><strong>Track the distribution, not the average.</strong> Cycle times are lumpy; the average hides the pain. What you promise on is a <em>percentile</em> — "85% of items finish within 9 days" is a commitment you can keep.</li>
+<li><strong>Watch the long tail.</strong> The items stuck for weeks are where your delivery risk lives — usually blocked, oversized, or forgotten. Chase the tail, not the average.</li>
+<li><strong>It powers your forecast.</strong> Cycle time and throughput are exactly the historical data a Monte Carlo forecast feeds on — which is the whole point of measuring them.</li>
+</ul>
+<div class="warn"><strong>Beware Goodhart's Law:</strong> "when a measure becomes a target, it ceases to be a good measure." Turn velocity into a goal and estimates inflate; turn cycle time into a goal and people split tickets to fake it. Metrics are for <em>seeing</em>, not for whipping the team.</div>
+
+<h2><span class="sn">6</span>Deliverable — forecast with Monte Carlo, not story points</h2>
+<p>Instead of adding up story points, a <strong>Monte Carlo forecast</strong> plays the project forward thousands of times. Each simulation samples a random week from your <em>actual past throughput</em> and tallies weeks until the backlog is done. Do it 10,000 times and you get a full distribution of finish dates — no estimation required, just history. Try it on a real project:</p>
+<div class="builder">
+  <div class="fld">Items left to finish (backlog count)<input id="s-backlog" type="number" min="1" value="40"></div>
+  <div class="fld">Your throughput history — items completed per week, last several weeks (comma-separated)<textarea id="s-hist" rows="2">5, 7, 3, 6, 4, 8, 5, 2, 6, 4</textarea></div>
+  <button id="s-run">🎼 Run 10,000 simulations →</button>
+  <div id="s-out" class="simout">
+    <div class="pcards">
+      <div class="pcard"><div class="pv" id="p50">–</div><div class="pl">50% by (a coin-flip)</div></div>
+      <div class="pcard hl"><div class="pv" id="p85">–</div><div class="pl">85% by (plan on this)</div></div>
+      <div class="pcard"><div class="pv" id="p95">–</div><div class="pl">95% by (safe commit)</div></div>
+    </div>
+    <div class="hist" id="s-hist-out"></div>
+    <div class="simsum" id="s-sum"></div>
+  </div>
+  <div class="simerr" id="s-err"></div>
+</div>
+<p style="font-size:12px;color:#888;margin-top:6px">Notice what you <em>didn't</em> do: estimate anything. The forecast comes entirely from how fast the team has actually been going. Feed it real weekly throughput and you have a defensible answer for the "when?" question — a range with confidence, not a single date you'll miss.</p>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Delivery leadership fails in predictable ways — false precision, piling on WIP, chasing gameable metrics, and adding process where flow was the problem. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Run the forecaster with your team's real weekly throughput — then quote the <em>85%</em> number, not the 50%, to stakeholders. (2) Count your team's actual WIP right now; if it's more than ~1.5× the number of people, that's your delivery problem. (3) Swap one "how many points?" conversation this week for "what does our cycle-time data say?" (4) Find your one ceremony that never changes anything, and kill or fix it.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 3 · leading the machine that ships. Follows Stage 2 · Leading People (<a class="x" href="leadership_first_follower.html">First Follower</a> → <a class="x" href="leadership_torchbearer.html">Torchbearer</a>). <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'An exec asks "exactly when will this be done?" You have several weeks of throughput data and a 40-item backlog.',
+     opts:[
+       {t:'Give a probabilistic forecast from the data: "85% confident within 11 weeks."',v:'best',fb:'Honest, defensible, and actually useful for planning. A confidence-based range from real throughput is the professional answer — it survives contact with reality in a way a single made-up date never does.'},
+       {t:'Give a range with a clear confidence caveat.',v:'ok',fb:'Good instinct — a range beats a point. Tighten it by attaching actual probabilities from your data ("50% by week 8, 85% by week 11") rather than a hand-wavy "6–12 weeks," and it becomes a real forecast.'},
+       {t:'Pick a single confident-sounding date.',v:'poor',fb:'False precision is the classic delivery trap. A single date has a near-zero chance of being exactly right, and when you miss it, you lose the credibility a range would have protected. Confidence you can’t back is just a future apology.'},
+       {t:'Refuse to commit — "it’s done when it’s done."',v:'poor',fb:'The opposite failure. Leadership needs to plan, and "no idea" reads as evasive or out of control. You <em>can</em> forecast responsibly from data — declining to is abdication, not honesty.'}
+     ]},
+    {q:'The team has 8 things in progress and nothing is shipping. There’s pressure to start a 9th "urgent" item.',
+     opts:[
+       {t:'Impose a WIP limit — stop starting, swarm to finish what’s already in flight.',v:'best',fb:'This is Little’s Law made practical. Eight half-done items deliver zero value; finishing three of them delivers three. Cutting WIP is the single fastest way to start shipping again — counterintuitive, and correct.'},
+       {t:'Prioritize the 9th above the rest and pause something else.',v:'ok',fb:'Reasonable if the 9th is genuinely more important — but only if you actually <em>stop</em> the paused work, not just add on top. The discipline is finishing, not reshuffling nine open items into a slightly different nine.'},
+       {t:'Start the 9th too — everything’s urgent.',v:'poor',fb:'"Everything’s urgent" is how you get nine things 80% done and nothing shippable. More WIP means more context-switching and longer cycle times for <em>all</em> of it. Adding work to a stalled system stalls it further.'},
+       {t:'Tell everyone to just work harder and faster.',v:'poor',fb:'The bottleneck isn’t effort, it’s flow. People are already busy — that’s the problem. "Work harder" on a high-WIP system burns the team out while delivery stays exactly as stuck.'}
+     ]},
+    {q:'Leadership starts ranking teams by story-point velocity. Your team’s velocity is suddenly up 40%.',
+     opts:[
+       {t:'Push back on velocity as a target and report cycle time and throughput instead.',v:'best',fb:'Goodhart’s Law in action — the instant velocity became a target, the points inflated, not the output. Redirecting to ungameable, real-world metrics (cycle time, throughput, items shipped) is exactly the conductor’s job.'},
+       {t:'Explain that velocity isn’t comparable across teams.',v:'ok',fb:'True and worth saying — points are a team-local unit, meaningless across teams. But stopping at "it’s not comparable" leaves the bad metric in place; propose the better ones (cycle time, throughput) to actually fix it.'},
+       {t:'Celebrate the 40% and set an even higher points target.',v:'poor',fb:'You’d be rewarding and institutionalizing the inflation. Next quarter the points rise again while real delivery is flat, and now the whole org is steering by a fabricated number. That’s how metrics theater metastasizes.'},
+       {t:'Quietly inflate estimates to keep the number climbing.',v:'poor',fb:'Gaming the metric to look good is a fast way to destroy your own credibility and the data everyone plans with. When it surfaces — and it does — you’ve traded trust for a vanity chart.'}
+     ]},
+    {q:'Your team performs every ceremony — standup, planning, retro — yet delivery is slow and retros never change anything.',
+     opts:[
+       {t:'Cut ceremonies to what creates value; fix the real flow problem (WIP, dependencies, cycle time).',v:'best',fb:'Textbook cargo-cult agile — the rituals without the results. The process should serve delivery, not the reverse. Strip it to what actually creates feedback and go fix the thing that’s truly slowing flow.'},
+       {t:'Bring in an agile coach to run the ceremonies better.',v:'ok',fb:'A good coach can help — but only if the diagnosis is "ceremonies run poorly." Often the real issue is high WIP or dependencies, and better-facilitated meetings won’t touch that. Fix the flow, not just the facilitation.'},
+       {t:'Add more process — a scrum master, stricter sprints, more meetings.',v:'poor',fb:'Adding process to a process problem is pouring water on a grease fire. More ceremony without changing flow just adds overhead and the <em>feeling</em> of control while delivery stays exactly as slow.'},
+       {t:'Abandon all process and just wing it.',v:'poor',fb:'Overcorrection. The answer to bad process isn’t no process — it’s the <em>minimum</em> that creates real feedback and predictable flow. Winging it trades ineffective ritual for pure chaos.'}
+     ]},
+    {q:'A fixed launch date is looming, and your Monte Carlo forecast says you won’t make it at the current scope.',
+     opts:[
+       {t:'Cut scope to the date — ship the most valuable slice on time.',v:'best',fb:'Of the classic three (scope, date, quality), scope is almost always the honest lever. Your forecast tells you exactly how much fits; ship that, cut the rest or defer it. A smaller thing that lands beats a bigger thing that slips.'},
+       {t:'Negotiate the date, backed by the forecast.',v:'ok',fb:'A legitimate move — a data-backed "here’s what the numbers say" is far stronger than "we need more time." Sometimes the date is genuinely movable. Just have the scope-cut option ready, since many dates truly can’t move.'},
+       {t:'Add more engineers to the project to speed it up.',v:'poor',fb:'Brooks’s Law: adding people to a late project makes it later. Onboarding and coordination overhead slow you down before they speed you up. Bodies are not a schedule fix on a deadline-critical project.'},
+       {t:'Push the team into crunch and overtime to hit it.',v:'poor',fb:'Crunch buys a short burst and pays it back with interest — bugs, burnout, and attrition (see <a class="x" href="leadership_torchbearer.html">The Torchbearer</a>). It also usually doesn’t even work. Cut scope; don’t break the people.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Conductor call',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // Monte Carlo forecaster
+  var out=document.getElementById('s-out'),err=document.getElementById('s-err');
+  document.getElementById('s-run').addEventListener('click',function(){
+    err.textContent='';
+    var backlog=parseInt(document.getElementById('s-backlog').value,10);
+    var hist=(document.getElementById('s-hist').value||'').split(/[^0-9.]+/).filter(function(x){return x!=='';}).map(Number).filter(function(n){return !isNaN(n)&&n>=0;});
+    if(!backlog||backlog<1){err.textContent='Enter a backlog of at least 1 item.';out.classList.remove('show');return;}
+    if(hist.length<2){err.textContent='Enter at least 2 weeks of throughput history.';out.classList.remove('show');return;}
+    if(hist.reduce(function(a,b){return a+b;},0)===0){err.textContent='Throughput history is all zeros — the team never completes anything, so it can never finish.';out.classList.remove('show');return;}
+    var TRIALS=10000,results=[];
+    for(var t=0;t<TRIALS;t++){
+      var done=0,weeks=0;
+      while(done<backlog&&weeks<1040){done+=hist[Math.floor(Math.random()*hist.length)];weeks++;}
+      results.push(weeks);
+    }
+    results.sort(function(a,b){return a-b;});
+    function pct(p){return results[Math.min(results.length-1,Math.floor(p*results.length))];}
+    var p50=pct(0.50),p85=pct(0.85),p95=pct(0.95);
+    document.getElementById('p50').textContent=p50+' wk';
+    document.getElementById('p85').textContent=p85+' wk';
+    document.getElementById('p95').textContent=p95+' wk';
+    // histogram
+    var lo=results[0],hi=results[results.length-1];
+    var counts={};for(var w=lo;w<=hi;w++)counts[w]=0;
+    results.forEach(function(w){counts[w]++;});
+    var maxc=0;for(var k in counts)if(counts[k]>maxc)maxc=counts[k];
+    var html='';for(var w2=lo;w2<=hi;w2++){
+      var c=counts[w2],pctc=(c/TRIALS*100),wide=Math.round(c/maxc*200);
+      var mark=(w2===p85)?' mark':'';
+      html+='<div class="hrow'+mark+'"><span class="hlab">wk '+w2+'</span><span class="hbar" style="width:'+wide+'px"></span><span class="hct">'+pctc.toFixed(0)+'%</span></div>';
+    }
+    document.getElementById('s-hist-out').innerHTML=html;
+    document.getElementById('s-sum').innerHTML='In 10,000 simulations, this project finished within <b>'+p50+' weeks</b> about half the time — but plan around the <b>85% line: '+p85+' weeks</b>. Committing to the 50% number means a coin-flip chance of being late. The highlighted bar marks the 85% mark; the long right tail is your risk.';
+    out.classList.add('show');
+  });
+})();
+</script>
+</body></html>
