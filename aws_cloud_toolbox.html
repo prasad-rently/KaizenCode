@@ -1,138 +1,781 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Cloud Toolbox — Every Tool From Laptop to Production</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:760px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
-/* necessity badges */
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Cloud Toolbox — Every Tool From Laptop to Production</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:800px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:8px 0 14px}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:25px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:20px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:30px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:7px 9px;text-align:left;border:1px solid #e8e8e8}td{padding:7px 9px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* necessity + cost badges */
 .t-must,.t-rec,.t-sit{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;letter-spacing:.3px}
 .t-must{background:#fdeeee;color:#993C1D}.t-rec{background:#fdf3e4;color:#BA7517}.t-sit{background:#eef4fb;color:#185FA5}
 @media(prefers-color-scheme:dark){.t-must{background:#2b1512;color:#e8907a}.t-rec{background:#2b2113;color:#e0a75a}.t-sit{background:#12202e;color:#7ab5e8}}
+.cost{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;background:#eee;color:#555;white-space:nowrap;font-family:'SF Mono','Fira Code',monospace}
+@media(prefers-color-scheme:dark){.cost{background:#242424;color:#aaa}}
+/* breadcrumb + pager */
+.crumb{font-size:11.5px;color:#999;margin:2px 0 10px}.crumb a{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){.crumb{color:#777}.crumb a{color:#8f8cff}}
+.pager{display:flex;gap:10px;margin:16px 0}
+.pg{flex:1 1 0;min-width:0;border:1px solid #e2e2e2;border-radius:10px;padding:9px 13px;text-decoration:none;background:#fafafa;transition:border-color .15s}
+.pg:hover{border-color:#5350B4}.pg span{display:block;font-size:10px;color:#999;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin-bottom:1px}.pg b{font-size:13px;color:#5350B4;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pg.next{text-align:right}
+@media(prefers-color-scheme:dark){.pg{background:#161616;border-color:#2a2a2a}.pg b{color:#8f8cff}.pg span{color:#777}}
 /* filter chips */
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0;position:sticky;top:0;background:inherit;padding:8px 0;z-index:2}
 .fbtn{font:inherit;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:5px 14px;border-radius:20px;transition:all .15s}
 .fbtn:hover{border-color:#5350B4;color:#5350B4}.fbtn.on{background:#5350B4;border-color:#5350B4;color:#fff}
 @media(prefers-color-scheme:dark){.fbtn{background:#1a1a1a;border-color:#333;color:#bbb}.fbtn.on{background:#8f8cff;border-color:#8f8cff;color:#111}}
-tr.hide{display:none}
-.toc{border:1px solid #e8e8e8;border-radius:10px;padding:14px 18px;margin:18px 0;font-size:12.5px;background:#fafafa}.toc a{color:#5350B4;text-decoration:none;font-weight:600}.toc li{margin-bottom:3px}@media(prefers-color-scheme:dark){.toc{background:#161616;border-color:#2a2a2a}.toc a{color:#8f8cff}}
-td b{font-size:12.5px}td .alt{color:#888;font-size:11.5px;display:block;margin-top:3px}
-pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px;background:#f5f5f5;border:1px solid #e8e8e8;border-radius:8px;margin:12px 0}@media(prefers-color-scheme:dark){pre{background:#1a1a1a;border-color:#2a2a2a}}.fn{color:#185FA5}.cm{color:#999}
+.toc{border:1px solid #e8e8e8;border-radius:10px;padding:14px 18px;margin:18px 0;font-size:12.5px;background:#fafafa}.toc a{color:#5350B4;text-decoration:none;font-weight:600}.toc li{margin-bottom:3px}.toc .tg{font-size:10px;letter-spacing:.6px;color:#999;text-transform:uppercase;font-weight:700;margin:9px 0 3px}@media(prefers-color-scheme:dark){.toc{background:#161616;border-color:#2a2a2a}.toc a{color:#8f8cff}}
+pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.8;padding:11px 13px;background:#f5f5f5;border:1px solid #e8e8e8;border-radius:8px;margin:9px 0}@media(prefers-color-scheme:dark){pre{background:#1a1a1a;border-color:#2a2a2a}}.fn{color:#185FA5}.cm{color:#999}.kw{color:#8250df}.str{color:#0F6E56}@media(prefers-color-scheme:dark){.fn{color:#7ab5e8}.kw{color:#c090ff}.str{color:#5fd0a0}}
+/* super-section label */
+.sup{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#5350B4;margin:38px 0 0;padding-top:14px;border-top:2px solid #eee}.sup .sd{display:block;font-size:11px;font-weight:500;letter-spacing:0;text-transform:none;color:#888;margin-top:2px}@media(prefers-color-scheme:dark){.sup{color:#8f8cff;border-color:#242424}.sup .sd{color:#888}}
+/* capability decision block */
+.cap{border:1px solid #e6e6e6;border-radius:12px;padding:15px 17px;margin:13px 0;background:#fcfcfc}.cap.hide{display:none}
+@media(prefers-color-scheme:dark){.cap{background:#151515;border-color:#282828}}
+.cap-h{display:flex;align-items:center;gap:9px;margin-bottom:7px;flex-wrap:wrap}
+.cap-h h3{font-size:15px;font-weight:700;flex:1 1 auto}.cap-ic{font-size:17px}
+.cap p{margin-bottom:7px}
+.why b,.concept b{color:#222}@media(prefers-color-scheme:dark){.why b,.concept b{color:#eee}}
+.verdict{border-left:3px solid #5350B4;padding:8px 12px;background:#f5f3ff;border-radius:0 8px 8px 0;font-size:12.5px;margin:11px 0 0}
+.vlabel{font-weight:800;text-transform:uppercase;font-size:9.5px;letter-spacing:.6px;color:#5350B4;margin-right:7px}
+@media(prefers-color-scheme:dark){.verdict{background:#191830}.vlabel{color:#9d99ff}}
+.xyz{border:1.5px dashed #3fa07f;background:#f3fdf8;border-radius:10px;padding:10px 13px;margin:11px 0 0;font-size:12.5px}
+.xyz .xh{font-weight:700;color:#0F6E56}.xyz pre{margin:7px 0 0;background:#fff;border-color:#d6ece2}
+@media(prefers-color-scheme:dark){.xyz{background:#0c1c15;border-color:#2f6d54}.xyz .xh{color:#5fd0a0}.xyz pre{background:#0a1410;border-color:#1e3a2c}}
+.deep{font-size:11px;color:#999;margin:10px 0 0}.deep a{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){.deep{color:#777}.deep a{color:#8f8cff}}
+.contenders{font-size:11px;color:#888;margin:2px 0 8px}.contenders b{color:#555}@media(prefers-color-scheme:dark){.contenders b{color:#aaa}}
+/* --- interactive learning components --- */
+.hook{font-size:13.5px;color:#333;margin-bottom:9px}.hook b{color:#111}@media(prefers-color-scheme:dark){.hook{color:#ddd}.hook b{color:#fff}}
+.analogy{background:#fff8ec;border:1px solid #f0dcae;border-radius:10px;padding:9px 13px;margin:9px 0;font-size:12.5px;color:#6b5a2a}.analogy b{color:#8a6d1f}
+@media(prefers-color-scheme:dark){.analogy{background:#1e1a10;border-color:#3a3018;color:#d8c290}.analogy b{color:#e0b95a}}
+details.qa{border:1px solid #e4e4e4;border-radius:9px;margin:6px 0;background:#fff;overflow:hidden}
+details.qa>summary{cursor:pointer;padding:9px 12px;font-size:12.5px;font-weight:600;color:#333;list-style:none;display:flex;gap:7px;align-items:baseline}
+details.qa>summary::-webkit-details-marker{display:none}
+details.qa>summary::before{content:'🤔';font-size:12px}
+details.qa>summary::after{content:'+';margin-left:auto;color:#5350B4;font-weight:700}
+details.qa[open]>summary::after{content:'–'}
+details.qa .qa-a{padding:0 12px 11px 31px;font-size:12.5px;color:#555;line-height:1.55}
+@media(prefers-color-scheme:dark){details.qa{background:#141414;border-color:#2a2a2a}details.qa>summary{color:#ddd}details.qa .qa-a{color:#a8a8a8}details.qa>summary::after{color:#8f8cff}}
+.gotcha{border-left:3px solid #C0392B;background:#fdf0ee;border-radius:0 8px 8px 0;padding:9px 12px;margin:10px 0;font-size:12.5px;color:#7a2f22}.gotcha b{color:#96271a}
+@media(prefers-color-scheme:dark){.gotcha{background:#1f1210;border-color:#8f3a2c;color:#e0a292}.gotcha b{color:#f0a89a}}
+.quiz{border:1.5px solid #cfccee;border-radius:11px;padding:12px 14px;margin:11px 0;background:#faf9ff}
+.quiz .qq{font-weight:700;font-size:12.5px;margin-bottom:9px}.quiz .qq::before{content:'🎯 Your turn — '}
+.qopt{font:inherit;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #cfcfe8;background:#fff;color:#444;padding:6px 12px;border-radius:8px;margin:3px 6px 3px 0;transition:all .12s}
+.qopt:hover{border-color:#5350B4;color:#5350B4}
+.qopt.right{background:#e6f7ee;border-color:#3fa07f;color:#0F6E56}.qopt.wrong{background:#fdeeee;border-color:#d88;color:#993C1D}
+.qfb{display:none;margin-top:9px;font-size:12px;padding:8px 11px;border-radius:8px;line-height:1.5}
+.qfb.show{display:block}.qfb.ok{background:#f3fdf8;color:#0F6E56}.qfb.no{background:#fef4ee;color:#8a4b1d}
+@media(prefers-color-scheme:dark){.quiz{background:#151428;border-color:#2f2c4e}.qopt{background:#1a1a1a;border-color:#333;color:#bbb}.qopt.right{background:#0c2018;border-color:#2f6d54;color:#5fd0a0}.qopt.wrong{background:#241211;border-color:#7a3b30;color:#e8907a}.qfb.ok{background:#0c1c15;color:#5fd0a0}.qfb.no{background:#231609;color:#e0b080}}
+details.more{margin:9px 0 0}details.more>summary{cursor:pointer;font-size:11.5px;font-weight:700;color:#5350B4;list-style:none;padding:3px 0}details.more>summary::-webkit-details-marker{display:none}details.more>summary::before{content:'▸ ';}details.more[open]>summary::before{content:'▾ '}
+@media(prefers-color-scheme:dark){details.more>summary{color:#8f8cff}}
 </style></head><body>
+<nav class="crumb"><a href="index.html">KaizenCode</a> › AWS · The Toolbox</nav>
 <a class="back" href="index.html">← KaizenCode</a>
-<span class="chip">Topic · AWS · The Toolbox</span>
+<div class="pager">
+  <a class="pg prev" href="aws_from_scratch.html"><span>← Prev · ①</span><b>AWS From Scratch</b></a>
+  <a class="pg next" href="index.html#mastery"><span>Next · deep dives →</span><b>The Mastery Track</b></a>
+</div>
+<span class="chip">Topic · AWS · The Toolbox · ②</span>
 <h1>🧰 The Cloud Toolbox</h1>
-<p class="sub">Every tool, service and utility a real application touches on its way from your laptop to a production cloud server — what each one is <em>for</em>, what it replaces, its alternatives, and whether you actually need it. Companion to <a class="x" href="aws_from_scratch.html">AWS From Scratch</a>, which explains the core services in depth.</p>
+<p class="sub">Not a list of tools — a set of <strong>decisions</strong>. For each capability a real app needs, this page teaches the <em>concept</em>, compares the AWS-native / cross-cloud / best-of-breed options, gives a verdict, and shows a working example. We build one app all the way through: <strong>🧗 Trailmark</strong>, a mobile app where hikers post geotagged trail photos. Follow the green panels top-to-bottom and you've built a real backend.</p>
 
-<div class="toc"><strong>On this page</strong>
+<div class="toc"><strong>The build, capability by capability</strong>
+<div class="tg">Run — where code executes &amp; how users reach it</div>
 <ol>
-<li><a href="#tiers">How to read this (the three tiers)</a></li>
-<li><a href="#foundation">Foundation — account, identity &amp; secrets</a></li>
-<li><a href="#ship">Shipping — source → build → deploy</a></li>
-<li><a href="#run">Running — compute, network &amp; delivery</a></li>
-<li><a href="#data">Data — databases, caches, queues &amp; search</a></li>
-<li><a href="#watch">Watching — observability &amp; on-call</a></li>
-<li><a href="#guard">Guarding — security, audit &amp; cost</a></li>
-<li><a href="#desk">At your desk — daily developer utilities</a></li>
-<li><a href="#minimal">The minimal viable production stack</a></li>
-<li><a href="#day">A day in the life — activity → tool map</a></li>
-</ol></div>
+<li><a href="#compute">Compute — what runs your code</a></li>
+<li><a href="#net">Networking &amp; the front door</a></li>
+<li><a href="#cdn">CDN &amp; edge delivery</a></li>
+<li><a href="#scale">Scaling</a></li>
+</ol>
+<div class="tg">Store — data &amp; state</div>
+<ol start="5">
+<li><a href="#rdb">Relational database</a></li>
+<li><a href="#object">Object storage</a></li>
+<li><a href="#cache">Cache</a></li>
+<li><a href="#queue">Queues &amp; events</a></li>
+<li><a href="#stream">Streaming</a></li>
+<li><a href="#nosql">NoSQL</a></li>
+<li><a href="#search">Search</a></li>
+<li><a href="#warehouse">Analytics &amp; warehouse</a></li>
+</ol>
+<div class="tg">Ship — laptop → production</div>
+<ol start="13">
+<li><a href="#cicd">Source &amp; CI/CD</a></li>
+<li><a href="#artifact">Build artifacts</a></li>
+<li><a href="#iac">Infrastructure as Code</a></li>
+<li><a href="#platform">Platform &amp; feature flags</a></li>
+</ol>
+<div class="tg">Secure — identity, secrets, guard, cost</div>
+<ol start="17">
+<li><a href="#iam">Identity &amp; access</a></li>
+<li><a href="#secrets">Secrets &amp; keys</a></li>
+<li><a href="#auth">End-user auth</a></li>
+<li><a href="#audit">Audit, threat &amp; compliance</a></li>
+<li><a href="#cost">Cost control</a></li>
+</ol>
+<div class="tg">See — observability &amp; on-call</div>
+<ol start="22">
+<li><a href="#logs">Logs, metrics &amp; alarms</a></li>
+<li><a href="#errors">Error tracking</a></li>
+<li><a href="#trace">Tracing</a></li>
+<li><a href="#uptime">Uptime &amp; on-call</a></li>
+</ol>
+<div class="tg">Think — the AI / ML layer</div>
+<ol start="26">
+<li><a href="#genai">GenAI models</a></li>
+<li><a href="#aiblocks">AI building blocks</a></li>
+<li><a href="#ml">Custom ML</a></li>
+</ol>
+<div class="tg">Reference</div>
+<ol start="29">
+<li><a href="#desk">At your desk — local dev utilities</a></li>
+<li><a href="#minimal">The minimal viable stack</a></li>
+<li><a href="#trailmark">Trailmark, end to end</a></li>
+<li><a href="#map">Market map — the quick-reference index</a></li>
+</ol>
+</div>
 
-<h2 id="tiers"><span class="sn">1</span>How to read this</h2>
-<p>Every tool below is tagged with how badly you need it. The trap for beginners is treating everything as required — real stacks start tiny and add tools <em>when a specific pain appears</em>:</p>
+<h2 id="how"><span class="sn">i</span>How to read a decision block</h2>
+<p>Every capability below is a little lesson, not a spec sheet. It follows the same beats so you can skim or study — and several of them are <b>things to click</b>:</p>
 <ul>
-<li><span class="t-must">MUST</span> — production is irresponsible without it. There are 17 of these across the whole page — that's the entire mandatory surface.</li>
-<li><span class="t-rec">RECOMMENDED</span> — add in your first months; each one removes a whole class of 3am problems.</li>
-<li><span class="t-sit">SITUATIONAL</span> — solves a specific problem. Adopting it before you have that problem is how stacks become unmaintainable. The description says exactly when the moment arrives.</li>
+<li><b>Plain-language hook + 💡 analogy</b> — what this is and why it matters, in everyday terms.</li>
+<li><b>🤔 Questions</b> — the what/why/how a beginner actually asks; <em>tap one to reveal the answer</em>.</li>
+<li><b>💸 Gotcha</b> — the real-world trap (usually a surprise bill or a security foot-gun) nobody warns you about.</li>
+<li><b>▸ Go deeper</b> — the dense comparison table + market context, tucked away so the surface stays simple. Open it when you want detail.</li>
+<li><b>Verdict</b> — the pragmatic default pick, with a need badge.</li>
+<li><b>🧗 Trailmark</b> — how our example app uses it, with the minimal wiring.</li>
+<li><b>🎯 Your turn</b> — a quick scenario. <em>Click an answer</em> — right or wrong, it explains why.</li>
 </ul>
-<p>Filter the tables:</p>
+<p>Need badges: <span class="t-must">MUST</span> production is irresponsible without it · <span class="t-rec">REC</span> add in your first months · <span class="t-sit">SIT</span> adopt only when its specific pain appears. Cost: <span class="cost">free</span> · <span class="cost">¢</span> cents · <span class="cost">$</span> tens · <span class="cost">$$</span> hundreds · <span class="cost">$$$</span> thousands+ per month at small scale.</p>
 <div class="filters">
-  <button class="fbtn on" data-f="all">All tools</button>
+  <button class="fbtn on" data-f="all">All capabilities</button>
   <button class="fbtn" data-f="must">Must-have</button>
   <button class="fbtn" data-f="rec">Recommended</button>
   <button class="fbtn" data-f="sit">Situational</button>
 </div>
+<div class="warn"><strong>“Market &amp; mindshare” figures are directional.</strong> True market cap only exists for public companies; AWS services roll up into Amazon and open-source tools have none. Valuations are rough magnitudes with an as-of year to tell you which <em>league</em> a tool plays in — not gospel, and this page is static.</div>
 
-<h2 id="foundation"><span class="sn">2</span>Foundation — account, identity &amp; secrets</h2>
-<p>Before an app can exist, someone has to answer: who are we in the cloud, who can touch what, and where do passwords live?</p>
+<h2 id="landscape"><span class="sn">ii</span>The landscape — three clouds, one default</h2>
+<p>AWS invented the modern cloud (S3 then EC2, 2006) and still leads it. Knowing the shape explains why so many independent tools <em>orbit</em> AWS rather than replace it.</p>
 <table>
-<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
-<tr data-tier="must"><td><b>AWS IAM</b></td><td>The permission system checking every API call. Daily: you assume roles, debug <code>AccessDenied</code>, and write least-privilege policies for services. Explained fully in <a class="x" href="aws_from_scratch.html#iam">From Scratch §5</a>.<span class="alt">Alternatives: none — it's mandatory. GCP IAM / Azure RBAC are the same idea elsewhere.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="must"><td><b>AWS CLI</b></td><td>Every console button as a terminal command. Daily: <code>aws logs tail</code>, <code>aws s3 sync</code>, checking what's running without leaving your editor.<span class="alt">Alternatives: the console (slower), SDKs (for code, not hands).</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="must"><td><b>Secrets Manager / SSM Parameter Store</b></td><td>The vault for DB passwords, API keys and tokens. Apps fetch secrets at boot via IAM role — <em>no secret ever sits in code, git, or a Slack message</em>. Secrets Manager adds automatic rotation (~$0.40/secret/mo); Parameter Store is the free 90% version — start there. Daily: adding a key for a new integration, rotating one after an employee leaves.<span class="alt">Alternatives: HashiCorp Vault (self-hosted, powerful, heavy), Doppler / Infisical (developer-friendly SaaS), 1Password for humans. A <code>.env</code> file on a server is the thing these all replace.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="rec"><td><b>IAM Identity Center (SSO) + AWS Organizations</b></td><td>One login for many AWS accounts, with dev/staging/prod as <em>separate accounts</em> so a dev mistake can't touch prod. Daily: <code>aws sso login</code> in the morning, switching roles between accounts.<span class="alt">Alternatives: Okta/Entra as the IdP in front. Solo learners: one account + IAM user is fine.</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="rec"><td><b>ACM (Certificate Manager)</b></td><td>Free, auto-renewing TLS certificates for your load balancer and CDN. Set once per domain, then forget certificates exist — which is the entire point.<span class="alt">Alternatives: Let's Encrypt + certbot (when you manage your own web server), Cloudflare's edge certs.</span></td><td><span class="t-rec">REC</span></td></tr>
+<tr><th style="width:18%">Provider</th><th style="width:14%">Rough share*</th><th>Where it wins</th></tr>
+<tr><td><b>AWS</b></td><td>~30–32%</td><td>The default. Widest catalog (200+ services), deepest ecosystem, most hiring demand. A ~$100B+/yr business inside Amazon. Tools integrate here first.</td></tr>
+<tr><td><b>Microsoft Azure</b></td><td>~20–25%</td><td>Enterprises already on Microsoft/AD, regulated + government, strong hybrid on-prem story.</td></tr>
+<tr><td><b>Google Cloud</b></td><td>~11–12%</td><td>Data/analytics (BigQuery), Kubernetes (it created it), ML. Smaller, growing, developer-favourite aesthetics.</td></tr>
 </table>
+<p style="font-size:11px;color:#999">*Directional ~2024–25 estimates; they move quarterly. The ordering and gaps matter, not the decimals.</p>
 
-<h2 id="ship"><span class="sn">3</span>Shipping — source → build → deploy</h2>
-<p>The pipeline: code leaves a laptop, becomes an artifact, and lands in production without a human copying files. This whole stage is <a class="x" href="mastery_forge_cicd.html">The Forge</a>'s territory.</p>
+<p class="sup">Run<span class="sd">Where your code executes, and how a user reaches it.</span></p>
+
+<div class="cap" data-tier="must" id="compute">
+<div class="cap-h"><span class="cap-ic">⬢</span><h3>Compute — what actually runs your code</h3><span class="t-must">MUST</span> <span class="cost">$$</span></div>
+<p class="hook">Your code needs a computer to run on — but you don't want to <em>own</em> one (buy it, plug it in, patch it, replace the fan at 2am). The cloud rents you one. The only real question: <b>how much of the babysitting do you hand to AWS?</b></p>
+<div class="analogy">💡 <b>Think of it like getting around a city.</b> <b>EC2</b> = buying a car (yours forever — you do the oil changes). <b>Fargate</b> = a taxi (you say where; they drive and maintain it). <b>Lambda</b> = a rental scooter (grab it for a 5-minute hop, pay only for the ride, it's gone after).</div>
+<details class="qa"><summary>What actually <em>is</em> a “container”?</summary><div class="qa-a">A lunchbox for your app. It seals your code <em>and</em> everything it needs to run — the right Node version, the libraries, the OS bits — into one box. That box runs identically on your laptop and in the cloud, so “works on my machine” finally means “works everywhere.”</div></details>
+<details class="qa"><summary>Why not just one big server that never turns off?</summary><div class="qa-a">For one tiny app, you can! It breaks when: <b>(1)</b> that server dies at 3am and your whole app is down, <b>(2)</b> traffic doubles and one box can't cope, <b>(3)</b> you deploy and users hit errors while it restarts. Fargate runs 2+ copies behind a load balancer, so none of those hurt.</div></details>
+<details class="qa"><summary>How do I actually pick one?</summary><div class="qa-a">Steady web app → <b>Fargate</b>. Tiny / spiky / occasional job → <b>Lambda</b>. Need a GPU or full control → <b>EC2</b>. Big team needing multi-cloud portability → <b>EKS</b> (Kubernetes). When unsure: Fargate.</div></details>
+<div class="gotcha">💸 <b>EC2's #1 surprise bill:</b> it charges you 24/7 whether you have 1 user or zero. A <code>t3.large</code> left running all month is ~$60 for literally nothing. Rule one of cloud bills: turn off what you're not using — or use Fargate/Lambda, which scale toward zero on their own.</div>
+<div class="gotcha">💸 <b>Lambda flips the other way:</b> dirt-cheap for bursts, but <em>expensive</em> if it runs constantly. Past a few hundred hours a month of steady traffic, plain Fargate costs less. Lambda is a scooter, not a daily commute.</div>
+<details class="more"><summary>Go deeper: the full option map &amp; why Kubernetes is best-of-breed</summary>
 <table>
-<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
-<tr data-tier="must"><td><b>Git + GitHub</b></td><td>Source of truth. Everything downstream is triggered by a push or merge. Daily: PRs, reviews, the merge button as your deploy button.<span class="alt">Alternatives: GitLab (integrated CI), Bitbucket. AWS CodeCommit is deprecated — don't start there.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="must"><td><b>GitHub Actions (CI/CD)</b></td><td>Robot that runs on every push: tests → build → docker image → deploy. The YAML file in <code>.github/workflows/</code> <em>is</em> your release process. Daily: watching a deploy go green, re-running a flaky job, adding a step.<span class="alt">Alternatives: GitLab CI, CircleCI, Buildkite; AWS-native CodePipeline/CodeBuild (clunkier, IAM-native); Jenkins (self-hosted, legacy gravity).</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="must"><td><b>Docker</b></td><td>Packages your app + runtime + OS deps into one image that runs identically on your laptop and in prod — ends "works on my machine" (Phase 4). Daily: <code>docker build</code>, <code>docker compose up</code> for local dev, writing the occasional Dockerfile.<span class="alt">Alternatives: Podman (drop-in), Nixpacks/buildpacks (Dockerfile-free builds). Running Node directly on EC2 is the thing it replaces.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="must"><td><b>ECR (Elastic Container Registry)</b></td><td>Private shelf where built images live, versioned by tag; ECS/EKS pull from it. Daily: mostly invisible — CI pushes, compute pulls; you visit to check tags or clean old images with a lifecycle rule.<span class="alt">Alternatives: Docker Hub, GitHub Container Registry (ghcr.io) — fine, but cross-cloud pulls cost latency and egress.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="rec"><td><b>Terraform (IaC)</b></td><td>Your whole infrastructure — VPC, ECS, RDS, DNS — declared in files, reviewed in PRs, applied with one command. The cure for "we're afraid to touch the console" (<a class="x" href="mastery_blueprint_iac.html">The Blueprint</a>). Daily: <code>terraform plan</code> on infra PRs, occasional state surgery.<span class="alt">Alternatives: OpenTofu (open-source fork), AWS CDK (infra in TypeScript), Pulumi (any language), CloudFormation (raw YAML underneath). Any is fine; pick one and never click-create prod resources again.</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="sit"><td><b>Convox / Heroku-style PaaS on AWS</b></td><td>An opinionated platform that runs <em>in your AWS account</em> and hides the assembly: <code>convox deploy</code> creates the load balancer, ECS services, scaling, logs and secrets wiring for you — Heroku ergonomics, AWS bill. Daily (if adopted): it <em>is</em> your deploy tool, dashboard and log viewer.<span class="alt">Alternatives on-AWS: Elastic Beanstalk, App Runner, Copilot CLI, SST (serverless apps), Flightcontrol, Porter. Off-AWS: Heroku, Render, Fly.io, Railway — genuinely great until traffic/cost/compliance pull you onto raw AWS. <b>When:</b> small team, no infra engineer, standard web app. <b>When not:</b> you need custom networking or you've outgrown the abstraction — the classic arc is PaaS → raw AWS + Terraform around year 2–3.</span></td><td><span class="t-sit">SIT</span></td></tr>
-<tr data-tier="sit"><td><b>Feature flags (LaunchDarkly / Unleash / Flagsmith)</b></td><td>Turn features on/off per user at runtime, separating <em>deploy</em> from <em>release</em>. Daily: wrapping risky code in a flag, one-click kill switch when it misbehaves.<span class="alt">Alternatives: a flags table in your own DB (fine at first), AWS AppConfig. <b>When:</b> the first time you wish you could undo a release without redeploying.</span></td><td><span class="t-sit">SIT</span></td></tr>
+<tr><th style="width:30%">You manage…</th><th>AWS</th><th>Google</th><th>Azure</th></tr>
+<tr><td>The whole VM</td><td>EC2</td><td>Compute Engine</td><td>VMs</td></tr>
+<tr><td>Just the container</td><td><b>ECS + Fargate</b></td><td>Cloud Run</td><td>Container Apps</td></tr>
+<tr><td>A cluster you steer</td><td>EKS</td><td>GKE</td><td>AKS</td></tr>
+<tr><td>Nothing (a function)</td><td>Lambda</td><td>Cloud Functions</td><td>Functions</td></tr>
 </table>
+<p class="why"><b>Why Kubernetes is the best-of-breed independent.</b> EKS/GKE/AKS are the same open engine — <b>Kubernetes</b>, born at Google, now CNCF-governed and owned by no vendor. Because it's an open standard, your deploy files move between clouds unchanged. That portability made it the industry standard — and is also why it's overkill until you have a platform team: you inherit all its complexity to gain freedom you may not need yet.</p>
+</details>
+<p class="verdict"><span class="vlabel">Verdict</span>Default to <b>ECS + Fargate</b>: hand AWS an image and a number (“run 3 copies”), it finds the machines and patches nothing. EKS only when portability/scale demand it · EC2 for GPUs or full control · Lambda for spiky, event-driven glue.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to run its Node API serving the trail feed all day. → <b>ECS on Fargate</b> (steady traffic, no server babysitting): one image, <code>desired_count: 2</code>, behind the ALB. Later, thumbnail-making (which only fires on uploads) moves to <b>Lambda</b> so you pay per photo, not per hour.</div>
+<div class="quiz"><p class="qq">Trailmark's thumbnail-maker runs only when someone uploads — ~50 times an hour, one second each. What runs it cheapest?</p>
+<button class="qopt" data-correct="0" data-fb="An always-on EC2 box would sit idle 99% of the time and still bill you 24/7 — the classic overpay.">EC2 (always on)</button>
+<button class="qopt" data-correct="0" data-fb="Closer — but a Fargate task also runs continuously. For work that fires in short bursts, you'd still pay for lots of idle time.">Fargate</button>
+<button class="qopt" data-correct="1" data-fb="Lambda ✅ — it wakes for that one second, does the job, and you pay for exactly that. Perfect for short, bursty, event-driven work.">Lambda</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_forge_cicd.html">The Forge</a> (how images build &amp; deploy) · <a class="x" href="aws_from_scratch.html#ec2">From Scratch §6</a></p>
+</div>
 
-<h2 id="run"><span class="sn">4</span>Running — compute, network &amp; delivery</h2>
-<p>Where the app actually executes, and how a user's packet finds it. (Each core service explained from zero in <a class="x" href="aws_from_scratch.html">From Scratch</a>.)</p>
+<div class="cap" data-tier="must" id="net">
+<div class="cap-h"><span class="cap-ic">🔀</span><h3>Networking &amp; the front door</h3><span class="t-must">MUST</span> <span class="cost">$</span></div>
+<p class="hook">Your app needs two things that sound opposite: to be <b>hidden</b> (so nobody reaches your database directly) and to be <b>reachable</b> (so users hit your site over HTTPS). Three pieces make both true at once.</p>
+<div class="analogy">💡 <b>Think of it like an office building.</b> The <b>VPC</b> is the building with locked floors. The <b>load balancer (ALB)</b> is the reception desk out front — greets every visitor, checks them in, sends them to a free staffer. <b>Route 53 (DNS)</b> is the street address that gets people to the door. Your database sits on a locked upper floor with no public entrance.</div>
+<details class="qa"><summary>Why can't I just put my database on the internet?</summary><div class="qa-a">Because bots scan every public address on earth within minutes, trying default passwords. A database on the open internet is found and attacked almost immediately. Keeping it in a private subnet — reachable only by your app, never from outside — removes that entire class of disaster.</div></details>
+<details class="qa"><summary>What does a load balancer actually do for me?</summary><div class="qa-a">Three quiet miracles: it lets you run <b>more than one copy</b> of your app (so one crash isn't an outage), it <b>deploys with zero downtime</b> (new copies come up before old ones leave), and it <b>handles HTTPS</b> so your app code doesn't have to. It's the hinge that makes “highly available” possible.</div></details>
+<div class="gotcha">💸 <b>Watch the NAT Gateway.</b> The networking piece nobody warns rookies about: a NAT Gateway (lets private servers reach <em>out</em> to the internet) costs ~$32/mo <em>plus</em> a fee per GB through it. On a quiet app it's often the biggest line on the bill. Real, but easy to forget you turned on.</div>
+<details class="more"><summary>Go deeper: the pieces &amp; the independent option</summary>
+<p class="contenders"><b>The pieces:</b> AWS <b>VPC</b> (the private network) + <b>ALB</b> (layer-7 HTTP front door) / <b>NLB</b> (layer-4, for raw TCP/UDP or static IPs) + <b>Route 53</b> (DNS). Cross-cloud: GCP VPC + Cloud LB, Azure VNet + Load Balancer. Independent: <b>Cloudflare</b> — many teams put it in front of AWS for free DNS + DDoS + caching.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>VPC + ALB + Route 53</b>, all AWS-native, defined once in Terraform and then forgotten until a connectivity bug. Add an NLB only for non-HTTP protocols. Cloudflare in front is a popular, free extra layer.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> the API reachable at <code>api.trailmark.app</code> but the database untouchable. → the ALB (public) terminates HTTPS and forwards to Fargate tasks in <em>private</em> subnets; RDS sits in a private subnet with no route to the internet. Route 53 points the name at the ALB.</div>
+<div class="quiz"><p class="qq">A hacker finds Trailmark's database password. Where does the database live so this <em>still</em> isn't a catastrophe?</p>
+<button class="qopt" data-correct="0" data-fb="A public subnet means the DB is reachable from the internet — with the password, they're in. This is exactly what to avoid.">A public subnet</button>
+<button class="qopt" data-correct="1" data-fb="Private subnet ✅ — with no public route, the password alone is useless; an attacker would first have to get <em>inside</em> your VPC. Defence in depth.">A private subnet</button>
+<button class="qopt" data-correct="0" data-fb="There's no such thing as an 'ALB subnet' — the ALB lives in public subnets precisely so your app and DB don't have to.">Its own ALB subnet</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="aws_from_scratch.html#vpc">From Scratch §8</a> (VPC from zero)</p>
+</div>
+
+<div class="cap" data-tier="rec" id="cdn">
+<div class="cap-h"><span class="cap-ic">🌐</span><h3>CDN &amp; edge delivery</h3><span class="t-rec">REC</span> <span class="cost">$</span></div>
+<p class="hook">If your only server is in Virginia, a user in Sydney waits for every byte to cross the planet — twice. A <b>CDN</b> keeps copies of your images and files in ~hundreds of cities, and hands each user the <em>nearest</em> copy.</p>
+<div class="analogy">💡 <b>Think of it like a coffee chain.</b> Without a CDN, there's one café and everyone flies to it. A CDN opens a branch in every city — you get your order from the one down the street, and the original kitchen isn't slammed.</div>
+<details class="qa"><summary>What can a CDN cache — everything?</summary><div class="qa-a">Anything that's the same for everyone: images, videos, CSS/JS, downloads, and “public” API responses. What it <em>can't</em> cache is per-user data (your feed, your inbox) — that still comes from your server. The trick is caching the 90% that's shared and letting the origin handle the personal 10%.</div></details>
+<details class="qa"><summary>Why do people put Cloudflare in front of AWS?</summary><div class="qa-a">Because its free tier is genuinely good and bundles three things at once — CDN, DNS, and a security layer (DDoS + firewall). You get global speed and a shield without adding to your AWS bill. It's so common it's basically a default pattern.</div></details>
+<div class="gotcha">⚠️ <b>The stale-cache trap.</b> You ship a fix, but users still see the old file — because the CDN is happily serving the cached copy. Every CDN needs a “cache invalidation” (a purge) after you change a cached asset, or a versioned filename (<code>logo.v2.png</code>). Forgetting this is a rite of passage.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
 <table>
-<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
-<tr data-tier="must"><td><b>Compute: ECS + Fargate (or EC2 / Lambda / EKS)</b></td><td>Something must run the container. The pragmatic default: <b>ECS on Fargate</b> — you say "run 3 copies of this image", AWS finds the machines; no servers to patch. Daily: watching a deploy roll, scaling a service, reading a stopped-task's reason.<span class="alt">Alternatives: EC2 (cheapest, most control, most toil — the learning box), Lambda (event-driven/spiky), EKS/Kubernetes (when you have a platform team, not before), Beanstalk/App Runner (training wheels). One of these is MUST; Fargate is the default answer.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="must"><td><b>VPC</b></td><td>The private network everything sits in: public subnets for the load balancer, private for app + DB. Set up once (in Terraform), then it's invisible until a connectivity bug drags you back in.<span class="alt">Alternatives: none — only how much you customize the default.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="must"><td><b>ALB (Application Load Balancer)</b></td><td>The front door: terminates HTTPS (with the ACM cert), health-checks instances, spreads traffic, enables zero-downtime deploys. ~$16/mo+. Daily: invisible; you check its target-group health when something's down.<span class="alt">Alternatives: API Gateway (for Lambda), nginx/Caddy on one box (single-server stage), Cloudflare in front.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="must"><td><b>Route 53</b></td><td>DNS — points <code>yourapp.com</code> at the ALB/CDN. Touched a few times a year; critical every second.<span class="alt">Alternatives: Cloudflare DNS (free, fast, pairs with its CDN), your registrar's DNS (fine for simple setups).</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="rec"><td><b>CloudFront (CDN)</b></td><td>400+ edge caches serving your static assets (and cacheable API responses) from near the user, cutting latency and your servers' load; also your DDoS buffer and free TLS at the edge. Daily: invalidating a cache after a bad asset ships.<span class="alt">Alternatives: Cloudflare (free tier is genuinely good — common to run Cloudflare in front of AWS), Fastly. <b>When MUST:</b> any real static frontend or global users.</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="rec"><td><b>Auto Scaling</b></td><td>Rules that add/remove app copies with load ("keep CPU ≈ 60%"). Set once; it quietly pays for itself every traffic spike and every quiet night.<span class="alt">Alternatives: overprovisioning (money) or manual scaling (sleep).</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="sit"><td><b>API Gateway</b></td><td>Managed front door for <em>Lambda-based</em> APIs: routing, auth (JWT/Cognito), rate limiting, per-request pricing. <b>When:</b> serverless architecture. Container apps behind an ALB don't need it.<span class="alt">Alternatives: ALB (cheaper at volume), Kong/Tyk (self-hosted gateways — <a class="x" href="mastery_gateway_apis.html">The Gateway</a>).</span></td><td><span class="t-sit">SIT</span></td></tr>
-</table>
+<tr><th style="width:34%">Option</th><th>Character</th></tr>
+<tr><td><b>CloudFront</b> (AWS)</td><td>Deep AWS wiring (S3, ALB, ACM, WAF). The default if you're all-in on AWS.</td></tr>
+<tr><td><b>Cloudflare</b> (independent)</td><td>~$30–40B-scale public co. (2025). Generous free tier; CDN + DNS + security in one.</td></tr>
+<tr><td>Fastly / Akamai / bunny.net</td><td>Fastly = programmable edge; Akamai = the pioneer, enterprise scale; bunny = cheap.</td></tr>
+</table></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>CloudFront</b> for one bill and tight AWS integration; <b>Cloudflare</b> for a free tier and a built-in security suite. Both are excellent — becomes a MUST the moment you have real images or global users.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> trail photos to load instantly for a hiker in New Zealand. → <b>CloudFront</b> in front of the S3 photo bucket; the app requests <code>cdn.trailmark.app/photos/…</code> and gets the nearest edge copy instead of a round-trip to Virginia.</div>
+<div class="quiz"><p class="qq">Which of these should Trailmark <em>not</em> serve from the CDN?</p>
+<button class="qopt" data-correct="0" data-fb="Trail photos are identical for everyone — perfect to cache at the edge.">Trail photos</button>
+<button class="qopt" data-correct="0" data-fb="The app's logo and icons are shared by all users — ideal CDN content.">The app logo</button>
+<button class="qopt" data-correct="1" data-fb="Correct ✅ — a hiker's personal feed is different for every user, so it can't be cached globally. That comes fresh from the API each time.">A user's personal feed</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_edge_performance.html">The Edge</a> (latency &amp; performance)</p>
+</div>
 
-<h2 id="data"><span class="sn">5</span>Data — databases, caches, queues &amp; search</h2>
+<div class="cap" data-tier="rec" id="scale">
+<div class="cap-h"><span class="cap-ic">📈</span><h3>Scaling</h3><span class="t-rec">REC</span> <span class="cost">free</span></div>
+<p class="hook">Traffic isn't a flat line — it's quiet at 3am and slammed at lunch. <b>Auto Scaling</b> adds app copies when it's busy and removes them when it's quiet, automatically, so you neither crash under load nor pay for idle machines.</p>
+<div class="analogy">💡 <b>Think of it like a shop rostering staff.</b> Auto Scaling watches the queue: crowd building? Call in more cashiers. Store empty? Send some home. You set the rule (“keep the line short”) once, and it staffs every rush and every lull for you.</div>
+<details class="qa"><summary>What's wrong with just running lots of servers all the time?</summary><div class="qa-a">You'd pay peak prices around the clock for capacity you use two hours a day — often 5–10× the bill. The opposite mistake (too few servers) means you crash the moment you get popular. Auto Scaling gives you <em>enough, right now</em>, and nothing more.</div></details>
+<details class="qa"><summary>How does it know when to scale?</summary><div class="qa-a">You pick a signal and a target — usually “keep average CPU around 60%.” When traffic pushes CPU above that, it adds a copy; when it drops, it removes one. You can also scale on memory, request count, or (with KEDA) queue depth.</div></details>
+<div class="gotcha">⚠️ <b>Scaling has a floor and a ceiling — set both.</b> No <code>max</code> and a traffic spike (or a bug, or a bot) can scale you to a huge bill. No sensible <code>min</code> and a sudden rush finds you with too few copies to ramp fast enough. Always cap both ends.</div>
+<p class="verdict"><span class="vlabel">Verdict</span>Turn on <b>AWS Auto Scaling</b> on your Fargate service with a target-tracking policy (<code>min 2, max 10, target CPU 60%</code>). Set once; it pays for itself on every spike and every quiet night.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to survive Saturday mornings when everyone hits the trails <em>and</em> the app. → the policy ramps from 2 tasks to as many as 10 as load climbs, then scales back to 2 by Tuesday night. You wrote the rule once in the Compute step; here you just switch it on.</div>
+<div class="quiz"><p class="qq">Trailmark gets featured on the news and traffic 20×'s in ten minutes. With Auto Scaling set to <code>min 2, max 10, CPU 60%</code>, what happens?</p>
+<button class="qopt" data-correct="1" data-fb="Right ✅ — it adds tasks up to the max of 10 to hold CPU near 60%. If 10 still isn't enough you'll see strain, which is your signal to raise the ceiling — but you won't simply fall over at 2.">It scales up toward 10 tasks</button>
+<button class="qopt" data-correct="0" data-fb="It won't stay at 2 — that's the <em>minimum</em>, not a cap on scaling up. The policy adds copies as CPU rises.">It stays at 2 and crashes</button>
+<button class="qopt" data-correct="0" data-fb="It won't blow past 10 — that's the whole point of setting a max: predictable cost even under a surprise surge.">It scales to unlimited tasks</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_edge_performance.html">The Edge</a></p>
+</div>
+
+<p class="sup">Store<span class="sd">Every kind of state, and the one rule: start with a database, add each of these only under real pressure.</span></p>
+
+<div class="cap" data-tier="must" id="rdb">
+<div class="cap-h"><span class="cap-ic">🗄️</span><h3>Relational database — the system of record</h3><span class="t-must">MUST</span> <span class="cost">$$</span></div>
+<p class="hook">Every app has one thing it must <em>never</em> get wrong: what's true right now — who the user is, what they own, what they paid. That truth lives in a <b>relational database</b>, and you want AWS, not you, keeping it alive at 3am.</p>
+<div class="analogy">💡 <b>Think of it like a meticulous ledger book.</b> Every fact has its row, nothing contradicts anything else, and there's always a backup if the building burns down. <b>Postgres</b> is the ledger; <b>RDS</b> is the accountant AWS hires to keep it, back it up, and cover when it's sick.</div>
+<details class="qa"><summary>What does “managed” actually save me?</summary><div class="qa-a">The unglamorous, never-ending chores: automated backups, security patching, failover when a machine dies, and spinning up read replicas. You still design your tables and write queries — AWS just keeps the box healthy so you're not paged for it.</div></details>
+<details class="qa"><summary>What's “Multi-AZ” and do I need it?</summary><div class="qa-a">A hot standby copy of your database in a second data centre (Availability Zone). If the main one fails, AWS automatically flips to the standby in about a minute. For anything real: yes — it's the difference between a one-minute blip and an hours-long outage.</div></details>
+<details class="qa"><summary>Postgres or MySQL?</summary><div class="qa-a">Default to <b>Postgres</b> — richer features (JSON, full-text, extensions), and the most-loved database in developer surveys. MySQL is perfectly fine, but Postgres is the modern default you won't outgrow.</div></details>
+<div class="gotcha">💸 <b>A read replica is NOT a backup.</b> It's a live copy for spreading out read traffic — so if you fat-finger a <code>DELETE</code>, the replica faithfully deletes too. <b>Backups</b> (automated snapshots) are your undo button; <b>replicas</b> are your speed boost. Real apps keep both.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
 <table>
-<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
-<tr data-tier="must"><td><b>RDS Postgres (or Aurora)</b></td><td>The system of record. Managed backups, patching, Multi-AZ failover, read replicas (<a class="x" href="aws_from_scratch.html#rds">From Scratch §9</a>). Daily: slow-query hunting, the occasional migration, checking replica lag. Aurora = AWS's re-engineered Postgres/MySQL — faster and pricier; start plain RDS.<span class="alt">Alternatives: Neon / Supabase / PlanetScale (serverless DBaaS, lovely DX), MongoDB Atlas (if document-shaped), self-hosted on EC2 (don't, until you have a reason and a DBA).</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="must"><td><b>S3</b></td><td>Files: uploads, builds, backups, logs, data lake — everything that isn't a database row ends up here. Daily: presigning upload URLs, lifecycle rules aging logs to Glacier.<span class="alt">Alternatives: Cloudflare R2 (zero egress fees — interesting for serving big files), GCS/Azure Blob elsewhere.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="rec"><td><b>ElastiCache Redis</b></td><td>In-memory store for the hot path: sessions, rate-limit counters, cached queries, pub/sub, job queues (BullMQ). Usually the first infra added after the DB, the moment something is slow or needs sharing across instances.<span class="alt">Alternatives: Upstash (serverless Redis, per-request pricing), Valkey (open-source fork), Memcached (pure cache). In-process memory works until instance #2 exists.</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="rec"><td><b>SQS (+ SNS / EventBridge)</b></td><td>Queues — the shock absorber. Web tier enqueues slow work (emails, resizing, webhooks); workers chew through it at their own pace; traffic spikes become queue depth instead of timeouts. SNS fans one event to many listeners; EventBridge routes events by pattern and runs cron. Daily: watching queue depth, draining a dead-letter queue after a bad deploy.<span class="alt">Alternatives: Redis + BullMQ (simpler start), RabbitMQ, Kafka/MSK (event <em>streaming</em> at scale — Phase 6, <a class="x" href="mastery_streaming_mind_eventdriven.html">The Streaming Mind</a>).</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="sit"><td><b>DynamoDB</b></td><td>Serverless NoSQL: single-digit-ms key-value lookups at any scale, zero maintenance. <b>When:</b> Lambda-native stacks, or a table with brutal scale and simple access patterns (sessions, carts, device state). Modeling is unforgiving — design access patterns first.<span class="alt">Alternatives: Redis (hot ephemeral), Postgres JSONB (honestly fine for most "NoSQL" needs), MongoDB Atlas.</span></td><td><span class="t-sit">SIT</span></td></tr>
-<tr data-tier="sit"><td><b>OpenSearch / a search engine</b></td><td>Full-text search, fuzzy matching, relevance ranking, log analytics — what <code>LIKE '%…%'</code> can't do. <b>When:</b> search becomes a feature users notice.<span class="alt">Alternatives: Postgres full-text search (surprisingly far), Algolia (best DX, $$), Meilisearch/Typesense (light, self-hostable), Elastic Cloud.</span></td><td><span class="t-sit">SIT</span></td></tr>
-<tr data-tier="sit"><td><b>Data warehouse (Redshift / BigQuery / Snowflake)</b></td><td>Analytics home — dashboards and "how many users did X" queries run here, not on your production DB. <b>When:</b> the first time an analyst's query slows production (<a class="x" href="mastery_ledger_data_engineering.html">The Ledger</a>).<span class="alt">Alternatives: a read replica + Metabase is the honest first step; DuckDB over S3 for small scale.</span></td><td><span class="t-sit">SIT</span></td></tr>
-</table>
+<tr><th style="width:34%">Option</th><th>Character</th></tr>
+<tr><td><b>RDS / Aurora</b> (AWS)</td><td>Managed Postgres/MySQL; Aurora = AWS's faster, pricier re-engineering. Start plain RDS Postgres.</td></tr>
+<tr><td><b>PostgreSQL</b> (the engine)</td><td>Open source, no owner, the most-loved DB in dev surveys. What you're actually running.</td></tr>
+<tr><td>Neon / Supabase / PlanetScale</td><td>Serverless-DB independents with lovely DX (git-like branching, scale-to-zero) — the hot challengers.</td></tr>
+</table></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>RDS Postgres</b>, Multi-AZ for failover, a read replica when reads dominate. Aurora at scale; Neon/Supabase for side-projects and preview environments.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to store hikers, trails, posts and follows. → <b>RDS Postgres</b>, Multi-AZ. When the feed query gets heavy, add a <b>read replica</b> and point feed reads at it; writes stay on the primary.</div>
+<div class="quiz"><p class="qq">Trailmark's primary database dies in one data centre at 3am. What turns this from an outage into a 60-second blip?</p>
+<button class="qopt" data-correct="0" data-fb="Backups restore you — but slowly, and you lose the most recent data. Not a 60-second fix.">A daily backup</button>
+<button class="qopt" data-correct="1" data-fb="Multi-AZ ✅ — AWS auto-fails-over to the hot standby in another AZ in about a minute. This is exactly what it's for.">A Multi-AZ standby</button>
+<button class="qopt" data-correct="0" data-fb="A read replica handles read traffic but isn't a failover target by default, and it can lag. The Multi-AZ standby is the one that flips in automatically.">A read replica</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="aws_from_scratch.html#rds">From Scratch §9</a> · <a class="x" href="mastery_ledger_data_engineering.html">The Ledger</a></p>
+</div>
 
-<h2 id="watch"><span class="sn">6</span>Watching — observability &amp; on-call</h2>
-<p>Production without observability is a car with the windshield painted black (<a class="x" href="mastery_watchtower_observability.html">The Watchtower</a>).</p>
+<div class="cap" data-tier="must" id="object">
+<div class="cap-h"><span class="cap-ic">🪣</span><h3>Object storage — everything that isn't a row</h3><span class="t-must">MUST</span> <span class="cost">$</span></div>
+<p class="hook">Databases are for facts you query. But photos, videos, PDFs, backups? Stuffing those into a database is slow and pricey. <b>Object storage</b> is the giant, cheap, bottomless bucket for files.</p>
+<div class="analogy">💡 <b>Think of it like an infinite coat-check.</b> You hand over a file, get a ticket (its key/URL), and can retrieve it forever. It never fills up, and you pay pennies per “coat” per month.</div>
+<details class="qa"><summary>Why not just store images in the database?</summary><div class="qa-a">They bloat it, slow every backup, and cost far more per GB. The rule of thumb: the database stores the <em>link</em> to the file; S3 stores the actual file. Keep big blobs out of your rows.</div></details>
+<details class="qa"><summary>What's a “presigned URL”?</summary><div class="qa-a">A temporary, signed link that lets someone upload or download <em>one specific file</em> straight to/from S3 — without your server touching the bytes and without making the bucket public. It's the safe, standard way to handle user uploads.</div></details>
+<details class="qa"><summary>What does “11 nines of durability” mean?</summary><div class="qa-a">S3 keeps many copies of your object across separate machines and buildings, so the odds of ever losing one are 99.999999999%-against. Translation: your files are far safer there than on any disk you own.</div></details>
+<div class="gotcha">💸 <b>The two classic S3 traps:</b> <b>(1)</b> a <em>public</em> bucket — the internet's favourite data leak; keep buckets private and serve via CloudFront or presigned URLs. <b>(2)</b> <em>egress fees</em> — downloading data <em>out</em> of AWS costs money, so serving lots of big files can surprise you (this is exactly R2's “zero egress” pitch).</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> AWS <b>S3</b> (2006; its API is a de-facto standard others clone) · GCS · Azure Blob · independents: <b>Cloudflare R2</b> (zero egress fees), Backblaze B2, MinIO (self-hosted, S3-compatible). So influential that rivals describe themselves as “S3-compatible.”</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>S3</b> by default, private, with lifecycle rules aging cold data to Glacier. Look at <b>R2</b> only if you serve big files and egress dominates the bill.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to accept photo uploads without routing them through the API. → the app asks the API for a <b>presigned S3 URL</b>, then uploads straight to S3:
+<pre><span class="cm"># API hands the phone a short-lived upload URL</span>
+POST /uploads → { url: <span class="str">"https://s3…/photos/abc?X-Amz-Signature=…"</span> }
+<span class="cm"># phone PUTs the JPEG directly to S3 — API never touches the bytes</span></pre></div>
+<div class="quiz"><p class="qq">How should Trailmark let a phone upload a 4 MB photo?</p>
+<button class="qopt" data-correct="0" data-fb="Works, but now every photo flows through your servers — wasting compute and bandwidth. There's a leaner way.">POST it through the API server</button>
+<button class="qopt" data-correct="0" data-fb="Never — a publicly writable bucket is a security disaster; anyone could dump anything into it.">Make the bucket public and upload there</button>
+<button class="qopt" data-correct="1" data-fb="Presigned URL ✅ — the phone uploads straight to S3 with a short-lived signed link; your API never touches the bytes and the bucket stays private.">Presigned URL straight to S3</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="aws_from_scratch.html#s3">From Scratch §7</a></p>
+</div>
+
+<div class="cap" data-tier="rec" id="cache">
+<div class="cap-h"><span class="cap-ic">⚡</span><h3>Cache — the hot path</h3><span class="t-rec">REC</span> <span class="cost">$</span></div>
+<p class="hook">Some answers are expensive to compute but asked for constantly. A <b>cache</b> keeps the answer in ultra-fast memory, so you compute it once and serve it a thousand times.</p>
+<div class="analogy">💡 <b>Think of it like keeping milk in the fridge</b> instead of driving to the farm for every cup of tea. The farm (your database) is the source of truth; the fridge (Redis) is the fast copy you actually reach for.</div>
+<details class="qa"><summary>What should I cache first?</summary><div class="qa-a">The slow, popular, rarely-changing stuff: a homepage feed, config, a user's profile. Don't cache data that's different on every request or changes every second — you'll spend more effort keeping it fresh than you save.</div></details>
+<details class="qa"><summary>What's a TTL?</summary><div class="qa-a">Time-to-live: how long a cached answer stays before it's thrown out and recomputed. Short TTL = fresher but more work; long TTL = faster but staler. You're literally dialling the trade between freshness and speed.</div></details>
+<details class="qa"><summary>Why not just keep it in my app's memory?</summary><div class="qa-a">That works with one server. The moment you run two (which you will, for reliability), each has its own memory and they disagree — one user sees new data, another sees old. Redis is one shared fridge that <em>all</em> your servers read from.</div></details>
+<div class="gotcha">⚠️ <b>Cache invalidation is famously one of the hard problems.</b> The classic bug: you update the data but forget to clear the cache, so users keep seeing the old value. Before you cache anything, know exactly how that value gets refreshed or expires.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> AWS <b>ElastiCache</b> (Redis/Valkey/Memcached) · <b>Redis</b> — a 2024 license split created the open <b>Valkey</b> fork (Linux Foundation; AWS backs it) vs <b>Redis Ltd</b> (~$2B private) · independents: Upstash (serverless, per-request), DragonflyDB.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>ElastiCache</b> (Valkey/Redis) inside your VPC. Consider <b>Upstash</b> for serverless stacks where a per-request price beats a running node.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> the feed to load fast without hammering Postgres. → cache the rendered feed per user in <b>Redis</b> with a 60-second TTL; also hold login sessions and the “5 uploads/min” rate-limit counter there.</div>
+<div class="quiz"><p class="qq">Trailmark's feed query takes 400ms and every user hits it constantly. First fix?</p>
+<button class="qopt" data-correct="0" data-fb="Throwing hardware at it is expensive and doesn't stop the same query running over and over.">Add more database servers</button>
+<button class="qopt" data-correct="1" data-fb="Cache ✅ — compute the feed once, serve it from Redis for 60s. DB load drops instantly and users get near-instant reads.">Cache the feed in Redis (short TTL)</button>
+<button class="qopt" data-correct="0" data-fb="The language isn't the bottleneck — repeatedly asking the DB the same expensive question is.">Rewrite the app in a faster language</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_edge_performance.html">The Edge</a></p>
+</div>
+
+<div class="cap" data-tier="rec" id="queue">
+<div class="cap-h"><span class="cap-ic">📮</span><h3>Queues &amp; events — the shock absorber</h3><span class="t-rec">REC</span> <span class="cost">¢</span></div>
+<p class="hook">Some work is slow — resizing an image, sending an email, calling a flaky third party. Making the user <em>wait</em> for it is cruel. A <b>queue</b> lets you say “I'll handle that in a moment” and reply instantly.</p>
+<div class="analogy">💡 <b>Think of it like a restaurant order rail.</b> The waiter (your API) clips the order and goes back to serving; the kitchen (workers) cooks at its own pace. On a rush, orders pile on the rail — none get lost, and nobody waits at the counter.</div>
+<details class="qa"><summary>Why not just do the slow work right away?</summary><div class="qa-a">Because the user's request hangs until it finishes — and a burst of slow work times everyone out at once. Queue it, return fast, and let a pool of workers grind through the backlog steadily.</div></details>
+<details class="qa"><summary>What's a “dead-letter queue”?</summary><div class="qa-a">The tray for messages that keep failing (a corrupt photo, a bug). Instead of retrying forever and clogging the line, they're set aside for you to inspect later. A must-have safety valve — always configure one.</div></details>
+<details class="qa"><summary>Queue vs SNS vs EventBridge?</summary><div class="qa-a"><b>SQS</b> = one worker pool pulls a to-do list. <b>SNS</b> = shout one event to many listeners at once (fan-out). <b>EventBridge</b> = route events by rules and run scheduled jobs (cron). Different shapes of “something happened.”</div></details>
+<div class="gotcha">⚠️ <b>Assume every message can arrive twice.</b> Queues guarantee “at least once” delivery, not “exactly once” — so make workers <em>idempotent</em> (processing the same message twice does no harm). Skip this and you get double-charges and double-emails.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> AWS <b>SQS</b> (one of AWS's first services; planet-scale) + SNS + EventBridge · independents: Redis + BullMQ (simplest start), RabbitMQ (rich routing), GCP Pub/Sub. For a durable, replayable log, that's <em>streaming</em> — next block.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>SQS</b> for work queues (with a dead-letter queue), <b>SNS/EventBridge</b> for fan-out and scheduling. Redis+BullMQ only if you already run Redis and want the simplest thing.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to make thumbnails without stalling the upload. → on upload, drop a message on <b>SQS</b>; a <b>Lambda</b> worker pulls it, makes 3 sizes, writes them back to S3. The upload returns instantly; thumbnails appear a second later.</div>
+<div class="quiz"><p class="qq">A photo upload needs 3 thumbnails made (~2s of work). What keeps the app snappy?</p>
+<button class="qopt" data-correct="0" data-fb="Now every upload blocks for 2s — and 100 uploads at once melts your API.">Make thumbnails before returning the response</button>
+<button class="qopt" data-correct="1" data-fb="Queue it ✅ — return the moment the photo lands in S3; a worker makes thumbnails a second later. Upload feels instant.">Drop a job on SQS, return immediately</button>
+<button class="qopt" data-correct="0" data-fb="Nicer than freezing, but you're still holding a request open and burning capacity for no reason.">Show the user a 2-second spinner</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_streaming_mind_eventdriven.html">The Streaming Mind</a></p>
+</div>
+
+<div class="cap" data-tier="sit" id="stream">
+<div class="cap-h"><span class="cap-ic">🌊</span><h3>Streaming — a replayable log of everything</h3><span class="t-sit">SIT</span> <span class="cost">$$</span></div>
+<p class="hook">A queue is a to-do list: once a worker does a task, it's gone. A <b>stream</b> is a diary: every event is written down and kept, so many readers can go back and re-read the whole history.</p>
+<div class="analogy">💡 <b>Think of it like a phone call vs a group chat.</b> A call (queue) — say it, it's heard, it's over. A group chat (stream) — the message stays; new people scroll up, and everyone reads at their own pace.</div>
+<details class="qa"><summary>Queue or stream — how do I tell?</summary><div class="qa-a">If one worker should handle each item and then forget it → <b>queue</b>. If many systems need the same events, or you might replay history later → <b>stream</b>. Two readers of the same events is the giveaway you want a stream.</div></details>
+<details class="qa"><summary>Why is this “situational”?</summary><div class="qa-a">It's powerful and genuinely complex to run. Most apps thrive on plain queues for years. Reach for streaming only when you have a real firehose — analytics, event-sourcing, or several independent consumers.</div></details>
+<div class="gotcha">💸 <b>Kafka/MSK isn't cheap or hands-off</b> — you pay for brokers running 24/7 whether or not events flow. Start with Kinesis (or even SQS) and adopt Kafka only when its ecosystem truly earns the ops cost.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> <b>Apache Kafka</b> (born at LinkedIn; the streaming standard) commercialised by <b>Confluent</b> (~$7–9B public, 2025) · AWS <b>Kinesis</b> (native, simpler) or <b>MSK</b> (managed Kafka) · Redpanda (Kafka-compatible, faster) · GCP Pub/Sub.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span>Start with <b>Kinesis</b> (least to run) on AWS; move to <b>MSK/Confluent</b> when Kafka's ecosystem (connectors, stream processing) earns its complexity.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> (much later) a live “trending trails” board <em>and</em> a raw analytics log — from the same events. → publish every view/like to <b>Kinesis</b>; one consumer updates trending counts, another lands raw events in S3. Same stream, two readers.</div>
+<div class="quiz"><p class="qq">Trailmark wants two independent consumers of the same view/like events. Best fit?</p>
+<button class="qopt" data-correct="0" data-fb="A queue deletes each event after one consumer reads it — you can't have two independent readers.">An SQS queue</button>
+<button class="qopt" data-correct="1" data-fb="A stream ✅ keeps the events; the trending and analytics consumers each read the whole thing at their own pace.">A Kinesis stream</button>
+<button class="qopt" data-correct="0" data-fb="A firehose of events would hammer your production DB — exactly what streaming exists to avoid.">Write it all to Postgres</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_streaming_mind_eventdriven.html">The Streaming Mind</a></p>
+</div>
+
+<div class="cap" data-tier="sit" id="nosql">
+<div class="cap-h"><span class="cap-ic">🔑</span><h3>NoSQL — key-value at any scale</h3><span class="t-sit">SIT</span> <span class="cost">¢</span></div>
+<p class="hook">Relational databases are brilliant at complex questions across related tables. But some data is dead simple — “give me the value for this key” — just at enormous volume. That's where <b>NoSQL</b> shines.</p>
+<div class="analogy">💡 <b>Think of it like a library vs a coat-check.</b> Postgres is a library: rich, cross-referenced, great for “find all books by X that mention Y.” DynamoDB is a coat-check: hand over a ticket, get your item back in milliseconds — no browsing, just instant lookups, forever, at any scale.</div>
+<details class="qa"><summary>When is NoSQL the <em>wrong</em> choice?</summary><div class="qa-a">Whenever you'll want flexible, relational questions later. DynamoDB makes you design your queries up front; a brand-new access pattern can mean redesigning the whole table. If there's any doubt, start with Postgres.</div></details>
+<details class="qa"><summary>Isn't Postgres JSONB “NoSQL enough”?</summary><div class="qa-a">Very often, yes. Postgres can store schemaless JSON documents and index them — covering most “I need NoSQL” cases without adding a second database to run and learn. Reach for DynamoDB when scale or latency truly demands it.</div></details>
+<div class="gotcha">⚠️ <b>DynamoDB's trap is modelling, not cost.</b> Design for the wrong access pattern and you're stuck with painful migrations or expensive full-table scans. Nail “how will I look this up?” <em>before</em> you create the table.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> AWS <b>DynamoDB</b> (powers Amazon.com's cart at Prime-Day scale; the 2007 Dynamo paper seeded a generation of NoSQL) · independents: MongoDB Atlas (document-shaped), Cassandra/ScyllaDB (self-managed scale) · often the honest answer is just <b>Postgres JSONB</b>.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span>Reach for <b>DynamoDB</b> in Lambda-native stacks or a table with brutal scale + simple keys. Otherwise, try Postgres JSONB first.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> one push-notification token per device, looked up by user, millions of them. → a <b>DynamoDB</b> table keyed on <code>userId</code> → device tokens: tiny, hot, perfectly key-value shaped.</div>
+<div class="quiz"><p class="qq">Store one push-token per device, looked up only by user id, millions of rows. Best fit?</p>
+<button class="qopt" data-correct="1" data-fb="DynamoDB ✅ — a simple key (userId) → value (tokens), huge volume, no relational questions. Textbook case.">DynamoDB</button>
+<button class="qopt" data-correct="0" data-fb="Overkill and slower for a pure key-value lookup at this scale.">A 3-table join in Postgres</button>
+<button class="qopt" data-correct="0" data-fb="That's for ranked text search, not instant key lookups.">OpenSearch</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_ledger_data_engineering.html">The Ledger</a></p>
+</div>
+
+<div class="cap" data-tier="sit" id="search">
+<div class="cap-h"><span class="cap-ic">🔎</span><h3>Search — what LIKE '%…%' can't do</h3><span class="t-sit">SIT</span> <span class="cost">$$</span></div>
+<p class="hook">Users expect Google-quality search: typos forgiven, best matches first, instant. Your database's <code>LIKE '%word%'</code> can't do that — it's slow and clueless about relevance. A <b>search engine</b> is built for exactly this.</p>
+<div class="analogy">💡 <b>Think of it like the index at the back of a book</b> vs flipping every page. <code>LIKE</code> reads every page every time; a search engine builds the index once, then jumps straight to the best matches — even if you misspelled the word.</div>
+<details class="qa"><summary>Do I need a search engine on day one?</summary><div class="qa-a">Usually no. Postgres full-text search is free and surprisingly capable. Add a dedicated engine only when search becomes a feature users actively judge you on and rank-quality matters.</div></details>
+<details class="qa"><summary>OpenSearch or Algolia?</summary><div class="qa-a"><b>OpenSearch</b> = powerful, AWS-native, more to run and tune yourself. <b>Algolia</b> = the fastest path to a great search UX, as a paid SaaS. You're choosing control vs convenience.</div></details>
+<div class="gotcha">⚠️ <b>A search index is a <em>copy</em>, not the source of truth.</b> You must keep it in sync — when a trail changes, re-index it. Forgetting is why search sometimes returns results that no longer exist.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> AWS <b>OpenSearch</b> (a 2021 fork of Elasticsearch after a license dispute with <b>Elastic NV</b>, ~$8–12B public) · independents: Algolia (best DX, $$), Meilisearch / Typesense (light, self-hostable) · and <b>Postgres full-text search</b> goes surprisingly far for free.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>Postgres FTS</b> until it strains, then <b>OpenSearch</b> (AWS-native) or <b>Algolia</b> (fastest to great UX, at a price).</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> hikers to find “misty ridge trails near Ooty” with typos and ranking. → index trails in <b>OpenSearch</b> (name, region, tags, difficulty); serve ranked, typo-tolerant results the DB never could.</div>
+<div class="quiz"><p class="qq">A hiker types “watrfall trail ooty” (typo). Which finds it well?</p>
+<button class="qopt" data-correct="0" data-fb="LIKE matches exact substrings — 'watrfall' won't match 'waterfall'. Typos defeat it.">SQL LIKE '%watrfall%'</button>
+<button class="qopt" data-correct="1" data-fb="OpenSearch ✅ — built for fuzzy matching and ranking, it forgives the typo and returns the best trails first.">OpenSearch with typo tolerance</button>
+<button class="qopt" data-correct="0" data-fb="Slow, and it still can't handle the misspelling.">Scanning every row in the app</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_ledger_data_engineering.html">The Ledger</a></p>
+</div>
+
+<div class="cap" data-tier="sit" id="warehouse">
+<div class="cap-h"><span class="cap-ic">📊</span><h3>Analytics &amp; warehouse — questions, not transactions</h3><span class="t-sit">SIT</span> <span class="cost">$$</span></div>
+<p class="hook">Your production database serves one user's request in milliseconds. Ask it “sum every order across three years” and it grinds — slowing every real user while it does. Big analytics belongs somewhere <em>separate</em>.</p>
+<div class="analogy">💡 <b>Think of it like a shop floor vs a back office.</b> The shop floor (your app DB) serves customers fast. The back office (a warehouse) crunches the month's numbers — you don't do the accounting at the checkout counter mid-rush.</div>
+<details class="qa"><summary>Do I need Snowflake on day one?</summary><div class="qa-a">Almost never. A read replica + a tool like Metabase answers most early analytics without a warehouse at all. Graduate when reports get big, frequent, or start competing with live traffic.</div></details>
+<details class="qa"><summary>Redshift vs Athena — what's the difference?</summary><div class="qa-a"><b>Redshift</b> is a warehouse you load data into and keep running. <b>Athena</b> runs SQL directly over raw files in S3, pay-per-query, nothing to keep running — the cheaper, lazier way to start.</div></details>
+<div class="gotcha">⚠️ <b>Never run analytics on your production database.</b> The #1 way a “quick report” takes the whole app down is an analyst's giant query locking tables at lunchtime. Point analytics at a replica or a warehouse — never the primary.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> AWS <b>Redshift</b> (warehouse), <b>Athena</b> (SQL over S3 files), <b>Glue</b> (ETL) · the independents dominate: <b>Snowflake</b> (~$50B public, 2025), Google <b>BigQuery</b>, <b>Databricks</b> (~$60B+ private, the lakehouse) · small scale: DuckDB over S3, or a read replica + Metabase.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span>Honest first step: a <b>read replica + Metabase</b>. Grow into <b>Athena</b> over S3, or <b>Snowflake/BigQuery</b> when analytics becomes a real function.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> a weekly “most-hiked trails” report without touching the live DB. → nightly export of posts to S3; query with <b>Athena</b> — pay per query, no warehouse to run, production untouched.</div>
+<div class="quiz"><p class="qq">Trailmark needs a weekly “most-hiked trails” report. Cheapest sane approach early on?</p>
+<button class="qopt" data-correct="0" data-fb="That giant scan competes with live users — the classic self-inflicted slowdown.">Run the query on the production DB</button>
+<button class="qopt" data-correct="1" data-fb="Athena ✅ — dump the data to S3, run SQL over it per query, pay cents, and never touch production.">Export to S3, query with Athena</button>
+<button class="qopt" data-correct="0" data-fb="Powerful, but overkill and pricier for a weekly report at this size.">Buy a Snowflake cluster</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_ledger_data_engineering.html">The Ledger</a></p>
+</div>
+
+<p class="sup">Ship<span class="sd">Moving code from a laptop to production without a human copying files.</span></p>
+
+<div class="cap" data-tier="must" id="cicd">
+<div class="cap-h"><span class="cap-ic">🚀</span><h3>Source &amp; CI/CD — the release robot</h3><span class="t-must">MUST</span> <span class="cost">¢</span></div>
+<p class="hook">Copying files onto a server by hand is how mistakes ship at 5pm on a Friday. <b>CI/CD</b> is a robot that takes every merge and does the whole boring, error-prone release for you — the same way, every time.</p>
+<div class="analogy">💡 <b>Think of it like a dishwasher.</b> You could wash each plate by hand (and occasionally drop one), or load the rack, press start, and get a clean, consistent result every cycle. Your pipeline is the dishwasher for shipping code.</div>
+<details class="qa"><summary>What's the difference between CI and CD?</summary><div class="qa-a"><b>CI</b> (Continuous Integration) = on every push, automatically build and test, so broken code is caught in minutes. <b>CD</b> (Continuous Delivery/Deployment) = automatically ship what passed. Together: merge → tested → live, hands-free.</div></details>
+<details class="qa"><summary>What actually goes in the pipeline?</summary><div class="qa-a">Usually a checklist a robot runs: install dependencies → run tests → build the Docker image → push it to the registry → tell your compute to roll out the new version. You write it once as YAML; it runs on every push forever.</div></details>
+<details class="qa"><summary>Why is “the merge button my deploy button”?</summary><div class="qa-a">Because the pipeline triggers on merge. Releasing becomes something anyone can do safely, with a full audit trail (who merged what, when) — instead of a scary manual ritual only one person remembers how to perform.</div></details>
+<div class="gotcha">⚠️ <b>A green pipeline is only as good as its tests.</b> With no tests, CI/CD will faithfully, automatically ship your bugs to production <em>faster than ever</em>. Add real tests, or you've just automated the mistake.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
 <table>
-<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
-<tr data-tier="must"><td><b>CloudWatch (logs + metrics + alarms)</b></td><td>Built-in eyes: every service emits metrics here, containers ship logs here, alarms page you. Daily: <code>aws logs tail --follow</code> during a deploy, checking a latency graph, tuning an alarm threshold. It's nobody's favorite UI, but it's already there and already integrated.<span class="alt">Alternatives/upgrades: Datadog (best-in-class, watch the bill), Grafana + Loki + Prometheus (open-source stack), New Relic, Better Stack.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="must"><td><b>Sentry (error tracking)</b></td><td>Catches every unhandled exception with stack trace, user, release, and breadcrumbs; groups duplicates; tells you <em>which deploy</em> broke it. The single highest value-per-dollar tool on this page. Daily: triaging the morning's new issues, linking one to a PR.<span class="alt">Alternatives: Rollbar, Bugsnag, Honeybadger, self-hosted GlitchTip. Grepping logs is the thing it replaces.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="rec"><td><b>Uptime monitoring (UptimeRobot / Better Stack / Pingdom)</b></td><td>Something <em>outside</em> your cloud that curls your health endpoint every minute and screams if it fails — because when your region is down, so is your monitoring. Five minutes to set up.<span class="alt">Alternatives: CloudWatch Synthetics (inside AWS — misses whole-account outages), cron + curl somewhere else.</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="sit"><td><b>Tracing (X-Ray / OpenTelemetry + Jaeger/Honeycomb)</b></td><td>Follows one request across services showing where the milliseconds went. <b>When:</b> more than ~3 services and "which hop is slow?" stops being answerable from logs.<span class="alt">Standardize on OpenTelemetry instrumentation regardless of backend — it keeps you portable.</span></td><td><span class="t-sit">SIT</span></td></tr>
-<tr data-tier="sit"><td><b>PagerDuty / Opsgenie (on-call)</b></td><td>Turns alerts into an escalating phone call to whoever's on rotation, with schedules and handoffs. <b>When:</b> more than ~3 engineers share production responsibility.<span class="alt">Alternatives: CloudWatch → SNS → phone/Slack (fine for a solo app), Grafana OnCall (free).</span></td><td><span class="t-sit">SIT</span></td></tr>
-<tr data-tier="sit"><td><b>Status page (Atlassian Statuspage / Instatus / Better Stack)</b></td><td>Public "is it down?" page that cuts support tickets in half during incidents. <b>When:</b> paying customers exist.</td><td><span class="t-sit">SIT</span></td></tr>
-</table>
+<tr><th style="width:34%">Option</th><th>Character</th></tr>
+<tr><td><b>GitHub + Actions</b></td><td>GitHub (Microsoft, $7.5B, 2018), 100M+ devs — the default. Actions became the default CI by bundling.</td></tr>
+<tr><td>GitLab CI</td><td>Public (~$8B-scale, 2025); integrated DevOps, self-hostable.</td></tr>
+<tr><td>CodePipeline / CodeBuild</td><td>AWS-native; clunkier UX but runs in-VPC with IAM-native perms — for compliance needs.</td></tr>
+<tr><td>CircleCI / Buildkite / Jenkins</td><td>Specialists &amp; the self-hosted legacy incumbent (Jenkins).</td></tr>
+</table></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>GitHub + GitHub Actions</b> for nearly everyone. Choose CodePipeline only when policy forces the pipeline inside your AWS account.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> a merge to ship itself. → <code>.github/workflows/deploy.yml</code>: on merge to <code>main</code> → run tests → <code>docker build</code> → push to ECR → <code>ecs update-service</code> rolling deploy → watch Sentry's release tab for 10 min.</div>
+<div class="quiz"><p class="qq">Trailmark's tests fail on a pull request. With CI set up right, what happens?</p>
+<button class="qopt" data-correct="0" data-fb="That defeats the point — CI exists precisely to stop broken code before it ships.">The code deploys anyway</button>
+<button class="qopt" data-correct="1" data-fb="Blocked ✅ — a failing check stops the merge, so broken code never reaches production. The safety net working as designed.">The merge is blocked until tests pass</button>
+<button class="qopt" data-correct="0" data-fb="You <em>can</em> make checks advisory — but then it's theatre. Make passing tests required to merge.">Nothing — tests are just advisory</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_forge_cicd.html">The Forge</a></p>
+</div>
 
-<h2 id="guard"><span class="sn">7</span>Guarding — security, audit &amp; cost</h2>
+<div class="cap" data-tier="must" id="artifact">
+<div class="cap-h"><span class="cap-ic">📦</span><h3>Build artifacts — the image &amp; its shelf</h3><span class="t-must">MUST</span> <span class="cost">¢</span></div>
+<p class="hook">You built and tested your app on your laptop. How does the cloud run the <em>exact</em> same thing — same code, same libraries, same everything? You seal it into a <b>Docker image</b>, and store that image where your servers can grab it (a <b>registry</b>).</p>
+<div class="analogy">💡 <b>Think of it like a shipping container.</b> Before containers, loading a ship was chaos — every cargo a different shape. Docker did for software what the steel box did for freight: one standard box any crane (any cloud) can lift, unchanged.</div>
+<details class="qa"><summary>Image vs container — what's the difference?</summary><div class="qa-a">An <b>image</b> is the frozen recipe (your app, packaged up). A <b>container</b> is a running copy of it. Build the image once, run many containers from it — like a class and its instances.</div></details>
+<details class="qa"><summary>Why a registry — can't I just build on the server?</summary><div class="qa-a">You could, but then every server builds slightly differently and clean rollbacks get hard. Build once in CI, push the exact image to a registry, and every server pulls that identical, versioned artifact.</div></details>
+<details class="qa"><summary>What's a “tag”?</summary><div class="qa-a">The version label on an image, like <code>trailmark-api:sha-abc123</code>. Tagging by git commit means you always know exactly which code is running — and can redeploy an old tag to roll back in seconds.</div></details>
+<div class="gotcha">💸 <b>Registries charge for storage, and CI pushes a new image every commit</b> — hundreds a month. Add a lifecycle rule to auto-delete old untagged images, or you'll slowly pay to store thousands of builds nobody will ever run again.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> <b>Docker</b> (the image format is now the open <b>OCI standard</b>, so it outlives any vendor); alternatives Podman, Buildpacks. Registry: AWS <b>ECR</b> (in-region, IAM-native, no egress) vs Docker Hub / GitHub Container Registry.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>Docker</b> to build, <b>ECR</b> to store — same region as your compute so pulls are fast and free. Add a lifecycle rule to prune old tags.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> its API image versioned and pullable by ECS. → CI builds <code>trailmark-api:sha-abc123</code>, pushes to <b>ECR</b>; the ECS task references that exact tag, so every deploy is a precise, rollback-able artifact.</div>
+<div class="quiz"><p class="qq">Production breaks right after a deploy. You tag images by git commit. Fastest fix?</p>
+<button class="qopt" data-correct="0" data-fb="Debugging in production while users suffer is the slow, stressful path.">Debug live on the server</button>
+<button class="qopt" data-correct="1" data-fb="Roll back ✅ — each build is a precise tagged artifact, so point the service back at the last good tag. Seconds, not hours. Then debug calmly.">Redeploy the previous image tag</button>
+<button class="qopt" data-correct="0" data-fb="Slow, and you might reintroduce the same problem. Roll back first, investigate after.">Rebuild from scratch and hope</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_forge_cicd.html">The Forge</a></p>
+</div>
+
+<div class="cap" data-tier="rec" id="iac">
+<div class="cap-h"><span class="cap-ic">📐</span><h3>Infrastructure as Code</h3><span class="t-rec">REC</span> <span class="cost">free</span></div>
+<p class="hook">Click 40 buttons in the console to build your setup, and six months later nobody remembers what you clicked — or dares change it. <b>Infrastructure as Code</b> writes it all down in files, so your whole cloud is version-controlled, reviewed, and rebuildable with one command.</p>
+<div class="analogy">💡 <b>Think of it like a recipe vs cooking from memory.</b> From memory, every batch differs and can't be handed off. A written recipe (Terraform) makes the dish identical every time — and anyone can follow it, improve it, or cook a second batch.</div>
+<details class="qa"><summary>What does “declarative” mean here?</summary><div class="qa-a">You describe the end state you want (“one load balancer, two servers, this database”), not the steps. Terraform works out what to create, change, or delete to match. You write the destination; it plans the route.</div></details>
+<details class="qa"><summary>What's <code>terraform plan</code>?</summary><div class="qa-a">A dry run that shows exactly what will change <em>before</em> anything happens — “+2 to add, ~1 to change, -0 to destroy.” Reviewing that plan in a pull request is how you catch a scary change before it touches prod.</div></details>
+<details class="qa"><summary>Terraform or CDK?</summary><div class="qa-a"><b>Terraform</b> if you might touch more than one cloud or want the biggest ecosystem (HCL config). <b>CDK</b> if your team would rather write infra in TypeScript/Python and you're all-in on AWS. Either beats clicking.</div></details>
+<div class="gotcha">⚠️ <b>Terraform keeps a “state file”</b> that maps your code to real resources — and it's precious. Two people running <code>apply</code> at once, or a lost state file, causes real damage. Store state remotely (S3 + locking) from day one, never on one laptop.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
 <table>
-<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
-<tr data-tier="must"><td><b>CloudTrail</b></td><td>The account's flight recorder: every API call — who, what, when, from where. Turn on once, forget until an incident or audit, then thank yourself. Effectively free.<span class="alt">Alternatives: none. This is the audit trail.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="must"><td><b>Budgets + Cost Explorer</b></td><td>The $-alarm and the where-did-it-go dashboard. Daily-ish: a Friday five-minute glance at the daily-spend graph catches every mistake before it compounds (<a class="x" href="mastery_wallet_finops.html">The Wallet</a>).<span class="alt">Alternatives/upgrades: Vantage, CloudZero (multi-account cost SaaS) — later, at org scale.</span></td><td><span class="t-must">MUST</span></td></tr>
-<tr data-tier="rec"><td><b>Dependabot / Renovate + a scanner (Snyk/Trivy)</b></td><td>Robots that PR your dependency updates and flag known-vulnerable packages and images. Supply-chain security on autopilot (<a class="x" href="mastery_forge_cicd.html">The Forge</a>).<span class="alt">Dependabot is free in GitHub — no excuse. Trivy scans Docker images in CI.</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="rec"><td><b>GuardDuty</b></td><td>AWS's threat detector: watches CloudTrail/VPC/DNS telemetry for cryptominers, leaked-key usage, port scans. One click on, ~dollars/month, zero maintenance.<span class="alt">Alternatives: none as cheap for the coverage. SIEMs come much later.</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="sit"><td><b>WAF (+ Shield)</b></td><td>HTTP firewall on your ALB/CloudFront: blocks SQL-injection patterns, bad bots, per-IP floods. <b>When:</b> public forms, login endpoints, or the first scraping/DDoS scare. Shield Standard (DDoS) is free and automatic.<span class="alt">Alternatives: Cloudflare WAF (often simpler and cheaper in front of everything).</span></td><td><span class="t-sit">SIT</span></td></tr>
-<tr data-tier="sit"><td><b>Security Hub / Inspector / Config</b></td><td>Continuous compliance: benchmark checks ("S3 buckets public?", "MFA everywhere?"), resource-change history, finding aggregation. <b>When:</b> SOC 2 / ISO audits appear on the horizon — auditors ask for exactly these reports.</td><td><span class="t-sit">SIT</span></td></tr>
-</table>
+<tr><th style="width:34%">Option</th><th>Character</th></tr>
+<tr><td><b>Terraform / OpenTofu</b></td><td>The standard (HashiCorp → IBM ~$6.4B, 2024; OpenTofu = the OSS fork). Multi-cloud, HCL.</td></tr>
+<tr><td>AWS CDK</td><td>Infra in real code (TS/Python), AWS-only, compiles to CloudFormation.</td></tr>
+<tr><td>Pulumi</td><td>Infra in real code, multi-cloud — the cloud-agnostic CDK.</td></tr>
+<tr><td>CloudFormation</td><td>AWS's native YAML engine under CDK/SAM; rarely hand-written now.</td></tr>
+</table></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>Terraform/OpenTofu</b> for multi-cloud and the biggest ecosystem; <b>CDK</b> if your team prefers real code and you're all-in on AWS. Pick one, never click-create prod again.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> a staging environment identical to prod. → the whole stack is a Terraform module; <code>terraform apply -var env=staging</code> stamps out a second copy. Infra PRs show a <code>plan</code> diff before anything changes.</div>
+<div class="quiz"><p class="qq">Trailmark needs staging to be an exact copy of production. With IaC, how hard is that?</p>
+<button class="qopt" data-correct="0" data-fb="That's exactly the drift-and-mismatch problem IaC exists to kill.">Re-click everything by hand and hope it matches</button>
+<button class="qopt" data-correct="1" data-fb="Easy ✅ — the environment is code, so you stamp out an identical copy with <code>env=staging</code>. Same recipe, second batch.">Re-run the same code with a different variable</button>
+<button class="qopt" data-correct="0" data-fb="Drift is the fate of click-built infra — IaC is the cure, not the victim.">Impossible — environments always drift</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_blueprint_iac.html">The Blueprint</a></p>
+</div>
 
-<h2 id="desk"><span class="sn">8</span>At your desk — daily developer utilities</h2>
+<div class="cap" data-tier="sit" id="platform">
+<div class="cap-h"><span class="cap-ic">🛫</span><h3>Platform &amp; feature flags</h3><span class="t-sit">SIT</span> <span class="cost">$</span></div>
+<p class="hook">Two optional accelerants. A <b>PaaS</b> hides all the AWS wiring so a tiny team can ship without an infra expert. <b>Feature flags</b> let you turn a feature on or off instantly — for everyone, or just 5% of users — without redeploying.</p>
+<div class="analogy">💡 <b>Think of a PaaS as an automatic car</b> (it handles the gears; you just drive) and <b>feature flags as a dimmer switch</b> (roll a feature up gradually, or cut it instantly, instead of an all-or-nothing light switch).</div>
+<details class="qa"><summary>Should I start on a PaaS or raw AWS?</summary><div class="qa-a">No infra person and a standard web app? A PaaS (or Render/Fly) gets you shipping today. The common arc: PaaS early, then migrate to raw AWS + Terraform around year 2–3 when cost and control demand it.</div></details>
+<details class="qa"><summary>What problem do feature flags actually solve?</summary><div class="qa-a">They split “deploy the code” from “turn on the feature.” So you can ship risky code dark, enable it for a few users, watch, and kill it in one click if it misbehaves — with no emergency redeploy.</div></details>
+<div class="gotcha">⚠️ <b>Flags are easy to add and easy to forget.</b> A codebase full of stale flags from features that shipped a year ago becomes its own tangle. Treat every flag as temporary — remove it once the feature is fully rolled out.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>PaaS:</b> on-AWS — Elastic Beanstalk, App Runner, Copilot, Convox, SST; off-AWS — Render, Fly.io, Railway, Heroku. <b>Flags:</b> LaunchDarkly (~$3B private, 2021), OSS Unleash/Flagsmith/PostHog, or a flags table in your own DB.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span>PaaS <b>when</b> you have no infra engineer and a standard web app; flags <b>when</b> you first wish you could undo a release without redeploying.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to test a new feed-ranking algorithm on 5% of users. → wrap it in a flag (<b>Unleash</b>): roll to 5%, watch metrics, ramp or kill instantly — no redeploy either way.</div>
+<div class="quiz"><p class="qq">Trailmark ships a new feed algorithm but isn't sure it's better. Safest rollout?</p>
+<button class="qopt" data-correct="0" data-fb="If it's worse, every user feels it and you need an emergency redeploy to undo.">Deploy to 100% and watch</button>
+<button class="qopt" data-correct="1" data-fb="Flag it ✅ — turn on for 5%, compare metrics, then ramp or kill instantly. No redeploy either way.">Put it behind a flag, enable 5%, then ramp</button>
+<button class="qopt" data-correct="0" data-fb="Long-lived branches rot and cause painful merges; flags let you merge now and control exposure separately.">Keep it on a branch forever</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_forge_cicd.html">The Forge</a></p>
+</div>
+
+<p class="sup">Secure<span class="sd">Who you are, where secrets live, keeping attackers out, and staying off a surprise bill.</span></p>
+
+<div class="cap" data-tier="must" id="iam">
+<div class="cap-h"><span class="cap-ic">🔐</span><h3>Identity &amp; access (IAM)</h3><span class="t-must">MUST</span> <span class="cost">free</span></div>
+<p class="hook">Every action in AWS — read a file, start a server, delete a database — is an API call, and <b>IAM</b> checks “are you allowed to do this?” before each one. Get it right and a stolen key is nearly useless; get it wrong and one leak owns everything.</p>
+<div class="analogy">💡 <b>Think of it like keycards in an office.</b> A new hire's card opens their floor and the kitchen — not the CEO's office or the server room. IAM gives every user and every app a keycard scoped to exactly what it needs, and nothing more.</div>
+<details class="qa"><summary>What's “least privilege,” and why does everyone repeat it?</summary><div class="qa-a">Give each thing permission to do only what it actually needs. So when (not if) a credential leaks, the damage is contained to that tiny scope instead of your whole account. It's the single highest-leverage security habit there is.</div></details>
+<details class="qa"><summary>Roles vs users vs keys — what do I give my app?</summary><div class="qa-a">A <b>role</b>. A user has long-lived keys that can leak; a role hands your app short-lived, auto-rotating credentials with no secret to steal. Humans log in via SSO; apps assume roles.</div></details>
+<details class="qa"><summary>Why separate accounts for dev and prod?</summary><div class="qa-a">So a mistake in dev physically <em>cannot</em> touch prod — different account, different blast radius. It's the strongest isolation AWS offers, and it's free.</div></details>
+<div class="gotcha">⚠️ <b>The lazy trap:</b> attaching <code>AdministratorAccess</code> or a <code>"*"</code> policy “just to make it work.” It works — and now anything that touches that role can do <em>anything</em> in your account. Start narrow; add a permission only when something's actually denied.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> AWS IAM is intrinsic — no alternative (GCP IAM / Azure RBAC are its siblings). The identity provider in front is often <b>Okta</b> (~$15B public) or Microsoft Entra. At scale, <b>IAM Identity Center + Organizations</b> give one login across many accounts.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span>Write least-privilege policies; give apps <b>roles</b>, not keys. Adopt Identity Center + account-per-environment once you're past a toy. Solo learners: one account + one IAM user is fine.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> its API to read photos from S3 and its secrets — with no hardcoded keys. → the Fargate task runs as an <b>IAM role</b> scoped to exactly <code>s3:GetObject</code> on the photo bucket + <code>secretsmanager:GetSecretValue</code>. Compromise the container, and that's all the attacker gets.</div>
+<div class="quiz"><p class="qq">Trailmark's API role can only <code>s3:GetObject</code> one bucket. An attacker fully compromises the container. What can they reach?</p>
+<button class="qopt" data-correct="0" data-fb="That's what an over-broad '*' policy would allow — exactly what least-privilege prevents.">Your whole AWS account</button>
+<button class="qopt" data-correct="1" data-fb="Contained ✅ — least privilege in action. The blast radius is that single permission: painful, but not catastrophic.">Only that one bucket's objects</button>
+<button class="qopt" data-correct="0" data-fb="A compromised container can use whatever the role allows — which is exactly why you scope the role tightly.">Nothing — roles can't be abused</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="aws_from_scratch.html#iam">From Scratch §5</a> · <a class="x" href="mastery_gatekeeper_auth.html">The Gatekeeper</a></p>
+</div>
+
+<div class="cap" data-tier="must" id="secrets">
+<div class="cap-h"><span class="cap-ic">🔏</span><h3>Secrets &amp; keys</h3><span class="t-must">MUST</span> <span class="cost">¢</span></div>
+<p class="hook">Your app needs the database password and a few API keys to run. Where do those live? <em>Never</em> in your code or git — bots scan public repos for leaked keys within seconds. A <b>secrets store</b> keeps them safe and hands them to your app at startup.</p>
+<div class="analogy">💡 <b>Think of it like a hotel safe.</b> You don't tape your passport to the door (a password in your code); you lock it in the safe, and only you — with the right key — can open it. Secrets Manager is the safe; your app's IAM role is the key.</div>
+<details class="qa"><summary>What's actually wrong with a <code>.env</code> file or hardcoding?</summary><div class="qa-a">It ends up in git history, backups, Slack pastes, and CI logs — and once a secret is in git, it's effectively public forever, even if you delete it later. A secrets store keeps the value in exactly one guarded place.</div></details>
+<details class="qa"><summary>Secrets Manager or Parameter Store?</summary><div class="qa-a">Parameter Store is free and covers ~90% of needs — start there. Upgrade to Secrets Manager when you want automatic rotation (it can change a DB password on a schedule). Both are fine choices.</div></details>
+<details class="qa"><summary>What is KMS doing in the background?</summary><div class="qa-a">KMS holds the encryption keys that scramble your data “at rest” (in S3, RDS, disks). You rarely touch it directly — you tick “encrypt,” and KMS makes “is your data encrypted?” answer yes.</div></details>
+<div class="gotcha">⚠️ <b>Deleting a leaked secret from git doesn't un-leak it</b> — it's in the history, and anyone who cloned the repo already has it. If a key ever hits git, <b>rotate it</b> (issue a new one, revoke the old) immediately. Prevention with a secrets store is far cheaper than that cleanup.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> AWS <b>Secrets Manager</b> (auto-rotation) / <b>SSM Parameter Store</b> (free 90% version) + <b>KMS</b> · independents: <b>HashiCorp Vault</b> (→ IBM ~$6.4B, 2024; powerful, heavy), Doppler / Infisical (SaaS DX).</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>Parameter Store</b> to start, <b>Secrets Manager</b> when you need rotation; <b>KMS</b> ticked on every store so “encrypted at rest?” is always yes. A <code>.env</code> on a server is what these replace.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> the RDS password and the APNs push key kept safe. → both live in <b>Secrets Manager</b>; the API reads them at boot via its IAM role. Rotate the DB password after an employee leaves — no redeploy, no secret in git.</div>
+<div class="quiz"><p class="qq">A developer commits the production DB password to a public GitHub repo. Right move?</p>
+<button class="qopt" data-correct="0" data-fb="It's still in git history and in every clone/fork. Deleting the commit is not enough.">Delete the commit — problem solved</button>
+<button class="qopt" data-correct="1" data-fb="Rotate ✅ — assume it's compromised the instant it's public. Issue a new password and revoke the old one now, then clean up.">Rotate the password immediately, then investigate</button>
+<button class="qopt" data-correct="0" data-fb="The key may already be scraped. Making the repo private later doesn't un-expose it — you must rotate.">Make the repo private</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_vault_security.html">The Vault</a></p>
+</div>
+
+<div class="cap" data-tier="sit" id="auth">
+<div class="cap-h"><span class="cap-ic">🎫</span><h3>End-user auth — sign-up &amp; login</h3><span class="t-sit">SIT</span> <span class="cost">¢</span><span style="font-size:10px;color:#999"> · MUST if you have user accounts</span></div>
+<p class="hook">The moment your app has user accounts, you're responsible for logins, passwords, resets, and “sign in with Apple” — done <em>securely</em>. Rolling your own is a minefield, so most teams hand it to a dedicated service and just check the token it issues.</p>
+<div class="analogy">💡 <b>Think of it like a club with a bouncer.</b> You don't check IDs at every door inside — the bouncer (Cognito/Auth0) checks once at the entrance and gives each guest a wristband (a JWT). Inside, your app just glances at the wristband.</div>
+<details class="qa"><summary>What's a JWT, and why does it matter?</summary><div class="qa-a">A JSON Web Token: a signed, tamper-proof “wristband” the auth service gives a logged-in user. Your API can verify it's genuine <em>without</em> calling the auth service every time — fast, stateless login checks.</div></details>
+<details class="qa"><summary>Why not just build login myself?</summary><div class="qa-a">Because secure auth means correctly handling password hashing, reset flows, MFA, session expiry, social login, and a dozen attack types. Get any one subtly wrong and accounts leak. It's the classic “don't roll your own” area.</div></details>
+<div class="gotcha">⚠️ <b>Cognito is cheap and IAM-native but famous for rough edges</b> — some user-pool settings can't be changed after creation. Prototype the flows before you commit, or you'll be migrating users later. (This is exactly why many pick Auth0/Clerk despite the cost.)</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
 <table>
-<tr><th style="width:20%">Tool</th><th>What it is &amp; its day-to-day job</th><th style="width:12%">Need</th></tr>
-<tr data-tier="rec"><td><b>SSM Session Manager</b></td><td>Shell into any instance/container <em>through IAM</em> — no SSH keys, no port 22 open, every session audited. The modern replacement for the <code>.pem</code> file workflow you learned with.<span class="alt">Alternatives: SSH + bastion host (the classic), Tailscale SSH, EC2 Instance Connect.</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="rec"><td><b>aws-vault / Granted / Leapp</b></td><td>Keeps AWS credentials encrypted in your OS keychain and issues short-lived session tokens per shell — instead of plaintext keys in <code>~/.aws/credentials</code> waiting to be exfiltrated. Daily: <code>assume prod-readonly</code>.<span class="alt">With SSO configured, <code>aws sso login</code> covers much of this natively.</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="rec"><td><b>Docker Compose (local stack)</b></td><td>One <code>docker compose up</code> starts your app + Postgres + Redis on your laptop, mirroring prod's shape. The daily inner loop.<span class="alt">Alternatives: running services natively via brew (drift city), devcontainers, Tilt (at k8s scale).</span></td><td><span class="t-rec">REC</span></td></tr>
-<tr data-tier="sit"><td><b>LocalStack</b></td><td>A fake AWS (S3, SQS, Lambda, DynamoDB…) running in a container so integration tests don't need a real account. <b>When:</b> your test suite starts touching AWS APIs.<span class="alt">Alternatives: a dedicated sandbox AWS account (more real, more risk), MinIO for just-S3.</span></td><td><span class="t-sit">SIT</span></td></tr>
-<tr data-tier="sit"><td><b>k6 / Artillery (load testing)</b></td><td>Scripted fake traffic to find your breaking point <em>before</em> launch day does. <b>When:</b> before any launch you're nervous about (<a class="x" href="mastery_edge_performance.html">The Edge</a>).</td><td><span class="t-sit">SIT</span></td></tr>
-<tr data-tier="sit"><td><b>ngrok / Cloudflare Tunnel</b></td><td>Public URL for your laptop — testing webhooks (Stripe, GitHub) against local code without deploying.</td><td><span class="t-sit">SIT</span></td></tr>
-<tr data-tier="sit"><td><b>infracost</b></td><td>Prints the monthly cost delta of a Terraform PR right in the review — "this change adds $340/mo" as a review comment. <b>When:</b> IaC is established and bills matter.</td><td><span class="t-sit">SIT</span></td></tr>
-</table>
+<tr><th style="width:34%">Option</th><th>Character</th></tr>
+<tr><td>AWS <b>Cognito</b></td><td>Native, cheap, integrates with IAM — but famously rough DX.</td></tr>
+<tr><td><b>Auth0</b> / Clerk</td><td>Auth0 (→ Okta $6.5B, 2021) &amp; Clerk out-polish everyone on DX; the go-to independents.</td></tr>
+<tr><td>Supabase / Firebase Auth</td><td>Bundled with their backends; great for greenfield.</td></tr>
+<tr><td>Keycloak / Ory (OSS)</td><td>Self-hosted, full control.</td></tr>
+</table></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>Cognito</b> if you value one bill + IAM integration and can stomach the DX; <b>Auth0/Clerk</b> if developer experience and speed matter more.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> hikers to sign up with email or Apple, on mobile. → <b>Cognito</b> user pool issues JWTs; the app sends the token, the API verifies it on every request. (Apple sign-in is a first-class Cognito federation.)</div>
+<div class="quiz"><p class="qq">Trailmark's API must confirm a request comes from a logged-in hiker, on every call, fast. How?</p>
+<button class="qopt" data-correct="0" data-fb="Works, but adds a database hit to every single request — slower and heavier than needed.">Look up the session in the DB each request</button>
+<button class="qopt" data-correct="1" data-fb="Verify the JWT ✅ — it's signed, so the API checks it locally in microseconds, no DB call, and it can't be forged.">Verify the signed JWT the auth service issued</button>
+<button class="qopt" data-correct="0" data-fb="Never trust a client-supplied identity — anyone could send any id. The signature is the whole point.">Trust a user-id the app sends</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_gatekeeper_auth.html">The Gatekeeper</a></p>
+</div>
 
-<h2 id="minimal"><span class="sn">9</span>The minimal viable production stack</h2>
-<p>Strip away everything situational and this is the honest day-one shopping list — <strong>13 pieces</strong> run a real production web app responsibly:</p>
+<div class="cap" data-tier="must" id="audit">
+<div class="cap-h"><span class="cap-ic">🛡️</span><h3>Audit, threat &amp; compliance</h3><span class="t-must">MUST</span> <span class="cost">¢</span></div>
+<p class="hook">Three jobs in one: know what happened (for the day something goes wrong), catch attackers early, and prove to auditors you're safe. AWS gives you cheap, always-on tools for each — the trick is switching the recorder on <em>before</em> the incident, not after.</p>
+<div class="analogy">💡 <b>Think of it like a building's security kit.</b> <b>CloudTrail</b> is the CCTV that records everyone in and out. <b>GuardDuty</b> is the alarm that notices a break-in. <b>WAF</b> is the bouncer turning away troublemakers at the door. You install all three <em>before</em> the burglary.</div>
+<details class="qa"><summary>Which one do I turn on first?</summary><div class="qa-a"><b>CloudTrail.</b> It records every action in your account, it's nearly free, and after any incident it's the only thing that can tell you who did what. On before you think you need it.</div></details>
+<details class="qa"><summary>What does a WAF actually block?</summary><div class="qa-a">Common web attacks: SQL-injection attempts, known-bad bots, and floods of requests from one IP (rate limiting). It sits in front of your app and filters the obvious malicious traffic before it lands.</div></details>
+<details class="qa"><summary>When do I care about Config / Inspector / Macie?</summary><div class="qa-a">When a customer or auditor asks for SOC 2 / ISO. They continuously check “any public buckets? MFA everywhere? any exposed PII? any known CVEs?” — the exact evidence auditors want.</div></details>
+<div class="gotcha">⚠️ <b>Turn CloudTrail on now, not after the breach.</b> It only records what happens <em>after</em> it's enabled — so flipping it on during an incident means you've already lost the history you need. It's near-free; there's no reason it isn't already on.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> mostly AWS-native and cheap-for-coverage (CloudTrail, GuardDuty, WAF+Shield, Config/Inspector/Macie, Dependabot+Trivy). Independents at scale: <b>Wiz</b> (~$32B Google acquisition agreed, 2025) / Orca for posture; <b>Snyk</b> (~$7.4B, 2022) for dependencies; Cloudflare WAF; Vanta/Drata for audit paperwork.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>Day one:</b> CloudTrail on. <b>First months:</b> GuardDuty + Dependabot. <b>When targeted:</b> WAF. <b>When audits loom:</b> Config/Inspector/Macie — auditors ask for exactly these.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to protect its login endpoint from credential-stuffing bots. → attach <b>WAF</b> to the ALB with a rate-limit rule on <code>/auth/login</code>; <b>GuardDuty</b> watches for a leaked key mining crypto; <b>CloudTrail</b> answers “who did what” after any incident.</div>
+<div class="quiz"><p class="qq">Trailmark's login page is hammered by a bot trying millions of password guesses. First line of defence?</p>
+<button class="qopt" data-correct="0" data-fb="Helpful long-term, but it doesn't stop the flood hitting your servers right now.">Ask users to pick stronger passwords</button>
+<button class="qopt" data-correct="1" data-fb="WAF ✅ — a rate-limit rule blocks an IP making too many attempts, cutting the flood off at the edge before it reaches your app.">A WAF rate-limit rule on /auth/login</button>
+<button class="qopt" data-correct="0" data-fb="That's an outage — the bot just won. Block the bot, keep real users logging in.">Turn off logins for a while</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_vault_security.html">The Vault</a></p>
+</div>
+
+<div class="cap" data-tier="must" id="cost">
+<div class="cap-h"><span class="cap-ic">💰</span><h3>Cost control</h3><span class="t-must">MUST</span> <span class="cost">free</span></div>
+<p class="hook">The cloud's scariest failure isn't a crash — it's a <b>bill</b>. A misconfigured job or a forgotten resource can quietly run up thousands before anyone notices. Two free tools make sure “notice” happens on day one, not on the invoice.</p>
+<div class="analogy">💡 <b>Think of it like a prepaid meter with a low-balance alarm</b> vs a bill you only see at month-end. A Budget alert pings you the moment spend crosses a line — while you can still do something about it.</div>
+<details class="qa"><summary>What's the very first thing to set up in a new account?</summary><div class="qa-a">A <b>Budget alert</b>. Before you deploy anything, tell AWS to email you at, say, $20 / $50 / $100. Five minutes, and it's caught more disasters than any other single setting.</div></details>
+<details class="qa"><summary>Where do surprise bills usually come from?</summary><div class="qa-a">Forgotten always-on resources (an EC2 box, a NAT gateway), <em>data egress</em> (serving big files out of AWS), and runaway loops (a bug that calls a paid API or spins up compute repeatedly). Budgets catch all three early.</div></details>
+<details class="qa"><summary>What's infracost?</summary><div class="qa-a">It comments the monthly cost change on an infra pull request — “this adds $180/mo” — so price is visible at review time, before the resource exists and the meter starts running.</div></details>
+<div class="gotcha">💸 <b>Free-tier is a trap if you forget it expires.</b> Many services are free for 12 months or up to a limit, then quietly start charging. A Budget alert is what catches the month the free ride ends — otherwise the first sign is the bill.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> AWS Budgets + Cost Explorer (free) · infracost (shift-left, in the PR) · at org scale, FinOps SaaS: Vantage, CloudZero, Kubecost.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span>A budget alarm on <b>day one</b> — the cheapest insurance in your account — plus a Friday five-minute glance at the daily-spend graph. Add infracost once IaC is established.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to never be surprised by an image-processing loop gone wrong. → a <b>Budget</b> alerts at 50/80/100% of the monthly target; a Terraform PR that adds a bigger RDS shows “+$180/mo” via <b>infracost</b> before anyone approves it.</div>
+<div class="quiz"><p class="qq">You spin up resources to experiment on a brand-new AWS account. Very first thing to set up?</p>
+<button class="qopt" data-correct="0" data-fb="Nice later, but it doesn't proactively warn you — you have to remember to look.">A fancy cost dashboard</button>
+<button class="qopt" data-correct="1" data-fb="Budget alert ✅ — five minutes, free, and it emails you the moment spend crosses a line, while you can still fix it. The cheapest insurance in the account.">A Budget alert at a low threshold</button>
+<button class="qopt" data-correct="0" data-fb="By then a runaway resource has been billing for weeks. The whole point is to find out early.">Nothing — check the bill next month</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_wallet_finops.html">The Wallet</a></p>
+</div>
+
+<p class="sup">See<span class="sd">Production without observability is a car with the windshield painted black.</span></p>
+
+<div class="cap" data-tier="must" id="logs">
+<div class="cap-h"><span class="cap-ic">📡</span><h3>Logs, metrics &amp; alarms</h3><span class="t-must">MUST</span> <span class="cost">$</span></div>
+<p class="hook">When your app misbehaves at 2am you have exactly two questions: “is something wrong?” and “what?” Metrics, logs and alarms answer both — they're the dashboard and the smoke detector for your running app.</p>
+<div class="analogy">💡 <b>Think of it like a car's dashboard.</b> <b>Metrics</b> are the gauges (speed, fuel, temperature), <b>logs</b> are the detailed trip record, and <b>alarms</b> are the red warning light that says “pull over now.” Driving without them is driving blindfolded.</div>
+<details class="qa"><summary>Metrics vs logs — what's the difference?</summary><div class="qa-a"><b>Metrics</b> are numbers over time (requests/sec, CPU %, error rate) — great for graphs and alarms. <b>Logs</b> are the detailed text record, line by line — great for digging into one specific problem. You want both.</div></details>
+<details class="qa"><summary>What should I actually alarm on?</summary><div class="qa-a">User-facing pain, not internals. “Error rate above X” or “p95 latency above Y” means users are hurting. Alarming on every CPU wiggle just trains you to ignore alerts — the dreaded alarm fatigue.</div></details>
+<details class="qa"><summary>Why do teams leave CloudWatch for Datadog?</summary><div class="qa-a">CloudWatch is fine per-service but clunky at connecting the dots <em>across</em> many services. Datadog shows everything in one correlated view — worth it once you have enough moving parts, if you can stomach the bill.</div></details>
+<div class="gotcha">💸 <b>Observability bills sneak up on you.</b> Verbose logging and high-cardinality metrics can cost more than the servers you're watching — “Datadog bill rivalling the compute bill” is a running industry joke. Log what you'll actually read; sample the rest.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<table>
+<tr><th style="width:34%">Option</th><th>Character</th></tr>
+<tr><td><b>CloudWatch</b> (AWS)</td><td>Zero-setup baseline; every service already feeds it. Nobody's favourite UI, but it's there.</td></tr>
+<tr><td><b>Datadog</b></td><td>Category leader, ~$40–50B public (2025). Best-in-class correlation — watch the bill.</td></tr>
+<tr><td><b>Grafana + Prometheus + Loki</b></td><td>Grafana Labs ~$6B private (2022); Prometheus/Loki are CNCF OSS. Datadog-class insight you own.</td></tr>
+</table></details>
+<p class="verdict"><span class="vlabel">Verdict</span>Start on <b>CloudWatch</b> (<code>aws logs tail --follow</code> during deploys). Move to <b>Datadog</b> when cross-service correlation defeats you, or the <b>Grafana</b> stack if you'd rather own it than pay per host.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to know when the feed gets slow. → a <b>CloudWatch</b> alarm on p95 latency &gt; 800ms pages the on-call; the dashboard shows which layer (ALB → Fargate → RDS) is the culprit.</div>
+<div class="quiz"><p class="qq">Which alarm is worth waking someone at 3am?</p>
+<button class="qopt" data-correct="0" data-fb="A brief spike that self-recovered isn't user pain — alarming on it just causes fatigue.">CPU briefly hit 85% then dropped</button>
+<button class="qopt" data-correct="1" data-fb="Yes ✅ — sustained high errors means users are actually being hurt right now. That deserves a page.">Error rate above 5% for 5 minutes</button>
+<button class="qopt" data-correct="0" data-fb="One error among thousands of requests is noise. Page on trends, not single blips.">A single 500 error</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_watchtower_observability.html">The Watchtower</a></p>
+</div>
+
+<div class="cap" data-tier="must" id="errors">
+<div class="cap-h"><span class="cap-ic">🐛</span><h3>Error tracking</h3><span class="t-must">MUST</span> <span class="cost">¢</span></div>
+<p class="hook">Logs bury exceptions in a firehose you'd have to grep. <b>Error tracking</b> catches every crash the instant it happens — with the exact line, the user affected, and which deploy caused it — and emails you before a user even complains.</p>
+<div class="analogy">💡 <b>Think of it like a black-box flight recorder for crashes.</b> When something breaks, you don't sift hours of cockpit chatter (logs) — the recorder hands you the precise moment, the conditions, and the cause. That's Sentry.</div>
+<details class="qa"><summary>How is this different from just logging errors?</summary><div class="qa-a">Logs are unstructured and you have to go looking. Error tracking automatically groups identical crashes, counts them, ties each to a release and a user, and pings you — turning “somewhere in a million log lines” into “this bug, 40 users, since the 3pm deploy.”</div></details>
+<details class="qa"><summary>Why is it “highest value per dollar”?</summary><div class="qa-a">It's cheap, takes minutes to add, and the first time it shows you a crash-with-stack-trace before a customer reports it, it's paid for itself. Almost nothing else on this page has that ratio.</div></details>
+<div class="gotcha">⚠️ <b>Wire it into the mobile app too, not just the backend.</b> A huge share of “the app is broken” reports are client-side crashes your server logs never see. One tool across both ends is how you catch them.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> <b>Sentry</b> (~$3B private, 2022; also open-source, self-hostable) is the leader · alternatives Rollbar, Bugsnag, Honeybadger, self-hosted GlitchTip. Grepping logs for exceptions is what it replaces.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>Sentry</b>, wired into both the backend and the mobile app, on day one. It pays for itself the first morning you triage a crash before a user reports it.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to catch a crash in the iOS app <em>and</em> the API from the same release. → <b>Sentry</b> in both; a null-pointer in the feed screen links straight to the commit that shipped it, with the affected user and device.</div>
+<div class="quiz"><p class="qq">A user tweets “Trailmark keeps crashing on the feed.” With Sentry wired in, what do you already have?</p>
+<button class="qopt" data-correct="0" data-fb="That's life without error tracking — you'd be guessing. Sentry exists precisely so you're not.">Nothing until you reproduce it</button>
+<button class="qopt" data-correct="1" data-fb="Everything ✅ — Sentry already captured the stack trace, the offending release, and affected users. You can often fix it before replying to the tweet.">The crash, stack trace, release &amp; affected users</button>
+<button class="qopt" data-correct="0" data-fb="That's a metric, not an error report. Sentry gives you the actual exception and its context.">Only a count of total requests</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_watchtower_observability.html">The Watchtower</a></p>
+</div>
+
+<div class="cap" data-tier="sit" id="trace">
+<div class="cap-h"><span class="cap-ic">🧵</span><h3>Tracing — where did the milliseconds go?</h3><span class="t-sit">SIT</span> <span class="cost">$</span></div>
+<p class="hook">When your app is one service, “why is this slow?” is easy. When it's five services calling each other, the slow bit hides in the hand-offs between them. <b>Tracing</b> follows a single request across every hop and shows exactly where the time went.</p>
+<div class="analogy">💡 <b>Think of it like tracking a parcel.</b> “It's late” isn't useful; the tracking page showing it sat in one depot for two days <em>is</em>. A trace is the tracking page for one request across your services.</div>
+<details class="qa"><summary>How is tracing different from logs and metrics?</summary><div class="qa-a">Metrics say “requests are slow”; logs show one service's view; a <b>trace</b> stitches together the whole journey of one request end-to-end — so you can see it spent 1.8s waiting on the search service and 50ms everywhere else.</div></details>
+<details class="qa"><summary>Why is this “situational”?</summary><div class="qa-a">With one or two services, logs answer “which is slow?” fine. Tracing earns its setup once you have enough services that the answer isn't obvious — usually past ~3 talking to each other.</div></details>
+<div class="gotcha">⚠️ <b>Instrument with OpenTelemetry, not a vendor's SDK.</b> OTel is the open standard, so you can switch tracing backends (X-Ray, Jaeger, Honeycomb, Datadog) later without re-instrumenting every service. Lock-in here is painful and avoidable.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> <b>OpenTelemetry</b> is the CNCF vendor-neutral standard — instrument once, send anywhere (X-Ray, Jaeger, Tempo, Honeycomb, Datadog APM). Honeycomb pioneered high-cardinality debugging.</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span>Standardise on <b>OpenTelemetry</b> regardless of backend — it keeps you portable. Adopt <b>when</b> you have more than ~3 services and “which hop?” stops being answerable from logs.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> (once it has API + thumbnailer + search + push) to find why a post takes 2s to appear. → an OTel trace shows the time is in the <b>OpenSearch</b> index write, not the DB — a two-minute diagnosis instead of an afternoon.</div>
+<div class="quiz"><p class="qq">A Trailmark post takes 2s to appear, across API + thumbnailer + search + push. Fastest way to find the culprit?</p>
+<button class="qopt" data-correct="0" data-fb="You can, but stitching four services' logs by hand for one request is slow — exactly what tracing automates.">Read each service's logs separately</button>
+<button class="qopt" data-correct="1" data-fb="Trace it ✅ — the waterfall shows the 1.8s is in the search index write. Two minutes, not an afternoon.">A distributed trace of one request</button>
+<button class="qopt" data-correct="0" data-fb="Optimising blindly wastes effort and can make things worse. Measure first.">Guess and add random caching</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_watchtower_observability.html">The Watchtower</a></p>
+</div>
+
+<div class="cap" data-tier="rec" id="uptime">
+<div class="cap-h"><span class="cap-ic">📟</span><h3>Uptime &amp; on-call</h3><span class="t-rec">REC</span> <span class="cost">¢</span></div>
+<p class="hook">Three related jobs: know your site is up (from <em>outside</em> your own cloud), make sure a human actually gets woken when it isn't, and tell users you're aware. Cheap to set up, invaluable at 3am.</p>
+<div class="analogy">💡 <b>Think of it like a night watchman with a phone tree.</b> The watchman (uptime monitor) stands across the street — so if your building loses power, they still see it. When something's wrong, the phone tree (PagerDuty) rings people until someone answers.</div>
+<details class="qa"><summary>Why must the uptime monitor live <em>outside</em> AWS?</summary><div class="qa-a">Because if your whole AWS region goes down, any monitoring inside it goes down too — and stays silent exactly when you most need the alert. An external checker is the one thing still watching during a total outage.</div></details>
+<details class="qa"><summary>What does PagerDuty add over just an alert?</summary><div class="qa-a">Escalation. An email is easy to miss at 3am. PagerDuty <em>phones</em> the on-call engineer, and if they don't answer in X minutes, it phones the backup. It guarantees someone is actually woken, not just notified.</div></details>
+<div class="gotcha">⚠️ <b>An alert nobody's assigned to is an alert nobody answers.</b> Before you rely on paging, define who's on-call and a fallback — otherwise the 3am alarm just rings into an empty inbox while the outage grows.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> uptime — UptimeRobot, Better Stack, Pingdom, Checkly (pick one <em>not</em> in your AWS region) · on-call — <b>PagerDuty</b> (~$1.5–2B public), Opsgenie, Grafana OnCall (free), incident.io · status — Atlassian Statuspage, Instatus, Cachet (OSS).</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span>External uptime check on day one (5 minutes). <b>PagerDuty</b>-style rotation <b>when</b> &gt;3 engineers share the pager. Status page <b>when</b> you have paying customers.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to know it's down even if all of AWS <code>us-east-1</code> is down. → <b>UptimeRobot</b> (hosted elsewhere) curls <code>/health</code> every minute; failure → PagerDuty call to whoever's on rotation; a status page tells hikers “we're on it.”</div>
+<div class="quiz"><p class="qq">Trailmark runs entirely in AWS us-east-1, and that whole region has an outage. Which tool still alerts you?</p>
+<button class="qopt" data-correct="0" data-fb="It's down with the region — an alarm can't fire when its own home is offline.">A CloudWatch alarm in us-east-1</button>
+<button class="qopt" data-correct="1" data-fb="External monitor ✅ — hosted outside the failing region, it keeps curling your endpoint and screams when it can't reach you. The one watcher still awake.">An external uptime monitor hosted elsewhere</button>
+<button class="qopt" data-correct="0" data-fb="If the app is down, so is its dashboard. You need something outside the blast radius.">Your in-app health dashboard</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_watchtower_observability.html">The Watchtower</a></p>
+</div>
+
+<p class="sup">Think<span class="sd">The AI / ML layer — increasingly table-stakes, same AWS-native-vs-independent choice.</span></p>
+
+<div class="cap" data-tier="sit" id="genai">
+<div class="cap-h"><span class="cap-ic">🤖</span><h3>GenAI models</h3><span class="t-sit">SIT</span> <span class="cost">$</span></div>
+<p class="hook">Want your app to summarise, chat, caption a photo, or pull data out of messy text? You don't train anything — you send a <b>prompt</b> to a large language model over the internet and get an answer back. The only real choice: call it <em>through</em> AWS, or call the model-maker directly.</p>
+<div class="analogy">💡 <b>Think of it like hiring a brilliant freelancer by the task.</b> You don't employ them full-time (train your own model) — you send a clear brief (the prompt) and pay per job. Bedrock is hiring through an agency that keeps everything in-house; calling Anthropic/OpenAI direct is hiring the freelancer straight.</div>
+<details class="qa"><summary>Bedrock or call the vendor directly?</summary><div class="qa-a"><b>Bedrock</b> keeps your data inside your AWS account with IAM/VPC controls — good when compliance or data-residency matters. Calling <b>Anthropic/OpenAI</b> directly gets you the newest models the day they ship, with the simplest setup — the trade is that your data leaves for a third party.</div></details>
+<details class="qa"><summary>How do I not get a huge bill?</summary><div class="qa-a">LLMs charge per “token” (roughly, per word in and out). A runaway loop or a giant document can rack up cost fast. Keep the API key in a secrets store, set a Budget alert on spend, and cap how much text you send.</div></details>
+<div class="gotcha">💸 <b>Token costs scale with text length</b>, and it's easy to 10× your bill by accident — resending a whole conversation on every call, or dumping huge documents into the prompt. Watch input size, and always put a Budget alert on AI spend.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<table>
+<tr><th style="width:34%">Option</th><th>Character</th></tr>
+<tr><td>AWS <b>Bedrock</b></td><td>Many models (incl. Anthropic's Claude — Amazon is a major Anthropic investor) behind one API; data stays in-account, IAM/VPC-native.</td></tr>
+<tr><td><b>Anthropic / OpenAI</b> APIs</td><td>The frontier labs (private, tens-to-hundreds-of-billions valuation, 2025). Newest models day-one; data leaves for a third party.</td></tr>
+<tr><td>Vertex AI / Azure OpenAI</td><td>The other clouds' managed gateways.</td></tr>
+</table></details>
+<p class="verdict"><span class="vlabel">Verdict</span><b>Bedrock</b> when compliance/data-residency matter and you're AWS-committed; call <b>Anthropic/OpenAI directly</b> when you want the newest capability and the fastest path.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to auto-suggest a caption and difficulty tag from a trail photo. → send the image to <b>Bedrock</b> (Claude) with a prompt; key in Secrets Manager, Budget alert on token spend. Data never leaves the AWS account.</div>
+<div class="quiz"><p class="qq">Trailmark handles sensitive user data that must stay inside its AWS compliance boundary. Which fits?</p>
+<button class="qopt" data-correct="0" data-fb="Fast to build, but the data leaves your AWS boundary — a problem when compliance requires it stay in-account.">Call the OpenAI API directly</button>
+<button class="qopt" data-correct="1" data-fb="Bedrock ✅ — it runs the models within your AWS account with IAM/VPC controls, so sensitive data never leaves the boundary.">Bedrock, data stays in-account</button>
+<button class="qopt" data-correct="0" data-fb="Enormously expensive and slow — and unnecessary when a hosted model does the job.">Train a model from scratch</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: your AI features are only as safe as <a class="x" href="mastery_vault_security.html">The Vault</a> keeps their keys.</p>
+</div>
+
+<div class="cap" data-tier="sit" id="aiblocks">
+<div class="cap-h"><span class="cap-ic">🧩</span><h3>AI building blocks</h3><span class="t-sit">SIT</span> <span class="cost">¢</span></div>
+<p class="hook">Some AI jobs are so common they're already solved and sold by the call: read text off an image (OCR), spot what's in a photo, turn speech into text. No training, no model — just one API call and a result.</p>
+<div class="analogy">💡 <b>Think of it like kitchen appliances vs cooking from scratch.</b> You don't build a blender to make a smoothie — you press a button. Rekognition, Textract and Transcribe are single-button appliances for the most common AI tasks.</div>
+<details class="qa"><summary>When do I use these vs a big LLM?</summary><div class="qa-a">Use a <b>task API</b> when you need one specific, well-defined job done cheaply and reliably (OCR a receipt, transcribe a call). Reach for a <b>multimodal LLM</b> when you'd otherwise chain several of them, or you need reasoning about the content, not just extraction.</div></details>
+<details class="qa"><summary>Are they accurate enough?</summary><div class="qa-a">For mainstream cases, yes — they're trained on huge datasets. For niche or high-stakes accuracy (medical, legal), test carefully and expect to review outputs. “Good enough” is task-dependent.</div></details>
+<div class="gotcha">💸 <b>These charge per image / page / minute</b>, and a bulk backfill (re-processing your whole photo library at once) can spike the bill. Batch deliberately and, again, keep a Budget alert on.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> AWS <b>Textract</b> (documents → text), <b>Rekognition</b> (image labels/faces), <b>Transcribe</b> (speech → text) · mirrored by Google Document AI/Vision/Speech and Azure Cognitive Services · increasingly one multimodal LLM does several at once (or open-source Tesseract/Whisper).</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span>Reach for a <b>task API</b> for one common job done cheaply; consider a <b>multimodal LLM</b> when you'd otherwise chain several of them.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> to auto-tag what's in a photo (waterfall, summit, forest) for search. → <b>Rekognition</b> labels each upload; the labels feed the OpenSearch index so “photos with waterfalls” just works.</div>
+<div class="quiz"><p class="qq">Trailmark wants to auto-tag objects in trail photos to power search. Simplest tool?</p>
+<button class="qopt" data-correct="0" data-fb="Overkill — you'd spend weeks building what a task API already does out of the box.">Train a custom vision model in SageMaker</button>
+<button class="qopt" data-correct="1" data-fb="Rekognition ✅ — one API call returns labels per photo; feed them into the search index. Common task, solved product.">Rekognition image labels</button>
+<button class="qopt" data-correct="0" data-fb="Slow, incomplete, and users won't bother — automate the obvious part.">Ask users to tag manually</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: pairs with <a class="x" href="#search">Search</a> above.</p>
+</div>
+
+<div class="cap" data-tier="sit" id="ml">
+<div class="cap-h"><span class="cap-ic">🧠</span><h3>Custom ML</h3><span class="t-sit">SIT</span> <span class="cost">$$$</span></div>
+<p class="hook">Everything above <em>uses</em> someone else's AI. This is for when you build your <em>own</em> model — a recommender, a fraud detector, a demand forecast — trained on your data. It needs a whole platform to train, host and monitor, and a team who knows how.</p>
+<div class="analogy">💡 <b>Think of it like takeout vs running a restaurant kitchen.</b> Calling an LLM is takeout — fast, no staff. SageMaker is the professional kitchen: powerful and bespoke, but you need chefs (an ML team) to run it.</div>
+<details class="qa"><summary>How do I know I need this and not just an LLM?</summary><div class="qa-a">If your problem is “understand/generate language or images,” a hosted LLM or task API is almost always faster and cheaper. You need <b>custom ML</b> only when the model must learn from <em>your</em> specific data — your users' behaviour, your fraud patterns — something no general model has seen.</div></details>
+<details class="qa"><summary>What's the honest first step before SageMaker?</summary><div class="qa-a">A simple heuristic in your normal code. “Most popular this week,” “people you follow also liked” — plain SQL gets you ~80% of a recommender with none of the ML overhead. Reach for SageMaker only when that ceiling is real.</div></details>
+<div class="gotcha">💸 <b>Custom ML is the most expensive corner of this page.</b> GPU training runs and always-on inference endpoints add up fast — and an idle endpoint bills 24/7 like any server. Don't stand one up until a simpler approach has clearly hit its limit.</div>
+<details class="more"><summary>Go deeper: the contenders</summary>
+<p class="contenders"><b>Contenders:</b> AWS <b>SageMaker</b> (notebooks, training, registry, endpoints) · independents: <b>Databricks</b> (~$60B+ valuation, the lakehouse leader), Google Vertex AI, Hugging Face, Modal/Replicate (serverless GPU).</p></details>
+<p class="verdict"><span class="vlabel">Verdict</span>Overkill unless you have an ML team. Then <b>SageMaker</b> for AWS-native pipelines, or <b>Databricks</b> if your data + ML live together in a lakehouse.</p>
+<div class="xyz"><span class="xh">🧗 Trailmark needs…</span> (far future, with a data team) a custom “trails you'll love” recommender. → train it in <b>SageMaker</b> on the S3 event history; serve from a SageMaker endpoint. Until then, a popularity + follows heuristic in Postgres is plenty.</div>
+<div class="quiz"><p class="qq">Early Trailmark wants a “trails you'll love” feature. Cheapest sensible start?</p>
+<button class="qopt" data-correct="0" data-fb="Big cost and effort for a young app — you likely don't have the data or the team yet.">Build a custom recommender in SageMaker now</button>
+<button class="qopt" data-correct="1" data-fb="Heuristic ✅ — plain SQL (popular this week + your follows' likes) gets most of the value with none of the ML overhead. Upgrade later if it plateaus.">A popularity + who-you-follow heuristic in SQL</button>
+<button class="qopt" data-correct="0" data-fb="Wildly premature spend — you don't need to train anything to ship a first version.">Buy a GPU cluster</button>
+<div class="qfb"></div></div>
+<p class="deep">↪ Go deeper: <a class="x" href="mastery_ledger_data_engineering.html">The Ledger</a></p>
+</div>
+
+<h2 id="desk"><span class="sn">iii</span>At your desk — local dev utilities</h2>
+<p>The small tools that make the daily inner loop safe and fast. <span class="t-rec">REC</span> as a set.</p>
+<table>
+<tr><th style="width:26%">Tool</th><th>What it does &amp; when</th></tr>
+<tr><td><b>Docker Compose</b></td><td><code>docker compose up</code> starts app + Postgres + Redis locally, mirroring prod's shape — the daily inner loop.</td></tr>
+<tr><td><b>SSM Session Manager</b></td><td>Shell into any box <em>through IAM</em> — no SSH keys, no open port 22, every session audited. Alternatives: Tailscale SSH, bastion.</td></tr>
+<tr><td><b>aws-vault / Granted</b></td><td>Encrypt AWS creds in your keychain, issue short-lived per-shell tokens. With SSO, <code>aws sso login</code> covers most of it.</td></tr>
+<tr><td><b>ngrok / Cloudflare Tunnel</b></td><td>A public URL for <code>localhost</code> to test webhooks (Stripe, GitHub, APNs) against local code without deploying.</td></tr>
+<tr><td><b>LocalStack</b></td><td>A fake AWS in a container so integration tests don't hit (or bill) a real account. When your tests touch AWS APIs.</td></tr>
+<tr><td><b>k6 / Artillery</b></td><td>Scripted fake traffic to find your breaking point before launch day does (k6 is now Grafana Labs).</td></tr>
+</table>
+<div class="xyz"><span class="xh">🧗 Trailmark's daily loop:</span> <code>docker compose up</code> (API + Postgres + Redis) → build a feature → <b>ngrok</b> to test the APNs push webhook against the laptop → before launch, <b>k6</b> ramps 5,000 virtual hikers to confirm Fargate + Auto Scaling hold.</div>
+
+<h2 id="minimal"><span class="sn">iv</span>The minimal viable production stack</h2>
+<p>Strip away everything situational and this is the honest day-one list — <strong>13 pieces</strong>, almost all AWS-native (one bill, one IAM model), run a real production app responsibly:</p>
 <pre><span class="cm"># identity & safety</span>
 IAM + CLI            <span class="fn">→ who may do what</span>
 Parameter Store      <span class="fn">→ where secrets live</span>
@@ -153,35 +796,89 @@ S3                   <span class="fn">→ the files</span>
 
 <span class="cm"># eyes</span>
 CloudWatch + Sentry  <span class="fn">→ metrics/logs/alarms + every exception</span></pre>
-<p>Everything else on this page earns its place later, when its specific pain shows up: Redis when something's slow, SQS when work goes async, CloudFront when users are far away, WAF after the first bot swarm, PagerDuty when the team shares the pager, Terraform the moment two environments drift.</p>
-<div class="warn"><strong>The anti-pattern</strong> is adopting the whole page on day one. Every tool is surface area: something to configure, secure, update and pay for. Great stacks are grown, not installed.</div>
+<div class="warn"><strong>The anti-pattern</strong> is adopting the whole page on day one. Every capability is surface area to configure, secure, update and pay for. Great stacks are grown, not installed — add each block above only when its pain appears.</div>
 
-<h2 id="day"><span class="sn">10</span>A day in the life — activity → tool map</h2>
-<p>What "using all this" actually feels like across an ordinary week:</p>
+<h2 id="trailmark"><span class="sn">v</span>Trailmark, end to end</h2>
+<p>Every green panel, assembled — the whole backend of a mobile trail-photo app, and the order it actually gets built:</p>
+<table>
+<tr><th style="width:30%">A hiker…</th><th>…and the stack that serves it</th></tr>
+<tr><td>Signs up with Apple</td><td><b>Cognito</b> issues a JWT → API verifies it → user row in <b>RDS</b></td></tr>
+<tr><td>Uploads a trail photo</td><td>API returns a <b>presigned S3</b> URL → phone PUTs the JPEG straight to <b>S3</b> → message to <b>SQS</b></td></tr>
+<tr><td>(behind the scenes)</td><td><b>Lambda</b> worker makes 3 thumbnail sizes + <b>Rekognition</b> tags → back to S3 &amp; <b>OpenSearch</b></td></tr>
+<tr><td>Opens the feed</td><td><b>CloudFront</b> serves photos from the edge → API reads a <b>Redis</b>-cached feed → misses hit <b>RDS</b> replica</td></tr>
+<tr><td>Searches “ridge trails”</td><td><b>OpenSearch</b> — ranked, typo-tolerant, filtered by Rekognition tags</td></tr>
+<tr><td>Gets a “new follower” push</td><td>event → <b>SNS</b> → Lambda → APNs, using the token in <b>DynamoDB</b> and the key in <b>Secrets Manager</b></td></tr>
+<tr><td>Everything runs on</td><td><b>Fargate</b> in a <b>VPC</b> behind an <b>ALB</b>, deployed by <b>GitHub Actions</b> → <b>ECR</b>, defined in <b>Terraform</b></td></tr>
+<tr><td>Watched by</td><td><b>CloudWatch</b> + <b>Sentry</b> + <b>UptimeRobot</b> → <b>PagerDuty</b>; guarded by <b>WAF</b>, <b>GuardDuty</b>, <b>CloudTrail</b>; budgeted by <b>Budgets</b></td></tr>
+</table>
+<div class="ok"><strong>Build order:</strong> the 13-piece minimal stack first (accounts → CI → Fargate + RDS + S3 → CloudWatch + Sentry). Then, as Trailmark grows: <b>Redis</b> (feed slow) → <b>SQS + Lambda</b> (thumbnails) → <b>CloudFront</b> (global hikers) → <b>Cognito</b> (accounts) → <b>OpenSearch</b> (search feature) → <b>WAF</b> (first bot swarm) → <b>Bedrock/Rekognition</b> (smart tags) → <b>Athena</b> (analytics). Each earns its place.</div>
+
+<h2 id="day"><span class="sn">vi</span>A day in the life — activity → tool map</h2>
 <table>
 <tr><th style="width:34%">You're doing…</th><th>You touch…</th></tr>
-<tr><td>Morning: check overnight health</td><td>Sentry (new issues?) → CloudWatch dashboard (latency/error graphs) → queue depth if you run SQS</td></tr>
+<tr><td>Morning: check overnight health</td><td>Sentry (new issues?) → CloudWatch/Datadog dashboard → SQS queue depth</td></tr>
 <tr><td>Build a feature locally</td><td>Docker Compose (app+DB+Redis), ngrok if webhooks involved</td></tr>
-<tr><td>Ship it</td><td><code>git push</code> → PR review → merge → GitHub Actions: tests, <code>docker build</code>, push to ECR, ECS rolling deploy behind the ALB → watch Sentry's release tab for 10 min</td></tr>
-<tr><td>Add a third-party API key</td><td>Secrets/Parameter Store (never <code>.env</code>, never Slack) → app reads it via IAM role at boot</td></tr>
-<tr><td>"The site is slow"</td><td>CloudWatch metrics (which layer?) → ALB target health → RDS slow-query log → add index, or cache it in Redis, or offload work to SQS</td></tr>
-<tr><td>"User can't upload"</td><td>CloudWatch logs (<code>aws logs tail</code>) → S3 presign expiry? CORS? IAM role missing <code>PutObject</code>?</td></tr>
+<tr><td>Ship it</td><td><code>git push</code> → PR → merge → Actions: test, <code>docker build</code>, push ECR, ECS rolling deploy → watch Sentry release tab</td></tr>
+<tr><td>Add a third-party API key</td><td>Secrets/Parameter Store (never <code>.env</code>, never Slack) → app reads via IAM role at boot</td></tr>
+<tr><td>Add an AI feature</td><td>Bedrock or a vendor API → key in Secrets Manager → Budget alert on tokens</td></tr>
+<tr><td>"The site is slow"</td><td>CloudWatch metrics (which layer?) → ALB target health → RDS slow-query log → index, cache in Redis, or offload to SQS</td></tr>
 <tr><td>Infra change (new queue, bigger DB)</td><td>Terraform PR → infracost comment → <code>plan</code> reviewed → <code>apply</code> from CI</td></tr>
-<tr><td>Debug a box directly</td><td>SSM Session Manager (no SSH keys, audited)</td></tr>
 <tr><td>3am: alarm fires</td><td>PagerDuty call → CloudWatch alarm → runbook → often: roll back the deploy or flip the feature flag off</td></tr>
-<tr><td>Friday: money & hygiene</td><td>Cost Explorer daily-spend glance → merge Dependabot PRs → check GuardDuty findings (usually empty)</td></tr>
+<tr><td>Friday: money & hygiene</td><td>Cost Explorer daily-spend glance → merge Dependabot PRs → check GuardDuty (usually empty)</td></tr>
 </table>
 
-<div class="ok"><strong>Go deeper:</strong> each layer of this page has a full module — <a class="x" href="aws_from_scratch.html">AWS From Scratch</a> (the core services + hands-on planner) · <a class="x" href="mastery_forge_cicd.html">The Forge</a> (CI/CD) · <a class="x" href="mastery_blueprint_iac.html">The Blueprint</a> (Terraform) · <a class="x" href="mastery_watchtower_observability.html">The Watchtower</a> (observability) · <a class="x" href="mastery_vault_security.html">The Vault</a> (security) · <a class="x" href="mastery_wallet_finops.html">The Wallet</a> (cost).</div>
+<h2 id="map"><span class="sn">vii</span>Market map — the quick-reference index</h2>
+<p>The same job, four ways. AWS-native = one bill, one IAM model; the best-of-breed independent usually wins its category on features or DX, at the cost of another vendor. Pick per-tool, not per-religion. Each row links to its full decision block above.</p>
+<table>
+<tr><th style="width:18%">Job</th><th>AWS</th><th>Google</th><th>Azure</th><th>Best-of-breed independent</th></tr>
+<tr><td><a class="x" href="#compute"><b>Containers</b></a></td><td>ECS / Fargate, EKS</td><td>Cloud Run, GKE</td><td>Container Apps, AKS</td><td>Kubernetes (CNCF)</td></tr>
+<tr><td><a class="x" href="#compute"><b>Serverless fn</b></a></td><td>Lambda</td><td>Cloud Functions</td><td>Functions</td><td>Cloudflare Workers</td></tr>
+<tr><td><a class="x" href="#cdn"><b>CDN</b></a></td><td>CloudFront</td><td>Cloud CDN</td><td>Front Door</td><td>Cloudflare, Fastly, Akamai</td></tr>
+<tr><td><a class="x" href="#rdb"><b>Relational DB</b></a></td><td>RDS / Aurora</td><td>Cloud SQL / AlloyDB</td><td>Azure SQL</td><td>Neon, Supabase, PlanetScale</td></tr>
+<tr><td><a class="x" href="#object"><b>Object store</b></a></td><td>S3</td><td>Cloud Storage</td><td>Blob Storage</td><td>Cloudflare R2, Backblaze</td></tr>
+<tr><td><a class="x" href="#cache"><b>Cache</b></a></td><td>ElastiCache</td><td>Memorystore</td><td>Azure Cache</td><td>Redis Cloud, Upstash</td></tr>
+<tr><td><a class="x" href="#queue"><b>Queues</b></a></td><td>SQS / SNS</td><td>Pub/Sub</td><td>Service Bus</td><td>RabbitMQ, BullMQ</td></tr>
+<tr><td><a class="x" href="#stream"><b>Streaming</b></a></td><td>Kinesis / MSK</td><td>Pub/Sub, Dataflow</td><td>Event Hubs</td><td>Confluent (Kafka), Redpanda</td></tr>
+<tr><td><a class="x" href="#nosql"><b>NoSQL</b></a></td><td>DynamoDB</td><td>Firestore / Bigtable</td><td>Cosmos DB</td><td>MongoDB Atlas</td></tr>
+<tr><td><a class="x" href="#search"><b>Search</b></a></td><td>OpenSearch</td><td>—</td><td>AI Search</td><td>Elastic, Algolia, Meilisearch</td></tr>
+<tr><td><a class="x" href="#warehouse"><b>Warehouse</b></a></td><td>Redshift / Athena</td><td>BigQuery</td><td>Synapse / Fabric</td><td>Snowflake, Databricks</td></tr>
+<tr><td><a class="x" href="#cicd"><b>CI/CD</b></a></td><td>CodePipeline</td><td>Cloud Build</td><td>Azure DevOps</td><td>GitHub Actions, GitLab CI</td></tr>
+<tr><td><a class="x" href="#iac"><b>IaC</b></a></td><td>CloudFormation / CDK</td><td>Deployment Mgr</td><td>ARM / Bicep</td><td>Terraform / OpenTofu, Pulumi</td></tr>
+<tr><td><a class="x" href="#secrets"><b>Secrets</b></a></td><td>Secrets Manager</td><td>Secret Manager</td><td>Key Vault</td><td>HashiCorp Vault, Doppler</td></tr>
+<tr><td><a class="x" href="#auth"><b>Auth (end-user)</b></a></td><td>Cognito</td><td>Identity Platform</td><td>Entra External ID</td><td>Auth0, Clerk, Supabase</td></tr>
+<tr><td><a class="x" href="#logs"><b>Observability</b></a></td><td>CloudWatch</td><td>Cloud Operations</td><td>Azure Monitor</td><td>Datadog, Grafana, New Relic</td></tr>
+<tr><td><a class="x" href="#errors"><b>Error tracking</b></a></td><td>—</td><td>Error Reporting</td><td>App Insights</td><td>Sentry, Rollbar, Bugsnag</td></tr>
+<tr><td><a class="x" href="#genai"><b>GenAI models</b></a></td><td>Bedrock</td><td>Vertex AI</td><td>Azure OpenAI</td><td>Anthropic, OpenAI APIs</td></tr>
+<tr><td><a class="x" href="#audit"><b>WAF / edge sec</b></a></td><td>WAF + Shield</td><td>Cloud Armor</td><td>Azure WAF</td><td>Cloudflare</td></tr>
+</table>
+
+<div class="pager">
+  <a class="pg prev" href="aws_from_scratch.html"><span>← Prev · ①</span><b>AWS From Scratch</b></a>
+  <a class="pg next" href="index.html#mastery"><span>Next · deep dives →</span><b>The Mastery Track</b></a>
+</div>
+<div class="ok"><strong>The deep dives</strong> each own one layer of this page in full — <a class="x" href="mastery_forge_cicd.html">The Forge</a> (CI/CD) · <a class="x" href="mastery_blueprint_iac.html">The Blueprint</a> (Terraform) · <a class="x" href="mastery_watchtower_observability.html">The Watchtower</a> (observability) · <a class="x" href="mastery_vault_security.html">The Vault</a> (security) · <a class="x" href="mastery_wallet_finops.html">The Wallet</a> (cost) · <a class="x" href="mastery_gatekeeper_auth.html">The Gatekeeper</a> (auth) · <a class="x" href="mastery_gateway_apis.html">The Gateway</a> (API gateways) · <a class="x" href="mastery_edge_performance.html">The Edge</a> (performance) · <a class="x" href="mastery_ledger_data_engineering.html">The Ledger</a> (data). And <a class="x" href="aws_from_scratch.html">AWS From Scratch</a> teaches the core services hands-on.</div>
 
 <script>(function(){
 var btns=document.querySelectorAll('.fbtn');
 btns.forEach(function(b){b.addEventListener('click',function(){
   btns.forEach(function(x){x.classList.remove('on')});b.classList.add('on');
   var f=b.getAttribute('data-f');
-  document.querySelectorAll('tr[data-tier]').forEach(function(r){
-    r.classList.toggle('hide',f!=='all'&&r.getAttribute('data-tier')!==f);
+  document.querySelectorAll('.cap').forEach(function(c){
+    c.classList.toggle('hide',f!=='all'&&c.getAttribute('data-tier')!==f);
   });
 });});
+// interactive quizzes
+document.querySelectorAll('.quiz').forEach(function(q){
+  var fb=q.querySelector('.qfb');
+  q.querySelectorAll('button.qopt').forEach(function(b){
+    b.addEventListener('click',function(){
+      var correct=b.getAttribute('data-correct')==='1';
+      q.querySelectorAll('button.qopt').forEach(function(x){x.classList.remove('right','wrong');});
+      b.classList.add(correct?'right':'wrong');
+      fb.textContent=b.getAttribute('data-fb');
+      fb.className='qfb show '+(correct?'ok':'no');
+    });
+  });
+});
 })();</script>
 </body></html>

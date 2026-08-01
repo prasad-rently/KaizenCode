@@ -7,9 +7,16 @@
 .planner{border:1px solid #e8e8e8;border-radius:10px;margin:14px 0;overflow:hidden}@media(prefers-color-scheme:dark){.planner{border-color:#2a2a2a}}.planner .p-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#f5f5f5;font-size:13px;font-weight:700}@media(prefers-color-scheme:dark){.planner .p-head{background:#1a1a1a}}.planner .p-head .cnt{font-size:11px;font-weight:600;color:#888}.task{display:flex;gap:10px;padding:9px 14px;border-top:1px solid #f0f0f0;cursor:pointer;align-items:flex-start}.task:hover{background:#fafafa}@media(prefers-color-scheme:dark){.task{border-color:#222}.task:hover{background:#191919}}.task .box{width:16px;height:16px;min-width:16px;border:1.5px solid #bbb;border-radius:5px;margin-top:2px;display:grid;place-items:center;font-size:11px;color:#fff;transition:all .15s}.task.done .box{background:#0F6E56;border-color:#0F6E56}.task .t-body{font-size:12.5px;line-height:1.5}.task .t-day{font-size:10.5px;font-weight:700;color:#5350B4;letter-spacing:.5px;text-transform:uppercase}.task.done .t-body{opacity:.55;text-decoration:line-through}.task .t-proof{font-size:11.5px;color:#888}@media(prefers-color-scheme:dark){.task .box{border-color:#444}.task .t-day{color:#8f8cff}}
 .pbar{height:7px;border-radius:5px;background:#efeefc;overflow:hidden;margin:8px 0 4px}.pbar>div{height:100%;background:#5350B4;width:0%;transition:width .3s}@media(prefers-color-scheme:dark){.pbar{background:#1a1830}.pbar>div{background:#8f8cff}}
 .pbar-label{font-size:11.5px;color:#888;margin-bottom:6px}
+.crumb{font-size:11.5px;color:#999;margin:2px 0 10px}.crumb a{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){.crumb{color:#777}.crumb a{color:#8f8cff}}
+.pager{display:flex;gap:10px;margin:16px 0}.pg{flex:1 1 0;min-width:0;border:1px solid #e2e2e2;border-radius:10px;padding:9px 13px;text-decoration:none;background:#fafafa;transition:border-color .15s}.pg:hover{border-color:#5350B4}.pg span{display:block;font-size:10px;color:#999;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin-bottom:1px}.pg b{font-size:13px;color:#5350B4;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pg.next{text-align:right}@media(prefers-color-scheme:dark){.pg{background:#161616;border-color:#2a2a2a}.pg b{color:#8f8cff}.pg span{color:#777}}
 </style></head><body>
+<nav class="crumb"><a href="index.html">KaizenCode</a> › AWS · From Scratch</nav>
 <a class="back" href="index.html">← KaizenCode</a>
-<span class="chip">Topic · AWS · From Scratch</span>
+<div class="pager">
+  <a class="pg prev" href="index.html#aws"><span>← Start</span><b>AWS overview</b></a>
+  <a class="pg next" href="aws_cloud_toolbox.html"><span>Next · ② →</span><b>The Cloud Toolbox</b></a>
+</div>
+<span class="chip">Topic · AWS · From Scratch · ①</span>
 <h1>☁️ AWS From Scratch</h1>
 <p class="sub">The complete novice's deep dive. What AWS actually <em>is</em>, why it exists, how EC2, S3, IAM, VPC, RDS, Lambda and the rest really work under the hood — with runnable demos, hands-on labs, and a 4-week work planner that tracks your progress in this page. Zero assumed knowledge.</p>
 
@@ -394,6 +401,11 @@ console.<span class="fn">log</span>(<span class="str">'\nTotal: ~40ms. Every hop
 </ul>
 
 <div class="ok"><strong>Where to next:</strong> <a href="phase5_aws_cloud.html">Phase 5</a> is the architecture-level view of everything here · <a href="mastery_blueprint_iac.html">The Blueprint</a> recreates your whole capstone as code with <code>terraform apply</code> · <a href="mastery_wallet_finops.html">The Wallet</a> teaches the money layer · <a href="mastery_watchtower_observability.html">The Watchtower</a> the operations layer.</div>
+
+<div class="pager">
+  <a class="pg prev" href="index.html#aws"><span>← Start</span><b>AWS overview</b></a>
+  <a class="pg next" href="aws_cloud_toolbox.html"><span>Next · ② →</span><b>The Cloud Toolbox</b></a>
+</div>
 
 <script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});
 // --- work planner ---

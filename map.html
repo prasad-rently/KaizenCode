@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Site Map — The Whole KaizenCode Curriculum</title>
+<meta name="description" content="A bird's-eye hierarchy of every KaizenCode track, topic and module — what's shipped and what's still on the Road to CTO.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fbfbfd;--fg:#1a1a1a;--muted:#6b6b70;--line:#ececf0;--card:#fff;
+  --accent:#5350B4;--accent-soft:#f3f2ff;
+  --green:#0F6E56;--green-soft:#e9f6f1;--amber:#BA7517;--amber-soft:#fbf1e0;
+  --gray-soft:#f0f0f2;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#0c0c0e;--fg:#ededed;--muted:#8a8a92;--line:#222226;--card:#141417;
+    --accent:#8f8cff;--accent-soft:#1a1830;
+    --green:#5fd0a0;--green-soft:#0c2018;--amber:#e0a75a;--amber-soft:#241a09;
+    --gray-soft:#1c1c20;
+  }
+}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased;max-width:860px;margin:0 auto;padding:26px 22px 60px}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+.back{font-size:12px}
+.crumb{font-size:11.5px;color:var(--muted);margin:8px 0 18px}
+.crumb a{font-weight:600}
+h1{font-size:clamp(26px,5vw,34px);font-weight:700;letter-spacing:-.8px;margin-bottom:6px}
+.lede{font-size:14px;color:var(--muted);max-width:620px;margin-bottom:24px}
+/* stat tiles */
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.stat{flex:1 1 150px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px}
+.stat .n{font-size:27px;font-weight:700;letter-spacing:-1px}
+.stat .l{font-size:12px;color:var(--muted)}
+.stat .n small{font-size:15px;color:var(--muted);font-weight:500}
+/* tree */
+.part{margin:26px 0 6px}
+.part h2{font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.part h2 span{font-size:12px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--muted)}
+.branch{margin-left:8px;padding-left:16px;border-left:1.5px solid var(--line)}
+.node{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin:10px 0}
+.node .nm{font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.node .sub{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.55}
+.node .acc{font-size:12.5px;color:var(--fg);margin-top:7px;padding-left:16px;position:relative;line-height:1.5}
+.node .acc::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800}
+.node .acc.todo{color:var(--muted)}
+.node .acc.todo::before{content:'○';color:var(--muted);font-weight:600}
+.pill{font-size:11px;padding:2px 10px;border-radius:20px;font-weight:700;white-space:nowrap;letter-spacing:.2px}
+.p-live{background:var(--green-soft);color:var(--green)}
+.p-up{background:var(--accent-soft);color:var(--accent)}
+.p-new{background:var(--amber-soft);color:var(--amber)}
+.p-plan{background:var(--gray-soft);color:var(--muted)}
+.stage{padding:9px 0;border-top:1px solid var(--line)}
+.stage:first-child{border-top:0;padding-top:2px}
+.stage .st{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font-size:13.5px;font-weight:600}
+.stage .stc{font-size:12px;color:var(--muted);font-weight:500;white-space:nowrap}
+.stage .acc{margin-top:4px}
+.legend{font-size:11.5px;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap;margin:24px 0 10px}
+.legend .pill{font-size:10px}
+.foot{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);margin-top:26px;padding-top:16px}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← KaizenCode</a>
+<nav class="crumb"><a href="index.html">KaizenCode</a> › Site map</nav>
+<h1>🗺️ The whole curriculum</h1>
+<p class="lede">A bird's-eye hierarchy of every track, topic and module — what's shipped, what's just been updated, and what's still ahead on the Road to CTO.</p>
+
+<div class="stats">
+  <div class="stat"><div class="n">36</div><div class="l">live learning modules</div></div>
+  <div class="stat"><div class="n">6</div><div class="l">tracks, across 3 parts</div></div>
+  <div class="stat"><div class="n">2 <small>/ 32</small></div><div class="l">Road-to-CTO board shipped</div></div>
+</div>
+
+<div class="part"><h2>Part 1 · Foundations <span>the 6-phase core path</span></h2></div>
+<div class="branch">
+  <div class="node">
+    <div class="nm">Core phases 1–6 <span class="pill p-live">6 / 6 live</span></div>
+    <div class="sub"><a href="phase1_http_backend_foundations.html">HTTP &amp; backend</a> · <a href="phase2_databases.html">Databases</a> · <a href="phase3_nextjs_mern_fullstack.html">Full stack (Next.js/MERN)</a> · <a href="phase4_docker_devops.html">Docker &amp; DevOps</a> · <a href="phase5_aws_cloud.html">Cloud: AWS</a> · <a href="phase6_distributed_systems_kafka.html">Distributed systems &amp; Kafka</a></div>
+    <div class="acc">Complete beginner-to-backend path — all six phases shipped.</div>
+  </div>
+</div>
+
+<div class="part"><h2>Part 2 · Mastery &amp; deep dives <span>cross-cutting topics</span></h2></div>
+<div class="branch">
+  <div class="node">
+    <div class="nm">Mastery track <span class="pill p-live">17 live</span></div>
+    <div class="sub">Blueprint · Bulwark · Compass · Edge · Engine Room · Forge · Foundry · Gatekeeper · Gateway · Juggler · Ledger · Oracle · Safety Net · Streaming Mind · Vault · Wallet · Watchtower</div>
+    <div class="acc">17 cross-cutting deep dives, each with runnable ▶ code snippets.</div>
+  </div>
+  <div class="node">
+    <div class="nm">Cryptography <span class="pill p-live">9 + guide</span></div>
+    <div class="sub"><a href="cryptography.html">Topic guide</a> → ECDH · AES-GCM · Hashing &amp; HMAC · HKDF/PBKDF2 · RSA · Signatures · TLS 1.3 · Shamir · Zero-knowledge proofs</div>
+    <div class="acc">Whole topic built with real WebCrypto where possible; ECDH simplified to school level.</div>
+  </div>
+  <div class="node">
+    <div class="nm">AWS <span class="pill p-up">3 · updated</span></div>
+    <div class="sub">Phase 5 (Cloud: AWS) · <a href="aws_from_scratch.html">AWS From Scratch</a> · <a href="aws_cloud_toolbox.html">The Cloud Toolbox</a></div>
+    <div class="acc">Cloud Toolbox rebuilt into 28 interactive decision blocks, a Trailmark worked example, 69 Q&amp;A reveals, 28 quizzes and cost gotchas, with prev/next navigation. <em>Latest work — not yet published.</em></div>
+  </div>
+  <div class="node">
+    <div class="nm">Mobile development <span class="pill p-new">1 · newest</span></div>
+    <div class="sub"><a href="mobile_silent_push_notifications.html">Silent push notifications</a></div>
+    <div class="acc">Track opened with one article — the thinnest track, with room to grow.</div>
+  </div>
+</div>
+
+<div class="part"><h2>Part 3 · The Road to CTO <span>30 modules still to build</span></h2></div>
+<div class="branch">
+  <div class="node">
+    <div class="nm">Leadership track <span class="pill p-live">1 built</span></div>
+    <div class="sub"><a href="leadership_first_follower.html">The First Follower</a> (IC → manager)</div>
+    <div class="acc">First people/business module built; further board modules land here.</div>
+  </div>
+  <div class="node">
+    <div class="nm">The board · 5 stages <span class="pill p-plan">2 / 32 shipped · 30 to go</span></div>
+    <div class="sub"><a href="upcoming.html">Open the build-and-track board →</a></div>
+    <div style="margin-top:10px">
+      <div class="stage"><div class="st"><span>Stage 1 · Complete the technical foundation</span><span class="stc">10 · 1 shipped</span></div><div class="acc">The Gatekeeper shipped (→ Mastery). 9 left — Switchboard, Helmsman, Cartographer, Homecoming, Paved Road, Landlord, Ark, Renovator, Registrar.</div></div>
+      <div class="stage"><div class="st"><span>Stage 2 · Leading people</span><span class="stc">6 · 1 shipped</span></div><div class="acc">The First Follower shipped. 5 left — Gardener, Scout, Referee, Diplomat, Torchbearer.</div></div>
+      <div class="stage"><div class="st"><span>Stage 3 · Leading delivery &amp; organizations</span><span class="stc">4 · planned</span></div><div class="acc todo">Conductor · Mapmaker · Architect of Teams · Weathervane.</div></div>
+      <div class="stage"><div class="st"><span>Stage 4 · Business fluency</span><span class="stc">5 · planned</span></div><div class="acc todo">Product Whisperer · Storyteller · Counting House · Bazaar · Treasury.</div></div>
+      <div class="stage"><div class="st"><span>Stage 5 · The CTO craft</span><span class="stc">7 · planned</span></div><div class="acc todo">Chessboard · Fine Print · Round Table · Magistrate · Storm Keeper · Beacon · Keeper of the Flame.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <span><span class="pill p-live">live</span> shipped &amp; on the site</span>
+  <span><span class="pill p-up">updated</span> latest work</span>
+  <span><span class="pill p-new">newest</span> just opened</span>
+  <span><span class="pill p-plan">planned</span> on the board</span>
+</div>
+
+<div class="foot"><strong>Naming convention:</strong> technical board modules ship into the <em>Mastery track</em> (<code>mastery_*</code>); people &amp; business modules ship into the <em>Leadership track</em> (<code>leadership_*</code>). The board (<a href="upcoming.html">upcoming.html</a>) tracks all 32 with status chips that persist in your browser.</div>
+</body>
+</html>
