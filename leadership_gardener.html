@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Gardener — Growing Engineers</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* delegation ladder */
+.ladder{border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;margin:14px 0}@media(prefers-color-scheme:dark){.ladder{border-color:#2a2a2a}}.rung{display:flex;gap:11px;align-items:flex-start;padding:9px 12px;border-top:1px solid #f0f0f0;font-size:12.5px;background:#fafafa}.rung:first-child{border-top:0}@media(prefers-color-scheme:dark){.rung{border-color:#202020;background:#151515}}.rung .lv{flex:0 0 auto;width:20px;height:20px;border-radius:6px;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}.rung b{color:#333}.rung span{color:#666}@media(prefers-color-scheme:dark){.rung b{color:#e2e2e2}.rung span{color:#999}}.lcap{display:flex;justify-content:space-between;font-size:10.5px;color:#888;font-weight:600;margin:2px 2px 0}
+/* builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:420px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 41–56 · Stage 2</span>
+<h1>🌱 The Gardener</h1>
+<p class="sub">A gardener can't yank a plant to make it grow. They pull the weeds, get the light and water right, and then get out of the way. Growing engineers is the same craft: you don't grow people, you <em>create the conditions</em> in which they grow themselves — and then resist the urge to do it for them.</p>
+
+<div class="tip">Second module of the <strong>Leadership</strong> track. No runnable code — instead: a contrast to fix your 1:1s, an <strong>SBI feedback</strong> composer, a <strong>delegation ladder</strong>, decision scenarios to pressure-test your instincts, and a builder for this module's deliverable: your <strong>weekly 1:1 notes</strong>.</p></div>
+
+<h2><span class="sn">1</span>The gardener's mindset</h2>
+<p>As an engineer, growth came from <em>your</em> effort on <em>your</em> problems. As a manager, your growth now happens through other people — and people don't respond to being compiled. They can't be debugged, refactored, or shipped. They can only be <strong>cultivated</strong>: given the right challenge, the right feedback, and the room to struggle productively.</p>
+<p>This flips your instincts. The fastest way to solve today's problem is usually to do it yourself; the fastest way to build a <em>team that solves problems</em> is almost always the opposite. Every section below is a tool for trading a little short-term speed for a lot of long-term capability — the gardener's trade.</p>
+
+<h2><span class="sn">2</span>The 1:1 — your highest-leverage half hour</h2>
+<p>The single most powerful tool you have is a recurring one-on-one. And the most common way new managers waste it is by turning it into a <strong>status update</strong> — something Slack, the board, or standup already cover. A status meeting is about the <em>work</em>. A real 1:1 is about the <em>person</em>.</p>
+<div class="sched">
+  <div class="col"><h4>❌ Status-update 1:1</h4>
+    <div class="blk bad">"So, where are we on the API ticket?"</div>
+    <div class="blk bad">Project-by-project progress check</div>
+    <div class="blk bad">Manager talks 80% of the time</div>
+    <div class="blk bad">Cancelled the moment you're busy</div>
+    <div class="blk bad">They leave feeling audited</div>
+  </div>
+  <div class="col"><h4>✅ Real 1:1</h4>
+    <div class="blk good">"What's on your mind this week?"</div>
+    <div class="blk good">Their agenda first — it's their meeting</div>
+    <div class="blk good">You listen 70%+; ask, don't tell</div>
+    <div class="blk good">Protected — rarely cancelled, never by you</div>
+    <div class="blk good">Career, growth, friction, feedback both ways</div>
+  </div>
+</div>
+<p>Good 1:1 questions open doors instead of checking boxes: <em>"What's felt frustrating lately?" · "Where do you want to be in a year?" · "What am I doing that helps — or gets in the way?" · "What are you avoiding?"</em> Then stay quiet long enough for a real answer. Let them cancel it if they're slammed; you cancelling it tells them they don't matter.</p>
+
+<h2><span class="sn">3</span>Coaching vs directing — ask, don't tell</h2>
+<p>When someone brings you a problem, you have two modes. <strong>Directing</strong> = you give the answer. <strong>Coaching</strong> = you ask questions that help <em>them</em> find it. Directing is faster today; coaching builds judgment that compounds for years. Your default should drift toward coaching as people grow.</p>
+<p>The hardest habit is staying curious one question longer instead of leaping to solve. Swap "here's what you should do" for:</p>
+<ul>
+<li><em>"What have you already tried?"</em></li>
+<li><em>"What do you think the options are?"</em></li>
+<li><em>"What's the real challenge here for you?"</em></li>
+<li><em>"If I weren't here, what would you do?"</em></li>
+</ul>
+<div class="warn"><strong>Directing is still right sometimes:</strong> in a genuine emergency, on safety or non-negotiables, or with a true novice who has no map yet. The skill isn't "always coach" — it's <em>choosing the mode on purpose</em> instead of always reflexively telling.</div>
+
+<h2><span class="sn">4</span>Feedback that lands — the SBI model</h2>
+<p>Most feedback fails because it's either too vague ("be more proactive") or an attack on character ("you're careless"). <strong>SBI</strong> fixes both by sticking to observable facts in three beats:</p>
+<ul>
+<li><strong>Situation</strong> — when and where, specifically. <em>"In this morning's standup…"</em></li>
+<li><strong>Behavior</strong> — what they actually did, no interpretation. <em>"…you cut Sam off twice before he finished."</em></li>
+<li><strong>Impact</strong> — the effect it had. <em>"…he went quiet for the rest of the meeting, and I think we lost his read on the migration."</em></li>
+</ul>
+<p>Notice what's absent: any claim about who they <em>are</em>. Facts are hard to argue with and easy to act on; labels ("you're rude") just trigger defensiveness. SBI works exactly the same way for praise — and specific praise is far more motivating than a generic "great job." Compose one now:</p>
+<div class="builder">
+  <div class="fld">Situation — when &amp; where<input id="s-sit" type="text" placeholder="e.g. In yesterday's design review…"></div>
+  <div class="fld">Behavior — what they did (just the facts)<input id="s-beh" type="text" placeholder="e.g. …you rewrote the proposal on the spot based on Aisha's objection…"></div>
+  <div class="fld">Impact — the effect it had<input id="s-imp" type="text" placeholder="e.g. …the room aligned in minutes and she felt genuinely heard."></div>
+  <button id="s-gen">🌱 Compose the feedback →</button>
+  <button id="s-copy" class="copy">Copy</button>
+  <div id="s-out" class="out-box"></div>
+</div>
+
+<h2><span class="sn">5</span>Delegation is a ladder, not a switch</h2>
+<p>New managers treat delegation as binary — either I do it, or I dump it on you. In reality it's a <strong>ladder of autonomy</strong>. The skill is matching the rung to how ready this person is for <em>this</em> task, and consciously climbing as they grow.</p>
+<div class="lcap"><span>↑ most manager control</span><span>you decide</span></div>
+<div class="ladder">
+  <div class="rung"><span class="lv" style="background:#993C1D">1</span><div><b>Tell</b> — you decide and announce it. <span>Crises, non-negotiables, legal/safety.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#B4551E">2</span><div><b>Sell</b> — you decide, but explain the why to win buy-in. <span>Unpopular but necessary calls.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#BA7517">3</span><div><b>Consult</b> — you gather their input, then you decide. <span>Your call, informed by them.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#7C7A2A">4</span><div><b>Agree</b> — you decide together, as equals. <span>Shared ownership.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#3F7A45">5</span><div><b>Advise</b> — they decide; you offer your opinion first. <span>They're driving, you're a passenger.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#2C7458">6</span><div><b>Inquire</b> — they decide; you just ask to hear about it after. <span>Trust, with a check-in.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#0F6E56">7</span><div><b>Delegate</b> — they own it end-to-end; you don't need the details. <span>Full autonomy.</span></div></div>
+</div>
+<div class="lcap"><span>↓ most autonomy</span><span>they decide</span></div>
+<p>The two classic failures are opposite ends of the same mistake — <strong>not matching the rung to the person</strong>. Staying on rungs 1–2 with someone ready for 5–7 is <em>micromanagement</em>; jumping to 7 with someone who needs scaffolding is <em>abdication</em> dressed up as trust. Name the rung out loud ("this one's yours end-to-end" vs "check with me before you commit") so expectations are never a guess.</p>
+
+<h2><span class="sn">6</span>What actually motivates engineers</h2>
+<p>Once pay is <em>fair</em>, more money barely moves engagement — and dangling bonuses can even <em>reduce</em> performance on creative work. Daniel Pink's <em>Drive</em> names the three intrinsic motivators that do work, and each maps to a tool you already have:</p>
+<ul>
+<li><strong>Autonomy</strong> — control over how, what, when, and with whom. This is what the delegation ladder buys. Prescribe the <em>outcome</em>, not the keystrokes.</li>
+<li><strong>Mastery</strong> — the pull to get visibly better at something that matters. Feed it with stretch assignments just past their current level, plus the coaching and feedback to actually learn from them.</li>
+<li><strong>Purpose</strong> — connection to a why bigger than the ticket. Relentlessly tie the work back to the user it helps or the goal it moves; never let people ship into a void.</li>
+</ul>
+<p>A bored senior engineer is rarely a pay problem — they've run out of mastery or autonomy. The gardener's job is to notice the plant has outgrown its pot before it wilts.</p>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Growing people fails in predictable ways — almost always by reaching for the fast, comfortable, engineer-brain answer. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<h2><span class="sn">8</span>Deliverable — run four weekly 1:1s</h2>
+<p>Theory doesn't grow anyone; reps do. Your deliverable is to run (or realistically mock) <strong>four weekly 1:1s</strong> with someone, capturing notes each time — because the value of 1:1s compounds across weeks, when you can follow threads and hold people to their own goals. Use this to generate a clean, reusable note for one session, then repeat it weekly:</p>
+<div class="builder">
+  <div class="fld">Report's name <span style="font-weight:400;color:#999">(optional)</span><input id="o-name" type="text" placeholder="e.g. Priya"></div>
+  <div class="fld">Their agenda — what's on their mind (ask first, listen)<textarea id="o-agenda" rows="2" placeholder="e.g. Feeling stuck on the migration; unsure whether to raise a concern about the deadline."></textarea></div>
+  <div class="fld">Wins &amp; progress since last time<textarea id="o-wins" rows="2" placeholder="e.g. Shipped the caching layer solo; unblocked two teammates in review."></textarea></div>
+  <div class="fld">Growth focus — the one thing they're developing<textarea id="o-growth" rows="2" placeholder="e.g. Leading a project end-to-end; practising saying no to scope creep."></textarea></div>
+  <div class="fld">Feedback for them (try SBI — specific, factual)<textarea id="o-feedback" rows="2" placeholder="e.g. In Tuesday's review you gave Sam concrete, kind feedback — it visibly raised the quality bar for the team."></textarea></div>
+  <div class="fld">What they need from me / blockers to clear<textarea id="o-blockers" rows="2" placeholder="e.g. A decision on the deadline by Friday; an intro to the data team."></textarea></div>
+  <div class="fld">Actions &amp; owners for next week<textarea id="o-actions" rows="2" placeholder="e.g. [Me] escalate the deadline · [Priya] draft the migration plan &amp; share Thu."></textarea></div>
+  <button id="o-gen">🌱 Generate my 1:1 note →</button>
+  <button id="o-copy" class="copy">Copy</button>
+  <div id="o-out" class="out-box"></div>
+</div>
+
+<div class="ok"><strong>Try it:</strong> (1) Work through all five scenarios — notice how often the growth answer means asking instead of telling. (2) Compose one real piece of SBI feedback you've been sitting on and actually deliver it this week. (3) For someone you manage (or a peer), place each task you'd hand them on the delegation ladder — are you a rung too low? (4) Run the 1:1 builder four weeks running; the notes are your deliverable.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 2 · the people half of the road to CTO. Pairs with <a class="x" href="leadership_first_follower.html">The First Follower</a>. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'In a 1:1, your report says "all good, no updates from me." What do you do?',
+     opts:[
+       {t:'"Great, short one then!" — hand the time back.',v:'poor',fb:'A tempting gift, but "no updates" usually means "nothing status-shaped" — not "nothing on my mind". Ending early trains them that this meeting is only for problems, and you lose the one space built for the non-urgent stuff.'},
+       {t:'Ask an open question that invites reflection.',v:'best',fb:'"What’s felt hard lately?" or "Where do you want to be in a year?" reopens the door. The best 1:1 material almost never surfaces as a "status update" — you have to invite it. Then stay quiet long enough for a real answer.'},
+       {t:'Share something of your own first, then ask.',v:'ok',fb:'Good instinct — modelling a little openness ("here’s what I’m chewing on") makes it safe for them to do the same. Just be sure it becomes their space, not your monologue.'},
+       {t:'Use the time to check on your projects.',v:'poor',fb:'This is the trap: you’ve just converted their meeting into your status meeting. Project questions belong in standup or Slack. Do this a few times and they’ll rightly stop bringing anything real.'}
+     ]},
+    {q:'A junior engineer keeps asking you exactly how to implement things you know cold.',
+     opts:[
+       {t:'Just give the answer — it’s fastest and they’re blocked.',v:'ok',fb:'Fine occasionally, and right when they’re truly stuck or it’s urgent. But if it’s your default, you’re building dependence, not capability — you become their compiler, and they never learn to reason it out.'},
+       {t:'Ask "what have you tried, and what do you think we should do?"',v:'best',fb:'Coaching. You build their judgment and their confidence, and next time they answer it themselves. Costs a few minutes now; saves you being the answer-desk forever.'},
+       {t:'Give the answer, but walk through your reasoning so they learn the pattern.',v:'ok',fb:'A solid middle path — "here’s the answer AND how I got there" teaches more than the answer alone. Still lighter on growth than letting them reason first, but great under time pressure.'},
+       {t:'"You’ll learn better if you figure it out yourself." and move on.',v:'poor',fb:'Coaching without support is just abandonment. A blocked junior with no scaffolding spins, loses confidence, and learns that asking you is pointless. Ask guiding questions — don’t just push them off a cliff.'}
+     ]},
+    {q:'A report talked over quieter teammates in a meeting. You want to give feedback.',
+     opts:[
+       {t:'"In today’s standup you cut Sam off twice; he went quiet and we lost his input."',v:'best',fb:'Textbook SBI — Situation, Behavior, Impact, all observable fact and zero character judgment. It’s specific enough to act on and hard to argue with. This is the one to practise until it’s reflexive.'},
+       {t:'"Try to be more mindful of letting others speak."',v:'ok',fb:'Kind, but too vague to change behavior — "more mindful" gives them nothing concrete to do differently. Anchor it to the specific moment and its impact and it lands ten times harder.'},
+       {t:'"You’re kind of a bad listener, honestly."',v:'poor',fb:'A character label, not feedback. It attacks who they <em>are</em>, triggers instant defensiveness, and gives them nothing to fix. Facts about behavior change people; labels just make enemies.'},
+       {t:'Say nothing — hope they read the room next time.',v:'poor',fb:'The most common feedback failure of all: silence. The behavior continues, the quiet teammates keep losing, and you’ve decided your comfort matters more than the team’s. Withheld feedback is a kindness to no one.'}
+     ]},
+    {q:'You told a strong senior engineer exactly how to build a feature. They seem checked out.',
+     opts:[
+       {t:'Keep prescribing the details — you want it done right.',v:'poor',fb:'You’re sitting on rung 1 (Tell) with someone ready for rung 6–7. That’s micromanagement, and it’s draining their autonomy — the fastest way to bore and eventually lose a senior. The disengagement is the symptom.'},
+       {t:'Give them the outcome and constraints; let them own the how.',v:'best',fb:'Climb the ladder. Hand a capable person the <em>what</em> and the guardrails, then get out of the way. Autonomy is rocket fuel for a senior — you’ll often get a better solution than the one you’d have dictated.'},
+       {t:'Ask them what level of ownership they’d like here.',v:'ok',fb:'A genuinely good move — making the delegation level explicit and collaborative builds trust. Just be ready to actually grant the autonomy they ask for, or the question is theatre.'},
+       {t:'Hand it over with "just make it happen" and no context.',v:'poor',fb:'Over-correcting from micromanaging straight into abdication. Autonomy without the outcome, constraints, and support isn’t empowerment — it’s a set-up. Match the rung <em>and</em> give them what they need to succeed on it.'}
+     ]},
+    {q:'Your best engineer has quietly gone flat — still delivering, but no spark. Pay is already fair.',
+     opts:[
+       {t:'Find them a real stretch: new autonomy, a harder problem, or a clearer why.',v:'best',fb:'You diagnosed it right — flat-but-fair-paid is almost always a mastery or autonomy problem, not a money one. Reconnect the work to purpose and hand them something that grows them. This is the gardener noticing the plant outgrew its pot.'},
+       {t:'Get them a raise or a spot bonus.',v:'ok',fb:'Money that’s below-market must be fixed — but here pay is already fair, so a bonus buys a short bump and then the boredom returns. Extrinsic rewards can’t fill an intrinsic hole (autonomy, mastery, purpose).'},
+       {t:'Leave it — they’re still shipping, so no problem yet.',v:'poor',fb:'"Still delivering" is exactly how you lose your best people: the disengagement is invisible in the metrics right up until the resignation. Quiet flatness is an early warning, not a non-issue.'},
+       {t:'Pile on more work to keep them busy.',v:'poor',fb:'More of the <em>same</em> work deepens the boredom — volume isn’t mastery or purpose. You’ll accelerate the burnout you’re trying to prevent. Change the <em>nature</em> of the challenge, not the amount.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Gardener move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  function val(id){return (document.getElementById(id).value||'').trim();}
+  function bind(genId,copyId,outId,build){
+    var out=document.getElementById(outId);
+    document.getElementById(genId).addEventListener('click',function(){out.textContent=build();out.classList.add('show');});
+    document.getElementById(copyId).addEventListener('click',function(){
+      if(!out.classList.contains('show'))out.textContent=build(),out.classList.add('show');
+      var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+    });
+  }
+
+  bind('s-gen','s-copy','s-out',function(){
+    var sit=val('s-sit')||'[situation — when & where]';
+    var beh=val('s-beh')||'[behavior — what they did]';
+    var imp=val('s-imp')||'[impact — the effect it had]';
+    var b=beh.replace(/^(you|they)\s+/i,'');
+    return sit.replace(/[.\s]+$/,'')+', you '+b.replace(/[.\s]+$/,'')+'. The impact: '+imp.replace(/[.\s]+$/,'')+'.\n\n— Notice: three facts, no labels. Nothing about who they are, only what happened.';
+  });
+
+  bind('o-gen','o-copy','o-out',function(){
+    var name=val('o-name');
+    function sec(label,id,fallback){var v=val(id);return '## '+label+'\n'+(v||'_'+fallback+'_')+'\n';}
+    return [
+      '# 1:1 — '+(name||'[report]')+'  ·  Week ___ / 4   ·  Date ___',
+      '',
+      sec('Their agenda (listen first)','o-agenda','what’s on their mind this week?'),
+      sec('Wins & progress','o-wins','what went well since last time?'),
+      sec('Growth focus','o-growth','the one capability we’re building'),
+      sec('Feedback (SBI)','o-feedback','one specific, factual thing — praise or improvement'),
+      sec('What they need from me','o-blockers','decisions to make, blockers to clear'),
+      sec('Actions & owners','o-actions','[me] …  ·  ['+(name||'them')+'] …'),
+      '---',
+      '_Run weekly × 4. Carry open threads forward — the compounding is the point._'
+    ].join('\n');
+  });
+})();
+</script>
+</body></html>
