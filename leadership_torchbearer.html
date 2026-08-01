@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Torchbearer — Culture</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:460px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 41–56 · Stage 2</span>
+<h1>🔦 The Torchbearer</h1>
+<p class="sub">The torchbearer carries the flame and passes it on — the culture, the standards, the sense of what's okay here. And you carry it whether you mean to or not: your team is always watching what you actually do, and calibrating to it. Culture isn't the values on the wall. It's the behavior you model, reward, and — most tellingly — tolerate.</p>
+
+<div class="tip">Sixth and final module of Stage 2 — <strong>Leading People</strong>. No runnable code — instead: builds-vs-destroys contrasts, decision scenarios, and two builders for this module's two-part deliverable: draft <strong>engineering values</strong> and a <strong>blameless postmortem template</strong>.</p></div>
+
+<h2><span class="sn">1</span>You set the culture whether you mean to or not</h2>
+<p>Every leader thinks culture is the values poster, the offsite, the Slack emoji. It isn't. Culture is the pattern of behavior people actually see repeated — and the loudest signal is what the leader <em>lets slide</em>. Tolerate a missed deadline with a shrug, and deadlines become optional. Laugh off a snide review comment, and cruelty becomes acceptable. Praise the person who burned a weekend, and heroics become the expectation.</p>
+<p>There's a line worth tattooing on your calendar: <strong>the lowest standard you walk past is the standard you've actually set.</strong> Your team learns what's real not from what you say in all-hands, but from what you reward, what you ignore, and what you refuse to accept.</p>
+
+<h2><span class="sn">2</span>Values that mean something</h2>
+<p>Most company values are interchangeable wallpaper — "integrity, excellence, teamwork." Useless, because no one would ever claim the opposite, so they guide zero decisions. A <strong>real value forces a tradeoff</strong>: it tells you what you'll give up. If honoring it never costs you anything, it isn't a value — it's a decoration.</p>
+<ul>
+<li><strong>Make them specific and opinionated.</strong> "Bias to ship" (over polishing in the dark) is a value — it tells you what to do at a fork. "Excellence" is not.</li>
+<li><strong>Values are for the hard calls.</strong> Their whole job is to decide the close, inconvenient cases — the ones where the easy path and the right path diverge.</li>
+<li><strong>They're tested the moment they're costly.</strong> The first time you break a value for a deadline or a deal, it's dead, and everyone knows it. Values are only as real as your worst day.</li>
+</ul>
+<p>You'll draft a set in the deliverable — with the tradeoff each one forces made explicit.</p>
+
+<h2><span class="sn">3</span>Psychological safety — the strongest predictor of team performance</h2>
+<p>Google's famous study of what makes teams effective (Project Aristotle) found the top factor wasn't talent or seniority — it was <strong>psychological safety</strong>: the shared belief that you can take a risk, admit a mistake, ask a "dumb" question, or disagree with the boss without being punished or humiliated. It is not "being nice." Nice teams that can't challenge each other are quietly mediocre; safe teams argue hard <em>and</em> trust each other.</p>
+<p>The catch: safety is built and destroyed in small, visible moments — and the leader sets the temperature.</p>
+<div class="sched">
+  <div class="col"><h4>🔥 Builds safety</h4>
+    <div class="blk good">Thank the person who brings bad news</div>
+    <div class="blk good">Admit your own mistakes out loud</div>
+    <div class="blk good">Invite dissent: "who sees it differently?"</div>
+    <div class="blk good">Treat questions as good, never dumb</div>
+    <div class="blk good">React calmly when something breaks</div>
+  </div>
+  <div class="col"><h4>🧊 Destroys safety</h4>
+    <div class="blk bad">Shoot the messenger</div>
+    <div class="blk bad">Never be wrong; blame others</div>
+    <div class="blk bad">Punish or mock people who speak up</div>
+    <div class="blk bad">"Everyone should already know this"</div>
+    <div class="blk bad">Explode when there's a problem</div>
+  </div>
+</div>
+<p>The tell is simple: on a safe team, you hear about problems <em>early</em>, from the people closest to them. On an unsafe team, you hear about problems late, after they've become disasters — because everyone was busy hiding them from you.</p>
+
+<h2><span class="sn">4</span>Blameless postmortems — safety made concrete</h2>
+<p>Nowhere does psychological safety matter more than when something breaks in production. The instinct is to find who caused it. That instinct is exactly backwards. Ask "<em>who</em> did this?" and you teach everyone to hide their mistakes and point fingers — so problems go underground and repeat. Ask "<em>how did our system allow this to happen?</em>" and you get the truth, and a fix that actually holds.</p>
+<div class="sched">
+  <div class="col"><h4>❌ Blaming postmortem</h4>
+    <div class="blk bad">"Who pushed the bad deploy?"</div>
+    <div class="blk bad">Someone is named &amp; shamed</div>
+    <div class="blk bad">Fix = "be more careful"</div>
+    <div class="blk bad">People learn to hide mistakes</div>
+    <div class="blk bad">Same failure recurs later</div>
+  </div>
+  <div class="col"><h4>✅ Blameless postmortem</h4>
+    <div class="blk good">"How did the system let this ship?"</div>
+    <div class="blk good">Everyone acted in good faith</div>
+    <div class="blk good">Fix = a guardrail so it can't recur</div>
+    <div class="blk good">People surface problems early</div>
+    <div class="blk good">The whole class of failure is closed</div>
+  </div>
+</div>
+<p>Blameless doesn't mean no accountability — it means accountability to <em>fix the system</em>, not to punish the human who tripped over a landmine anyone could have stepped on. Good engineers rarely fail from not caring; they fail because the system made failure easy. You'll generate a full postmortem template below.</p>
+
+<h2><span class="sn">5</span>Culture at a distance — remote &amp; hybrid</h2>
+<p>Co-located teams absorb culture by osmosis — overheard conversations, hallway context, body language. Remote and hybrid teams get none of that for free, so culture has to be built <em>deliberately</em> or it quietly erodes into isolation and a two-tier team.</p>
+<ul>
+<li><strong>Write things down.</strong> Async, written communication is the backbone of remote culture — decisions, context, and docs that don't depend on being in the room at the right minute. It also happens to make everything more inclusive and searchable.</li>
+<li><strong>Judge output, not presence.</strong> Hours online and butts-in-seats are not the work. Measure what people deliver, or you'll reward the loudest and most visible over the most effective.</li>
+<li><strong>Make hybrid meetings fair.</strong> The failure mode is the in-room people dominating while remote folks go unheard and decisions happen in the hallway. Norms like "one person remote → everyone joins remotely," round-robins, and documented decisions level the field.</li>
+<li><strong>Be intentional about connection.</strong> The human glue that formed naturally at desks now needs designing — but design it, don't force it; mandatory fun is its own morale drain.</li>
+</ul>
+
+<h2><span class="sn">6</span>Retention &amp; regretted attrition</h2>
+<p>Not all attrition is bad — some turnover is healthy, and a wrong-fit hire moving on is fine. The number that should keep you up is <strong>regretted attrition</strong>: the people you wanted to keep, walking out the door. Every great engineer who leaves takes years of context with them and costs months to replace, if you can at all.</p>
+<ul>
+<li><strong>People leave managers and stagnation, not usually pay.</strong> Once comp is fair, the top reasons are a bad manager, no growth, no autonomy, and no sense of purpose — all the things the rest of this track is about. A resignation is often a management post-mortem.</li>
+<li><strong>Do stay interviews, not just exit interviews.</strong> An exit interview tells you why someone left — too late. A stay interview asks, while they're still here and happy: "What would make you leave? What do you want more of? What's the best thing about working here — and the most frustrating?" Then act on it.</li>
+<li><strong>Watch for the quiet disengagement.</strong> Your steadiest, least-complaining people are the ones you take for granted and lose without warning. Silence is not the same as satisfaction.</li>
+</ul>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Culture erodes in small, tolerated moments — a jerk excused for being brilliant, a value bent for a deal, bad news punished instead of thanked. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<h2><span class="sn">8</span>Deliverable — engineering values + a postmortem template</h2>
+<p>Two artifacts that make your culture concrete. First, draft a set of values where each one forces a real tradeoff (take the defaults or write your own):</p>
+<div class="builder">
+  <div class="fld">Team / org <span style="font-weight:400;color:#999">(optional)</span><input id="v-team" type="text" placeholder="e.g. our engineering team"></div>
+  <div class="fld">Value 1 — name &amp; what it means (and gives up)<input id="v-1" type="text" placeholder="e.g. Bias to ship — small and learning over polishing in the dark"></div>
+  <div class="fld">Value 2<input id="v-2" type="text" placeholder="e.g. Blameless truth — surface problems fast; fix systems, not people"></div>
+  <div class="fld">Value 3<input id="v-3" type="text" placeholder="e.g. Ownership — own the outcome, not just the ticket"></div>
+  <div class="fld">Value 4<input id="v-4" type="text" placeholder="e.g. Sustainable pace — no heroics; a marathon, and rest is part of the work"></div>
+  <button id="v-gen">🔦 Generate my values →</button>
+  <button id="v-copy" class="copy">Copy</button>
+  <div id="v-out" class="out-box"></div>
+</div>
+<p>Second, a reusable <strong>blameless postmortem template</strong>. Type an example incident (or take the default) and generate the full template:</p>
+<div class="builder">
+  <div class="fld">Example incident <span style="font-weight:400;color:#999">(optional)</span><input id="p-inc" type="text" placeholder="e.g. Checkout API returned 500s for 22 minutes during peak"></div>
+  <button id="p-gen">🔦 Generate the postmortem template →</button>
+  <button id="p-copy" class="copy">Copy</button>
+  <div id="p-out" class="out-box"></div>
+</div>
+
+<div class="ok"><strong>Try it:</strong> (1) Work through all five scenarios — notice how every culture failure is a small thing tolerated. (2) Generate your values, then ask of each: "when did honoring this last cost us something?" If never, it's decoration. (3) Generate the postmortem template and run your next incident through it — with zero names in the root-cause section. (4) Book one stay interview this month with someone you'd hate to lose.</div>
+
+<div class="tip"><strong>🎉 That completes Stage 2 · Leading People.</strong> The full people-leadership arc: become a manager (<a class="x" href="leadership_first_follower.html">The First Follower</a>) → grow engineers (<a class="x" href="leadership_gardener.html">The Gardener</a>) → hire well (<a class="x" href="leadership_scout.html">The Scout</a>) → hold the bar fairly (<a class="x" href="leadership_referee.html">The Referee</a>) → navigate hard conversations (<a class="x" href="leadership_diplomat.html">The Diplomat</a>) → set the culture (The Torchbearer). Next up the road: Stage 3 · Leading Delivery &amp; Organizations.</p></div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 2 · the people half of the road to CTO. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'Your most brilliant engineer is technically superb but routinely belittles teammates in code review.',
+     opts:[
+       {t:'Address it directly and hold them to the values — the behavior stops or they go.',v:'best',fb:'A "brilliant jerk" is a net negative no matter their output: they quietly drive away good people and teach everyone that cruelty is the price of being valued. Tolerating it <em>is</em> your culture. The talent doesn’t buy an exemption.'},
+       {t:'Have a quiet word and hope it improves.',v:'ok',fb:'A first step, but "a quiet word" often signals you won’t really enforce it — which the whole team reads. Pair the direct feedback with a clear expectation and a consequence, or the behavior (and the message that it’s tolerated) continues.'},
+       {t:'Let it slide — they ship more than anyone.',v:'poor',fb:'This is the classic culture-killer. You’re trading your best <em>other</em> engineers, and everyone’s trust, for one person’s output. The lowest behavior you tolerate becomes the standard — and you just set it very low.'},
+       {t:'Quietly move the people they upset onto other teams.',v:'poor',fb:'Rearranging victims around a problem person rewards the wrong behavior and punishes the wronged. You’re spending real talent to avoid one hard conversation, and telegraphing exactly whose comfort matters.'}
+     ]},
+    {q:'In standup, a junior admits they pushed the change that caused this morning’s outage. Everyone’s watching your face.',
+     opts:[
+       {t:'Thank them for surfacing it fast; focus on how the system let it ship, and fix that together.',v:'best',fb:'This single moment teaches the whole team whether it’s safe to be honest. Publicly rewarding the disclosure and hunting the systemic gap (how did a bad change reach prod?) builds the safety that surfaces the <em>next</em> problem early.'},
+       {t:'Stay calm now; address it privately with them later.',v:'ok',fb:'Not reacting badly is good, and some coaching is private. But the public moment is a gift: visibly thanking them and going blameless in front of everyone does far more for the culture than a quiet 1:1 no one else sees.'},
+       {t:'Show visible frustration — "how did this even happen?!"',v:'poor',fb:'One frustrated reaction in front of the team teaches everyone to never volunteer a mistake again. You’ll get shorter standups and much longer outages, because problems will now hide until they explode.'},
+       {t:'Ask "who reviewed this?" and find who to blame.',v:'poor',fb:'The blame hunt is how safety dies. It doesn’t prevent the next outage — it just guarantees the next one is discovered late, because everyone learned that honesty here gets you named in the incident channel.'}
+     ]},
+    {q:'A lucrative deal needs you to ship something that cuts a corner your stated value ("we don’t ship what we wouldn’t trust") forbids.',
+     opts:[
+       {t:'Honor the value even at the cost of the deal — and tell the team why.',v:'best',fb:'This is the moment the value becomes real or becomes decoration. The team is watching whether it survives contact with money. Holding it when it’s expensive is worth more than a hundred all-hands about integrity.'},
+       {t:'Ship it, but transparently, with a committed plan to fix it fast.',v:'ok',fb:'Sometimes a defensible pragmatic call — <em>if</em> the corner is small, the risk is owned openly, and the fix genuinely lands. The danger is that "just this once, we’ll fix it later" is exactly how values quietly die. Be honest about which this is.'},
+       {t:'Ship it quietly — it’s one time and the deal matters.',v:'poor',fb:'Quietly breaking your own stated value is the fastest way to make every value worthless. People find out (they always do), and the lesson they learn is that the wall poster is for show and the real rule is "money wins."'},
+       {t:'Ship it and quietly drop that value from the list.',v:'poor',fb:'Deleting the value to avoid the hypocrisy is the hypocrisy, plus cowardice. You’d be rewriting your principles to match your convenience — which tells the team your principles are whatever’s easy this quarter.'}
+     ]},
+    {q:'In hybrid meetings, the in-office group dominates, remote folks go unheard, and decisions get made in the hallway after.',
+     opts:[
+       {t:'Set norms that level it — decisions documented, round-robins, or "one remote → all remote."',v:'best',fb:'Two-tier teams form exactly here. Making presence irrelevant to voice — through explicit norms and written decisions — is how you keep remote people first-class contributors instead of quietly sidelined ones.'},
+       {t:'Remind people to include their remote colleagues.',v:'ok',fb:'Helpful, but a reminder without a structural change tends to fade by the next meeting. Good intentions lose to room dynamics; norms and defaults are what actually hold. Pair the reminder with a real rule.'},
+       {t:'Encourage everyone to just come into the office more.',v:'poor',fb:'"Solve remote by ending remote" punishes people for a setup you offered and ignores why they’re remote. It also dodges the actual skill — running inclusive distributed teams — which you’ll need regardless.'},
+       {t:'Leave it — the in-office people are more engaged anyway.',v:'poor',fb:'That’s the two-tier trap closing shut: remote people disengage <em>because</em> they’re sidelined, then you cite the disengagement as proof. You’ll slowly lose good people who happen not to sit near you.'}
+     ]},
+    {q:'A quiet, high-performing engineer who never complains seems a little disengaged lately. Nothing’s wrong on paper.',
+     opts:[
+       {t:'Do a stay interview now — ask what would keep them, what they want next, before they’re out the door.',v:'best',fb:'Your steadiest people are the ones you take for granted and lose without warning. Asking early — "what would make you leave? what do you want more of?" — and acting on it is how you prevent regretted attrition instead of diagnosing it at the exit.'},
+       {t:'Give them a preemptive raise to be safe.',v:'ok',fb:'Fixing pay matters if it’s behind — but if the real issue is growth, autonomy, or a bad dynamic, money buys a short pause, not a stay. Find the actual reason first; don’t treat every retention risk as a comp problem.'},
+       {t:'Wait for the exit interview to learn why they left.',v:'poor',fb:'The exit interview is an autopsy. By then the decision is made and the context is walking out the door. Everything useful could have been learned — and acted on — weeks earlier with one honest conversation.'},
+       {t:'Assume they’re fine — they’ve never raised anything.',v:'poor',fb:'"Never complains" is not "content" — often it’s the opposite, a quiet person who’s already decided and won’t make a fuss. Silence from your best people is a signal to lean in, not a reason to relax.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Torchbearer move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  function val(id){return (document.getElementById(id).value||'').trim();}
+  function wire(genId,copyId,outId,build){
+    var out=document.getElementById(outId);
+    document.getElementById(genId).addEventListener('click',function(){out.textContent=build();out.classList.add('show');});
+    document.getElementById(copyId).addEventListener('click',function(){
+      if(!out.classList.contains('show')){out.textContent=build();out.classList.add('show');}
+      var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+    });
+  }
+
+  wire('v-gen','v-copy','v-out',function(){
+    var team=val('v-team')||'our engineering team';
+    var vs=[
+      val('v-1')||'Bias to ship — we favor shipping something small and learning over polishing in the dark.',
+      val('v-2')||'Blameless truth — we surface problems fast and fix systems, not people.',
+      val('v-3')||'Ownership — you own the outcome, not just the ticket; see it through to the user.',
+      val('v-4')||'Sustainable pace — no heroics; we build for a marathon, and rest is part of the work.'
+    ].filter(function(v){return v;});
+    var lines=['# '+team+' — engineering values','',
+      'Values are for the hard calls, not the poster. The test for each one:',
+      'does it force a real tradeoff? If honoring it costs nothing, it isn’t a value.',''];
+    vs.forEach(function(v,i){lines.push((i+1)+'. '+v);});
+    lines.push('','---',
+      'We are judged by the behavior we model, reward, and tolerate — not by this doc.',
+      'The lowest standard we walk past is the standard we’ve actually set.');
+    return lines.join('\n');
+  });
+
+  wire('p-gen','p-copy','p-out',function(){
+    var inc=val('p-inc')||'Checkout API returned 500s for 22 minutes during peak';
+    return [
+      '# Postmortem — '+inc,'',
+      'STATUS: draft    AUTHORS: ______    DATE: ______','',
+      '## Summary',
+      'One paragraph, plain language: what happened, who was affected, for how long.',
+      '(e.g. '+inc+')','',
+      '## Impact',
+      '- Users affected: ______',
+      '- Duration: ______',
+      '- Business / data impact: ______','',
+      '## Timeline (UTC)',
+      '- HH:MM — first symptom / alert fired',
+      '- HH:MM — detected / acknowledged',
+      '- HH:MM — mitigation started',
+      '- HH:MM — resolved','',
+      '## Root cause — ask "how did the system allow this?", never "who?"',
+      'Five Whys, to reach a systemic cause (not a person):',
+      '- Why? ______',
+      '- Why? ______',
+      '- Why? ______',
+      '- Why? ______',
+      '- Why? ______   → root cause: ______','',
+      '## What went well',
+      '- (celebrate the detection, the response, the people)','',
+      '## What went wrong / where we got lucky',
+      '- (gaps in tooling, alerting, tests, process — not gaps in people)','',
+      '## Action items  (owner · due · tracked)',
+      '- [ ] Systemic guardrail so this class of failure can’t recur — ______',
+      '- [ ] Detection / alerting improvement — ______',
+      '- [ ] Runbook / documentation update — ______','',
+      '---',
+      'BLAMELESS STATEMENT: Everyone acted in good faith with the information they had.',
+      'The goal of this document is to fix the system, never to assign fault. When',
+      'people fear blame they hide problems — and hidden problems are the ones that hurt us.'
+    ].join('\n');
+  });
+})();
+</script>
+</body></html>
