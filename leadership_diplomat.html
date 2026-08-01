@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Diplomat — Hard Conversations</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* ladder / process */
+.ladder{border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;margin:14px 0}@media(prefers-color-scheme:dark){.ladder{border-color:#2a2a2a}}.rung{display:flex;gap:11px;align-items:flex-start;padding:9px 12px;border-top:1px solid #f0f0f0;font-size:12.5px;background:#fafafa}.rung:first-child{border-top:0}@media(prefers-color-scheme:dark){.rung{border-color:#202020;background:#151515}}.rung .lv{flex:0 0 auto;width:20px;height:20px;border-radius:6px;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}.rung b{color:#333}.rung span{color:#666}@media(prefers-color-scheme:dark){.rung b{color:#e2e2e2}.rung span{color:#999}}.lcap{font-size:10.5px;color:#888;font-weight:600;margin:2px 2px 0}
+/* builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:460px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 41–56 · Stage 2</span>
+<h1>🕊️ The Diplomat</h1>
+<p class="sub">A diplomat commands no army. They get things done across borders they don't control — through conversation, understanding, and trust. As you rise, more and more of your work looks like this: moving peers who don't report to you, defusing conflicts before they fester, and having the hard conversations most people spend enormous energy avoiding. The avoidance is the real cost. This is how to stop paying it.</p>
+
+<div class="tip">Fifth module of the <strong>Leadership</strong> track. No runnable code — instead: the anatomy of a hard conversation, an interests-vs-positions contrast, decision scenarios, and a builder for this module's deliverable: <strong>role-play scripts for three hard conversations</strong>.</p></div>
+
+<h2><span class="sn">1</span>Your power is conversation, not command</h2>
+<p>Early on, work gets done because you do it or because you can assign it. Higher up, the most important things depend on people you <em>can't</em> tell what to do: a peer manager, another team, a skeptical stakeholder, an exec, your own boss. Authority runs out fast; influence doesn't. The leaders who scale are the ones who can walk into a room with no formal power and leave with alignment.</p>
+<p>Two skills carry almost all of it, and both are learnable: <strong>having the hard conversation</strong> instead of avoiding it, and <strong>negotiating from interests</strong> instead of fighting over positions. Everything below is one of those two.</p>
+
+<h2><span class="sn">2</span>The hard conversation — avoided until it explodes</h2>
+<p>The default move with a hard conversation is to postpone it — soften it, hint at it in Slack, hope it self-resolves. It rarely does; it compounds. The unspoken problem grows, resentment sets in, and by the time you finally address it, it's ten times harder and the other person feels ambushed. <strong>The kindest, cheapest time to have it is early.</strong> There's a repeatable shape:</p>
+<div class="lcap">the shape of a hard conversation →</div>
+<div class="ladder">
+  <div class="rung"><span class="lv" style="background:#7F77DD">1</span><div><b>Prepare</b> — what's the <em>real</em> issue, and what outcome do you actually want? <span>Not "vent" — a goal.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#6A64C9">2</span><div><b>Open directly</b> — name it in the first minute, kindly. <span>No long warm-up that makes them relax before the drop.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#4E7EA8">3</span><div><b>State the facts</b> — SBI, not labels; then stop and let it land. <span>"Here's what I observed," not "you always…".</span></div></div>
+  <div class="rung"><span class="lv" style="background:#2C7458">4</span><div><b>Listen</b> — genuinely understand their side. <span>This is the real work — most of the conversation.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#0F6E56">5</span><div><b>Close</b> — agree one concrete change and a check-in. <span>End with a path, not just a problem.</span></div></div>
+</div>
+<p>Notice steps 3 and 4 are the opposite of what anxiety wants you to do — anxiety wants you to <em>talk more</em> to fill the silence. State your facts cleanly, then get quiet and hand them the floor.</p>
+
+<h2><span class="sn">3</span>Actually listening — the most underrated skill</h2>
+<p>Most people don't listen; they wait to talk. In a hard conversation or a negotiation, that's fatal — because <strong>people who feel genuinely heard become reasonable, and people who don't, dig in.</strong> Feeling understood is often what someone wants more than winning. Real listening is a set of concrete moves:</p>
+<ul>
+<li><strong>Don't interrupt, and leave a beat of silence.</strong> The most useful thing is often said right after the pause you were tempted to fill.</li>
+<li><strong>Reflect it back.</strong> "So what I'm hearing is you're worried this ships broken and lands on you — is that right?" It proves you listened and lets them correct you.</li>
+<li><strong>Separate hearing from agreeing.</strong> You can fully understand someone's view without conceding it. "I get why you see it that way" is not "you're right."</li>
+<li><strong>Ask, then be quiet.</strong> "What's your read?" followed by real silence beats any clever argument.</li>
+</ul>
+
+<h2><span class="sn">4</span>Interests, not positions</h2>
+<p>The single most useful idea in negotiation (from <em>Getting to Yes</em>): a <strong>position</strong> is what someone <em>says</em> they want; an <strong>interest</strong> is <em>why</em> they want it. Positions are demands, and demands collide. Interests are needs, and needs can often be met more than one way. Argue positions and you get a stalemate or a grudging split; uncover interests and you find room nobody saw.</p>
+<div class="sched">
+  <div class="col"><h4>Position — what they say</h4>
+    <div class="blk bad">"Move the deadline!"</div>
+    <div class="blk bad">"I need three more engineers."</div>
+    <div class="blk bad">"We have to rewrite it in Go."</div>
+    <div class="blk bad">"Reject this whole design."</div>
+  </div>
+  <div class="col"><h4>Interest — what they need</h4>
+    <div class="blk good">"I'm scared we ship broken &amp; I'm blamed."</div>
+    <div class="blk good">"My team is drowning and burning out."</div>
+    <div class="blk good">"I need it to scale and stop paging me."</div>
+    <div class="blk good">"I don't trust that it's safe under load."</div>
+  </div>
+</div>
+<p>The classic story: two people fight over one orange and agree to cut it in half — only to discover one wanted the juice and the other wanted the peel for baking. Split down the middle, each got half of what they needed. Had they asked <em>why</em>, each could have had all of it. So the diplomat's habit is the question: <em>"Help me understand — what are you actually trying to protect here?"</em></p>
+
+<h2><span class="sn">5</span>BATNA — your quiet source of power</h2>
+<p>Your real leverage in any negotiation isn't how hard you push — it's your <strong>BATNA: your Best Alternative To a Negotiated Agreement</strong>. It's what you'll do if you walk away with no deal. A strong walk-away option lets you hold the line calmly; a weak one means you'll accept almost anything, and the other side can feel it.</p>
+<ul>
+<li><strong>Know yours before you enter.</strong> "If we don't agree, I'll ___." If that alternative is decent, you can negotiate from ease instead of desperation.</li>
+<li><strong>Estimate theirs.</strong> Their willingness to move depends on how good <em>their</em> walk-away is. Someone with no other option will bend further than they let on.</li>
+<li><strong>Improve yours quietly.</strong> The best way to win a negotiation is often done beforehand — line up a second option so you genuinely don't need this one.</li>
+<li><strong>Never accept worse than your BATNA.</strong> If the deal on the table is worse than walking away, walk away. That's the entire point of knowing it.</li>
+</ul>
+
+<h2><span class="sn">6</span>Mediating conflict — don't play telephone</h2>
+<p>When two of your people are in conflict, the trap is becoming the switchboard: each vents to you separately and asks you to fix the other. Relaying messages back and forth (the "telephone game") is exhausting, distorts everything, and lets both avoid the actual conversation — which just entrenches the fight.</p>
+<ul>
+<li><strong>Get them in a room together</strong>, with you facilitating — not carrying messages between two rooms.</li>
+<li><strong>Each states their view and is heard</strong> (reflect it back) before anyone rebuts. Half of most conflict evaporates once each person truly feels understood.</li>
+<li><strong>Separate the people from the problem.</strong> Frame it as "the two of you vs the shared problem," not "you vs each other." Find the goal they both actually want.</li>
+<li><strong>Agree on specific future behaviors</strong>, not an apology for the past. "Next time X, we'll do Y."</li>
+</ul>
+<div class="warn"><strong>Don't rush to declare a winner.</strong> Picking a side and telling the other to adjust ends the meeting but not the conflict — it just teaches the "loser" to route around you. Your job is to help them resolve it, not to referee a verdict onto them.</div>
+
+<h2><span class="sn">7</span>Influence without authority</h2>
+<p>Most of what you'll need as you grow, you can't order — you have to earn. Influence without authority is a craft with real moves:</p>
+<ul>
+<li><strong>Trade in currencies they value.</strong> People help those who help them. Understand the other person's goals and pressures, and frame your ask as something that also advances <em>theirs</em> — or offer something they need in return.</li>
+<li><strong>Build the relationship before you need it.</strong> The time to bank goodwill is <em>before</em> the ask. A cold "can you drop everything for me?" from a stranger loses to a warm one from someone who's helped them before.</li>
+<li><strong>Make it easy to say yes.</strong> Do the thinking, bring a crisp proposal, reduce their effort to a nod. Vague, high-effort asks get deprioritized.</li>
+<li><strong>Manage up the same way.</strong> Your boss is a stakeholder too: bring solutions not just problems, make their life easier, and give them no surprises. Managing up well is what buys you autonomy.</li>
+</ul>
+<div class="tip"><strong>Escalation is a tool, not a first move.</strong> Going over someone's head to force a decision burns the relationship you'll need next quarter. Try to solve it peer-to-peer first; escalate openly ("I think we should get our leads in a room") rather than secretly, and only when direct diplomacy has genuinely stalled.</p></div>
+
+<h2><span class="sn">8</span>Pressure-test your instincts</h2>
+<p>Diplomacy fails in predictable ways — usually by avoiding the direct conversation, or by fighting the stated position instead of the real need. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<h2><span class="sn">9</span>Deliverable — script three hard conversations</h2>
+<p>The muscle is built in reps, and a little scripting beforehand turns dread into a plan. Draft a script for one hard conversation you're avoiding — the generator gives you a full model script from sensible defaults — then run it for three different situations (a feedback talk, a peer conflict, a no to a stakeholder):</p>
+<div class="builder">
+  <div class="fld">Who &amp; the situation<input id="c-who" type="text" placeholder="e.g. A senior engineer who keeps missing commitments without flagging it"></div>
+  <div class="fld">My goal for this conversation (an outcome, not "to vent")<textarea id="c-goal" rows="2" placeholder="e.g. Get honest about the pattern and agree one concrete change — while keeping the relationship intact."></textarea></div>
+  <div class="fld">The facts I'll state (SBI — specific, no labels)<textarea id="c-facts" rows="2" placeholder="e.g. In the last three sprints, two committed tasks slipped without a heads-up, and the team replanned late twice."></textarea></div>
+  <div class="fld">What I most need to understand from them<textarea id="c-listen" rows="2" placeholder="e.g. What's actually getting in the way — workload, unclear scope, or something outside work?"></textarea></div>
+  <div class="fld">My walk-away / bottom line if nothing changes<input id="c-batna" type="text" placeholder="e.g. Move to smaller, clearly-scoped work and revisit in a month"></div>
+  <button id="c-gen">🕊️ Generate my conversation script →</button>
+  <button id="c-copy" class="copy">Copy</button>
+  <div id="c-out" class="out-box"></div>
+</div>
+
+<div class="ok"><strong>Try it:</strong> (1) Work through all five scenarios — notice how many traps are just an avoided conversation or a fight over a position. (2) Generate a script and rehearse the <em>opening line</em> out loud until it's easy. (3) For your next negotiation, write down your BATNA and one guess at the other side's real interest <em>before</em> the meeting. (4) Do it three times, for three different hard conversations — that's the deliverable.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 2 · the people half of the road to CTO. Pairs with <a class="x" href="leadership_referee.html">The Referee</a> and <a class="x" href="leadership_gardener.html">The Gardener</a>. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'A peer’s team keeps missing a dependency you need, and it’s now threatening your launch. You’ve been hinting in Slack.',
+     opts:[
+       {t:'Have a direct, private conversation with the peer — name the impact, ask what’s going on, find a joint fix.',v:'best',fb:'Hints don’t land; a direct, kind, peer-to-peer conversation does. Name the concrete impact, get curious about their side (they may be underwater), and solve it together before it’s a crisis or an escalation.'},
+       {t:'Raise it in the next shared meeting, with the data.',v:'ok',fb:'Better than hinting, and data helps — but airing it first in a group can feel like an ambush and make them defensive. A private conversation first, then the meeting if needed, usually works better.'},
+       {t:'Escalate to their manager right away.',v:'poor',fb:'Going over their head before talking to them directly torches the peer relationship you’ll need for the next ten projects. Escalation is a later tool, used openly — not the opening move.'},
+       {t:'Keep hinting and quietly build a workaround, resenting them.',v:'poor',fb:'The avoidance trap. The problem festers, the resentment grows, and you burn effort routing around something a five-minute honest conversation could fix. Silence is not a strategy.'}
+     ]},
+    {q:'A stakeholder demands you drop everything and ship feature X by Friday. It genuinely isn’t feasible.',
+     opts:[
+       {t:'Ask why Friday and why X — uncover the real interest, then solve that.',v:'best',fb:'"Friday" and "X" are positions; there’s a need underneath — a customer demo, a promise they made, a fear. Find it and you often discover a smaller thing by Thursday solves their real problem better than the impossible one.'},
+       {t:'Explain clearly why it’s not feasible and offer a realistic date.',v:'ok',fb:'Honest and professional — a solid fallback. But leading with "no, here’s the date" argues the position; asking "what are you actually trying to achieve?" first often unlocks a better answer for both of you.'},
+       {t:'Say yes to avoid the conflict, then miss it.',v:'poor',fb:'A yes you can’t keep is worse than a no. You trade five minutes of discomfort now for a broken commitment, a blown Friday, and lost trust — the most expensive way to avoid a hard conversation.'},
+       {t:'Flatly refuse — "not possible" — and move on.',v:'poor',fb:'Technically honest, diplomatically terrible. A blunt no with no curiosity and no alternative makes an enemy of a stakeholder and leaves their real need unsolved. You can say no to the position while saying yes to the interest.'}
+     ]},
+    {q:'You’re mediating two engineers. One is venting heatedly, and you can already see the fix. What do you do?',
+     opts:[
+       {t:'Let them finish, reflect back what you heard, confirm they feel understood — then move to solutions.',v:'best',fb:'People who feel heard become reasonable; people cut off with a fix stay inflamed. Reflecting it back ("so you felt blindsided when…") often drains half the heat on its own and makes them ready to actually solve it.'},
+       {t:'Acknowledge briefly, then steer to solutions.',v:'ok',fb:'Reasonable if the venting is winding down — but "briefly" often lands as dismissive when someone’s still hot. When in doubt, let them fully finish and prove you heard before pivoting; the extra minute pays for itself.'},
+       {t:'Interrupt with the obvious fix — you’re busy and it’s clear.',v:'poor',fb:'The solution may be right and still fail, because they don’t feel heard and so won’t buy in. Jumping to the fix mid-vent reads as "your feelings don’t matter," and now you have two problems.'},
+       {t:'Tell them to calm down and keep it professional.',v:'poor',fb:'"Calm down" has never once calmed anyone down — it invalidates them and escalates. Your job in mediation is to make it safe to be heard, not to police the temperature.'}
+     ]},
+    {q:'Two of your reports are in conflict. Each keeps venting to you separately and asking you to fix the other.',
+     opts:[
+       {t:'Get them in a room together, facilitate: each states their view, is heard, then find the shared goal.',v:'best',fb:'Real conflict resolves between the people, not through you as switchboard. Facilitate a direct conversation where each feels understood and you reframe it as "both of you vs the problem." That’s mediation; relaying messages is not.'},
+       {t:'Coach each of them separately to go talk to the other directly.',v:'ok',fb:'A good developmental move — building their conflict skills beats solving it for them. Sometimes enough. But for a real, stuck conflict, a facilitated joint conversation usually gets there faster and cleaner.'},
+       {t:'Relay messages between them to keep the peace.',v:'poor',fb:'The telephone trap: exhausting, distorting, and it lets both dodge the actual conversation forever. You become a permanent, lossy middleman while the real issue stays unresolved.'},
+       {t:'Decide who’s right and tell the other to adjust.',v:'poor',fb:'Declaring a winner ends the meeting, not the conflict. The "loser" learns to route around you, resentment lingers, and you’ve refereed a verdict instead of helping them resolve it. Facilitate, don’t adjudicate.'}
+     ]},
+    {q:'You need another team to prioritize your work. Their lead is lukewarm, and you have no authority over them.',
+     opts:[
+       {t:'Understand their goals and frame your ask as helping them — or trade something they value; invest in the relationship.',v:'best',fb:'Influence without authority runs on currencies and relationships. Connect your ask to what <em>they’re</em> measured on, make it easy to say yes, and bank goodwill. People prioritize the work of people who help them.'},
+       {t:'Make a crisp, data-backed case for why it matters to the company.',v:'ok',fb:'Useful — a clear, evidence-based case earns respect and makes saying yes easier. But "important to the company" competes with everything else on their plate; tying it to their specific goals is what moves the needle.'},
+       {t:'Escalate to their VP immediately to force the priority.',v:'poor',fb:'Force by escalation wins this round and loses the relationship — next quarter you’ll need them again, and now they route around you. Escalate openly and late, not secretly and first.'},
+       {t:'Imply it’s a leadership mandate when it really isn’t.',v:'poor',fb:'Manufacturing fake authority is a trust bomb with a timer. The moment they discover there was no mandate, your word is worthless — and in a company, they always discover it. Influence built on a lie doesn’t compound; it detonates.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Diplomat move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  function val(id){return (document.getElementById(id).value||'').trim();}
+  var out=document.getElementById('c-out');
+  function build(){
+    var who=val('c-who')||'A senior engineer who keeps missing commitments without flagging it';
+    var goal=val('c-goal')||'Get honest about the pattern and agree one concrete change — while keeping the relationship intact.';
+    var facts=val('c-facts')||'In the last three sprints, two committed tasks slipped without a heads-up, and the team replanned late twice.';
+    var listen=val('c-listen')||'What’s actually getting in the way — workload, unclear scope, or something outside work?';
+    var batna=val('c-batna')||'Move to smaller, clearly-scoped work and revisit in a month';
+    return [
+      '# Hard-conversation script — '+who,'',
+      'MY GOAL:      '+goal,
+      'MY WALK-AWAY: '+batna,'',
+      '1. OPEN — direct, in the first minute (no ambush)',
+      '   "I want to raise something directly because I respect you and your work.',
+      '    Is now an okay time?"','',
+      '2. STATE THE FACTS — SBI, then stop and let it land',
+      '   "'+facts+'"','',
+      '3. LISTEN — the real work; understand before you fix',
+      '   Ask: "'+listen+'"',
+      '   → then be quiet. Reflect back: "So what I’m hearing is ___ — did I get that right?"','',
+      '4. ANTICIPATE & RESPOND',
+      '   If defensive     → "I’m not attacking you — I’m on your side and want us to fix this together."',
+      '   If a real blocker → "Thank you, that changes things. Let’s solve that part."',
+      '   If they dispute   → stay on the specific facts, never on character.','',
+      '5. FIND THE INTEREST, NOT THE POSITION',
+      '   "What do you actually need here?" — solve for the why, not the first demand.','',
+      '6. CLOSE — one concrete change + a check-in',
+      '   "So we’ve agreed ___ by ___, and we’ll check in on ___. Thanks for taking this well."','',
+      '---',
+      'Rehearse the OPENING LINE out loud until it’s easy — that’s the hard part.',
+      'Run this for THREE conversations: a feedback talk, a peer conflict, a no to a stakeholder.'
+    ].join('\n');
+  }
+  document.getElementById('c-gen').addEventListener('click',function(){out.textContent=build();out.classList.add('show');});
+  document.getElementById('c-copy').addEventListener('click',function(){
+    if(!out.classList.contains('show')){out.textContent=build();out.classList.add('show');}
+    var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
