@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Scout — Hiring &amp; Talent</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* rubric / ladder */
+.ladder{border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;margin:14px 0}@media(prefers-color-scheme:dark){.ladder{border-color:#2a2a2a}}.rung{display:flex;gap:11px;align-items:flex-start;padding:9px 12px;border-top:1px solid #f0f0f0;font-size:12.5px;background:#fafafa}.rung:first-child{border-top:0}@media(prefers-color-scheme:dark){.rung{border-color:#202020;background:#151515}}.rung .lv{flex:0 0 auto;padding:0 8px;height:20px;border-radius:6px;color:#fff;font-size:10.5px;font-weight:700;display:grid;place-items:center;white-space:nowrap}.rung b{color:#333}.rung span{color:#666}@media(prefers-color-scheme:dark){.rung b{color:#e2e2e2}.rung span{color:#999}}
+/* builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:440px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 41–56 · Stage 2</span>
+<h1>🔭 The Scout</h1>
+<p class="sub">A scout rides out ahead of the team to find the right people and read the terrain. Hiring is the single most consequential — and least reversible — decision a manager makes: a great hire compounds for years, a bad one costs months of everyone's time and a chunk of the team's morale. Yet most people do it on gut feeling. This module is how to do it like a professional.</p>
+
+<div class="tip">Third module of the <strong>Leadership</strong> track. No runnable code — instead: a structured-vs-vibes contrast, a scoring rubric, decision scenarios, and a builder for this module's deliverable: a full <strong>interview loop with rubrics</strong> for a backend role.</p></div>
+
+<h2><span class="sn">1</span>Hiring is your highest-leverage decision</h2>
+<p>As an IC you multiplied your own effort. As a manager, <em>who you hire</em> quietly sets the ceiling on everything your team can ever do. A single great engineer can lift the whole group's bar; a single bad hire drains your time (managing them), your team's time (covering and correcting), and — worst of all — your credibility, because everyone can see it.</p>
+<p>And it's nearly irreversible: hiring is easy, un-hiring is slow, painful, and demoralizing for everyone. That asymmetry is the whole reason to be systematic. The scout's discipline: <strong>a false positive (hiring the wrong person) costs far more than a false negative (passing on a good one).</strong> When you're genuinely torn, the answer is no.</p>
+
+<h2><span class="sn">2</span>Sourcing — you can't hire who you never reach</h2>
+<p>Hiring starts long before the interview, at the top of the funnel. The best engineers usually aren't scrolling job boards — they're happily employed and have to be <em>reached</em>. Your pipeline comes from referrals (your team's networks are gold), targeted outreach, communities, and a reputation worth joining.</p>
+<ul>
+<li><strong>Referrals first, but widen deliberately.</strong> Referrals are high-signal — and they quietly clone your existing team. If you only hire from your people's networks, you inherit their blind spots. Diversity of any kind starts at sourcing: <em>you cannot hire who you didn't put in the funnel.</em></li>
+<li><strong>The job description is a filter, not a wish list.</strong> A wall of 15 "required" technologies repels great generalists and attracts box-tickers. Write for the <em>problem</em> they'll own and the impact they'll have; list what's truly required separately from what's nice.</li>
+<li><strong>Candidate experience is your employer brand.</strong> Every rejected candidate talks. A fast, respectful, human process markets you to everyone they know; a ghosting black-hole does the opposite.</li>
+</ul>
+
+<h2><span class="sn">3</span>Structured interviews beat vibes</h2>
+<p>The default interview — "let's just chat and see if there's a fit" — is close to worthless, and worse than worthless if you care about fairness. Unstructured interviews mostly measure how much the interviewer <em>likes</em> the candidate and how <em>similar</em> they are to them. That's not signal; that's bias with a job title.</p>
+<div class="sched">
+  <div class="col"><h4>❌ Unstructured "let's chat"</h4>
+    <div class="blk bad">Different questions for each candidate</div>
+    <div class="blk bad">Measures likeability &amp; similarity</div>
+    <div class="blk bad">"I just got a good feeling"</div>
+    <div class="blk bad">Can't compare candidates fairly</div>
+    <div class="blk bad">Bias rides in unchecked</div>
+  </div>
+  <div class="col"><h4>✅ Structured &amp; scored</h4>
+    <div class="blk good">Same core questions, every candidate</div>
+    <div class="blk good">Scored against a defined rubric</div>
+    <div class="blk good">"Evidence: here's what they did"</div>
+    <div class="blk good">Apples-to-apples comparison</div>
+    <div class="blk good">Bias has to get past the scorecard</div>
+  </div>
+</div>
+<p>A <strong>rubric</strong> is the fix: for each competency, decide <em>in advance</em> what strong, adequate, and weak answers actually look like, then score what you observed. Every interviewer gives one of four verdicts per competency:</p>
+<div class="ladder">
+  <div class="rung"><span class="lv" style="background:#0F6E56">Strong hire</span><div><b>Clear evidence they'd raise our bar</b> on this competency. <span>Rare and unambiguous.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#2C7458">Hire</span><div><b>Solid — meets the bar, with real evidence.</b> <span>The everyday "yes".</span></div></div>
+  <div class="rung"><span class="lv" style="background:#BA7517">No hire</span><div><b>Gaps, or not enough signal to be confident.</b> <span>"Fine" lives here — and "fine" is a no.</span></div></div>
+  <div class="rung"><span class="lv" style="background:#993C1D">Strong no</span><div><b>Clear misfit or a real red flag.</b> <span>One is enough to end it.</span></div></div>
+</div>
+<div class="warn"><strong>Don't average away a real gap.</strong> A firm "no hire" on a <em>core</em> competency should sink the hire even if every other score is glowing — a brilliant coder who can't collaborate is still a bad hire. The rubric exists so a single soft "they seemed nice" can't paper over a hard "they couldn't do the job."</div>
+
+<h2><span class="sn">4</span>Design the loop — one competency per stage</h2>
+<p>The most common loop mistake is testing the same thing five times. If four of your five interviewers run a coding exercise, you've measured coding four times and everything else zero times — and you'll be blindsided later by the gaps you never checked.</p>
+<p>Instead, give each stage <strong>one competency to own</strong>, so the loop as a whole covers the full picture with no overlap and no holes. A solid backend loop:</p>
+<div class="sched">
+  <div class="col"><h4>❌ Five interviews, one signal</h4>
+    <div class="blk bad">Screen → coding</div>
+    <div class="blk bad">Round 1 → coding</div>
+    <div class="blk bad">Round 2 → coding</div>
+    <div class="blk bad">Round 3 → coding again</div>
+    <div class="blk bad">Debrief → "great coder, ship it"</div>
+  </div>
+  <div class="col"><h4>✅ One competency per stage</h4>
+    <div class="blk good">Screen → motivation &amp; basics</div>
+    <div class="blk good">Coding → problem-solving &amp; craft</div>
+    <div class="blk good">System design → scale &amp; tradeoffs</div>
+    <div class="blk good">Behavioral → ownership &amp; ambiguity</div>
+    <div class="blk good">Values → collaboration, raises the team</div>
+  </div>
+</div>
+<p>Assign each interviewer their competency <em>and</em> the questions in advance, so nobody wings it and nobody doubles up. This is exactly what you'll design in the deliverable below.</p>
+
+<h2><span class="sn">5</span>The debrief — decide on evidence, not impressions</h2>
+<p>The decision meeting is where good candidates get rejected and bad ones get hired, if you run it badly. The enemy is <strong>anchoring</strong>: the moment the most senior or most confident person says "strong yes," everyone else's judgment quietly bends to match. Structure it to keep every read independent:</p>
+<ul>
+<li><strong>Written scores first, discussion second.</strong> Each interviewer submits their score <em>and the evidence for it</em> before anyone speaks. No one sees the others' scores until they've committed their own.</li>
+<li><strong>Argue from evidence, not vibes.</strong> "I liked them" is not data. "They couldn't explain why they chose that datastore" is. Resolve disagreements by going back to what the candidate actually said and did.</li>
+<li><strong>Raise-the-bar, not no-red-flags.</strong> The question isn't "any reason not to hire?" — it's "is there real evidence this person makes the team <em>better</em>?" Absence of negatives is not presence of signal.</li>
+<li><strong>Torn means no.</strong> Because false positives cost more, a genuinely split room is a pass. "Let's take a chance" is how bad hires happen.</li>
+</ul>
+
+<h2><span class="sn">6</span>Closing, comp &amp; equity</h2>
+<p>A "yes" from you is only half the deal — the best candidates have options, and the offer stage is a two-way sell. You've been selling the whole time (that's what a great candidate experience is); now you close.</p>
+<ul>
+<li><strong>Move fast and stay human.</strong> Speed signals conviction, and great candidates go off the market quickly. A same-day "we'd love to have you," a personal call from the manager, and momentum beat a slow, formal process.</li>
+<li><strong>Sell to their real motivators.</strong> Back to autonomy, mastery, purpose (from <a class="x" href="leadership_gardener.html">The Gardener</a>) plus growth, the team, and the mission. Money gets them in the room; those keep them.</li>
+<li><strong>Pay fairly against a band, not a negotiation.</strong> Decide the range from the role and level, not from how hard someone haggles. Lowballing a great hire to "win" the negotiation is pennies now, resentment later.</li>
+<li><strong>Be honest about equity.</strong> Most engineers don't really understand options, strike prices, vesting, or dilution — and a vague "it could be worth millions" pitch erodes trust the day they learn the reality. Explain it straight.</li>
+</ul>
+<div class="warn"><strong>Internal pay equity is a landmine.</strong> Paying a hard-negotiating new hire 20% above a loyal teammate in the same role feels efficient — until it leaks (it always leaks), and your best existing engineer feels like a fool for staying. Hold the band, or move both.</div>
+
+<h2><span class="sn">7</span>Onboarding — the hire isn't done at "yes"</h2>
+<p>You fought to find and close this person; the fastest way to waste that is a chaotic first month. A new hire's early experience sets their trajectory — and how loudly they'll rave or complain to the next candidate you try to source. Give every hire a plan:</p>
+<ul>
+<li><strong>First 30 days — land &amp; learn.</strong> Environment set up day one, an onboarding buddy, a tour of the systems and the people, and a small, real, shippable task in week one so they get an early win and a taste of the workflow.</li>
+<li><strong>60 days — contribute.</strong> Owning normal-sized work independently, in the flow of the team.</li>
+<li><strong>90 days — own.</strong> Taking a meaningful slice end-to-end; you both have enough signal to confirm the hire was right.</li>
+</ul>
+<p>Ramp expectations explicitly — nobody is fully productive in week two, and pretending otherwise just breeds impostor stress. Say out loud that month one is for learning.</p>
+
+<h2><span class="sn">8</span>Pressure-test your instincts</h2>
+<p>Hiring goes wrong in predictable, human ways — anchoring, affinity bias, desperation, and false urgency. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<h2><span class="sn">9</span>Deliverable — design a backend interview loop with rubrics</h2>
+<p>Design a complete loop you could actually run for a backend role: the bar, one competency per stage, a strong-"yes" signal for each, and the scoring + debrief rules. Fill in what you can — the generator produces a solid model loop from sensible defaults, so you can start from a real template and tune it:</p>
+<div class="builder">
+  <div class="fld">Role &amp; level<input id="l-role" type="text" placeholder="e.g. Senior Backend Engineer"></div>
+  <div class="fld">The bar — the one thing that must be true to hire<input id="l-bar" type="text" placeholder="e.g. Raises the team's average on backend craft and ownership"></div>
+  <div class="fld">Coding stage — a strong "yes" looks like…<textarea id="l-code" rows="2" placeholder="e.g. Reasons out loud, handles edge cases, writes clean code without hand-holding."></textarea></div>
+  <div class="fld">System design stage — a strong "yes" looks like…<textarea id="l-sys" rows="2" placeholder="e.g. Clarifies requirements first, names real tradeoffs, knows where the bottlenecks are."></textarea></div>
+  <div class="fld">Behavioral / ownership stage — a strong "yes" looks like…<textarea id="l-own" rows="2" placeholder="e.g. Owned an outcome end-to-end, drove through ambiguity, learned from a real failure."></textarea></div>
+  <div class="fld">Values / collaboration stage — a strong "yes" looks like…<textarea id="l-val" rows="2" placeholder="e.g. Makes teammates better, gives kind and direct feedback, disagrees then commits."></textarea></div>
+  <button id="l-gen">🔭 Generate my interview loop →</button>
+  <button id="l-copy" class="copy">Copy</button>
+  <div id="l-out" class="out-box"></div>
+</div>
+
+<div class="ok"><strong>Try it:</strong> (1) Work through all five scenarios — notice how many traps are just bias or desperation wearing a disguise. (2) Generate the loop, then assign each stage to a real (or imagined) interviewer with their questions written down. (3) Draft the strong/adequate/weak rubric anchors for your one hardest-to-assess competency — that's where structure pays off most. (4) Write the debrief rules on the invite so nobody anchors.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 2 · the people half of the road to CTO. Pairs with <a class="x" href="leadership_gardener.html">The Gardener</a> and <a class="x" href="leadership_first_follower.html">The First Follower</a>. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'The team debriefs a candidate. How do you run the meeting to get the truest decision?',
+     opts:[
+       {t:'Everyone submits written scores + evidence before anyone speaks.',v:'best',fb:'This is the whole game. Independent scores first kills anchoring — nobody’s read bends to match the loudest or most senior voice. Then you discuss only the disagreements, against evidence.'},
+       {t:'Go around the room verbally, most junior first.',v:'ok',fb:'Better than free-for-all — juniors-first reduces some anchoring. But memories reshape themselves the instant someone else speaks; written-before-spoken is meaningfully stronger.'},
+       {t:'Open discussion, starting with the senior interviewer’s gut read.',v:'poor',fb:'The textbook anchoring failure. The first confident opinion — especially a senior one — quietly becomes everyone’s opinion, and you’ve turned five data points into one.'},
+       {t:'Skip the meeting; just average everyone’s scores.',v:'poor',fb:'Averaging hides the signal that matters most: a single firm "no hire" on a core competency. The debrief exists precisely to surface and reason about disagreement, not to blend it away.'}
+     ]},
+    {q:'A candidate was "fine" in every round — no strong signal, no red flags. The role’s been open 3 months.',
+     opts:[
+       {t:'Lean no — "fine" and "no red flags" aren’t a yes.',v:'best',fb:'Correct, and disciplined. You hire for evidence someone raises the bar, not for the absence of reasons to reject. "Fine" is a no-hire on the rubric for a reason. If good candidates keep coming out "fine," fix the loop or the sourcing.'},
+       {t:'Run one more targeted round on your weakest-signal competency.',v:'ok',fb:'Reasonable if there’s a genuine gap in coverage — get real signal where you have none. Just don’t keep adding rounds hoping to talk yourself into a yes; that’s desperation with extra steps.'},
+       {t:'Hire — they’re fine and we’ve been searching forever.',v:'poor',fb:'The desperation hire. "We’re tired of looking" is the single most expensive reason to say yes. A mediocre hire doesn’t end the pain — it adds managing-them pain on top of it, for years.'},
+       {t:'Hire, but note "watch closely" in onboarding.',v:'poor',fb:'"We’ll fix it in onboarding" is a fantasy you’re telling yourself to justify a hire you already doubt. If you’re planning to watch closely from day one, you already have your answer.'}
+     ]},
+    {q:'You instantly click with a candidate — same school, same stack, same sense of humor. You want to fast-track them.',
+     opts:[
+       {t:'Notice the affinity bias; hold them to the exact same rubric and evidence.',v:'best',fb:'"They’re just like me" is the most flattering and most dangerous signal in hiring. Recognising it and forcing the same bar is how you avoid building a team of clones — and how you keep the process fair.'},
+       {t:'Have an interviewer unlike you assess them independently.',v:'ok',fb:'A genuinely good check — a different perspective catches what your affinity blinds you to. Pair it with the rubric and you’re in good shape; on its own it’s a helpful supplement, not a substitute.'},
+       {t:'Trust the gut — culture fit matters and you’d love working with them.',v:'poor',fb:'"Culture fit" is where bias hides most comfortably. "I’d love working with them" often just means "they’re like me" — which shrinks your team’s range. Fit should mean shared values, not shared background.'},
+       {t:'Skip a stage to close them before other offers land.',v:'poor',fb:'Cutting corners for the candidate you like is bias twice over — you’re both over-weighting affinity and gathering less evidence exactly when you should gather the same. Same loop for everyone.'}
+     ]},
+    {q:'Your top candidate has a competing offer expiring Friday. Your loop isn’t finished and the debrief is next week.',
+     opts:[
+       {t:'Compress the process — pull the debrief forward and decide fast, without dropping the bar.',v:'best',fb:'A great candidate with options is exactly when to move. You can shorten the calendar without lowering the bar: finish the essential signal, run the debrief early, decide. Speed and rigor aren’t opposites.'},
+       {t:'Ask for a few days’ extension to finish the loop properly.',v:'ok',fb:'Often works and buys you real signal — most candidates will hold a bit for a process that’s clearly serious. Just have a plan B, because sometimes the deadline is real and won’t move.'},
+       {t:'Rush out an offer now, before finishing the loop or debrief.',v:'poor',fb:'Urgency is not evidence. Offering before you’ve gathered the signal is how false-positive hires happen — you’re letting their timeline override your judgment on the least reversible decision you make.'},
+       {t:'Let them walk — the process is the process.',v:'poor',fb:'Rigid to a fault. The point of process is better decisions, not ceremony. If you can responsibly compress it and still clear the bar, refusing to bend just loses you a great hire to inflexibility.'}
+     ]},
+    {q:'A strong candidate negotiates hard for 20% above your band — more than a teammate already in the same role earns.',
+     opts:[
+       {t:'Hold the band (or level up both) — internal equity is a landmine.',v:'best',fb:'Pay always leaks. A new hire out-earning a loyal teammate in the same role, discovered six months in, can cost you the person you already have. Fairness across the team beats winning one negotiation.'},
+       {t:'Offer top-of-band plus a sign-on bonus or extra equity to bridge.',v:'ok',fb:'A pragmatic middle: a one-time bonus closes the gap without permanently breaking base-pay parity. Fine as long as it doesn’t quietly become a recurring exception that reopens the same inequity.'},
+       {t:'Just pay the 20% — you want them and they’re worth it.',v:'poor',fb:'Rewarding the hardest negotiator over the fairest structure builds a comp system based on nerve, not value — and detonates trust the day your existing engineer finds out. "Worth it" for one can be very expensive for the team.'},
+       {t:'Lowball and hope they accept.',v:'poor',fb:'Trying to "win" by underpaying a great hire starts the relationship with a bad taste, and they’ll either decline or join already looking. Pay fairly against the band — up or down — not by gamesmanship.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Scout move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  function val(id){return (document.getElementById(id).value||'').trim();}
+  var out=document.getElementById('l-out');
+  function build(){
+    var role=val('l-role')||'Senior Backend Engineer';
+    var bar=val('l-bar')||'Raises the team’s average on backend craft and ownership';
+    var code=val('l-code')||'Reasons out loud, handles edge cases, writes clean code without hand-holding.';
+    var sys=val('l-sys')||'Clarifies requirements first, names real tradeoffs, knows where the bottlenecks are.';
+    var own=val('l-own')||'Owned an outcome end-to-end, drove through ambiguity, learned from a real failure.';
+    var vals=val('l-val')||'Makes teammates better, gives kind and direct feedback, disagrees then commits.';
+    return [
+      '# Interview loop — '+role,'',
+      'THE BAR (must be true to hire): '+bar,
+      'Hire for evidence they clear this bar — not for "no red flags."','',
+      'THE LOOP — one competency per stage',
+      '1. Recruiter / HM screen (30m) → motivation, basics, comp fit',
+      '   strong yes: genuine interest in the problem; realistic on level & comp',
+      '2. Coding (60m live) → problem-solving & code craft',
+      '   strong yes: '+code,
+      '3. System design (60m) → designing for scale & tradeoffs',
+      '   strong yes: '+sys,
+      '4. Behavioral / ownership (45m) → ownership under ambiguity',
+      '   strong yes: '+own,
+      '5. Values / collaboration (45m) → collaboration; raises the team',
+      '   strong yes: '+vals,'',
+      'SCORE EACH COMPETENCY',
+      '  Strong hire — clear evidence they’d raise our bar',
+      '  Hire        — solid, meets the bar with evidence',
+      '  No hire      — gaps, or not enough signal ("fine" lives here)',
+      '  Strong no    — clear misfit / red flag','',
+      'SCORECARD (one per interviewer, submitted BEFORE the debrief)',
+      '  Competency: ______   Score: ______',
+      '  Evidence (what they actually said / did): ______________________','',
+      'DEBRIEF RULES',
+      '  1. Written scores + evidence submitted before anyone speaks.',
+      '  2. Argue from evidence, not impressions ("I liked them" is not data).',
+      '  3. A "no hire" on a core competency sinks it — don’t average a gap away.',
+      '  4. If the room is torn, it’s a no. False positives cost more.','',
+      '— Assign each stage to a named interviewer with their questions written down.'
+    ].join('\n');
+  }
+  document.getElementById('l-gen').addEventListener('click',function(){out.textContent=build();out.classList.add('show');});
+  document.getElementById('l-copy').addEventListener('click',function(){
+    if(!out.classList.contains('show')){out.textContent=build();out.classList.add('show');}
+    var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
