@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Weathervane — Risk &amp; Stakeholder Management</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* 2x2 matrix */
+.matrix{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.cell{border:1px solid #e8e8e8;border-radius:10px;padding:10px 12px;background:#fafafa}@media(prefers-color-scheme:dark){.cell{border-color:#2a2a2a;background:#151515}}.cell h5{font-size:12px;font-weight:700;margin-bottom:3px;color:#5350B4}@media(prefers-color-scheme:dark){.cell h5{color:#a6a3ff}}.cell p{font-size:11.5px;color:#666;margin:0;line-height:1.45}@media(prefers-color-scheme:dark){.cell p{color:#999}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* builder / risk register */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}
+.premortem{font-size:12.5px;background:#f8f7ff;border:1px dashed #cfccee;border-radius:9px;padding:10px 13px;margin:8px 0 12px;line-height:1.5}@media(prefers-color-scheme:dark){.premortem{background:#17162b;border-color:#332f57}}.premortem b{color:#5350B4}@media(prefers-color-scheme:dark){.premortem b{color:#a6a3ff}}
+.rilegend{font-size:10.5px;color:#888;margin:2px 0 8px;line-height:1.5}.riwrap{overflow-x:auto;margin:4px 0 10px}.ritable{border-collapse:collapse;font-size:11.5px;min-width:100%}.ritable th{font-size:9.5px;color:#888;font-weight:700;text-align:center;padding:2px 3px;text-transform:uppercase;letter-spacing:.3px}.ritable th.nm{text-align:left}.ritable td{padding:2px}.ritable input{font:inherit;font-size:12px;padding:5px 6px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a}.ritable input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.ritable input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.ritable input:focus{border-color:#8f8cff}}.ritable input.risk{width:150px}.ritable input.mit{width:150px}.ritable input.own{width:80px}.ritable input.num{width:44px;text-align:center}
+.rout{display:none;margin-top:12px}.rout.show{display:block}.rrow{display:flex;align-items:center;gap:9px;font-size:12.5px;padding:7px 10px;border:1px solid #e8e8e8;border-radius:8px;margin-bottom:5px;background:#fafafa}@media(prefers-color-scheme:dark){.rrow{border-color:#2a2a2a;background:#151515}}.rrow .rk{flex:1}.rrow .rk b{font-weight:600}.rrow .rk small{color:#888;display:block;font-size:10.5px}@media(prefers-color-scheme:dark){.rrow .rk small{color:#888}}.badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap}.b-red{background:#fbe9e6;color:#993C1D}.b-amb{background:#fbf1e0;color:#8a5210}.b-grn{background:#e7f7ef;color:#0F6E56}@media(prefers-color-scheme:dark){.b-red{background:#2a1712;color:#e8907a}.b-amb{background:#241a09;color:#e0b070}.b-grn{background:#0c2016;color:#5fd0a0}}
+.rsum{font-size:12.5px;line-height:1.55;margin-top:10px;padding:10px 12px;border-radius:8px;background:#f4fef8;border:1px dashed #a9dcc7;color:#0F6E56}@media(prefers-color-scheme:dark){.rsum{background:#0a1f14;border-color:#2f6d54;color:#7fd8b3}}.rerr{color:#993C1D;font-size:12px;margin-top:8px}@media(prefers-color-scheme:dark){.rerr{color:#e8907a}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 57–72 · Stage 3</span>
+<h1>🌤️ The Weathervane</h1>
+<p class="sub">A weathervane doesn't stop the storm — it tells you which way the wind is turning while there's still time to act. Senior leaders are judged less on avoiding every problem than on <em>seeing it coming</em>: naming risks early, keeping stakeholders honestly informed, and raising the alarm at the right moment — neither too late, nor so often that no one listens.</p>
+
+<div class="tip">Final module of <strong>Stage 3 · Leading Delivery</strong>. Hands-on to the end: a real in-browser <strong>pre-mortem → risk register</strong> is the deliverable — surface a project's risks and score them by likelihood × impact.</p></div>
+
+<h2><span class="sn">1</span>Read the wind before the storm</h2>
+<p>Junior engineers react to problems; senior leaders <em>anticipate</em> them. A risk is simply an uncertainty that could hurt the outcome — and you can't eliminate risk (a project with no risk isn't worth doing). What you can do is <strong>manage</strong> it, on a loop: <em>identify</em> the risks, <em>assess</em> each by likelihood and impact, <em>mitigate</em> the ones that matter, and <em>monitor</em> them as things change.</p>
+<p>The whole discipline is a bet against the two most expensive words in delivery: "we didn't see it coming." Almost always, someone did — they just had no venue to say it, or no one was watching the vane. Your job is to build both.</p>
+
+<h2><span class="sn">2</span>The risk register — likelihood × impact</h2>
+<p>A <strong>risk register</strong> is the venue: a living list of what could go wrong, each with a <em>likelihood</em>, an <em>impact</em>, an <em>owner</em>, and a <em>mitigation</em>. Scoring likelihood × impact lets you rank them, because you can't fix everything — you triage. A near-certain catastrophe gets your attention; a rare annoyance does not.</p>
+<div class="warn"><strong>A register is a verb, not a document.</strong> The classic failure is writing one at kickoff, filing it, and never looking again — then a listed risk materializes and everyone shrugs "well, it <em>was</em> on the register." Documenting a risk isn't managing it. Review the top risks on a cadence, update the scores as reality shifts, and actually <em>do</em> the mitigations.</p></div>
+
+<h2><span class="sn">3</span>Pre-mortems — imagine the failure</h2>
+<p>The best way to fill that register is a <strong>pre-mortem</strong> (Gary Klein's technique), and it's beautifully counterintuitive. A normal "what could go wrong?" brainstorm feels vaguely disloyal to the plan, so people hold back. A pre-mortem removes that friction by making failure a <em>given</em>:</p>
+<div class="premortem">🔮 <b>The pre-mortem prompt:</b> "It's six months from now. This project has failed — completely, embarrassingly. Take five minutes and write down <em>why</em>." Then collect every reason, group them, and turn the biggest into risks with owners and mitigations.</div>
+<p>This is "prospective hindsight," and studies find it surfaces roughly <strong>30% more</strong> potential problems than the standard framing. Assuming the failure has already happened gives people permission to voice the doubt they've been sitting on — and the quiet, cautious folks (often the ones who see the iceberg) finally speak up. You'll run one in the deliverable below.</p>
+
+<h2><span class="sn">4</span>RACI — kill the ownership ambiguity</h2>
+<p>One of the most common risks on any register is invisible: <strong>nobody's sure who owns the decision.</strong> Work stalls, everyone assumes someone else has it, and it falls through the cracks. <strong>RACI</strong> makes ownership explicit for each decision or deliverable:</p>
+<div class="matrix">
+  <div class="cell"><h5>R — Responsible</h5><p>Does the actual work. Can be several people.</p></div>
+  <div class="cell"><h5>A — Accountable</h5><p>Owns the outcome; the buck stops here. Exactly <b>one</b> person, always.</p></div>
+  <div class="cell"><h5>C — Consulted</h5><p>Gives input <em>before</em> the decision. Two-way conversation.</p></div>
+  <div class="cell"><h5>I — Informed</h5><p>Told <em>after</em> the decision. One-way, no debate needed.</p></div>
+</div>
+<p>The one rule that does most of the work: <strong>exactly one Accountable per item.</strong> "We're all accountable" means no one is. When something's stuck, the fastest unblock is often just naming the single person whose call it is.</p>
+
+<h2><span class="sn">5</span>Status execs read — and escalating without crying wolf</h2>
+<p>Executives skim. A status update that buries the risk in the fourth paragraph, offers no clear status colour, and never asks for anything is a status update no one acts on. Write for a reader who gives you twenty seconds:</p>
+<div class="sched">
+  <div class="col"><h4>❌ Status execs ignore</h4>
+    <div class="blk bad">Buried lede — risk in paragraph 4</div>
+    <div class="blk bad">A wall of detail, no clear ask</div>
+    <div class="blk bad">Always "green" (a watermelon)</div>
+    <div class="blk bad">No status colour up top</div>
+    <div class="blk bad">"…so, thoughts?"</div>
+  </div>
+  <div class="col"><h4>✅ Status execs read</h4>
+    <div class="blk good">BLUF — bottom line in line one</div>
+    <div class="blk good">Red / Amber / Green at the top</div>
+    <div class="blk good">Honest status, even when it's red</div>
+    <div class="blk good">One clear "what I need from you"</div>
+    <div class="blk good">Skimmable in 20 seconds</div>
+  </div>
+</div>
+<p>The deadliest status is the <strong>watermelon</strong>: green on the outside, red on the inside — reported healthy right up until it explodes. Leaders can absorb bad news early; they cannot absorb surprises. And escalation is the same discipline in real time: <strong>raise risks before they're crises</strong>, but calibrate. Escalate too often and you're the boy who cried wolf — your signal gets tuned out. Escalate too late and you own an avoidable disaster. When you do escalate, bring a <em>proposed solution and the specific decision you need</em>, not just a problem dumped on someone's desk.</p>
+
+<h2><span class="sn">6</span>Deliverable — run a pre-mortem</h2>
+<p>Pick a project you're planning and run the pre-mortem: imagine it failed, list <em>why</em>, then score each risk by likelihood × impact (1–5 each) and give it an owner and a mitigation. The tool ranks them so you know which few to actually act on. Edit the sample risks or replace them with your own:</p>
+<div class="builder">
+  <div class="premortem" style="margin-top:2px">🔮 <b>"It's six months from now. This project failed. Why?"</b> — capture each reason below as a risk.</div>
+  <div class="rilegend"><b>Likelihood</b> &amp; <b>Impact</b> each 1–5 (1 = low, 5 = high). Risk score = L × I. <b>Act now</b> ≥ 15 · <b>Watch</b> 7–14 · <b>Low</b> ≤ 6.</div>
+  <div class="riwrap"><table class="ritable" id="ritable">
+    <tr><th class="nm">Risk (how it failed)</th><th>L</th><th>I</th><th>Owner</th><th class="nm">Mitigation</th></tr>
+  </table></div>
+  <button id="r-run">🌤️ Score &amp; rank the risks →</button>
+  <button id="r-copy" class="copy">Copy register</button>
+  <div id="r-out" class="rout"></div>
+  <div id="r-err" class="rerr"></div>
+</div>
+<p style="font-size:12px;color:#888;margin-top:6px">The output is your risk register, ranked. Now it becomes a verb: put the top "act now" risks on your radar, do their mitigations, and revisit the scores as the project moves.</p>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Risk &amp; stakeholder management fails in predictable ways — skipping the pre-mortem, reporting watermelon-green, mis-calibrating escalation, and leaving ownership vague. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Run a real pre-mortem with your team before your next project — five silent minutes of "why did it fail?" beats an hour of confident planning. (2) Score the risks it surfaces and commit to mitigating only the top "act now" ones. (3) Rewrite your next status update BLUF-first with a RAG colour and one clear ask. (4) For your most-stalled decision, name the single Accountable person out loud.</div>
+
+<div class="tip"><strong>🎉 That completes Stage 3 · Leading Delivery &amp; Organizations.</strong> The delivery arc: run predictable delivery (<a class="x" href="leadership_conductor.html">The Conductor</a>) → prioritize &amp; roadmap (<a class="x" href="leadership_mapmaker.html">The Mapmaker</a>) → design the org (<a class="x" href="leadership_architect_of_teams.html">The Architect of Teams</a>) → manage risk &amp; stakeholders (The Weathervane). Next on the road: Stage 4 · Business Fluency.</p></div>
+
+<p style="margin-top:20px;font-size:12px;color:#888">Leadership track · Stage 3 · leading the machine that ships. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'You’re kicking off an ambitious project. The team is excited and confident. Spending an hour on "what could fail" feels like a downer.',
+     opts:[
+       {t:'Run a pre-mortem — "imagine it failed, why?" — precisely because confidence hides risk.',v:'best',fb:'Excitement is exactly when risks go unspoken. The pre-mortem’s "it already failed" framing gives people permission to voice the doubts optimism is suppressing — and surfaces about 30% more problems than a normal risk chat. An hour now saves a quarter later.'},
+       {t:'Do a quick "what could go wrong?" brainstorm.',v:'ok',fb:'Better than nothing, but the standard framing feels disloyal to the plan, so people self-censor — especially the cautious ones who see the most. The pre-mortem’s inversion unlocks noticeably more; use it if you can.'},
+       {t:'Skip it — you don’t want to dampen the team’s morale.',v:'poor',fb:'Protecting morale by refusing to look at risk is how confident teams sail into avoidable disasters. Naming risks isn’t pessimism; it’s what lets an ambitious project actually succeed. The morale hit comes later, when it fails.'},
+       {t:'Assume a team this confident has already thought it through.',v:'poor',fb:'Confidence and coverage are unrelated — often inversely. A team sure it’ll succeed is a team that hasn’t stress-tested the plan. Someone usually senses the iceberg; without a venue, they never say it.'}
+     ]},
+    {q:'Your project is genuinely in trouble, but you’ve been reporting "green" to leadership to avoid alarming them.',
+     opts:[
+       {t:'Report the true status now — amber/red with the issue and your plan.',v:'best',fb:'Leaders can absorb bad news early; they cannot absorb surprises. A watermelon project (green outside, red inside) doesn’t stay hidden — it explodes, and then you’ve lost the delivery <em>and</em> your credibility. Honest-and-early is a gift, not a confession.'},
+       {t:'Move it to amber and flag the specific risk clearly.',v:'ok',fb:'A reasonable, honest step in the right direction — surfacing the risk with a colour change beats silence. Just make sure "amber" isn’t you softening a genuine "red"; the status has to match the reality, not your comfort.'},
+       {t:'Keep it green and quietly work nights to fix it before anyone notices.',v:'poor',fb:'The classic watermelon, plus burnout. You’re gambling that heroics will bail you out before the truth surfaces — and when the gamble fails (it usually does), the surprise is far more damaging than early honesty would have been.'},
+       {t:'Wait until it’s undeniable, then report red.',v:'poor',fb:'Reporting red only when it’s obvious to everyone means you’ve removed leadership’s entire window to help. The value of a status update is lead time; a red delivered at the last minute is just a post-mortem in advance.'}
+     ]},
+    {q:'A moderate risk appears that you could probably handle yourself. Do you escalate it to leadership?',
+     opts:[
+       {t:'Handle it yourself, but note it on your status/radar — escalate for help only if it grows or you genuinely need a decision.',v:'best',fb:'Calibrated escalation. You keep leadership <em>aware</em> without asking them to act, preserving your signal for when it matters. Escalating everything trains people to ignore you (the wolf tax); escalating nothing means they’re surprised later.'},
+       {t:'Escalate early with your plan, so no one is surprised.',v:'ok',fb:'Erring toward transparency is defensible, and "here’s a risk and here’s my plan" is a good habit. Just watch the frequency — if every manageable risk becomes an escalation, the important ones stop standing out.'},
+       {t:'Escalate every risk immediately, to be safe.',v:'poor',fb:'Crying wolf. Flood leadership with every risk and they tune you out — so the one genuinely serious risk lands in a channel they’ve learned to ignore. Escalation only works if it’s rationed.'},
+       {t:'Say nothing at all, not even in your status.',v:'poor',fb:'The opposite failure. Handling it yourself is fine; hiding it entirely means if it grows, it becomes a surprise. Awareness and escalation aren’t the same — keep them aware even when you’re handling it.'}
+     ]},
+    {q:'A cross-team decision keeps stalling. Everyone assumes someone else owns it, and nothing moves.',
+     opts:[
+       {t:'Assign clear RACI — name the single Accountable person for the decision.',v:'best',fb:'"Everyone’s accountable" means no one is, and that ambiguity is itself the risk. Naming exactly one Accountable person — the one whose call it is — is usually the fastest unblock available. Clarity of ownership beats another round of discussion.'},
+       {t:'Escalate to get someone above to force a decision.',v:'ok',fb:'Sometimes necessary to break a true deadlock — but it treats the symptom. If the real problem is unclear ownership, escalate <em>and</em> fix the RACI, or the next decision stalls the same way.'},
+       {t:'Call more meetings to build consensus.',v:'poor',fb:'More meetings on an ownerless decision just distribute the stall. Consensus-seeking without an Accountable owner is how decisions die slowly — you get discussion, not a decision.'},
+       {t:'Just make the call yourself to unblock it, even if it’s not yours.',v:'poor',fb:'Grabbing a decision that isn’t yours unblocks today and undermines ownership tomorrow — the real owner learns to wait for you, and you’ve modelled that RACI is optional. Name the owner; don’t become the bottleneck.'}
+     ]},
+    {q:'You have a risk register, but it was written at kickoff and never revisited. Now a risk that’s listed on it has materialized.',
+     opts:[
+       {t:'Make the register living — review risks on a cadence, update scores, and act on the top ones.',v:'best',fb:'A register is a verb. "It was documented" is worthless if no one watched it or did the mitigations. Regular review turns the list from an alibi into an early-warning system that actually changes what you do.'},
+       {t:'Update it now and put recurring reviews on the calendar.',v:'ok',fb:'Exactly the right corrective — capture the lesson and institutionalize the cadence. The only gap is the past tense: pair it with actually doing the mitigations for the current top risks, not just scheduling meetings about them.'},
+       {t:'It’s fine — the risk was on the register, so it was managed.',v:'poor',fb:'Documenting a risk is not managing it. A register no one reviews is theater that provides false comfort and a convenient "well, we knew" after the fact. Knowing and doing nothing is worse than not knowing.'},
+       {t:'Abandon the register — clearly it didn’t help.',v:'poor',fb:'The register didn’t fail; the <em>process</em> did. Throwing out the tool because you never used it properly just removes your one venue for seeing risk early. Fix the cadence, don’t ditch the instrument.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Weathervane move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // pre-mortem risk register
+  var SEED=[
+    ['Payment provider integration slips past the launch date',4,5,'Priya','Spike the integration in week 1; line up a fallback provider'],
+    ['Ownership between web & platform teams is unclear',4,4,'You','Assign RACI now; one Accountable per surface'],
+    ['Launch-day traffic exceeds capacity',3,4,'Sam','Load-test to 3x; autoscaling + a runbook ready'],
+    ['Key engineer on the critical path is unavailable',2,5,'You','Pair now to spread context; document the design'],
+    ['Final UI polish doesn’t land in time',3,2,'Lee','Cut to a "good enough" v1; polish fast-follow']
+  ];
+  var tbl=document.getElementById('ritable');
+  SEED.forEach(function(r){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td><input class="risk" type="text" value="'+r[0].replace(/"/g,'&quot;')+'"></td>'+
+      '<td><input class="num l" type="number" min="1" max="5" value="'+r[1]+'"></td>'+
+      '<td><input class="num i" type="number" min="1" max="5" value="'+r[2]+'"></td>'+
+      '<td><input class="own" type="text" value="'+r[3]+'"></td>'+
+      '<td><input class="mit" type="text" value="'+r[4].replace(/"/g,'&quot;')+'"></td>';
+    tbl.appendChild(tr);
+  });
+  var out=document.getElementById('r-out'),err=document.getElementById('r-err'),lastText='';
+  function band(s){return s>=15?{k:'Act now',c:'b-red'}:s>=7?{k:'Watch',c:'b-amb'}:{k:'Low',c:'b-grn'};}
+  function esc(t){return t.replace(/</g,'&lt;');}
+  function run(){
+    err.textContent='';
+    var items=[];
+    tbl.querySelectorAll('tr').forEach(function(tr){
+      var rk=tr.querySelector('.risk'); if(!rk)return;
+      var name=(rk.value||'').trim(); if(!name)return;
+      var L=Math.max(1,Math.min(5,parseInt(tr.querySelector('.l').value,10)||0));
+      var I=Math.max(1,Math.min(5,parseInt(tr.querySelector('.i').value,10)||0));
+      if(!tr.querySelector('.l').value||!tr.querySelector('.i').value)return;
+      items.push({name:name,L:L,I:I,s:L*I,own:(tr.querySelector('.own').value||'—').trim(),mit:(tr.querySelector('.mit').value||'—').trim()});
+    });
+    if(items.length<2){err.textContent='Add at least two risks with a likelihood and impact (1–5).';out.classList.remove('show');return;}
+    items.sort(function(a,b){return b.s-a.s;});
+    var html='',txt='# Risk register (from pre-mortem) — ranked by likelihood x impact\n\n',rank=0,actNow=0;
+    items.forEach(function(it){
+      rank++;var bd=band(it.s);if(bd.k==='Act now')actNow++;
+      html+='<div class="rrow"><span class="rk"><b>'+rank+'. '+esc(it.name)+'</b><small>owner: '+esc(it.own)+' · mitigation: '+esc(it.mit)+'</small></span><span class="badge '+bd.c+'">'+bd.k+' · '+it.s+'</span></div>';
+      txt+=(bd.k==='Act now'?'!! ':(bd.k==='Watch'?' ~ ':'  · '))+rank+'. '+it.name+'  [L'+it.L+'xI'+it.I+'='+it.s+' '+bd.k+']\n     owner: '+it.own+' | mitigation: '+it.mit+'\n';
+    });
+    html+='<div class="rsum"><b>'+actNow+' "act now" risk'+(actNow===1?'':'s')+'</b> of '+items.length+'. Focus your energy on those — do their mitigations and keep them on your radar. Now review this on a cadence: a register is a verb, not a document.</div>';
+    txt+='\n'+actNow+' "act now" risks of '+items.length+'. Mitigate those first; review the register on a cadence.\n';
+    out.innerHTML=html;out.classList.add('show');lastText=txt;
+  }
+  document.getElementById('r-run').addEventListener('click',run);
+  document.getElementById('r-copy').addEventListener('click',function(){
+    if(!lastText)run();
+    if(!lastText)return;
+    var btn=this;navigator.clipboard.writeText(lastText).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
