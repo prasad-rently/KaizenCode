@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Product Whisperer — Product Thinking</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:440px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}
+/* funnel calc */
+.fnwrap{overflow-x:auto;margin:4px 0 10px}.fntable{border-collapse:collapse;font-size:11.5px;min-width:100%}.fntable th{font-size:9.5px;color:#888;font-weight:700;text-align:left;padding:2px 3px;text-transform:uppercase;letter-spacing:.3px}.fntable td{padding:2px}.fntable input{font:inherit;font-size:12px;padding:5px 6px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a}.fntable input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fntable input{background:#0d0d0d;border-color:#333;color:#e8e8e8}}.fntable input.stg{width:150px}.fntable input.cnt{width:90px;text-align:center}
+.fnout{display:none;margin-top:12px}.fnout.show{display:block}.fbar{display:flex;align-items:center;gap:9px;margin-bottom:5px;font-size:12px}.fbar .fl{width:118px;flex:0 0 auto;font-weight:600}.fbar .fbwrap{flex:1;background:#eee;border-radius:5px;overflow:hidden;height:22px}@media(prefers-color-scheme:dark){.fbar .fbwrap{background:#222}}.fbar .fb{height:22px;background:#8f8cff;border-radius:5px}.fbar .fc{width:130px;flex:0 0 auto;text-align:right;font-size:11px;color:#666;font-family:'SF Mono',monospace}@media(prefers-color-scheme:dark){.fbar .fc{color:#999}}.fbar.leak .fb{background:#d9704f}.fbar.leak .fl{color:#993C1D}@media(prefers-color-scheme:dark){.fbar.leak .fl{color:#e8907a}}
+.fnsum{font-size:12.5px;line-height:1.55;margin-top:8px;padding:10px 12px;border-radius:8px;background:#f4fef8;border:1px dashed #a9dcc7;color:#0F6E56}@media(prefers-color-scheme:dark){.fnsum{background:#0a1f14;border-color:#2f6d54;color:#7fd8b3}}.fnerr{color:#993C1D;font-size:12px;margin-top:8px}@media(prefers-color-scheme:dark){.fnerr{color:#e8907a}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 73–84 · Stage 4</span>
+<h1>🎯 The Product Whisperer</h1>
+<p class="sub">Engineers are trained to build the thing <em>right</em>. Product thinking is about building the <em>right thing</em> — and it's the skill that turns a strong technical leader into someone the business can't do without. You don't need to become a PM, but you do need to speak their language fluently: outcomes, metrics, funnels, and evidence over opinion.</p>
+
+<div class="tip">First module of <strong>Stage 4 · Business Fluency</strong>. Hands-on: a real <strong>funnel calculator</strong> and a <strong>north-star metric builder</strong> — the latter is the deliverable.</p></div>
+
+<h2><span class="sn">1</span>Build the right thing, not just the thing right</h2>
+<p>The most expensive failure in software isn't a bug — it's shipping something beautifully engineered that nobody wants. Teams pour months into features that move no metric because they fell in love with a <em>solution</em> instead of a <em>problem</em>. Product thinking flips the default: start from the user's problem and the outcome you want to change, and treat the feature as just one hypothesis about how to get there.</p>
+<p>The mantra worth internalizing: <strong>fall in love with the problem, not the solution.</strong> Solutions are cheap and disposable; a real, validated problem is the durable asset. Hold your feature ideas loosely and your understanding of the user's pain tightly.</p>
+
+<h2><span class="sn">2</span>Discovery — validate before you build</h2>
+<p>Discovery is the work of finding out whether you're about to build something worth building — <em>before</em> you spend the quarter building it. It's cheap insurance against the most expensive mistake. The core habits:</p>
+<ul>
+<li><strong>Find the riskiest assumption and test it first.</strong> Every plan rests on beliefs ("users will want this", "they'll pay", "it's technically feasible"). Identify the one that would sink the project if wrong, and go validate <em>that</em> — with a prototype, a landing page, five user interviews — before building the rest.</li>
+<li><strong>Talk to actual users.</strong> Not a survey, not the loudest stakeholder — real conversations with the people who'll use it. What's their day like? What do they do today instead? The gap between what people <em>say</em> and what they <em>do</em> is where products die.</li>
+<li><strong>Continuous, not a phase.</strong> Discovery isn't a gate you pass once; the best teams keep a steady trickle of user contact running alongside delivery, so they're always course-correcting.</li>
+</ul>
+
+<h2><span class="sn">3</span>The north-star metric — and the vanity trap</h2>
+<p>A <strong>north-star metric (NSM)</strong> is the single number that best captures the value your product delivers to users — the one the whole team can rally behind and that, if it grows, means the business grows too. Spotify's is time spent listening; Airbnb's, nights booked. It aligns everyone and cuts through feature-by-feature bickering.</p>
+<p>The trap is picking a <strong>vanity metric</strong> — a number that reliably goes up and makes everyone feel good but guides no decision and predicts no revenue. "Total registered users" only ever climbs; it says nothing about whether the product is actually working.</p>
+<div class="sched">
+  <div class="col"><h4>❌ Vanity metrics</h4>
+    <div class="blk bad">Total registered users (only grows)</div>
+    <div class="blk bad">Page views / raw downloads</div>
+    <div class="blk bad">Cumulative sign-ups</div>
+    <div class="blk bad">Looks great, guides nothing</div>
+    <div class="blk bad">Can't tell you what to do next</div>
+  </div>
+  <div class="col"><h4>✅ Actionable metrics</h4>
+    <div class="blk good">Weekly active / retained users</div>
+    <div class="blk good">Activation rate</div>
+    <div class="blk good">Conversion through the funnel</div>
+    <div class="blk good">Moves when the product improves</div>
+    <div class="blk good">Points straight at the next fix</div>
+  </div>
+</div>
+<p>A good NSM comes with <strong>input metrics</strong> (the few levers you can actually move that drive it) and a <strong>guardrail</strong> (something that must not get worse while you chase it — e.g. don't grow engagement by tanking load time). You'll define a full set in the deliverable.</p>
+
+<h2><span class="sn">4</span>Funnels &amp; retention — the leaky bucket</h2>
+<p>Users move through stages — a classic frame is <strong>AARRR</strong>: Acquisition → Activation → Retention → Revenue → Referral. A <em>funnel</em> shows how many make it through each step, and the biggest drop-off is where you're losing the most value — usually your highest-leverage fix.</p>
+<p>The most important and most neglected stage is <strong>retention</strong>. Acquisition without retention is a <em>leaky bucket</em>: you pour expensive marketing in the top while users pour out the bottom, and growth stays flat no matter how much you spend. Retention is the real growth engine — a product people come back to grows even with modest acquisition. Find your leak:</p>
+<div class="builder">
+  <div class="fnwrap"><table class="fntable" id="fntable">
+    <tr><th>Funnel stage</th><th># of users</th></tr>
+  </table></div>
+  <button id="fn-run">🎯 Find the biggest leak →</button>
+  <div id="fn-out" class="fnout"></div>
+  <div id="fn-err" class="fnerr"></div>
+</div>
+
+<h2><span class="sn">5</span>A/B experimentation — test, don't guess</h2>
+<p>Teams burn weeks arguing over which design is better when they could just <em>ask the users</em> — by shipping both and measuring. An <strong>A/B test</strong> shows version A to half your users and B to the other half, and lets the target metric decide. It replaces the loudest opinion in the room with evidence.</p>
+<ul>
+<li><strong>Most ideas fail — and that's the point.</strong> At mature companies, well over half of tested changes don't beat the control (and a chunk actively hurt). Experimentation is humbling; it's also how you stop shipping confident guesses that quietly make things worse.</li>
+<li><strong>Wait for significance; don't peek-and-declare.</strong> Ending a test the moment it looks good ("p-hacking") manufactures fake wins. Decide the sample size and duration up front, then read the result.</li>
+<li><strong>Ship to learn.</strong> A losing test isn't wasted — it's a cheap lesson about your users that sharpens the next bet.</li>
+</ul>
+
+<h2><span class="sn">6</span>Work with PM &amp; design as peers — and scope the MVP</h2>
+<p>Modern product teams run on a <strong>triad</strong>: engineering, product, and design as equal partners. The failure mode for engineers is becoming an <em>order-taker</em> — "just tell me what to build" — which wastes your best asset: you understand what's cheap, what's expensive, and what's possible. Show up as a peer who challenges the <em>what</em> and the <em>why</em>, not just the how — and disagree with data, not ego.</p>
+<p>Where that partnership pays off most is <strong>MVP scoping</strong>. An MVP is the <em>smallest thing that tests your riskiest assumption</em> — not a half-baked v1, and definitely not a gold-plated everything-at-once launch. The engineer's superpower in the triad is spotting the 20% of scope that delivers 80% of the learning, and proposing the leaner path that gets you real data faster.</p>
+<div class="warn"><strong>Both extremes are traps.</strong> Gold-plating (polishing for months before any user sees it) and slapdash (shipping something so broken it teaches you nothing) both fail. The MVP is the honest middle: small, real, and pointed straight at the question you most need answered.</p></div>
+
+<h2><span class="sn">7</span>Deliverable — define a north-star metric</h2>
+<p>Pick one of your apps and define its metric set: the north-star, the input metrics that drive it, and a guardrail. Fill it in (or take the sample) and generate a clean one-pager:</p>
+<div class="builder">
+  <div class="fld">Product / app<input id="n-prod" type="text" placeholder="e.g. our habit-tracking app"></div>
+  <div class="fld">North-star metric — the one number that captures value to users<input id="n-nsm" type="text" placeholder="e.g. Weekly active users who complete ≥3 check-ins"></div>
+  <div class="fld">Why it captures <em>real</em> value (not vanity)<textarea id="n-why" rows="2" placeholder="e.g. It measures users getting repeated value from the habit loop — not just signing up once."></textarea></div>
+  <div class="fld">Input metrics — the levers that move it (one per line)<textarea id="n-inputs" rows="3" placeholder="e.g. New activated users / week&#10;Week-1 retention rate&#10;Avg check-ins per active user"></textarea></div>
+  <div class="fld">Guardrail metric — must NOT get worse while you chase the NSM<input id="n-guard" type="text" placeholder="e.g. Median app load time stays under 1.5s"></div>
+  <button id="n-gen">🎯 Generate my metric set →</button>
+  <button id="n-copy" class="copy">Copy</button>
+  <div id="n-out" class="out-box"></div>
+</div>
+
+<h2><span class="sn">8</span>Pressure-test your instincts</h2>
+<p>Product thinking fails in predictable ways — falling for the solution, celebrating vanity metrics, pouring money into a leaky bucket, and deciding by opinion. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Run the funnel calculator on one of your products' real numbers — the biggest leak is probably your next roadmap item. (2) Define a north-star with the builder, then apply the vanity check honestly. (3) For your next feature, write down the single riskiest assumption and the cheapest way to test it before building. (4) In your next product debate, replace "I think" with "let's test it."</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 4 · the business half of the road to CTO. First module after Stages 2–3 (people &amp; delivery). <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'A senior stakeholder is in love with building Feature X. There’s no evidence users actually want it.',
+     opts:[
+       {t:'Run discovery first — validate the problem and demand before committing to build it.',v:'best',fb:'The most expensive mistake is building something nobody wants. A few user conversations, a prototype, or a fake-door test costs days and can save a quarter. Fall in love with the problem; make the stakeholder’s idea earn its place with evidence.'},
+       {t:'Build a small MVP or prototype to test demand cheaply.',v:'ok',fb:'A solid move — the smallest thing that tests the assumption is exactly right. Just make sure it’s genuinely scoped to <em>learn</em> (a fake door, a prototype), not a half-built real feature that costs almost as much as the full one.'},
+       {t:'Build the full feature — they’re the stakeholder and they’re sure.',v:'poor',fb:'Seniority is not evidence. Building a fully-specced feature on one person’s conviction is how teams ship beautifully-engineered things no one uses. Confidence upstream doesn’t reduce the risk — it just hides it until launch.'},
+       {t:'Refuse outright because there’s no data.',v:'poor',fb:'Too blunt, and it makes you the blocker. The move isn’t "no" — it’s "let’s cheaply find out." Reframing a fight over the solution into a shared question ("do users want this?") gets you a partner instead of an adversary.'}
+     ]},
+    {q:'Leadership is celebrating total registered users climbing nicely, but active usage is quietly shrinking.',
+     opts:[
+       {t:'Shift the focus to an actionable metric — active/retained users — and show the real picture.',v:'best',fb:'"Total registered users" is the textbook vanity metric: it only ever goes up and hides a dying product. Reframing around active/retained users tells the truth and points at what to fix. Uncomfortable now beats a cliff later.'},
+       {t:'Show both, but emphasize retention and active use.',v:'ok',fb:'Diplomatic and often the pragmatic path — you meet leadership where they are while steering toward the metric that matters. Just don’t let the vanity number keep top billing, or it’ll keep driving the decisions.'},
+       {t:'Keep celebrating registrations — the line goes up and to the right.',v:'poor',fb:'You’re steering by a broken instrument. A rising registration count with falling engagement is a product bleeding out while everyone toasts the chart. Vanity metrics feel great right up until the business is suddenly in trouble "out of nowhere."'},
+       {t:'Report whichever metric happens to look best each quarter.',v:'poor',fb:'Metric-shopping destroys trust and any ability to actually learn. If the number changes every quarter to flatter the story, it’s marketing, not measurement — and no one can tell whether the product is working.'}
+     ]},
+    {q:'Growth is flat despite heavy marketing spend. Lots of sign-ups arrive; very few stick around.',
+     opts:[
+       {t:'Fix activation and retention first — you’re pouring acquisition into a leaky bucket.',v:'best',fb:'Classic leaky bucket. Spending more on acquisition when users don’t stick just pours water faster into a bucket with a hole. Retention is the real growth engine; plug the leak (onboarding, activation, the aha moment) and the same spend suddenly compounds.'},
+       {t:'A/B test the onboarding flow to lift activation.',v:'ok',fb:'A great concrete first step — onboarding/activation is exactly where most leaks start, and testing beats guessing. It’s "ok" only because it’s one tactic; pair it with looking across the whole retention curve to find where users actually drop.'},
+       {t:'Increase acquisition spend to hit the growth number.',v:'poor',fb:'Doubling down on the leaky bucket. You’ll buy a bump in sign-ups that evaporates, burn budget, and flat growth returns next month — now with a worse payback. More top-of-funnel can’t fix a bottom-of-funnel problem.'},
+       {t:'Conclude marketing is underperforming and pressure them.',v:'poor',fb:'Marketing is delivering sign-ups; the product isn’t keeping them. Blaming acquisition for a retention problem misdiagnoses the funnel and sends everyone chasing the wrong fix while the real leak keeps draining.'}
+     ]},
+    {q:'The team is deadlocked debating two designs, each defended on gut feeling and seniority.',
+     opts:[
+       {t:'Run an A/B test and let the target metric decide.',v:'best',fb:'When you can measure, opinions are optional. Ship both to a slice of users and let the metric settle it — and be ready for the humbling truth that maybe neither wins. Data ends the debate and teaches you something the argument never could.'},
+       {t:'Ship one, watch the metric closely, and be ready to revert.',v:'ok',fb:'A reasonable lightweight approach when a clean A/B isn’t practical (low traffic, big change). You still let evidence rule — just with less rigor and more risk of confounding, so hold the conclusion loosely.'},
+       {t:'Go with the most senior person’s instinct.',v:'poor',fb:'The HiPPO deciding by gut is exactly what experimentation exists to replace. Senior intuition is a useful hypothesis generator and a terrible oracle — the whole point is that most confident guesses (theirs included) lose in a test.'},
+       {t:'Build both fully and pick the winner afterward.',v:'poor',fb:'Enormously wasteful — you pay to build two complete things to answer a question a lightweight experiment could settle. Test the assumption cheaply; don’t fully engineer both sides of a coin flip.'}
+     ]},
+    {q:'A PM hands engineering a fully-specced solution ("build exactly this"). You see a simpler path that tests the core assumption faster.',
+     opts:[
+       {t:'Engage as a peer — bring the simpler alternative and the assumption it tests; co-design the smallest MVP.',v:'best',fb:'This is the triad working. Your knowledge of what’s cheap vs expensive is exactly what the PM lacks — surfacing a leaner path that learns faster is you adding product value, not just executing. Disagree with reasoning and options, and you become a partner, not a pair of hands.'},
+       {t:'Build what’s specced, but flag your concern first.',v:'ok',fb:'Better than silent compliance — at least the concern is on record. But "flag and build anyway" often means the better idea dies in a comment. Push to actually explore the alternative together before committing the team to the heavier build.'},
+       {t:'Build exactly what’s specced, no questions asked.',v:'poor',fb:'The order-taker trap. You’re wasting your unique vantage point and letting the team over-build when a smaller test would do. "Just tell me what to code" feels cooperative and quietly makes you less valuable and the product worse.'},
+       {t:'Override the PM and build your version instead.',v:'poor',fb:'Swinging from order-taker to lone-wolf. Unilaterally ignoring the PM torches the partnership and skips the shared reasoning that makes the decision sound. Peer means <em>with</em> them — propose, debate with evidence, decide together.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Product move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // funnel calculator
+  var FSEED=[['Visited landing page',10000],['Signed up',2000],['Activated (aha moment)',800],['Retained to day 30',500],['Paid',150]];
+  var ftbl=document.getElementById('fntable');
+  FSEED.forEach(function(r){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td><input class="stg" type="text" value="'+r[0]+'"></td><td><input class="cnt" type="number" min="0" value="'+r[1]+'"></td>';
+    ftbl.appendChild(tr);
+  });
+  var fout=document.getElementById('fn-out'),ferr=document.getElementById('fn-err');
+  document.getElementById('fn-run').addEventListener('click',function(){
+    ferr.textContent='';
+    var rows=[];
+    ftbl.querySelectorAll('tr').forEach(function(tr){
+      var s=tr.querySelector('.stg');if(!s)return;
+      var name=(s.value||'').trim();var c=parseFloat(tr.querySelector('.cnt').value);
+      if(name==='')return; if(isNaN(c)||c<0)return;
+      rows.push({name:name,c:c});
+    });
+    if(rows.length<2){ferr.textContent='Enter at least two funnel stages with counts.';fout.classList.remove('show');return;}
+    if(rows[0].c<=0){ferr.textContent='The first stage must be greater than 0.';fout.classList.remove('show');return;}
+    var top=rows[0].c,worstDrop=-1,worstIdx=-1;
+    for(var i=1;i<rows.length;i++){var drop=rows[i-1].c-rows[i].c;var dropPct=rows[i-1].c>0?drop/rows[i-1].c:0;if(dropPct>worstDrop){worstDrop=dropPct;worstIdx=i;}}
+    var html='';
+    rows.forEach(function(r,i){
+      var w=Math.max(1,Math.round(r.c/top*100));
+      var step=i===0?'—':(rows[i-1].c>0?(r.c/rows[i-1].c*100).toFixed(0)+'% of prev':'—');
+      var leak=(i===worstIdx)?' leak':'';
+      html+='<div class="fbar'+leak+'"><span class="fl">'+r.name.replace(/</g,'&lt;')+'</span><span class="fbwrap"><span class="fb" style="width:'+w+'%"></span></span><span class="fc">'+r.c.toLocaleString()+' · '+step+'</span></div>';
+    });
+    var overall=(rows[rows.length-1].c/top*100);
+    html+='<div class="fnsum">Overall conversion: <b>'+overall.toFixed(1)+'%</b> make it end-to-end. Biggest leak: <b>'+rows[worstIdx].name+'</b> — you lose <b>'+(worstDrop*100).toFixed(0)+'%</b> of users right there. That drop-off, not the top of the funnel, is almost certainly your highest-leverage fix.</div>';
+    fout.innerHTML=html;fout.classList.add('show');
+  });
+
+  // north-star builder
+  function val(id){return (document.getElementById(id).value||'').trim();}
+  var out=document.getElementById('n-out');
+  function build(){
+    var prod=val('n-prod')||'our habit-tracking app';
+    var nsm=val('n-nsm')||'Weekly active users who complete ≥3 check-ins';
+    var why=val('n-why')||'It measures users getting repeated value from the core habit loop — not just signing up once.';
+    var inputs=(document.getElementById('n-inputs').value||'').split('\n').map(function(x){return x.trim();}).filter(Boolean);
+    if(!inputs.length)inputs=['New activated users / week','Week-1 retention rate','Avg check-ins per active user'];
+    var guard=val('n-guard')||'Median app load time stays under 1.5s';
+    var lines=['# North-star metric — '+prod,'',
+      '## North-star metric','  '+nsm,'  Why it captures real value: '+why,'',
+      '## Input metrics (the levers that move the NSM)'];
+    inputs.forEach(function(i){lines.push('  - '+i);});
+    lines.push('','## Guardrail (must NOT get worse while chasing the NSM)','  '+guard,'',
+      '--- vanity check ---',
+      'A real north-star: (1) reflects value delivered to the USER, not just to us;',
+      '(2) is a rate or an active count, not a number that can only ever go up;',
+      '(3) predicts revenue rather than merely correlating with it.',
+      'If yours is "total registered users", it is vanity — pick again.');
+    return lines.join('\n');
+  }
+  document.getElementById('n-gen').addEventListener('click',function(){out.textContent=build();out.classList.add('show');});
+  document.getElementById('n-copy').addEventListener('click',function(){
+    if(!out.classList.contains('show')){out.textContent=build();out.classList.add('show');}
+    var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
