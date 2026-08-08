@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Storyteller — Communication Mastery</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:460px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 73–84 · Stage 4</span>
+<h1>📖 The Storyteller</h1>
+<p class="sub">At senior levels, your impact is capped by your ability to make other people <em>act</em> on your ideas — and that runs almost entirely on communication. The best technical plan, badly explained, loses every time to a worse plan told well. Clear writing and clear speaking aren't soft skills bolted onto the job; at this altitude, they largely <em>are</em> the job.</p>
+
+<div class="tip">Second module of <strong>Stage 4 · Business Fluency</strong>. Hands-on: a real <strong>one-page CFO memo builder</strong> is the deliverable — pitch a technical investment in language a finance chief will act on.</p></div>
+
+<h2><span class="sn">1</span>Communication is the multiplier</h2>
+<p>As an IC, your work spoke for itself — the code either ran or it didn't. As a leader, your work is <em>other people's work</em>, and that only happens if you can transfer an idea from your head into theirs clearly enough that they move. A brilliant strategy nobody understands has zero impact; a mediocre one everyone rallies behind ships. Communication is the lever that converts your thinking into organizational action.</p>
+<p>The good news: it's a learnable craft, not a talent. It comes down to a few repeatable moves — lead with the answer, translate into the reader's language, wrap data in a story, and ruthlessly cut. This module is those moves.</p>
+
+<h2><span class="sn">2</span>The pyramid principle — answer first</h2>
+<p>Engineers are trained to reason <em>bottom-up</em>: here's the context, here's the analysis, and therefore — at the end — here's the conclusion. It's how you <em>derive</em> an answer, and it's exactly backwards for <em>communicating</em> one. Busy readers (Barbara Minto's <em>Pyramid Principle</em>) want the <strong>answer first</strong>, then the supporting reasons, then the detail beneath those — so they can stop reading the moment they're convinced.</p>
+<div class="sched">
+  <div class="col"><h4>❌ Bottom-up (how you derived it)</h4>
+    <div class="blk bad">Background and context first</div>
+    <div class="blk bad">Then the analysis…</div>
+    <div class="blk bad">The ask buried in paragraph 5</div>
+    <div class="blk bad">Reader waits for the point</div>
+    <div class="blk bad">They stop reading before the ask</div>
+  </div>
+  <div class="col"><h4>✅ Pyramid (answer-first)</h4>
+    <div class="blk good">The recommendation in line one</div>
+    <div class="blk good">Then the 3 reasons it's right</div>
+    <div class="blk good">Detail sits beneath each reason</div>
+    <div class="blk good">Skimmable top-down</div>
+    <div class="blk good">Approve — or ask one question — in 30s</div>
+  </div>
+</div>
+<p>This is the written cousin of <strong>BLUF</strong> (bottom line up front) from <a class="x" href="leadership_weathervane.html">The Weathervane</a>. Put the conclusion in the first sentence and structure everything else as support for it. If a reader gets only your first line, they should still get your point.</p>
+
+<h2><span class="sn">3</span>Speak their language — translate to money &amp; risk</h2>
+<p>The single most common reason engineers fail to get buy-in: they pitch in <em>engineering</em> currency (elegance, tech debt, latency) to people who bank in <em>business</em> currency (money, risk, time, customers). Nobody funds "refactoring"; they fund "reclaiming a third of our engineering capacity." Same thing — one is translated. Run every point through the "<strong>so what?</strong>" test until it lands in something the listener already cares about.</p>
+<div class="sched">
+  <div class="col"><h4>❌ What engineers say</h4>
+    <div class="blk bad">"We need to pay down tech debt."</div>
+    <div class="blk bad">"Improve CI/CD and observability."</div>
+    <div class="blk bad">"Migrate to microservices."</div>
+    <div class="blk bad">"Reduce p99 latency."</div>
+  </div>
+  <div class="col"><h4>✅ What execs act on</h4>
+    <div class="blk good">"~30% of our time goes to working around old code — this reclaims it."</div>
+    <div class="blk good">"Ship faster, with fewer customer-facing outages."</div>
+    <div class="blk good">"Let teams release independently, so we move faster."</div>
+    <div class="blk good">"The app feels instant, so fewer customers give up and leave."</div>
+  </div>
+</div>
+
+<h2><span class="sn">4</span>Storytelling with data</h2>
+<p>Data doesn't persuade on its own — a wall of twelve charts overwhelms and convinces no one. Humans are wired for <em>narrative</em>, so the move is to wrap the numbers in a simple story arc: <strong>setup</strong> (here's the situation) → <strong>tension</strong> (here's the problem, and what it's costing) → <strong>resolution</strong> (here's the fix, and the result). The data becomes the evidence <em>inside</em> the story, not a substitute for it.</p>
+<ul>
+<li><strong>One chart, one message.</strong> Each visual should make exactly one point, and you should be able to say that point in a sentence. If a chart needs a paragraph to explain, it's doing too much.</li>
+<li><strong>Lead with the "so what," not the axes.</strong> "Incidents doubled after the last launch" beats "here is a time-series of incident counts." Tell them what it <em>means</em>, then show the chart as proof.</li>
+<li><strong>Round and simplify.</strong> "About a third" sticks; "31.7%" evaporates. Precision is for the appendix; memorability is for the room.</li>
+</ul>
+
+<h2><span class="sn">5</span>The one-page memo &amp; presenting to execs</h2>
+<p>Amazon famously banned slide decks for big decisions in favor of <strong>narrative memos</strong> — because prose forces the logic slides let you hide. You can't paper over a hole in your argument with a bullet point and a nice transition; you have to write the actual sentence, and if it doesn't hold up, you see it. Writing the memo <em>is</em> the thinking.</p>
+<ul>
+<li><strong>Lead with the ask.</strong> First line: what you want and why it matters. Exec-summary and board comms follow the same rule — the decision up front, the support below.</li>
+<li><strong>Anticipate the hard question and pre-answer it.</strong> A CFO will ask "what's the return, and what if it fails?" Put the ROI and the downside-with-mitigation <em>in the memo</em>, before they have to ask. Anticipating the objection is what makes you look ready.</li>
+<li><strong>Be ruthlessly short.</strong> One page beats ten. Brevity isn't laziness — it's respect for the reader's time and proof you know what actually matters. Cutting is the last 50% of the work.</li>
+</ul>
+
+<h2><span class="sn">6</span>Deliverable — the one-page CFO memo</h2>
+<p>Pitch a real technical investment to a CFO in one page. Fill in the pieces (or take the sample) and the builder assembles them into a pyramid-structured, money-framed memo — the ask up front, the numbers, the cost of inaction:</p>
+<div class="builder">
+  <div class="fld">The investment — what you want to do (plain language)<input id="m-inv" type="text" placeholder="e.g. A one-quarter investment to modernize our payments service"></div>
+  <div class="fld">Situation — the current state, in business terms<textarea id="m-sit" rows="2" placeholder="e.g. Payments runs on a 6-year-old system that ~30% of engineering time now works around."></textarea></div>
+  <div class="fld">What's changing / getting worse (the tension)<textarea id="m-comp" rows="2" placeholder="e.g. Incidents are up 40% year-over-year and every new feature ships slower than the last."></textarea></div>
+  <div class="fld">The cost — people / time / $<input id="m-cost" type="text" placeholder="e.g. 4 engineers for one quarter (~$180k fully loaded)"></div>
+  <div class="fld">The return — in the CFO's currency (money / risk / time)<textarea id="m-ret" rows="2" placeholder="e.g. ~30% eng capacity reclaimed (~$600k/yr), 40% fewer payment incidents, faster feature delivery."></textarea></div>
+  <div class="fld">Cost of doing nothing (the risk)<input id="m-risk" type="text" placeholder="e.g. A payments outage at peak risks ~$50k/hr in lost transactions and customer trust"></div>
+  <div class="fld">The specific ask — the decision you need<input id="m-ask" type="text" placeholder="e.g. Approve the quarter's allocation; I'll report reclaimed capacity & incident rate at quarter-end"></div>
+  <button id="m-gen">📖 Assemble the memo →</button>
+  <button id="m-copy" class="copy">Copy</button>
+  <div id="m-out" class="out-box"></div>
+</div>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Communication fails in predictable ways — burying the ask, pitching in jargon, drowning the point in data, and hoping the hard question won't come. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Take your last long update and rewrite it so the ask is the very first sentence. (2) Generate the CFO memo, then read only line one — does it stand alone? (3) Run your next technical pitch through the "so what?" test until every point lands in money, risk, time, or customers. (4) Before your next big proposal, write the one-pager <em>before</em> the deck — let the prose expose the gaps.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 4 · the business half of the road to CTO. Pairs with <a class="x" href="leadership_product_whisperer.html">The Product Whisperer</a>. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'You email the CEO a six-paragraph update. The decision you actually need from them is in paragraph five.',
+     opts:[
+       {t:'Rewrite it pyramid-style — the ask in the first sentence, support below.',v:'best',fb:'Busy readers decide from line one. Put "I need approval to do X, because Y" up top and let the rest be support they can read only if they want. If they read nothing but the first sentence, they still get your point — and can act.'},
+       {t:'Add a bold "TL;DR:" line at the very top.',v:'ok',fb:'A real improvement — a TL;DR rescues a buried ask and takes ten seconds. It’s "ok" rather than "best" only because the whole memo reads better when it’s genuinely structured answer-first, not just capped with a summary.'},
+       {t:'Send it as is — it’s all important and they’ll read to the end.',v:'poor',fb:'They won’t. Executives skim, and an ask in paragraph five is an ask that doesn’t get seen or gets seen late. "It’s all important" is exactly the thinking that buries the one thing that mattered.'},
+       {t:'Make it longer and more detailed to be thorough.',v:'poor',fb:'More length lowers the odds the point lands, not raises them. Thoroughness in the body is fine; burying a decision under more prose just makes the reader work harder to find what they needed to act on.'}
+     ]},
+    {q:'You need budget for "refactoring tech debt and improving CI/CD." Pitching it, the CFO’s eyes glaze over.',
+     opts:[
+       {t:'Translate to business terms: "~30% of our time goes to working around old code — this reclaims it and speeds every release."',v:'best',fb:'You pitched in engineering currency to someone who banks in money and time. Translated — reclaimed capacity, faster releases, fewer outages — the exact same work becomes fundable. Run every point through "so what?" until it lands in their world.'},
+       {t:'Add a one-line analogy after the technical explanation.',v:'ok',fb:'An analogy helps and is a good instinct — but if it’s bolted onto a technical explanation, you’ve still led with jargon. Lead with the business outcome; use the analogy to make it stick, not to rescue the tech-speak.'},
+       {t:'Explain the technical details more thoroughly so they understand.',v:'poor',fb:'More detail in a language they don’t speak just deepens the glaze. The CFO doesn’t need to understand microservices; they need to know what it buys the business. Depth is the opposite of what’s missing here.'},
+       {t:'Just say "trust me, engineering needs this."',v:'poor',fb:'"Trust me" doesn’t survive a budget review — and it trains finance to see engineering as a black-box cost center that can’t justify itself. Translating your ask into their terms is precisely how you earn the trust you’re asking them to extend.'}
+     ]},
+    {q:'To justify a decision to the board, you’ve prepared twelve dense charts. The data is all there.',
+     opts:[
+       {t:'One chart, one message — wrapped in a narrative: problem → what it costs → the fix → the ask.',v:'best',fb:'Data doesn’t persuade; story does, with data as its evidence. A single clear chart inside a setup-tension-resolution arc lands far harder than twelve competing for attention. "The data speaks for itself" is the myth that sinks good analysis.'},
+       {t:'Keep all twelve charts but add a summary slide up front.',v:'ok',fb:'The summary up front is right; the eleven extra charts still dilute it. Move the detail to an appendix "for the record" and present only the one or two visuals that carry the story. Available ≠ presented.'},
+       {t:'Present all twelve — let the data speak for itself.',v:'poor',fb:'Data never speaks for itself; the presenter gives it a voice or the audience invents their own. Twelve dense charts overwhelm, and the board leaves remembering none of them — or worse, the wrong one.'},
+       {t:'Cut all the data and just tell a compelling story.',v:'poor',fb:'Overcorrection. A story with no evidence is just an opinion, and a board rightly won’t fund opinions. The craft is story <em>plus</em> the one or two numbers that prove it — not either alone.'}
+     ]},
+    {q:'You have a complex proposal to make. Your instinct is to build a 30-slide deck.',
+     opts:[
+       {t:'Write a one-page narrative memo first — prose forces the logic clear; slides can follow.',v:'best',fb:'Slides let you hide a weak argument behind bullets and transitions; prose won’t. Writing the actual sentences exposes the gaps to <em>you</em> first, so you fix them before the room finds them. Amazon banned decks for big decisions for exactly this reason.'},
+       {t:'Build the deck, but lead with an exec-summary slide.',v:'ok',fb:'The exec summary helps, and sometimes a deck is genuinely the right medium. But if you skip the written argument, you may polish slides around a hole in the logic. At least draft the one-pager first to pressure-test the thinking.'},
+       {t:'Build all 30 slides — more slides signal more rigor.',v:'poor',fb:'Slide count is not rigor; it’s often the opposite — a thick deck hides a thin argument. Thirty slides also guarantees you run out of time before the ask. Volume is not persuasion.'},
+       {t:'Skip the writing and just talk through it live.',v:'poor',fb:'Winging a complex proposal means you discover the gaps in front of your audience, in real time. Writing first is how you find the weak joints in private. No prep is confidence borrowed against a bad meeting.'}
+     ]},
+    {q:'You’re pitching an investment and you know the CFO will ask "what’s the ROI, and what if it fails?"',
+     opts:[
+       {t:'Put the ROI and the downside-with-mitigation in the memo, up front — pre-answer the hard question.',v:'best',fb:'Anticipating the objection and addressing it before it’s asked is what makes you look ready and trustworthy. Naming the risk yourself (with a mitigation) builds far more credibility than being caught by it — and it’s the question that decides the yes.'},
+       {t:'Prepare answers privately, ready if it comes up.',v:'ok',fb:'Being prepared is good and beats hoping. But if you know the question is coming, putting the answer in the memo is stronger than holding it in reserve — it shows you’ve already thought it through and removes the "gotcha" moment entirely.'},
+       {t:'Hope they don’t ask, and cross that bridge if they do.',v:'poor',fb:'They will ask — ROI and failure risk are a CFO’s whole job. Getting caught flat-footed on the predictable question undermines the entire pitch, no matter how good the rest was. Hope is not a strategy for a known question.'},
+       {t:'Downplay the risk so the proposal looks safer.',v:'poor',fb:'Hiding or minimizing the downside is the fastest way to lose credibility — CFOs are professional risk-spotters, and once they catch one buried risk they distrust the whole memo. Name it honestly with a mitigation; that’s what earns the yes.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Storyteller move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  function val(id){return (document.getElementById(id).value||'').trim();}
+  var out=document.getElementById('m-out');
+  function build(){
+    var inv=val('m-inv')||'A one-quarter investment to modernize our payments service';
+    var sit=val('m-sit')||'Payments runs on a 6-year-old system that ~30% of engineering time now works around.';
+    var comp=val('m-comp')||'Incidents are up 40% year-over-year and every new feature ships slower than the last.';
+    var cost=val('m-cost')||'4 engineers for one quarter (~$180k fully loaded)';
+    var ret=val('m-ret')||'~30% eng capacity reclaimed (~$600k/yr), 40% fewer payment incidents, and faster feature delivery.';
+    var risk=val('m-risk')||'A payments outage at peak risks ~$50k/hr in lost transactions and customer trust.';
+    var ask=val('m-ask')||'Approve the quarter’s allocation; I’ll report reclaimed capacity and incident rate at quarter-end.';
+    return [
+      'MEMO — '+inv,
+      'To: CFO     From: [you]     Date: [today]',
+      '─────────────────────────────────────────────',
+      '',
+      'RECOMMENDATION',
+      '  '+inv+'. Cost: '+cost+'. Expected return: '+ret,
+      '',
+      'WHY NOW',
+      '  Situation:  '+sit,
+      '  Changing:   '+comp,
+      '',
+      'THE NUMBERS',
+      '  Cost:               '+cost,
+      '  Return:             '+ret,
+      '  Cost of inaction:   '+risk,
+      '',
+      'THE ASK',
+      '  '+ask,
+      '',
+      '─────────────────────────────────────────────',
+      'Why this memo works: the recommendation is in the first block, before any',
+      'detail — a CFO can approve or ask one question in 30 seconds. Every line is',
+      'in their currency (money, risk, time), no jargon, and the hard question',
+      '("what if it fails?") is pre-answered by "cost of inaction". One page. Done.'
+    ].join('\n');
+  }
+  document.getElementById('m-gen').addEventListener('click',function(){out.textContent=build();out.classList.add('show');});
+  document.getElementById('m-copy').addEventListener('click',function(){
+    if(!out.classList.contains('show')){out.textContent=build();out.classList.add('show');}
+    var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
