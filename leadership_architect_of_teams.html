@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Architect of Teams — Org Design</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* 2x2 matrix */
+.matrix{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.cell{border:1px solid #e8e8e8;border-radius:10px;padding:10px 12px;background:#fafafa}@media(prefers-color-scheme:dark){.cell{border-color:#2a2a2a;background:#151515}}.cell h5{font-size:12px;font-weight:700;margin-bottom:3px;color:#5350B4}@media(prefers-color-scheme:dark){.cell h5{color:#a6a3ff}}.cell p{font-size:11.5px;color:#666;margin:0;line-height:1.45}@media(prefers-color-scheme:dark){.cell p{color:#999}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* builder / org calc */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.cap{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;font-weight:600;color:#666;margin:2px 0 10px}@media(prefers-color-scheme:dark){.cap{color:#999}}.cap input{width:52px;font:inherit;font-size:12px;padding:5px 6px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a;margin-left:5px}@media(prefers-color-scheme:dark){.cap input{background:#0d0d0d;border-color:#333;color:#e8e8e8}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}
+.orgout{display:none;margin-top:12px}.orgout.show{display:block}.orgcards{display:flex;gap:10px;flex-wrap:wrap}.ocard{flex:1 1 160px;border:1px solid #e8e8e8;border-radius:10px;padding:11px 13px;background:#fff}@media(prefers-color-scheme:dark){.ocard{background:#0d0d0d;border-color:#2a2a2a}}.ocard h5{font-size:14px;font-weight:700;margin-bottom:6px}.ocard .stat{font-size:11.5px;color:#555;margin-bottom:2px;display:flex;justify-content:space-between;gap:8px}.ocard .stat b{color:#1a1a1a;font-weight:700}@media(prefers-color-scheme:dark){.ocard .stat{color:#aaa}.ocard .stat b{color:#eee}}.ocard .shape{font-size:11px;color:#5350B4;margin-top:7px;line-height:1.45;border-top:1px dashed #e2e2e2;padding-top:6px}@media(prefers-color-scheme:dark){.ocard .shape{color:#a6a3ff;border-color:#2a2a2a}}.ocard .plat{font-size:10.5px;margin-top:5px;font-weight:600}
+.orgsum{font-size:12.5px;line-height:1.55;margin-top:10px;padding:10px 12px;border-radius:8px;background:#f4fef8;border:1px dashed #a9dcc7;color:#0F6E56}@media(prefers-color-scheme:dark){.orgsum{background:#0a1f14;border-color:#2f6d54;color:#7fd8b3}}.orgerr{color:#993C1D;font-size:12px;margin-top:8px}@media(prefers-color-scheme:dark){.orgerr{color:#e8907a}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 57–72 · Stage 3</span>
+<h1>🏗️ The Architect of Teams</h1>
+<p class="sub">At some point you stop designing software and start designing the <em>system that designs the software</em> — the teams, their boundaries, and how they talk. It's the highest-leverage architecture you'll ever draw, because the shape of your org quietly becomes the shape of your product. Get it right and work flows; get it wrong and no amount of individual talent rescues it.</p>
+
+<div class="tip">Third module of <strong>Stage 3 · Leading Delivery</strong>. Hands-on again: a real in-browser <strong>org-design calculator</strong> is the deliverable — see how teams, layers and managers should scale at 10 → 30 → 100 engineers.</p></div>
+
+<h2><span class="sn">1</span>Org design is system design — Conway's Law</h2>
+<p>In 1967 Melvin Conway observed that <strong>organizations design systems that mirror their own communication structure</strong>. It's held up remarkably well: four teams that don't talk will build four services that don't integrate; one big undifferentiated team will build one big undifferentiated ball of mud. Your architecture diagram and your org chart converge whether you intend it or not.</p>
+<p>The leverage move is the <strong>Inverse Conway Maneuver</strong>: instead of fighting this, design your teams to match the architecture you <em>want</em>. Want clean, independently deployable services? Give each one a team that owns it end-to-end. You don't enforce good boundaries with rules and reviews — you enforce them by drawing the team lines where you want the system lines.</p>
+
+<h2><span class="sn">2</span>Team Topologies — the shapes of teams</h2>
+<p>The book <em>Team Topologies</em> (Skelton &amp; Pais) gives the modern vocabulary. Almost every team should be one of four types — and the great majority should be the first:</p>
+<div class="matrix">
+  <div class="cell"><h5>Stream-aligned</h5><p>Owns a slice of the product end-to-end (a user journey, a domain). The default — most teams are these, and everything else exists to serve them.</p></div>
+  <div class="cell"><h5>Platform</h5><p>Provides internal services and "paved roads" (CI, infra, auth) that let stream teams go fast without reinventing the plumbing.</p></div>
+  <div class="cell"><h5>Enabling</h5><p>Specialists who <em>temporarily</em> help a stream team pick up a new capability (testing, security) — then leave. Coaches, not owners.</p></div>
+  <div class="cell"><h5>Complicated-subsystem</h5><p>A deep-expertise team for a genuinely hard component (a codec, an ML core) where scattered ownership would fail.</p></div>
+</div>
+<p>Two rules make it work. Keep teams <strong>small and long-lived</strong> — a stable "two-pizza" team that owns its area for years beats project teams that form and dissolve. And respect <strong>cognitive load</strong>: a team should own only as much as it can actually hold in its collective head. Overload a team with unrelated responsibilities and everything slows down, no matter how strong the individuals.</p>
+
+<h2><span class="sn">3</span>Spans, layers &amp; managing managers</h2>
+<p>Two numbers shape the management structure. <strong>Span of control</strong> = how many people report to one manager; the healthy range is roughly <strong>5–8</strong>. Too wide and people get neglected (no real 1:1s, no growth); too narrow and you get micromanagement and needless layers. <strong>Layers</strong> = how many management levels deep the org is; keep it as flat as you responsibly can, because every layer adds distance, distortion, and delay between the top and the work.</p>
+<p>When a span gets too wide, you add a layer — and cross a threshold: you start <strong>managing managers</strong>. This is its own step-change, as big as IC→manager was:</p>
+<ul>
+<li><strong>Your leverage is now other people's leadership.</strong> You succeed through managers who succeed through their teams — two levels removed from the code.</li>
+<li><strong>Coach judgment, not tasks.</strong> You're no longer assigning work; you're developing decision-makers. Resist solving their teams' problems for them — it undermines them and doesn't scale.</li>
+<li><strong>Use skip-level 1:1s</strong> to keep ground truth: talk directly with your managers' reports occasionally, so you're not seeing the org only through a filtered layer.</li>
+</ul>
+
+<h2><span class="sn">4</span>Platform vs product teams</h2>
+<p>Early on, every team does its own infra, and that's fine. As you grow, the same plumbing gets rebuilt five times and drifts five different ways — that's the signal to carve out a <strong>platform team</strong>. But there's a classic failure mode waiting: the platform team becomes a <em>ticket queue</em> that everyone waits on, and turns from an accelerator into the bottleneck.</p>
+<div class="warn"><strong>Run platform as a product, not a gatekeeper.</strong> Its customers are internal engineers; its job is self-service tools and paved roads they can consume <em>without waiting for a ticket</em>. Measure it by adoption and internal satisfaction, not tickets closed. The moment stream teams have to queue behind it, you've recreated the silo you were trying to remove.</p></div>
+
+<h2><span class="sn">5</span>Reorgs that don't destroy trust</h2>
+<p>Reorganizations are powerful and expensive. Every reorg resets forming-storming-norming, severs hard-won working relationships, and burns weeks of context and morale. That cost is worth paying occasionally for a real structural reason — and never worth paying for a fake one.</p>
+<div class="sched">
+  <div class="col"><h4>❌ Reorg as avoidance</h4>
+    <div class="blk bad">Used to route around a difficult person</div>
+    <div class="blk bad">No clear "why" anyone can repeat</div>
+    <div class="blk bad">Frequent — every few months</div>
+    <div class="blk bad">Sprung as a surprise</div>
+    <div class="blk bad">Breaks teams that were working well</div>
+  </div>
+  <div class="col"><h4>✅ Reorg done right</h4>
+    <div class="blk good">Solves a real structural / flow problem</div>
+    <div class="blk good">A crisp rationale, communicated openly</div>
+    <div class="blk good">Rare, and given time to settle</div>
+    <div class="blk good">Explained early, with the reasoning</div>
+    <div class="blk good">Protects bonds; disrupts only what must change</div>
+  </div>
+</div>
+<p>The most common bad reorg is the one used to <em>avoid a hard conversation</em> — reshuffling an entire group because of one difficult individual you haven't managed directly. Deal with the person (that's <a class="x" href="leadership_diplomat.html">The Diplomat</a> and <a class="x" href="leadership_referee.html">The Referee</a>); don't inflict a reorg on everyone to dodge it.</p>
+
+<h2><span class="sn">6</span>Deliverable — the org at 10 → 30 → 100</h2>
+<p>The same team scaled up isn't the same org — structure has to change with size, or it breaks. Set your target team size and span of control, and see how the shape should evolve across the three classic inflection points (edit the headcounts if you like):</p>
+<div class="builder">
+  <div class="cap">Target team size <input id="ts" type="number" min="2" value="8"> &nbsp;·&nbsp; Span of control <input id="span" type="number" min="2" value="6"></div>
+  <div class="cap">Stages: <input id="h1" type="number" min="1" value="10"> &nbsp; <input id="h2" type="number" min="1" value="30"> &nbsp; <input id="h3" type="number" min="1" value="100"> engineers</div>
+  <button id="org-run">🏗️ Design the org →</button>
+  <button id="org-copy" class="copy">Copy</button>
+  <div id="org-out" class="orgout"><div class="orgcards" id="org-cards"></div><div class="orgsum" id="org-sum"></div></div>
+  <div id="org-err" class="orgerr"></div>
+</div>
+<p style="font-size:12px;color:#888;margin-top:6px">Watch what changes: at 10 you stay flat and manage everyone; by 30 you're managing managers and a platform team earns its place; by 100 you have layers, domains, and org design becomes a deliberate, ongoing act — not an accident.</p>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Org design fails in predictable ways — architecture fighting the org chart, spans stretched past breaking, reorgs used to dodge people problems, and platform teams turned into bottlenecks. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Run the calculator at your current headcount — is your real span inside 5–8, and your layer count as flat as it could be? (2) Sketch the architecture you <em>want</em>, then check whether your team boundaries match it (inverse Conway). (3) Label each of your teams with a Team-Topologies type — any team that's secretly three types is overloaded. (4) If you've reorged in the last year, ask honestly: was it structural, or was it avoiding a conversation?</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 3 · leading the machine that ships. Pairs with <a class="x" href="leadership_conductor.html">The Conductor</a> and <a class="x" href="leadership_mapmaker.html">The Mapmaker</a>. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'You want a clean set of independently-deployable services, but one big team owns everything and the services keep coupling.',
+     opts:[
+       {t:'Reshape the teams to match the architecture you want — one team per service/stream.',v:'best',fb:'The Inverse Conway Maneuver. Coupling in the code mirrors the single team’s all-in-one communication. Draw the team lines where you want the system lines, and clean boundaries follow far more reliably than any amount of enforced discipline.'},
+       {t:'Add architecture review boards and guidelines to enforce boundaries.',v:'ok',fb:'Guidelines help at the margin, but you’re fighting Conway’s Law with paperwork. As long as one team owns everything, the path of least resistance is to couple — reviews slow the bleeding without fixing the cause.'},
+       {t:'Keep the one team and trust discipline to hold the boundaries.',v:'poor',fb:'Hope is not an architecture. A single team sharing everything will always find it easier to reach across a boundary than to respect it. The org structure will win over good intentions every time.'},
+       {t:'Split the code into microservices but leave the one team owning them all.',v:'poor',fb:'The worst of both worlds — a distributed monolith. You get the operational pain of many services with none of the independence, because one team still changes them all together. Split the teams, not just the repos.'}
+     ]},
+    {q:'A manager now has 14 direct reports. Their 1:1s are slipping and people say they feel neglected.',
+     opts:[
+       {t:'Add a layer — split into teams with leads; 14 is well beyond a supportable span.',v:'best',fb:'A span of 14 makes real 1:1s, growth, and coaching impossible — the neglect is structural, not a personal failing. Introducing team leads brings the span back into the 5–8 range where a manager can actually manage.'},
+       {t:'Cut 1:1s to biweekly or 20 minutes to fit everyone in.',v:'ok',fb:'A stopgap that buys a little time, but you’re rationing the manager’s attention rather than fixing the ratio. Fourteen shallow check-ins isn’t management — it’s a status queue. Use it only while you set up the layer.'},
+       {t:'Leave it — the reports are senior and mostly self-sufficient.',v:'poor',fb:'Even senior people need growth conversations, unblocking, and advocacy. "They’re fine" is how you quietly lose good people (see <a class="x" href="leadership_torchbearer.html">The Torchbearer</a>) — and the manager is stretched too thin to notice until someone resigns.'},
+       {t:'Tell the manager to put in longer hours to cover everyone.',v:'poor',fb:'You’re asking one person to absorb a structural problem with their evenings. It doesn’t scale, it burns them out, and the reports still get a frazzled, time-starved manager. Fix the span, not the manager’s calendar.'}
+     ]},
+    {q:'Two teams have friction, traced mostly to one difficult lead. Someone proposes reorganizing the group to separate them.',
+     opts:[
+       {t:'Address the actual people problem — manage the lead directly — rather than reorg around it.',v:'best',fb:'The most common bad reorg is the one that dodges a hard conversation. Reshuffling everyone to avoid managing one person burns the whole group’s stability to spare you one difficult talk. Deal with the lead; that’s the real fix.'},
+       {t:'Make a small, well-explained boundary change AND deal with the lead.',v:'ok',fb:'Sometimes there’s a genuine structural component too, and a minimal, clearly-reasoned adjustment can help. Just make sure it’s not cover for avoiding the person — the conversation still has to happen or the friction follows them.'},
+       {t:'Reorganize the whole group to route around the person.',v:'poor',fb:'You pay the full cost of a reorg (broken teams, lost context, anxiety for everyone) to avoid one conversation — and the difficult lead learns nothing and simply creates the same friction in their new shape. Expensive avoidance.'},
+       {t:'Do nothing and hope the friction resolves itself.',v:'poor',fb:'Unmanaged friction between teams metastasizes — it pulls in others and hardens into factions. "Wait and see" here is just a slower version of avoidance, with a bigger mess at the end.'}
+     ]},
+    {q:'Your new platform team has become a ticket queue everyone waits behind. It’s now a bottleneck, not an accelerator.',
+     opts:[
+       {t:'Shift to platform-as-a-product — self-service paved roads teams use without waiting; measure adoption.',v:'best',fb:'A platform’s job is to make stream teams faster on their own, not to be a gate they queue at. Reframe it around self-service tooling and internal-customer satisfaction, and the bottleneck dissolves back into an accelerator.'},
+       {t:'Add more people to the platform team to clear the queue faster.',v:'ok',fb:'More throughput on a ticket queue is still a ticket queue — you’ve treated the symptom. It buys relief, but until the model shifts to self-service, demand will refill the queue and the bottleneck returns.'},
+       {t:'Tell stream teams to file better tickets and prioritize harder.',v:'poor',fb:'This doubles down on exactly the gatekeeper model that’s failing. Optimizing the queue accepts the queue; you’ve made teams wait "more efficiently" while the platform stays a dependency instead of a paved road.'},
+       {t:'Disband the platform team and let each team do its own infra again.',v:'poor',fb:'Back to five teams rebuilding the same plumbing five drifting ways — the duplication you formed the platform to kill. The problem was the operating model, not the existence of the team.'}
+     ]},
+    {q:'You’ve just been promoted to manage managers. A team under one of your managers has a problem, and you can see the fix.',
+     opts:[
+       {t:'Coach your manager to solve it; resist jumping in over their head.',v:'best',fb:'Managing managers means your leverage is <em>their</em> leadership. Handing them the fix (or worse, doing it yourself with their team) undermines their authority and teaches everyone to escalate past them. Coach the judgment; let them own the call.'},
+       {t:'Talk it through with the manager and agree an approach together.',v:'ok',fb:'Good and collaborative — sharing your read while leaving them the wheel. Just guard against it quietly becoming "you decide and they execute"; the goal is to grow their judgment, not to route your solution through them.'},
+       {t:'Jump in and fix it directly with the team.',v:'poor',fb:'The fastest way to neuter a manager. Going around them tells their team who’s really in charge, and tells the manager you don’t trust them. It also doesn’t scale — you can’t run every team two levels down.'},
+       {t:'Stay out of it entirely — it’s their team now.',v:'poor',fb:'The opposite overcorrection. "Managing managers" isn’t "abandon managers" — your job is to coach and develop them. Seeing a problem and offering nothing is negligence dressed up as empowerment.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Architect move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // org design calculator
+  function shape(eng,ts,span){
+    var teams=Math.max(1,Math.round(eng/ts));
+    var levels=[teams],n=teams;
+    while(n>1){n=Math.ceil(n/span);levels.push(n);}
+    var layers=levels.length;
+    var mgrs=levels.reduce(function(a,b){return a+b;},0);
+    var platform = eng>=25;
+    return {eng:eng,teams:teams,avg:Math.round(eng/teams*10)/10,layers:layers,mgrs:mgrs,levels:levels,platform:platform};
+  }
+  function chain(levels){
+    if(levels.length===1)return '1 team — you lead it directly';
+    var names=['team leads','managers','group managers','directors','VP'];
+    var parts=[];
+    for(var i=0;i<levels.length;i++){
+      var label = i===0 ? 'leads' : (i===levels.length-1 ? 'head' : 'managers');
+      parts.push(levels[i]+' '+label);
+    }
+    return parts.join(' → ');
+  }
+  function note(s){
+    if(s.layers<=1) return 'Stay flat — you manage everyone directly. Resist adding managers before you need them.';
+    if(!s.platform) return 'One management layer; you now manage a few leads, not ICs. Keep it simple.';
+    if(s.layers===2) return 'You manage managers now. A platform team starts to earn its place as infra work duplicates.';
+    return 'Multiple layers and domains; a real platform group. Org design is now a deliberate, ongoing act.';
+  }
+  var out=document.getElementById('org-out'),err=document.getElementById('org-err'),cards=document.getElementById('org-cards'),sum=document.getElementById('org-sum');
+  var lastText='';
+  function run(){
+    err.textContent='';
+    var ts=parseInt(document.getElementById('ts').value,10),span=parseInt(document.getElementById('span').value,10);
+    var hs=['h1','h2','h3'].map(function(id){return parseInt(document.getElementById(id).value,10);});
+    if(!ts||ts<2||!span||span<2){err.textContent='Team size and span of control must each be at least 2.';out.classList.remove('show');return;}
+    if(hs.some(function(h){return !h||h<1;})){err.textContent='Each stage needs at least 1 engineer.';out.classList.remove('show');return;}
+    var html='',txt='# Engineering org design — team size '+ts+', span '+span+'\n\n';
+    hs.forEach(function(eng){
+      var s=shape(eng,ts,span);
+      var platTxt=s.platform?'<span class="plat" style="color:#0F6E56">✓ platform team warranted</span>':'<span class="plat" style="color:#888">no platform team yet</span>';
+      html+='<div class="ocard"><h5>'+eng+' engineers</h5>'+
+        '<div class="stat"><span>Stream teams</span><b>'+s.teams+'</b></div>'+
+        '<div class="stat"><span>Avg team size</span><b>'+s.avg+'</b></div>'+
+        '<div class="stat"><span>Mgmt layers</span><b>'+s.layers+'</b></div>'+
+        '<div class="stat"><span>Managers total</span><b>'+s.mgrs+'</b></div>'+
+        platTxt+
+        '<div class="shape">'+chain(s.levels)+'<br>'+note(s)+'</div></div>';
+      txt+='## '+eng+' engineers\n- '+s.teams+' stream teams (~'+s.avg+' each)\n- '+s.layers+' management layer(s): '+chain(s.levels)+'\n- '+s.mgrs+' managers total · '+(s.platform?'platform team warranted':'no platform team yet')+'\n- '+note(s)+'\n\n';
+    });
+    cards.innerHTML=html;
+    sum.innerHTML='Notice the same people at 10, 30 and 100 need three <em>different</em> structures. Flat early; managing managers by ~30; layers, domains and a platform group by 100. Scaling the org is redesigning it — not just adding seats.';
+    txt+='The same team at 10, 30 and 100 needs three different structures. Scaling the org is redesigning it.\n';
+    out.classList.add('show');lastText=txt;
+  }
+  document.getElementById('org-run').addEventListener('click',run);
+  document.getElementById('org-copy').addEventListener('click',function(){
+    if(!lastText)run();
+    if(!lastText)return;
+    var btn=this;navigator.clipboard.writeText(lastText).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
