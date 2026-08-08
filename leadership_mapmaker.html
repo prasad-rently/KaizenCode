@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Mapmaker — Roadmapping &amp; Prioritization</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* builder / prioritizer */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}
+.rilegend{font-size:10.5px;color:#888;margin:2px 0 8px;line-height:1.5}.riwrap{overflow-x:auto;margin:4px 0 10px}
+.ritable{border-collapse:collapse;font-size:11.5px;min-width:100%}.ritable th{font-size:9.5px;color:#888;font-weight:700;text-align:center;padding:2px 3px;text-transform:uppercase;letter-spacing:.3px}.ritable th.nm{text-align:left}.ritable td{padding:2px}.ritable input{font:inherit;font-size:12px;padding:5px 6px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a}.ritable input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.ritable input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.ritable input:focus{border-color:#8f8cff}}.ritable input.name{width:150px}.ritable input.num{width:58px;text-align:center}
+.cap{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;font-weight:600;color:#666;margin:6px 0 10px}@media(prefers-color-scheme:dark){.cap{color:#999}}.cap input{width:56px;font:inherit;font-size:12px;padding:5px 6px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a;margin-left:5px}@media(prefers-color-scheme:dark){.cap input{background:#0d0d0d;border-color:#333;color:#e8e8e8}}
+.rmout{display:none;margin-top:14px}.rmout.show{display:block}.rmhead{font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#5350B4;margin:12px 0 4px}@media(prefers-color-scheme:dark){.rmhead{color:#8f8cff}}.rmhead .cw{color:#888;font-weight:500;text-transform:none;letter-spacing:0}
+.rmrow{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:6px 10px;border:1px solid #e8e8e8;border-radius:8px;margin-bottom:4px;background:#fafafa}@media(prefers-color-scheme:dark){.rmrow{border-color:#2a2a2a;background:#151515}}.rmrow .rn{font-weight:600;flex:1}.rmrow .rs{font-family:'SF Mono',monospace;font-size:11px;color:#5350B4;font-weight:700}.rmrow .re{font-size:10.5px;color:#888;white-space:nowrap}@media(prefers-color-scheme:dark){.rmrow .rs{color:#a6a3ff}}
+.rmrow.cut{opacity:.6;background:transparent}
+.cutline{display:flex;align-items:center;gap:8px;margin:12px 0 6px;color:#993C1D;font-size:11px;font-weight:700;letter-spacing:.3px}.cutline::before,.cutline::after{content:'';flex:1;height:0;border-top:2px dashed #d9704f}@media(prefers-color-scheme:dark){.cutline{color:#e8907a}.cutline::before,.cutline::after{border-color:#8f3a2c}}
+.rmsum{font-size:12.5px;line-height:1.55;margin-top:10px;padding:10px 12px;border-radius:8px;background:#f4fef8;border:1px dashed #a9dcc7;color:#0F6E56}@media(prefers-color-scheme:dark){.rmsum{background:#0a1f14;border-color:#2f6d54;color:#7fd8b3}}.rmerr{color:#993C1D;font-size:12px;margin-top:8px}@media(prefers-color-scheme:dark){.rmerr{color:#e8907a}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 57–72 · Stage 3</span>
+<h1>📍 The Mapmaker</h1>
+<p class="sub">A mapmaker doesn't invent the terrain — they show it honestly, mark the route, and are clear about what's charted and what's still fog. A roadmap is the same: not a promise of dated features, but a communication of <em>intent and bets</em>, and — just as importantly — of what you're deliberately <strong>not</strong> doing. The hardest, most valuable line on any roadmap is the cut line.</p>
+
+<div class="tip">Second module of <strong>Stage 3 · Leading Delivery</strong>. This one is hands-on: a real in-browser <strong>RICE prioritizer</strong> that ranks your initiatives and draws the cut lines is the deliverable — a two-quarter roadmap built from evidence, not volume.</p></div>
+
+<h2><span class="sn">1</span>A roadmap is a set of bets, not a list of dates</h2>
+<p>The most common roadmap is a Gantt chart of features with confident dates stretching four quarters out. It's comforting and almost entirely fiction — you don't know what you'll learn next month, let alone next quarter. A good roadmap communicates three honest things: <strong>what outcomes we're chasing, in what rough order, and how confident we are</strong>. It's a living statement of intent, not a contract.</p>
+<p>The deeper shift is from <em>outputs</em> to <em>outcomes</em>. "Ship feature X" is an output; "cut checkout abandonment by 20%" is an outcome. Feature factories measure success by how much they build; the best teams measure it by what changes for the user. Roadmap the change you want, and stay flexible about the features that get you there.</p>
+<div class="sched">
+  <div class="col"><h4>❌ Feature-factory roadmap</h4>
+    <div class="blk bad">A list of features with hard dates</div>
+    <div class="blk bad">Measures output ("we shipped 12 things")</div>
+    <div class="blk bad">Fixed 4 quarters out, pretends to certainty</div>
+    <div class="blk bad">Everything is committed; nothing is cut</div>
+  </div>
+  <div class="col"><h4>✅ Outcome roadmap</h4>
+    <div class="blk good">Outcomes we're betting on, roughly ordered</div>
+    <div class="blk good">Measures change ("abandonment −20%")</div>
+    <div class="blk good">Confident near-term, fuzzy far-term</div>
+    <div class="blk good">An explicit cut line — what we won't do</div>
+  </div>
+</div>
+
+<h2><span class="sn">2</span>OKRs — steer by outcomes</h2>
+<p><strong>OKRs</strong> (Objectives &amp; Key Results) are the tool for making outcomes concrete. An <em>Objective</em> is a qualitative, motivating direction ("make checkout effortless"); its <em>Key Results</em> are the measurable outcomes that prove you got there ("abandonment &lt; 15%", "median checkout &lt; 20s"). They align a team on <em>why</em> and let you measure success without dictating the features.</p>
+<ul>
+<li><strong>Key results are outcomes, not tasks.</strong> "Launch the new checkout" is a task (you either did it or didn't). "Abandonment under 15%" is a result (it says whether the work <em>worked</em>). If you can complete a KR without moving a metric, it's a task in disguise.</li>
+<li><strong>Few and ambitious.</strong> Three objectives with three KRs each, not thirty. OKRs are for focus; a long list is the opposite of focus.</li>
+<li><strong>Don't bolt them to comp.</strong> Tie bonuses to hitting OKRs and everyone sandbags the targets to be safe — Goodhart's Law again. Keep them a stretch, not a stick.</li>
+</ul>
+
+<h2><span class="sn">3</span>Prioritize in the open — RICE &amp; cost of delay</h2>
+<p>Every stakeholder's request is, to them, obviously the top priority. Without a shared method, prioritization defaults to politics and the <strong>HiPPO</strong> (Highest Paid Person's Opinion). Frameworks don't remove judgment — the inputs are estimates — but they drag the tradeoff into the open, where it can be discussed with evidence instead of decibels.</p>
+<ul>
+<li><strong>RICE</strong> = <code>(Reach × Impact × Confidence) ÷ Effort</code>. Reach = how many, per period; Impact = how much per person; Confidence = how sure you are (a humility multiplier); Effort = the cost. It rewards big, likely wins that are cheap to build.</li>
+<li><strong>WSJF</strong> = <code>Cost of Delay ÷ Job Size</code> — do the work with the highest cost-of-delay per unit of effort first. This is why a two-week, high-urgency fix often beats a six-month epic, even if the epic is "bigger."</li>
+</ul>
+<div class="warn"><strong>The framework informs; it doesn't decide.</strong> A RICE score is a conversation-starter, not an oracle — the confidence factor exists precisely because your numbers are guesses. Use it to structure the debate and expose assumptions, never to end thinking with a spreadsheet.</div>
+
+<h2><span class="sn">4</span>Cost of delay — the most underused lever</h2>
+<p>Most teams prioritize by value or by effort. Far fewer ask the sharpest question: <strong>what does it cost us for every week we <em>don't</em> have this?</strong> That's cost of delay, and it reframes everything. A feature worth $1M that loses $0 by waiting a quarter is less urgent than a $200k fix bleeding $50k/week right now.</p>
+<p>Cost of delay is what makes urgency legible. It's why "do the biggest project first" is usually wrong — you should do the highest cost-of-delay-per-effort first, ship value continuously, and keep the slow-bleeding items from festering while you polish something that could have waited.</p>
+
+<h2><span class="sn">5</span>The art of saying no — and the cut line</h2>
+<p>Here's the executive truth: <strong>a roadmap is defined by what it leaves out.</strong> Saying yes is easy and popular; every yes without a corresponding no just quietly overcommits the team until nothing ships and everyone burns out. The skill that separates senior leaders is a graceful, visible <em>no</em>.</p>
+<ul>
+<li><strong>Make the tradeoff visible, don't hide it.</strong> The magic phrase is "yes, and here's what drops." You rarely have to refuse outright — you just show the cost. Faced with the actual thing that would be cut, most requesters reprioritize themselves.</li>
+<li><strong>Draw an explicit cut line.</strong> Rank the work, decide what capacity you truly have, and draw a literal line. Above it: committed. Below it: not this cycle — said out loud, not left as a vague "maybe later." An unstated no is how backlogs rot and stakeholders feel betrayed.</li>
+<li><strong>Protect focus like it's the scarce resource it is.</strong> Managing up on scope is mostly this: defending the team's ability to finish a few important things against the constant pressure to start many.</li>
+</ul>
+
+<h2><span class="sn">6</span>Deliverable — prioritize &amp; draw the cut line</h2>
+<p>Score your candidate initiatives with RICE, then let capacity draw the cut lines into a two-quarter roadmap. Edit the initiatives (or use the sample set) and set how much capacity each quarter has:</p>
+<div class="builder">
+  <div class="rilegend"><b>Impact:</b> 3 massive · 2 high · 1 medium · 0.5 low · 0.25 minimal &nbsp;·&nbsp; <b>Confidence:</b> 1 = 100% · 0.8 = 80% · 0.5 = 50% &nbsp;·&nbsp; <b>Effort</b> in person-months</div>
+  <div class="riwrap"><table class="ritable" id="ritable">
+    <tr><th class="nm">Initiative</th><th>Reach</th><th>Impact</th><th>Conf.</th><th>Effort</th></tr>
+  </table></div>
+  <div class="cap">Q1 capacity <input id="q1cap" type="number" min="1" value="6"> person-months &nbsp;·&nbsp; Q2 capacity <input id="q2cap" type="number" min="1" value="6"> person-months</div>
+  <button id="rm-run">📍 Rank &amp; draw the roadmap →</button>
+  <button id="rm-copy" class="copy">Copy</button>
+  <div id="rm-out" class="rmout"></div>
+  <div id="rm-err" class="rmerr"></div>
+</div>
+<p style="font-size:12px;color:#888;margin-top:6px">The value isn't the exact scores — it's the discipline. Ranking forces the tradeoffs into the open, and the cut line turns "we'll try to do everything" into an honest, communicable plan.</p>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Roadmapping fails in predictable ways — false certainty, letting the loudest voice win, chasing size over urgency, and saying yes to everything. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Run the prioritizer on your team's real backlog — then show a stakeholder the <em>cut line</em>, not just what's in. (2) For your top item, estimate its cost of delay per week; for your biggest item, do the same — the ranking may surprise you. (3) Rewrite one roadmap "feature" as an outcome with a metric. (4) Practice the sentence "yes, and here's what drops" until it's comfortable.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 3 · leading the machine that ships. Pairs with <a class="x" href="leadership_conductor.html">The Conductor</a> (delivery &amp; forecasting). <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'The CEO wants their pet feature at the top of the roadmap. It scores low on RICE, and there’s clearly higher-value work.',
+     opts:[
+       {t:'Make the tradeoff visible: "yes we can — here’s what drops and what that costs us," then let them decide.',v:'best',fb:'You don’t win by overruling the CEO with a spreadsheet, and you don’t just obey. You surface the real cost — "to do this, X and Y slip, and X is bleeding cost of delay." Informed, most execs reprioritize themselves; if they still choose it, that’s their call to make, made with eyes open.'},
+       {t:'Build it, but timebox it small to limit the damage.',v:'ok',fb:'A pragmatic hedge that respects the hierarchy while protecting focus — often fine. Just pair it with making the tradeoff visible, or you’ve quietly absorbed a cost nobody acknowledged and set a precedent that pet features skip the queue.'},
+       {t:'Silently reprioritize the whole roadmap around it.',v:'poor',fb:'Quietly caving teaches everyone that the loudest/highest voice always wins and that your prioritization is theater. The team loses trust in the roadmap, and you’ve hidden a real cost instead of surfacing it.'},
+       {t:'Refuse, using the RICE score as a trump card.',v:'poor',fb:'"The framework says no" is a great way to look junior and get overruled anyway. RICE informs the conversation; it doesn’t outrank the CEO. Lead with the tradeoff and the cost of delay, not a number as a weapon.'}
+     ]},
+    {q:'Five stakeholders each insist their request is the #1 priority, and the team can’t possibly do all five.',
+     opts:[
+       {t:'Force-rank all five together against one framework, then draw a visible cut line.',v:'best',fb:'The only way out of "everything is P1" is a shared, explicit ranking and a line that says what’s in and what’s out — decided together, against the same yardstick. It converts five private "mine first" into one agreed order everyone saw made.'},
+       {t:'Take the top ask from each stakeholder and interleave them.',v:'ok',fb:'Feels fair and keeps the peace, but "one of everyone’s" often means five half-done things and no clear win. Sometimes a reasonable compromise; usually a ranked cut line delivers more actual value.'},
+       {t:'Attempt all five in parallel so no one feels rejected.',v:'poor',fb:'Maximum WIP, minimum delivery (see <a class="x" href="leadership_conductor.html">The Conductor</a>). Five things in flight means five things slow and probably nothing shipped this quarter. Avoiding the "no" guarantees the worst outcome for everyone.'},
+       {t:'Let the most senior stakeholder win by default.',v:'poor',fb:'Defaulting to the HiPPO is exactly what a prioritization method exists to prevent. It’s not that seniors are always wrong — it’s that "loudest/most senior wins" is politics, not prioritization, and the team knows it.'}
+     ]},
+    {q:'You can do one big high-value project (6 months) or three small, urgent, high-cost-of-delay fixes (2 weeks each) first.',
+     opts:[
+       {t:'Sequence by cost of delay ÷ size — the quick, high-urgency wins usually go first.',v:'best',fb:'This is WSJF. Three fixes that each bleed value every week, done in six weeks total, often beat locking the team onto one epic for six months while those costs compound. Ship urgent value continuously; the big bet can start right after.'},
+       {t:'Do the big project — it’s the most valuable overall.',v:'ok',fb:'Not crazy if the epic’s own cost of delay is genuinely high and the small fixes can wait cheaply. But "biggest total value" ignores <em>when</em> value lands — six months of nothing shipping is a real cost, and the small items may bleed the whole time.'},
+       {t:'Do them in the order they were requested.',v:'poor',fb:'Request order correlates with nothing that matters — not value, not urgency, not effort. It’s a queue, not a priority. You’ll routinely do a stale low-value ask before an urgent one simply because it arrived first.'},
+       {t:'Do the easiest ones first, regardless of value.',v:'poor',fb:'"Easy first" feels productive and quietly starves the important work. You optimize for closed tickets, not delivered value — the busy-work trap dressed up as momentum.'}
+     ]},
+    {q:'Sales wants firm dates on the roadmap for the next four quarters so they can promise customers.',
+     opts:[
+       {t:'Give confidence-tiered Now / Next / Later — committed, likely, exploring — not hard dates for far-out work.',v:'best',fb:'You give sales something real to work with while protecting against overcommitment. "Now" is a commitment; "Later" is a direction, clearly labeled as such. Firm dates you can’t keep don’t help sales — they create broken customer promises with your name on them.'},
+       {t:'Give firm dates for this quarter, ranges beyond.',v:'ok',fb:'Reasonable and honest about near vs far certainty. Just make sure even "this quarter" carries appropriate confidence, and that the ranges beyond aren’t quietly treated as commitments the moment sales quotes them.'},
+       {t:'Put firm dates on all four quarters to make sales happy.',v:'poor',fb:'Fiction that will be quoted to real customers as fact. Q3–Q4 dates are guesses; committing to them just converts your uncertainty into their broken promises — and the blame flows back to engineering.'},
+       {t:'Refuse to share any roadmap with sales.',v:'poor',fb:'Starving sales of direction is its own failure — they’ll invent worse answers or lose deals. The goal isn’t secrecy; it’s sharing intent honestly, with confidence clearly labeled so nobody over-promises.'}
+     ]},
+    {q:'Mid-quarter, a shiny new opportunity appears and there’s pressure to add it to the team’s plate right now.',
+     opts:[
+       {t:'Say "yes, and here’s what we’d drop to do it" — make the switching cost explicit.',v:'best',fb:'The core move of protecting focus. New work isn’t free; it displaces committed work. Naming exactly what would slip usually turns the excited "we must do this now!" into a calm "…actually, it can wait for replanning."'},
+       {t:'Add it to the "Next" bucket to weigh at replanning.',v:'ok',fb:'A solid default — capture it, don’t derail the quarter for it. Just make sure "Next" is a real evaluation, not a graveyard, and that genuinely urgent, high-cost-of-delay opportunities can still jump the queue when the tradeoff justifies it.'},
+       {t:'Squeeze it in on top of the committed work.',v:'poor',fb:'The commitment you already made silently slips, WIP climbs, and the quarter’s plan quietly dies by a thousand "just one more things." Adding without subtracting is how roadmaps become fiction.'},
+       {t:'Say a flat no with no reasoning.',v:'poor',fb:'Might protect focus this once, but "no" with no visible tradeoff reads as territorial and makes you the blocker. "Yes, and here’s the cost" achieves the same protection while keeping you a partner, not an obstacle.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Mapmaker move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // RICE prioritizer + cut lines
+  var SEED=[
+    ['Onboarding flow revamp',5000,3,0.8,2],
+    ['One-click checkout',8000,2,0.8,3],
+    ['Dark mode',10000,0.5,1,1],
+    ['Search relevance revamp',6000,1,0.5,5],
+    ['Admin analytics dashboard',200,2,0.5,4]
+  ];
+  var tbl=document.getElementById('ritable');
+  SEED.forEach(function(r){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td><input class="name" type="text" value="'+r[0]+'"></td>'+
+      '<td><input class="num r" type="number" min="0" value="'+r[1]+'"></td>'+
+      '<td><input class="num i" type="number" min="0" step="0.25" value="'+r[2]+'"></td>'+
+      '<td><input class="num c" type="number" min="0" max="1" step="0.1" value="'+r[3]+'"></td>'+
+      '<td><input class="num e" type="number" min="0.1" step="0.5" value="'+r[4]+'"></td>';
+    tbl.appendChild(tr);
+  });
+  var out=document.getElementById('rm-out'),err=document.getElementById('rm-err');
+  var lastText='';
+  function compute(){
+    var items=[];
+    tbl.querySelectorAll('tr').forEach(function(tr){
+      var nm=tr.querySelector('.name'); if(!nm)return;
+      var name=(nm.value||'').trim(); if(!name)return;
+      var R=parseFloat(tr.querySelector('.r').value)||0;
+      var I=parseFloat(tr.querySelector('.i').value)||0;
+      var C=parseFloat(tr.querySelector('.c').value)||0;
+      var E=parseFloat(tr.querySelector('.e').value)||0;
+      if(E<=0)return;
+      items.push({name:name,rice:Math.round(R*I*C/E),eff:E});
+    });
+    return items;
+  }
+  function render(){
+    err.textContent='';
+    var items=compute();
+    if(items.length<2){err.textContent='Add at least two initiatives with a name and an effort above 0.';out.classList.remove('show');return;}
+    items.sort(function(a,b){return b.rice-a.rice;});
+    var q1=parseFloat(document.getElementById('q1cap').value)||0;
+    var q2=parseFloat(document.getElementById('q2cap').value)||0;
+    var bucket=[],u1=0,u2=0,stage=1;
+    items.forEach(function(it){
+      if(stage===1){ if(u1+it.eff<=q1){it.b='Q1';u1+=it.eff;} else {stage=2;} }
+      if(stage===2){ if(it.b){} else if(u2+it.eff<=q2){it.b='Q2';u2+=it.eff;} else {stage=3;} }
+      if(stage===3 && !it.b){it.b='CUT';}
+      bucket.push(it);
+    });
+    var html='',txt='# Two-quarter roadmap — ranked by RICE, cut by capacity\n\n',rank=0,cutStarted=false;
+    var lastB='';
+    bucket.forEach(function(it){
+      rank++;
+      if(it.b!==lastB){
+        if(it.b==='Q1'){html+='<div class="rmhead">Q1 · committed <span class="cw">(capacity '+q1+'pm, using '+u1+')</span></div>';txt+='## Q1 · committed (capacity '+q1+'pm, using '+u1+')\n';}
+        else if(it.b==='Q2'){html+='<div class="rmhead">Q2 · next <span class="cw">(capacity '+q2+'pm, using '+u2+')</span></div>';txt+='\n## Q2 · next (capacity '+q2+'pm, using '+u2+')\n';}
+        else if(it.b==='CUT'){html+='<div class="cutline">CUT LINE — not this cycle</div>';txt+='\n--- CUT LINE — not this cycle ---\n';cutStarted=true;}
+        lastB=it.b;
+      }
+      var cls=it.b==='CUT'?' cut':'';
+      html+='<div class="rmrow'+cls+'"><span class="rn">'+rank+'. '+it.name.replace(/</g,'&lt;')+'</span><span class="rs">RICE '+it.rice+'</span><span class="re">'+it.eff+'pm</span></div>';
+      txt+=(it.b==='CUT'?'  x ':'  • ')+rank+'. '+it.name+'  (RICE '+it.rice+', '+it.eff+'pm)'+(it.b==='CUT'?'  → say no / revisit at replanning':'')+'\n';
+    });
+    var cutCount=bucket.filter(function(x){return x.b==='CUT';}).length;
+    html+='<div class="rmsum">Ranked by value-per-effort, then cut to fit real capacity. <b>'+(bucket.length-cutCount)+' committed</b>, <b>'+cutCount+' below the cut line</b>. Show a stakeholder the cut line, not just the plan — the explicit "no" is what protects the "yes".</div>';
+    txt+='\nThe cut line is the point: it makes the "no" explicit and shared, so focus is a decision, not an accident.\n';
+    out.innerHTML=html;out.classList.add('show');lastText=txt;
+  }
+  document.getElementById('rm-run').addEventListener('click',render);
+  document.getElementById('rm-copy').addEventListener('click',function(){
+    if(!lastText)render();
+    if(!lastText)return;
+    var btn=this;navigator.clipboard.writeText(lastText).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
