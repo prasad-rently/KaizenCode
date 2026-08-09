@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Counting House — Finance for CTOs</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#eef2fb;color:#185FA5}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#101d2e;color:#7ab5e8}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* mini P&L */
+.pnl{border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;margin:14px 0;font-size:12px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){.pnl{border-color:#2a2a2a}}.pnl .pr{display:flex;justify-content:space-between;padding:6px 12px;border-top:1px solid #f0f0f0;background:#fafafa}.pnl .pr:first-child{border-top:0}@media(prefers-color-scheme:dark){.pnl .pr{border-color:#202020;background:#151515}}.pnl .pr.sub{font-weight:700;background:#f3f2ff}@media(prefers-color-scheme:dark){.pnl .pr.sub{background:#191830}}.pnl .lab{color:#555}.pnl .val{color:#1a1a1a}@media(prefers-color-scheme:dark){.pnl .lab{color:#aaa}.pnl .val{color:#eee}}.pnl .note{color:#5350B4;font-size:10.5px}@media(prefers-color-scheme:dark){.pnl .note{color:#a6a3ff}}
+/* builders */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}
+.cap{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;font-weight:600;color:#666;margin:2px 0 10px}@media(prefers-color-scheme:dark){.cap{color:#999}}.cap label{display:flex;flex-direction:column;gap:3px}.cap input{width:96px;font:inherit;font-size:12px;padding:5px 6px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a}@media(prefers-color-scheme:dark){.cap input{background:#0d0d0d;border-color:#333;color:#e8e8e8}}
+.riwrap{overflow-x:auto;margin:4px 0 10px}.ritable{border-collapse:collapse;font-size:11.5px;min-width:100%}.ritable th{font-size:9.5px;color:#888;font-weight:700;text-align:center;padding:2px 3px;text-transform:uppercase;letter-spacing:.3px}.ritable th.nm{text-align:left}.ritable td{padding:2px}.ritable input{font:inherit;font-size:12px;padding:5px 6px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a}.ritable input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.ritable input{background:#0d0d0d;border-color:#333;color:#e8e8e8}}.ritable input.role{width:140px}.ritable input.num{width:56px;text-align:center}.ritable input.cost{width:96px;text-align:center}
+.calcout{display:none;margin-top:12px}.calcout.show{display:block}.mcards{display:flex;gap:9px;flex-wrap:wrap}.mcard{flex:1 1 110px;border:1px solid #e8e8e8;border-radius:10px;padding:9px 11px;background:#fff;text-align:center}@media(prefers-color-scheme:dark){.mcard{background:#0d0d0d;border-color:#2a2a2a}}.mcard .mv{font-size:19px;font-weight:700;line-height:1.1}.mcard .ml{font-size:10px;color:#888;margin-top:2px}.mcard.hl{border-color:#5350B4;background:#f5f3ff}@media(prefers-color-scheme:dark){.mcard.hl{border-color:#8f8cff;background:#191830}}
+.csum{font-size:12.5px;line-height:1.55;margin-top:10px;padding:10px 12px;border-radius:8px;background:#f4fef8;border:1px dashed #a9dcc7;color:#0F6E56}@media(prefers-color-scheme:dark){.csum{background:#0a1f14;border-color:#2f6d54;color:#7fd8b3}}.cerr{color:#993C1D;font-size:12px;margin-top:8px}@media(prefers-color-scheme:dark){.cerr{color:#e8907a}}
+.brow{display:flex;justify-content:space-between;font-size:12px;padding:5px 10px;border-bottom:1px solid #f0f0f0}@media(prefers-color-scheme:dark){.brow{border-color:#202020}}.brow.tot{font-weight:700;border-top:2px solid #5350B4;border-bottom:0;margin-top:4px}@media(prefers-color-scheme:dark){.brow.tot{border-color:#8f8cff}}.brow .bl{color:#555}.brow .bv{font-family:'SF Mono',monospace;color:#1a1a1a}@media(prefers-color-scheme:dark){.brow .bl{color:#aaa}.brow .bv{color:#eee}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 73–84 · Stage 4</span>
+<h1>🧮 The Counting House</h1>
+<p class="sub">A CTO doesn't just spend the company's money — they're a steward of its capital, and often the owner of its single largest cost line. The leaders who get a real seat at the table are the ones who can read a P&amp;L, defend a budget, and talk about margin, burn and unit economics as fluently as they talk about latency. You don't need an MBA; you need to stop being the person in the room who goes quiet when the numbers come up.</p>
+
+<div class="tip">Third module of <strong>Stage 4 · Business Fluency</strong>. Two real calculators: a <strong>unit-economics (LTV:CAC)</strong> tool, and a <strong>12-month engineering budget builder</strong> — the deliverable.</p></div>
+
+<h2><span class="sn">1</span>Why a CTO speaks finance</h2>
+<p>Engineering is usually one of the two biggest expenses in a software company — often the biggest. That makes you a major steward of the company's capital, whether you think of yourself that way or not. When you can explain what your spend <em>buys</em> in financial terms — margin, capacity, risk reduction, growth — you stop being a cost center to be squeezed and become a partner in how the business is run. Financial fluency is the price of admission to the executive conversation.</p>
+
+<h2><span class="sn">2</span>Reading a P&amp;L — where engineering lives</h2>
+<p>The <strong>P&amp;L</strong> (profit &amp; loss / income statement) is the company's scoreboard. It flows top to bottom from what you earn to what you keep:</p>
+<div class="pnl">
+  <div class="pr"><span class="lab">Revenue</span><span class="val">$10.0M</span></div>
+  <div class="pr"><span class="lab">− COGS (cost to <em>serve</em> customers)</span><span class="val">$2.5M</span></div>
+  <div class="pr sub"><span class="lab">= Gross profit <span class="note">(75% gross margin)</span></span><span class="val">$7.5M</span></div>
+  <div class="pr"><span class="lab">− OpEx (R&amp;D, sales, G&amp;A)</span><span class="val">$6.0M</span></div>
+  <div class="pr sub"><span class="lab">= Operating income</span><span class="val">$1.5M</span></div>
+</div>
+<p>The line that trips up engineers is <strong>COGS vs OpEx</strong> — and it matters, because COGS is subtracted <em>before</em> gross margin (the number investors obsess over), while OpEx sits below it:</p>
+<div class="sched">
+  <div class="col"><h4>COGS — cost to serve customers</h4>
+    <div class="blk bad">Production cloud &amp; infra (your bill!)</div>
+    <div class="blk bad">Storage &amp; bandwidth for customers</div>
+    <div class="blk bad">Per-transaction third-party APIs</div>
+    <div class="blk bad">Customer support</div>
+    <div class="blk bad">→ hits GROSS MARGIN</div>
+  </div>
+  <div class="col"><h4>OpEx — building &amp; running the business</h4>
+    <div class="blk good">R&amp;D / most engineering salaries</div>
+    <div class="blk good">Dev &amp; test environments</div>
+    <div class="blk good">Sales, marketing, G&amp;A, office</div>
+    <div class="blk good">Internal tooling</div>
+    <div class="blk good">→ below the gross-margin line</div>
+  </div>
+</div>
+
+<h2><span class="sn">3</span>Gross margin &amp; COGS — your cloud bill lives here</h2>
+<p>Here's the fact every CTO should hold onto: <strong>your production cloud bill is COGS.</strong> Every dollar of infrastructure it takes to serve a customer comes straight out of gross margin — and gross margin is a huge driver of how the company is valued. A SaaS business at 80% gross margin is worth far more per dollar of revenue than one at 55%, because more of every sale drops through to profit.</p>
+<p>That's why "just throw more servers at it" is a financial decision, not only a technical one, and why <a class="x" href="mastery_wallet_finops.html">FinOps</a> (cloud cost engineering) is now a CTO-level concern. Cutting cost-to-serve isn't penny-pinching — it directly lifts margin, and margin lifts valuation.</p>
+<div class="tip"><strong>CapEx vs OpEx, briefly:</strong> a big one-time purchase (servers you own) is <em>capital expenditure</em> — it hits cash now but is spread across the P&amp;L over years. A monthly cloud bill is <em>operating expenditure</em> — it hits the P&amp;L as you go. Cloud turned most infra from CapEx into OpEx, which is why finance cares how it's classified.</p></div>
+
+<h2><span class="sn">4</span>Unit economics &amp; CAC / LTV</h2>
+<p>Zoom from the whole company down to a single customer: do they make money? <strong>Unit economics</strong> answers that, and two numbers dominate. <strong>CAC</strong> (customer acquisition cost) is what you spend to win one customer; <strong>LTV</strong> (lifetime value) is the gross profit that customer generates before they churn. The ratio <strong>LTV:CAC</strong> is the health of your growth engine — the rule of thumb is you want it above <strong>3</strong>, and you want to recover CAC (the payback period) within roughly a year.</p>
+<p>Compute it for a subscription business:</p>
+<div class="builder">
+  <div class="cap">
+    <label>ARPU / mo ($)<input id="u-arpu" type="number" min="0" value="50"></label>
+    <label>Gross margin (%)<input id="u-gm" type="number" min="0" max="100" value="80"></label>
+    <label>Monthly churn (%)<input id="u-churn" type="number" min="0.1" max="100" value="3"></label>
+    <label>CAC ($)<input id="u-cac" type="number" min="0" value="400"></label>
+  </div>
+  <button id="u-run">🧮 Compute unit economics →</button>
+  <div id="u-out" class="calcout">
+    <div class="mcards">
+      <div class="mcard"><div class="mv" id="u-life">–</div><div class="ml">Avg lifetime (mo)</div></div>
+      <div class="mcard"><div class="mv" id="u-ltv">–</div><div class="ml">LTV (gross profit)</div></div>
+      <div class="mcard hl"><div class="mv" id="u-ratio">–</div><div class="ml">LTV : CAC</div></div>
+      <div class="mcard"><div class="mv" id="u-pay">–</div><div class="ml">CAC payback (mo)</div></div>
+    </div>
+    <div class="csum" id="u-sum"></div>
+  </div>
+  <div id="u-err" class="cerr"></div>
+</div>
+
+<h2><span class="sn">5</span>Cash, burn &amp; runway</h2>
+<p>The P&amp;L shows profitability; the thing that actually kills companies is running out of <strong>cash</strong>. Two numbers you must always know: <strong>burn rate</strong> (net cash you spend per month) and <strong>runway</strong> = cash ÷ burn — how many months until zero. A startup with "8 months of runway" is telling you exactly how long you have to reach the next milestone or raise.</p>
+<p>This directly shapes your decisions. Every hire adds to burn and shortens runway; a big infra commitment does too. When runway is short, the CTO's job is to spend deliberately — protect the critical roles and the work that reaches the next milestone, and defer the rest. "We can afford it over a year" is irrelevant if you run out of cash in eight months.</p>
+
+<h2><span class="sn">6</span>Deliverable — a 12-month engineering budget</h2>
+<p>Build the real thing: a 12-month engineering budget. Headcount (fully-loaded — salary plus ~30–40% for benefits, tax, equipment and overhead) is usually 70–80% of it; cloud and tooling make up most of the rest. Edit the roles and costs, or use the sample org:</p>
+<div class="builder">
+  <div class="riwrap"><table class="ritable" id="btable">
+    <tr><th class="nm">Role</th><th>Count</th><th>Loaded $/yr each</th></tr>
+  </table></div>
+  <div class="cap">
+    <label>Cloud / infra ($/yr)<input id="b-cloud" type="number" min="0" value="600000"></label>
+    <label>Tooling / SaaS ($/yr)<input id="b-tool" type="number" min="0" value="120000"></label>
+  </div>
+  <button id="b-run">🧮 Build the 12-month budget →</button>
+  <button id="b-copy" class="copy">Copy</button>
+  <div id="b-out" class="calcout"></div>
+  <div id="b-err" class="cerr"></div>
+</div>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Finance for CTOs fails in predictable ways — treating the cloud bill as "not my concern," chasing growth with broken unit economics, cutting the wrong budget line, and ignoring runway. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Run the unit-economics calculator with your product's real ARPU, margin, churn and CAC — is LTV:CAC above 3? (2) Build your 12-month budget and note what % is headcount; that's the line that actually moves the number. (3) Find out your company's current gross margin and runway — if you don't know them, that's today's homework. (4) Next time you propose infra spend, name its effect on gross margin, not just its dollar cost.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 4 · the business half of the road to CTO. Pairs with <a class="x" href="leadership_storyteller.html">The Storyteller</a> and <a class="x" href="mastery_wallet_finops.html">The Wallet</a> (cloud cost). <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'The CFO asks you to improve gross margin. Digging in, your production cloud bill is the main thing dragging it down.',
+     opts:[
+       {t:'Own it — treat cloud as COGS and drive cost-to-serve down (FinOps), because it directly lifts margin and valuation.',v:'best',fb:'Your production cloud bill <em>is</em> COGS, so every dollar you cut flows straight to gross margin — and margin drives how the whole company is valued. This is squarely a CTO responsibility, not just an engineering nice-to-have.'},
+       {t:'Explain it’s a function of growth and should normalize over time.',v:'ok',fb:'Sometimes partly true — costs can lag revenue — but "it’ll sort itself out" isn’t a plan, and margin rarely self-corrects. Pair the context with an actual cost-to-serve effort, or you’re just deferring the CFO’s real question.'},
+       {t:'Push back — "infrastructure is engineering’s domain, not a finance issue."',v:'poor',fb:'This is the exact instinct that keeps CTOs out of the executive conversation. Cloud spend sits in COGS and shapes margin; treating it as "not a finance thing" tells the CFO you don’t understand your own P&amp;L line.'},
+       {t:'Slash compute across the board regardless of what it powers.',v:'poor',fb:'Blind cuts can wreck reliability and the customer experience that revenue depends on. FinOps is about cost <em>per unit of value served</em>, not indiscriminate austerity — protect what earns, trim what wastes.'}
+     ]},
+    {q:'Marketing wants to triple acquisition spend to hit a growth target. Your LTV:CAC is 1.5 and CAC payback is 20 months.',
+     opts:[
+       {t:'Push back — fix the unit economics (churn, margin, or CAC) before pouring in more spend.',v:'best',fb:'At 1.5 you barely make money per customer, and a 20-month payback means each new customer is a long cash drain. Tripling spend just scales a leaky model — you’d grow revenue and burn cash faster. Fix the economics first, then pour fuel on.'},
+       {t:'Approve a small increase and watch payback closely.',v:'ok',fb:'More cautious, and testing at small scale is reasonable — but with LTV:CAC at 1.5 you’re still funding marginal customers. Better to tie any increase to a concrete improvement in churn or margin, so the extra spend lands on healthier economics.'},
+       {t:'Triple it — growth is the priority, economics can catch up later.',v:'poor',fb:'"Grow now, fix economics later" has buried countless companies. Scaling a model that barely breaks even per customer multiplies the burn and shortens runway — you can spend your way to a bigger version of a business that doesn’t work.'},
+       {t:'Refuse any acquisition spend until economics are perfect.',v:'poor',fb:'Too far the other way — some acquisition is how you get the volume to <em>learn</em> and improve. The move isn’t "stop growing," it’s "don’t triple down on a broken ratio." Calibrated spend beats a total freeze.'}
+     ]},
+    {q:'You’re asked to cut the engineering budget by 15%. What’s your first move?',
+     opts:[
+       {t:'Recognize headcount is ~75% of the budget — the real levers are hiring pace, role mix and cloud; decide deliberately and humanely.',v:'best',fb:'You can’t cut 15% out of the 20% that isn’t people. Facing the math honestly — slowing hiring, rebalancing seniority, cutting genuine cloud waste — lets you hit the number thoughtfully instead of theater. Painful, but it’s where the money actually is.'},
+       {t:'Trim cloud waste and unused tooling first, then reassess the gap.',v:'ok',fb:'A sensible, low-pain first pass — kill zombie infra and shelfware before touching people. Just be honest that it rarely gets you to 15%; you’ll still have to confront headcount, so plan for that rather than pretending the tooling cut finished the job.'},
+       {t:'Cancel all the SaaS tools and declare victory.',v:'poor',fb:'Tooling is often a few percent of the budget — cancelling it can’t reach 15%, and gutting the tools that make engineers productive can cost more than it saves. It’s a way to <em>look</em> decisive while dodging the real (headcount) math.'},
+       {t:'Freeze all salaries across the board.',v:'poor',fb:'A blunt, morale-crushing move that drives out your best people (who have options) and often doesn’t even hit the target. Across-the-board freezes signal you couldn’t make hard, specific choices — the opposite of stewardship.'}
+     ]},
+    {q:'The CEO mentions the company has "about 8 months of runway." How should that shape your hiring plan?',
+     opts:[
+       {t:'Understand runway = cash ÷ burn, and pace hiring to protect it until the next milestone or raise.',v:'best',fb:'Every hire adds to burn and shortens runway. With 8 months, you spend deliberately — fund the roles that reach the milestone that unlocks the next raise or profitability, defer the rest. Runway awareness is core financial stewardship.'},
+       {t:'Get the exact burn rate from finance and model hiring against it.',v:'ok',fb:'Exactly the right diligence — you can’t plan against "about 8 months." Getting the real burn and modeling scenarios is the professional move; it’s "ok" only because it’s the first step, not yet the decision. Then act on what the model shows.'},
+       {t:'Keep hiring on the original plan — more engineers is always good.',v:'poor',fb:'"Hiring is always good" ignores the cash clock. Every added salary shortens the runway you just heard is only 8 months; over-hiring into short runway is how companies force painful layoffs (or die) a few months later.'},
+       {t:'Freeze everything immediately, including business-critical roles.',v:'poor',fb:'Panic-freezing can be as damaging as overspending — if a critical role is what gets you to the milestone that extends runway, cutting it is self-defeating. The skill is deliberate prioritization, not a blanket stop.'}
+     ]},
+    {q:'Leadership is celebrating revenue up 50%, but gross margin fell from 75% to 55% as infra costs ballooned.',
+     opts:[
+       {t:'Flag the margin erosion — a 55%-margin business is worth far less per dollar; growth that costs more to serve isn’t the win it looks like.',v:'best',fb:'Revenue up while margin craters is often a warning, not a triumph — investors value a 75%-margin SaaS far above a 55% one. Surfacing the trade (and driving cost-to-serve back down) is exactly the financial judgment that earns a CTO their seat.'},
+       {t:'Show both numbers and kick off a FinOps effort to recover margin.',v:'ok',fb:'Solid and constructive — pairing the celebration with the margin reality and a plan to fix it. Just make sure the margin story gets equal billing; if it’s a footnote to the revenue party, the erosion continues unaddressed.'},
+       {t:'Celebrate the revenue — top-line growth is what matters most.',v:'poor',fb:'Top line alone is a vanity metric here. Growing revenue by spending ever more to serve each customer can destroy value even as the headline number soars — you’re scaling a less valuable business and calling it success.'},
+       {t:'Blame the cloud provider for the rising costs.',v:'poor',fb:'Deflection, not stewardship. The provider’s pricing is a constraint you manage, not an excuse — margin is your responsibility. Blaming the vendor tells the room you don’t own the number you’re accountable for.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'CFO-ready move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  function money(n){return '$'+Math.round(n).toLocaleString();}
+  // unit economics
+  var uout=document.getElementById('u-out'),uerr=document.getElementById('u-err');
+  document.getElementById('u-run').addEventListener('click',function(){
+    uerr.textContent='';
+    var arpu=parseFloat(document.getElementById('u-arpu').value),gm=parseFloat(document.getElementById('u-gm').value)/100,
+        churn=parseFloat(document.getElementById('u-churn').value)/100,cac=parseFloat(document.getElementById('u-cac').value);
+    if(isNaN(arpu)||isNaN(gm)||isNaN(churn)||isNaN(cac)||churn<=0||arpu<0||cac<0){uerr.textContent='Fill every field; churn must be greater than 0.';uout.classList.remove('show');return;}
+    var life=1/churn, gpm=arpu*gm, ltv=gpm*life, ratio=cac>0?ltv/cac:Infinity, pay=gpm>0?cac/gpm:Infinity;
+    document.getElementById('u-life').textContent=life.toFixed(1);
+    document.getElementById('u-ltv').textContent=money(ltv);
+    document.getElementById('u-ratio').textContent=(isFinite(ratio)?ratio.toFixed(1):'∞')+':1';
+    document.getElementById('u-pay').textContent=isFinite(pay)?pay.toFixed(1):'—';
+    var verdict;
+    if(ratio<1)verdict='Below 1:1 — you lose money on every customer. Fix churn, margin, or CAC before growing at all.';
+    else if(ratio<3)verdict='Between 1 and 3 — marginal. Each customer makes a little, but there’s not much room; improve the economics before pouring on acquisition spend.';
+    else if(ratio<=5)verdict='Healthy (3–5:1) — a sound engine. You can invest in growth with confidence.';
+    else verdict='Very high (&gt;5:1) — great economics, but you may be <em>under-investing</em> in growth; you could likely afford to acquire more aggressively.';
+    var payTxt = isFinite(pay)?('CAC payback is <b>'+pay.toFixed(1)+' months</b> — under ~12 is strong, over ~18 ties up cash a long time.'):'';
+    document.getElementById('u-sum').innerHTML='LTV:CAC is <b>'+(isFinite(ratio)?ratio.toFixed(1):'∞')+':1</b>. '+verdict+' '+payTxt;
+    uout.classList.add('show');
+  });
+
+  // budget builder
+  var BSEED=[['Staff Engineer',1,300000],['Engineering Manager',2,250000],['Senior Engineer',5,220000],['Mid-level Engineer',5,170000],['Junior Engineer',2,130000]];
+  var btbl=document.getElementById('btable');
+  BSEED.forEach(function(r){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td><input class="role" type="text" value="'+r[0]+'"></td><td><input class="num cnt" type="number" min="0" value="'+r[1]+'"></td><td><input class="cost sal" type="number" min="0" value="'+r[2]+'"></td>';
+    btbl.appendChild(tr);
+  });
+  var bout=document.getElementById('b-out'),berr=document.getElementById('b-err'),lastText='';
+  document.getElementById('b-run').addEventListener('click',function(){
+    berr.textContent='';
+    var lines=[],hc=0,people=0;
+    btbl.querySelectorAll('tr').forEach(function(tr){
+      var rl=tr.querySelector('.role');if(!rl)return;
+      var name=(rl.value||'').trim();var c=parseInt(tr.querySelector('.cnt').value,10)||0;var s=parseFloat(tr.querySelector('.sal').value)||0;
+      if(!name||c<=0)return;
+      lines.push({name:name,c:c,s:s,total:c*s});hc+=c*s;people+=c;
+    });
+    var cloud=parseFloat(document.getElementById('b-cloud').value)||0,tool=parseFloat(document.getElementById('b-tool').value)||0;
+    if(!lines.length){berr.textContent='Add at least one role with a count above 0.';bout.classList.remove('show');return;}
+    var total=hc+cloud+tool;
+    var html='';
+    lines.forEach(function(l){html+='<div class="brow"><span class="bl">'+l.name.replace(/</g,'&lt;')+' × '+l.c+'</span><span class="bv">'+money(l.total)+'</span></div>';});
+    html+='<div class="brow"><span class="bl">Cloud / infra</span><span class="bv">'+money(cloud)+'</span></div>';
+    html+='<div class="brow"><span class="bl">Tooling / SaaS</span><span class="bv">'+money(tool)+'</span></div>';
+    html+='<div class="brow tot"><span class="bl">Total / year ('+people+' engineers)</span><span class="bv">'+money(total)+'</span></div>';
+    html+='<div class="brow"><span class="bl">Per month</span><span class="bv">'+money(total/12)+'</span></div>';
+    var hcPct=Math.round(hc/total*100);
+    html+='<div class="csum">Headcount is <b>'+money(hc)+' ('+hcPct+'%)</b> of a <b>'+money(total)+'/yr</b> budget — cloud '+Math.round(cloud/total*100)+'%, tooling '+Math.round(tool/total*100)+'%. As always, people are the lever: you can’t materially cut this budget without touching hiring pace or role mix.</div>';
+    bout.innerHTML=html;bout.classList.add('show');
+    lastText='# 12-month engineering budget\n\n'+lines.map(function(l){return l.name+' x'+l.c+': '+money(l.total);}).join('\n')+'\nCloud/infra: '+money(cloud)+'\nTooling/SaaS: '+money(tool)+'\n\nTOTAL/YR ('+people+' eng): '+money(total)+'\nPer month: '+money(total/12)+'\nHeadcount: '+money(hc)+' ('+hcPct+'%)\n';
+  });
+  document.getElementById('b-copy').addEventListener('click',function(){
+    if(!lastText)document.getElementById('b-run').click();
+    if(!lastText)return;
+    var btn=this;navigator.clipboard.writeText(lastText).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>

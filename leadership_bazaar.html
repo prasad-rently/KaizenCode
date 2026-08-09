@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Bazaar — Business Models &amp; Pricing</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* 3-col compare */
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px 0}.cell{border:1px solid #e8e8e8;border-radius:10px;padding:9px 11px;background:#fafafa}@media(prefers-color-scheme:dark){.cell{border-color:#2a2a2a;background:#151515}}.cell h5{font-size:11.5px;font-weight:700;margin-bottom:3px;color:#5350B4}@media(prefers-color-scheme:dark){.cell h5{color:#a6a3ff}}.cell p{font-size:11px;color:#666;margin:0 0 4px;line-height:1.4}@media(prefers-color-scheme:dark){.cell p{color:#999}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* builders */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}
+.cap{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;font-weight:600;color:#666;margin:2px 0 10px}@media(prefers-color-scheme:dark){.cap{color:#999}}.cap label{display:flex;flex-direction:column;gap:3px}.cap input{width:90px;font:inherit;font-size:12px;padding:5px 6px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a}@media(prefers-color-scheme:dark){.cap input{background:#0d0d0d;border-color:#333;color:#e8e8e8}}
+.riwrap{overflow-x:auto;margin:4px 0 10px}.ritable{border-collapse:collapse;font-size:11.5px;min-width:100%}.ritable th{font-size:9.5px;color:#888;font-weight:700;text-align:left;padding:2px 4px;text-transform:uppercase;letter-spacing:.3px}.ritable td{padding:2px}.ritable input{font:inherit;font-size:12px;padding:5px 6px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a;width:120px}.ritable input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.ritable input{background:#0d0d0d;border-color:#333;color:#e8e8e8}}
+.calcout{display:none;margin-top:12px}.calcout.show{display:block}.mcards{display:flex;gap:9px;flex-wrap:wrap}.mcard{flex:1 1 100px;border:1px solid #e8e8e8;border-radius:10px;padding:9px 11px;background:#fff;text-align:center}@media(prefers-color-scheme:dark){.mcard{background:#0d0d0d;border-color:#2a2a2a}}.mcard .mv{font-size:18px;font-weight:700;line-height:1.1}.mcard .ml{font-size:10px;color:#888;margin-top:2px}.mcard.hl{border-color:#5350B4;background:#f5f3ff}@media(prefers-color-scheme:dark){.mcard.hl{border-color:#8f8cff;background:#191830}}
+.csum{font-size:12.5px;line-height:1.55;margin-top:10px;padding:10px 12px;border-radius:8px;background:#f4fef8;border:1px dashed #a9dcc7;color:#0F6E56}@media(prefers-color-scheme:dark){.csum{background:#0a1f14;border-color:#2f6d54;color:#7fd8b3}}.cerr{color:#993C1D;font-size:12px;margin-top:8px}@media(prefers-color-scheme:dark){.cerr{color:#e8907a}}
+.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:440px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 73–84 · Stage 4</span>
+<h1>🏪 The Bazaar</h1>
+<p class="sub">Every product lives in a marketplace, and how it makes money shapes everything about it — including what you build. A CTO who treats the business model as "someone else's department" ends up building the wrong things beautifully. Understand how the company captures value — its metrics, its pricing, its sales motion — and you become a partner in strategy, not just its executor.</p>
+
+<div class="tip">Fourth module of <strong>Stage 4 · Business Fluency</strong>. Two real tools: a <strong>SaaS-metrics calculator</strong> (NRR, magic number, rule of 40) and a <strong>pricing-teardown builder</strong> — the deliverable.</p></div>
+
+<h2><span class="sn">1</span>Pricing is product</h2>
+<p>It's tempting to think pricing is a spreadsheet the finance or sales team owns. In reality, <strong>how you charge is a product decision</strong>, and it feeds straight back into engineering. Charge per seat and you'll build admin and user-management features; charge by usage and you'll invest in metering, quotas, and cost-to-serve; go freemium and your architecture has to make the free tier cheap to run at huge scale. The business model quietly writes half your roadmap — so you'd better understand it.</p>
+
+<h2><span class="sn">2</span>The SaaS metrics that matter</h2>
+<p>These extend the P&amp;L literacy from <a class="x" href="leadership_counting_house.html">The Counting House</a> into the language of a subscription business. The one to tattoo on your brain is <strong>NRR</strong>.</p>
+<ul>
+<li><strong>ARR / MRR</strong> — annual (or monthly) recurring revenue: the predictable subscription run-rate. The heartbeat of a SaaS company.</li>
+<li><strong>NRR (net revenue retention)</strong> — of the revenue you had a year ago, how much do those same customers pay you now, after expansion and churn? <strong>Above 100% means you grow even if you never sign a new customer</strong> — the holy grail. 120%+ is world-class.</li>
+<li><strong>Churn</strong> — the leak. Revenue churn (dollars lost) matters more than logo churn (customers lost); losing one whale hurts more than ten minnows.</li>
+<li><strong>Magic number</strong> — net new ARR ÷ prior sales &amp; marketing spend. Sales efficiency: above ~1 means every $1 of S&amp;M buys more than $1 of new recurring revenue — pour it on.</li>
+<li><strong>Rule of 40</strong> — growth rate % + profit margin % should exceed 40. It captures the growth-vs-profitability trade the whole company is judged on.</li>
+</ul>
+<p>Compute them for a business:</p>
+<div class="builder">
+  <div class="cap">
+    <label>Starting ARR ($M)<input id="s-start" type="number" min="0" value="10"></label>
+    <label>New-logo ARR ($M)<input id="s-new" type="number" min="0" value="4"></label>
+    <label>Expansion ARR ($M)<input id="s-exp" type="number" min="0" value="2"></label>
+    <label>Churned ARR ($M)<input id="s-churn" type="number" min="0" value="1.5"></label>
+    <label>S&amp;M spend ($M)<input id="s-sm" type="number" min="0" value="3"></label>
+    <label>Profit margin (%)<input id="s-margin" type="number" value="5"></label>
+  </div>
+  <button id="s-run">🏪 Compute SaaS metrics →</button>
+  <div id="s-out" class="calcout">
+    <div class="mcards">
+      <div class="mcard"><div class="mv" id="m-arr">–</div><div class="ml">Ending ARR</div></div>
+      <div class="mcard"><div class="mv" id="m-growth">–</div><div class="ml">Growth</div></div>
+      <div class="mcard hl"><div class="mv" id="m-nrr">–</div><div class="ml">NRR</div></div>
+      <div class="mcard"><div class="mv" id="m-magic">–</div><div class="ml">Magic number</div></div>
+      <div class="mcard"><div class="mv" id="m-r40">–</div><div class="ml">Rule of 40</div></div>
+    </div>
+    <div class="csum" id="s-sum"></div>
+  </div>
+  <div id="s-err" class="cerr"></div>
+</div>
+
+<h2><span class="sn">3</span>Value-based pricing &amp; packaging</h2>
+<p>The most common pricing mistake engineers make is <strong>cost-plus</strong>: "it cost us $X to build, so charge $X plus margin." That leaves enormous money on the table and anchors on the wrong thing. Price to the <strong>value the customer receives</strong>, not what it cost you to make — a feature that saves a customer $100k/year can command far more than its build cost, and one that saves nothing can't be rescued by any markup.</p>
+<p><strong>Packaging</strong> — how you bundle features into tiers — is often more powerful than the price itself. Good-better-best tiers let you serve a hobbyist and an enterprise with the same product, and steer buyers toward the middle. The features you gate behind the higher tiers decide <em>who</em> buys and how they expand.</p>
+
+<h2><span class="sn">4</span>The three pricing models</h2>
+<p>Most SaaS pricing is a variation on three shapes. The key question for each: does the thing you charge for — the <strong>value metric</strong> — scale with the value the customer actually gets?</p>
+<div class="three">
+  <div class="cell"><h5>Per-seat</h5><p>Pay per user.</p><p><b>+</b> Simple, predictable.</p><p><b>−</b> Breaks when value ≠ headcount; users share logins.</p></div>
+  <div class="cell"><h5>Usage-based</h5><p>Pay for what you consume.</p><p><b>+</b> Tracks value; low entry; expands automatically.</p><p><b>−</b> Unpredictable bills; needs metering.</p></div>
+  <div class="cell"><h5>Freemium</h5><p>Free tier → paid upgrade.</p><p><b>+</b> Viral adoption, land-and-expand.</p><p><b>−</b> Free users cost you; low convert rates.</p></div>
+</div>
+<p>The winning pattern is usually <strong>land and expand</strong>: get in cheap (free tier or a small seat count), deliver value, and let the account grow — which is exactly what drives NRR above 100%. Align the value metric well and pricing becomes a growth engine; align it badly and heavy users feel gouged while light users churn.</p>
+
+<h2><span class="sn">5</span>How enterprise sales works — and engineering's role</h2>
+<p>Selling to a large company is a different sport from a self-serve signup. It's a months-long, multi-threaded motion: a rep (AE) runs the deal, a sales engineer (SE) handles the technical evaluation, and it passes through a <strong>proof-of-concept</strong>, a security review, procurement, and legal before a signature. Deals are large and lumpy, and a single champion inside the account often makes or breaks them.</p>
+<p>Here's what surprises new leaders: <strong>a lot of this lands on engineering</strong>, and it's real go-to-market work, not a distraction.</p>
+<ul>
+<li><strong>Security &amp; reliability are sales assets.</strong> That 300-question security questionnaire, the SOC 2 report, the uptime SLA — they directly unlock (or kill) enterprise deals. Investing in them is investing in revenue.</li>
+<li><strong>SEs and POCs need engineering air-cover.</strong> Supporting the technical sale — a smooth POC, a fast answer to a hard architecture question — is often the difference in a big deal.</li>
+</ul>
+<div class="warn"><strong>The feature-for-a-deal trap.</strong> Sales will want to promise a custom feature to close a whale. Sometimes right — but if every big deal bends the roadmap, you end up with a Frankenstein product built for accounts, not a market. The test: is it <em>generalizable</em> to other customers? If yes, maybe. If it's a true one-off, push for a paid services engagement or hold the line — one deal shouldn't own your product.</p></div>
+
+<h2><span class="sn">6</span>Deliverable — tear down three SaaS pricings</h2>
+<p>The fastest way to learn pricing is to reverse-engineer products you use. Pick three (or use the samples), and for each capture its model, its value metric, who it targets, and how accounts expand. The tool assembles a comparison teardown so the patterns jump out:</p>
+<div class="builder">
+  <div class="riwrap"><table class="ritable" id="ttable">
+    <tr><th>Product</th><th>Pricing model</th><th>You pay by (value metric)</th><th>Target buyer</th><th>How accounts expand</th></tr>
+  </table></div>
+  <button id="t-run">🏪 Build the teardown →</button>
+  <button id="t-copy" class="copy">Copy</button>
+  <div id="t-out" class="out-box"></div>
+  <div id="t-err" class="cerr"></div>
+</div>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Business-model thinking fails in predictable ways — ignoring NRR, cost-plus pricing, misaligned value metrics, and treating enterprise sales as "not engineering's problem." Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Run the SaaS-metrics calculator with your company's real numbers — is NRR above 100%? (2) Tear down the pricing of three tools you use daily; notice which value metric each chose and why. (3) For your product, ask: does what we charge for scale with the value customers get? (4) Find out your company's ARR, NRR and gross margin — the three numbers a CTO should always know.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 4 · the business half of the road to CTO. Pairs with <a class="x" href="leadership_counting_house.html">The Counting House</a>. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'The board wants faster growth. Your NRR is 90% (existing customers shrink over time), and the plan is to hire more sales reps.',
+     opts:[
+       {t:'Fix NRR first — below 100% you’re filling a leaky bucket; expansion & retention are cheaper growth than new logos.',v:'best',fb:'At 90% NRR your existing base shrinks every year, so new sales first have to replace the leak before any of it is real growth. Getting NRR above 100% means the base grows on its own — the cheapest, most durable growth there is. Plug the leak before you pour in more.'},
+       {t:'Balance it — invest in both retention and new acquisition.',v:'ok',fb:'Reasonable, and you rarely do just one. But with NRR at 90%, weighting toward retention/expansion usually wins: a dollar kept and expanded is far cheaper than a dollar of new-logo ARR poured into a leaking base. Fix the leak as the priority.'},
+       {t:'Just hire more sales reps to push new-logo growth.',v:'poor',fb:'Scaling acquisition onto a 90%-NRR base is the classic leaky-bucket trap from <a class="x" href="leadership_product_whisperer.html">The Product Whisperer</a>, in revenue form. You’ll spend more to stand still while churn quietly eats the gains.'},
+       {t:'Ignore NRR — top-line ARR is still growing, so it’s fine.',v:'poor',fb:'Top-line ARR can rise while the underlying base rots, masked by heavy new sales. NRR is the truth serum: below 100% it warns that your product isn’t retaining value, and no amount of sales spend fixes a retention problem.'}
+     ]},
+    {q:'You’re pricing a new feature. The instinct in the room is "it cost us about $X to build, so charge $X plus a margin."',
+     opts:[
+       {t:'Price to the value it delivers to the customer, not to what it cost you to build.',v:'best',fb:'Cost-plus anchors on the wrong number and leaves money on the table. A feature that saves a customer $100k/yr can command far more than its build cost; one that saves nothing can’t be rescued by any markup. Willingness-to-pay follows value received, not your effort.'},
+       {t:'Benchmark competitors’ pricing and match the market.',v:'ok',fb:'Useful context — the market sets a reference point. But matching competitors can just import their mistakes, and it still ignores <em>your</em> value differentiation. Use benchmarks as a sanity check on a value-based price, not as the method itself.'},
+       {t:'Cost-plus: add 30% margin to the build cost.',v:'poor',fb:'The build cost is nearly irrelevant to what a customer will pay. Cost-plus systematically underprices high-value features and overprices low-value ones — you leave money on the table exactly where you created the most value.'},
+       {t:'Make it free to keep customers happy.',v:'poor',fb:'Free is a pricing decision with big consequences — it trains customers that value is free, adds cost-to-serve with no revenue, and is hard to walk back. "Free to be nice" is how you erode margin and anchor expectations against yourself.'}
+     ]},
+    {q:'You charge per seat, but customers get value from usage volume. Heavy users feel gouged; light users churn as too expensive.',
+     opts:[
+       {t:'Align the value metric — charge by the thing that scales with value (usage), so price tracks value received.',v:'best',fb:'The symptom (heavy users gouged, light users churning) is a classic value-metric misalignment. When what you charge for tracks the value delivered, small customers can afford to start and big ones happily pay more as they get more — pricing becomes a growth engine instead of a source of friction.'},
+       {t:'Add usage-based tiers on top of the per-seat base.',v:'ok',fb:'A pragmatic hybrid that many mature products land on — keep a seat floor, add usage to capture heavy-user value. Good, as long as the added complexity is worth it and the dominant value metric is genuinely usage; sometimes a cleaner switch is better.'},
+       {t:'Keep per-seat — it’s the simplest thing to bill.',v:'poor',fb:'Optimizing pricing for <em>your</em> billing convenience over customer value is how you lose both ends of the market. Simplicity is nice, but not when the model actively pushes away light users and overcharges the heavy ones who should love you.'},
+       {t:'Raise the per-seat price across the board.',v:'poor',fb:'This deepens the exact problem — light users churn faster and heavy users feel more gouged. You’re turning the wrong dial harder; the issue is the <em>metric</em>, not the number on it.'}
+     ]},
+    {q:'Sales wants to promise a big prospect a custom feature — not on the roadmap — to close the deal this quarter.',
+     opts:[
+       {t:'Test whether it’s generalizable; if yes, build a reusable version — if it’s a true one-off, offer paid services or hold the line.',v:'best',fb:'The right filter is "does this serve the market or just this account?" A generalizable feature a whale will pay to accelerate can be a gift; a bespoke one-off that only they want is a roadmap tax forever. Reframe one-offs as paid services, or decline — one deal shouldn’t own your product.'},
+       {t:'Build it, but timebox it and make it configurable/reusable.',v:'ok',fb:'A sensible instinct — if you must build it, generalize it so the next customer benefits too. The risk is that "we’ll make it reusable" becomes a story you tell to justify a one-off; be honest about whether the market actually wants it.'},
+       {t:'Build the one-off exactly as promised to land the deal.',v:'poor',fb:'One bespoke feature per whale is how products turn into unmaintainable Frankensteins built for accounts instead of a market. Each one adds permanent maintenance and roadmap drag; sales closes this quarter, engineering pays for years.'},
+       {t:'Refuse flatly — sales can lose the deal if they have to.',v:'poor',fb:'Too rigid. Enterprise revenue is real, and a generalizable ask can be genuinely worth it. Being the reflexive "no" makes you a blocker and cedes the strategic conversation. Evaluate the trade; don’t reject it on principle.'}
+     ]},
+    {q:'A large prospect’s security team sends a 300-question questionnaire and wants a POC. Sales asks for engineering’s help.',
+     opts:[
+       {t:'Treat it as core go-to-market work — security posture and reliability are sales assets; support the SE motion and build reusable answers.',v:'best',fb:'Enterprise deals are unlocked (or killed) by exactly this: security questionnaires, SOC 2, a smooth POC, SLAs. It’s revenue work, not a distraction — and investing once in reusable answers and a solid security posture pays off on every future deal.'},
+       {t:'Delegate it to a senior engineer to handle this one time.',v:'ok',fb:'Fine for the immediate deal, and delegating is right — but "this one time" misses the pattern. These requests recur on every enterprise deal, so treat the first as a chance to build reusable assets, not a one-off favor to sales.'},
+       {t:'Dismiss it — "security questionnaires are sales’ problem, not engineering’s."',v:'poor',fb:'This attitude directly loses deals and marks you as someone who doesn’t connect engineering to revenue. The answers can only come from engineering, and the posture behind them is yours to own. It’s as much your job as shipping features.'},
+       {t:'Rush half-answers to move it along quickly.',v:'poor',fb:'A security review is a trust exercise with a sophisticated buyer; sloppy or evasive answers raise red flags and can sink the deal outright — or worse, commit you to things that aren’t true. Do it properly; the questionnaire <em>is</em> part of the product now.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Bazaar move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // SaaS metrics
+  var sout=document.getElementById('s-out'),serr=document.getElementById('s-err');
+  document.getElementById('s-run').addEventListener('click',function(){
+    serr.textContent='';
+    function g(id){return parseFloat(document.getElementById(id).value);}
+    var start=g('s-start'),nw=g('s-new'),exp=g('s-exp'),churn=g('s-churn'),sm=g('s-sm'),margin=g('s-margin');
+    if([start,nw,exp,churn,sm,margin].some(function(x){return isNaN(x);})||start<=0){serr.textContent='Fill every field; starting ARR must be greater than 0.';sout.classList.remove('show');return;}
+    var ending=start+nw+exp-churn, netNew=ending-start, growth=netNew/start*100, nrr=(start+exp-churn)/start*100, magic=sm>0?netNew/sm:Infinity, r40=growth+margin;
+    document.getElementById('m-arr').textContent='$'+ending.toFixed(1)+'m';
+    document.getElementById('m-growth').textContent=growth.toFixed(0)+'%';
+    document.getElementById('m-nrr').textContent=nrr.toFixed(0)+'%';
+    document.getElementById('m-magic').textContent=isFinite(magic)?magic.toFixed(2):'∞';
+    document.getElementById('m-r40').textContent=r40.toFixed(0);
+    var nrrTxt=nrr>=120?'world-class — the base grows fast on its own':(nrr>=100?'healthy — you grow even with zero new customers':'leaky — existing customers shrink your revenue over time; fix this first');
+    var magicTxt=isFinite(magic)?(magic>=1?'very efficient (pour on more S&amp;M)':(magic>=0.75?'efficient enough to keep investing':'inefficient — each $1 of S&amp;M buys &lt;$0.75 of ARR')):'—';
+    var r40Txt=r40>=40?'passes the Rule of 40':'below 40 — the growth/profit balance needs work';
+    document.getElementById('s-sum').innerHTML='NRR <b>'+nrr.toFixed(0)+'%</b>: '+nrrTxt+'. Magic number <b>'+(isFinite(magic)?magic.toFixed(2):'∞')+'</b>: '+magicTxt+'. Rule of 40 = growth '+growth.toFixed(0)+'% + margin '+margin.toFixed(0)+'% = <b>'+r40.toFixed(0)+'</b>, '+r40Txt+'.';
+    sout.classList.add('show');
+  });
+
+  // pricing teardown
+  var TSEED=[
+    ['Team chat (Slack-style)','Per-seat, tiered','Active user / seat','Teams → enterprise','More seats as the company grows'],
+    ['Cloud infra (AWS-style)','Usage-based','Consumption (compute, storage, egress)','Developers → enterprise','Usage rises with the customer’s own scale'],
+    ['Docs tool (Notion/Figma-style)','Freemium → per-seat','Free solo; seats + premium features','Individuals → teams','Viral team adoption, then upgrade for admin/SSO']
+  ];
+  var ttbl=document.getElementById('ttable');
+  TSEED.forEach(function(r){
+    var tr=document.createElement('tr');
+    tr.innerHTML=r.map(function(v){return '<td><input type="text" value="'+v.replace(/"/g,'&quot;')+'"></td>';}).join('');
+    ttbl.appendChild(tr);
+  });
+  var tout=document.getElementById('t-out'),terr=document.getElementById('t-err'),lastText='';
+  document.getElementById('t-run').addEventListener('click',function(){
+    terr.textContent='';
+    var rows=[];
+    ttbl.querySelectorAll('tr').forEach(function(tr){
+      var ins=tr.querySelectorAll('input');if(!ins.length)return;
+      var v=[].map.call(ins,function(i){return (i.value||'').trim();});
+      if(!v[0])return;
+      rows.push(v);
+    });
+    if(rows.length<2){terr.textContent='Fill in at least two products (a name is enough to include a row).';tout.classList.remove('show');return;}
+    var txt='# Pricing teardown — '+rows.length+' SaaS products\n\n';
+    rows.forEach(function(v,i){
+      txt+=(i+1)+'. '+v[0]+'\n   Model:        '+(v[1]||'—')+'\n   Value metric: '+(v[2]||'—')+'\n   Target buyer: '+(v[3]||'—')+'\n   Expands by:   '+(v[4]||'—')+'\n\n';
+    });
+    txt+='WHAT TO NOTICE\n'+
+      '- Value metric: does each charge for something that scales with the value the\n  customer gets? That alignment is what makes pricing feel fair and expand naturally.\n'+
+      '- Land & expand: nearly all get in cheap (free tier / few seats / low usage) and\n  grow the account over time — that expansion is what drives NRR above 100%.\n'+
+      '- Target & motion: self-serve models price simply; enterprise-targeted ones add\n  seats, admin, SSO and security as the upgrade path.\n';
+    tout.textContent=txt;tout.classList.add('show');lastText=txt;
+  });
+  document.getElementById('t-copy').addEventListener('click',function(){
+    if(!lastText)document.getElementById('t-run').click();
+    if(!lastText)return;
+    var btn=this;navigator.clipboard.writeText(lastText).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
