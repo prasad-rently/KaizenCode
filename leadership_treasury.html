@@ -1,0 +1,201 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Treasury — Fundraising &amp; Equity</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* builder / cap table */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}
+.riwrap{overflow-x:auto;margin:6px 0 10px}.ritable{border-collapse:collapse;font-size:11.5px;min-width:100%}.ritable th{font-size:9.5px;color:#888;font-weight:700;text-align:center;padding:3px 4px;text-transform:uppercase;letter-spacing:.3px}.ritable th.nm{text-align:left}.ritable td{padding:3px 4px}.ritable input{font:inherit;font-size:12px;padding:5px 6px;border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#1a1a1a;width:66px;text-align:center}.ritable input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.ritable input{background:#0d0d0d;border-color:#333;color:#e8e8e8}}.ritable td.rl{font-weight:600;text-align:left;color:#555}@media(prefers-color-scheme:dark){.ritable td.rl{color:#bbb}}
+.calcout{display:none;margin-top:12px}.calcout.show{display:block}.captbl{border-collapse:collapse;font-size:11.5px;width:100%;min-width:340px}.captbl th{font-size:10px;color:#888;font-weight:700;text-align:right;padding:5px 8px;border-bottom:1px solid #e2e2e2}.captbl th.nm{text-align:left}.captbl td{padding:5px 8px;text-align:right;font-family:'SF Mono',monospace;border-bottom:1px solid #f0f0f0}.captbl td.nm{text-align:left;font-family:inherit;font-weight:600;color:#333}@media(prefers-color-scheme:dark){.captbl th{border-color:#2a2a2a;color:#888}.captbl td{border-color:#202020}.captbl td.nm{color:#ddd}}.captbl tr.founders td{color:#5350B4;font-weight:700}@media(prefers-color-scheme:dark){.captbl tr.founders td{color:#a6a3ff}}
+.csum{font-size:12.5px;line-height:1.6;margin-top:12px;padding:10px 12px;border-radius:8px;background:#f4fef8;border:1px dashed #a9dcc7;color:#0F6E56}@media(prefers-color-scheme:dark){.csum{background:#0a1f14;border-color:#2f6d54;color:#7fd8b3}}.cerr{color:#993C1D;font-size:12px;margin-top:8px}@media(prefers-color-scheme:dark){.cerr{color:#e8907a}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 73–84 · Stage 4</span>
+<h1>💎 The Treasury</h1>
+<p class="sub">If your company takes venture money, then equity — how it's raised, split, and diluted — quietly governs your own net worth, your team's, and half the incentives around you. As a CTO you'll sit in investor diligence, hold meaningful shares, and help decide when and how to raise. The founders who understand cap tables keep more of their company; the ones who don't get a nasty surprise at signing. This is the math nobody teaches engineers.</p>
+
+<div class="tip">Final module of <strong>Stage 4 · Business Fluency</strong>. The centerpiece is a real <strong>cap-table dilution simulator</strong> — model founder ownership from founding through Series B, and watch % fall while value climbs.</p></div>
+
+<h2><span class="sn">1</span>Why a CTO learns venture math</h2>
+<p>Equity is the currency of startups, and most engineers treat it as a mystery number in an offer letter. As a leader you can't afford that. You'll be granting equity to your team (and fielding their questions), sitting across from investors who do this for a living, and making decisions — how much to raise, at what price — that determine what everyone's shares are worth. Financial fluency (from <a class="x" href="leadership_counting_house.html">The Counting House</a>) covers the operating business; this covers how the company is <em>owned and financed</em>.</p>
+
+<h2><span class="sn">2</span>How a round works — pre-money, post-money, dilution</h2>
+<p>A funding round has a simple core. The <strong>pre-money valuation</strong> is what the company is worth before the new money goes in; add the <strong>raise</strong> and you get the <strong>post-money valuation</strong>. The new investors' ownership is just <code>raise ÷ post-money</code>. Raise $5M at a $20M pre-money → $25M post → investors own <code>5/25 = 20%</code>.</p>
+<p>That 20% comes from somewhere: everyone who already owned shares. This is <strong>dilution</strong> — every round shrinks your <em>percentage</em>. But here's the mindset shift that separates good founders from anxious ones:</p>
+<div class="sched">
+  <div class="col"><h4>❌ The dilution trap (chase %)</h4>
+    <div class="blk bad">Raise as little as possible</div>
+    <div class="blk bad">Guard your ownership % above all</div>
+    <div class="blk bad">Fear every new investor</div>
+    <div class="blk bad">A big slice is the goal</div>
+    <div class="blk bad">Optimize the percentage</div>
+  </div>
+  <div class="col"><h4>✅ The value view (chase $)</h4>
+    <div class="blk good">Raise what the plan actually needs</div>
+    <div class="blk good">% falls, but the pie grows faster</div>
+    <div class="blk good">Great investors add value, not just cash</div>
+    <div class="blk good">A small slice of a huge company wins</div>
+    <div class="blk good">Optimize the stake's <em>worth</em></div>
+  </div>
+</div>
+<p>A founder who owns 100% of a company worth nothing has nothing. A founder who owns 40% of a company worth $150M has $60M. Dilution is the price of building something big — the calculator below makes that trade concrete.</p>
+
+<h2><span class="sn">3</span>Deliverable — model a cap table, seed → Series B</h2>
+<p>A <strong>cap table</strong> records who owns what. Model one across three rounds: for each, set the new investors' share (of post-money), the option-pool top-up, and the post-money valuation. Watch founders' <em>percentage</em> fall as their <em>dollar value</em> climbs:</p>
+<div class="builder">
+  <div class="riwrap"><table class="ritable" id="rtable">
+    <tr><th class="nm">Round</th><th>New investor %</th><th>Pool top-up %</th><th>Post-money ($M)</th></tr>
+    <tr><td class="rl">Seed</td><td><input class="inv" type="number" min="0" max="90" value="18"></td><td><input class="pool" type="number" min="0" max="40" value="10"></td><td><input class="post" type="number" min="0" value="10"></td></tr>
+    <tr><td class="rl">Series A</td><td><input class="inv" type="number" min="0" max="90" value="22"></td><td><input class="pool" type="number" min="0" max="40" value="5"></td><td><input class="post" type="number" min="0" value="40"></td></tr>
+    <tr><td class="rl">Series B</td><td><input class="inv" type="number" min="0" max="90" value="18"></td><td><input class="pool" type="number" min="0" max="40" value="3"></td><td><input class="post" type="number" min="0" value="150"></td></tr>
+  </table></div>
+  <button id="c-run">💎 Model the cap table →</button>
+  <button id="c-copy" class="copy">Copy</button>
+  <div id="c-out" class="calcout">
+    <div class="riwrap"><table class="captbl" id="captbl"></table></div>
+    <div class="csum" id="c-sum"></div>
+  </div>
+  <div id="c-err" class="cerr"></div>
+</div>
+
+<h2><span class="sn">4</span>SAFEs &amp; the option pool — the two things that surprise people</h2>
+<p>Two mechanics catch first-time founders off guard, and both quietly cost <em>them</em>:</p>
+<ul>
+<li><strong>SAFEs &amp; convertible notes.</strong> Early money often comes in as a SAFE — a promise to convert to equity at the next priced round, usually at a <em>valuation cap</em> and/or discount. The surprise: if you raised on a $5M cap and later price the round at $20M, those SAFEs convert as if the company were worth $5M — so they take a much bigger slice than the dollars suggest. Always model the <strong>fully-diluted</strong> cap table including SAFE conversion <em>before</em> you sign the priced round.</li>
+<li><strong>The option-pool shuffle.</strong> Investors will require an option pool (for future hires) be created <em>pre-money</em> — which means it comes out of the <em>founders'</em> and existing holders' shares, not the new investors'. A "20% pre-money pool" is a stealth dilution of you. Negotiate the pool to what you'll actually grant before the next round (usually ~10%), not an inflated number that pads the investor's effective ownership.</li>
+</ul>
+<div class="warn"><strong>The option pool is where your team's equity comes from.</strong> As CTO, that pool funds every engineer's grant. Fight for a healthy pool — but understand each grant dilutes the founders and everyone else, so it's a real budget to steward, not free money.</p></div>
+
+<h2><span class="sn">5</span>What investors ask a CTO in diligence — and debt vs equity</h2>
+<p>When a round gets serious, investors run <strong>technical due diligence</strong>, and you're the one in the chair. They're probing for the risks that could sink their investment. Be ready with honest answers <em>and</em> mitigations:</p>
+<ul>
+<li><strong>Scalability &amp; architecture</strong> — will this hold up at 10× the load, or is a rewrite looming?</li>
+<li><strong>Tech debt &amp; code quality</strong> — how much of the roadmap is really achievable, or is it mortgaged to shortcuts?</li>
+<li><strong>Security &amp; compliance</strong> — SOC 2, data handling, past incidents (the questionnaires from <a class="x" href="leadership_bazaar.html">The Bazaar</a> live here too).</li>
+<li><strong>Key-person / bus-factor risk</strong> — "what happens if your lead architect leaves?" Documentation and cross-training are the answer that keeps a deal alive.</li>
+<li><strong>IP ownership</strong> — did every contractor and founder actually assign their IP to the company? A gap here can kill a deal.</li>
+</ul>
+<p><strong>Debt vs equity, briefly:</strong> equity is patient but expensive (you give up ownership forever). <strong>Venture debt</strong> is a loan — it extends runway <em>without</em> dilution, but it must be repaid and is a claim on the company's assets, so it adds risk. The right use is to reach a milestone that de-risks the next equity round — not to avoid a raise you genuinely need.</p>
+
+<h2><span class="sn">6</span>Pressure-test your instincts</h2>
+<p>Equity thinking fails in predictable ways — fearing dilution over value, missing the pool shuffle, ignoring SAFE overhang, and fumbling diligence. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Run the cap-table simulator — notice founders drop from 100% to ~40% while their stake grows from nothing to tens of millions. (2) If your company has raised, ask to see the real cap table and find where the option pool and any SAFEs sit. (3) For your own equity grant, work out your fully-diluted % and what it's worth at the current valuation. (4) Write down an honest answer to "what happens if your key engineer leaves?" — then go reduce that risk.</div>
+
+<div class="tip"><strong>🎉 That completes Stage 4 · Business Fluency.</strong> The business arc: think in products &amp; metrics (<a class="x" href="leadership_product_whisperer.html">Product Whisperer</a>) → communicate to the business (<a class="x" href="leadership_storyteller.html">Storyteller</a>) → read the finances (<a class="x" href="leadership_counting_house.html">Counting House</a>) → understand the model &amp; pricing (<a class="x" href="leadership_bazaar.html">Bazaar</a>) → fund the company (The Treasury). Next, the summit: Stage 5 · The CTO Craft.</p></div>
+
+<p style="margin-top:20px;font-size:12px;color:#888">Leadership track · Stage 4 · the business half of the road to CTO. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'A strong Series A would dilute you ~25%, but fully funds critical growth. A co-founder wants to raise far less to protect ownership %.',
+     opts:[
+       {t:'Optimize for the value of your stake, not the percentage — a smaller slice of a well-funded, faster-growing company usually wins.',v:'best',fb:'40% of a $150M company beats 60% of a $20M one. If the capital genuinely drives growth, taking it and diluting is how you build something big. Guarding your percentage into a starved company is optimizing the wrong number.'},
+       {t:'Negotiate a slightly smaller round that still fully funds the plan.',v:'ok',fb:'Sensible — don’t raise more than you need, and every point of dilution is real. Just make sure "smaller" still funds the milestones; under-raising to save a few points of ownership can starve the growth that makes the whole stake valuable.'},
+       {t:'Raise the absolute minimum to minimize dilution.',v:'poor',fb:'The dilution trap. Chronically under-raising to protect percentage often starves the company of the fuel it needs, so you end up with a big slice of a small (or dead) pie. Ownership % is meaningless if the value isn’t there.'},
+       {t:'Take the biggest round offered, terms be damned.',v:'poor',fb:'The opposite error — over-raising at bad terms (or a too-high valuation you later can’t justify) creates its own problems: excess dilution, pressure, and a painful down-round risk. Raise what the plan needs, on terms you understand.'}
+     ]},
+    {q:'The term sheet requires a 20% option pool created pre-money. A co-founder shrugs — "pools are standard." Do you push back?',
+     opts:[
+       {t:'Yes — a pre-money pool dilutes founders, not investors; negotiate it to what you’ll actually grant before the next round (~10%).',v:'best',fb:'The "option pool shuffle": putting the pool pre-money means it comes out of <em>your</em> shares while padding the investor’s effective ownership. Sizing it to real 18-month hiring needs (often ~10%, not 20%) can save founders several points. This is exactly the math that separates informed founders.'},
+       {t:'Accept it but push to size the pool to realistic hiring needs.',v:'ok',fb:'Right instinct on the size — that’s where the money is. Just be clear that pre-money placement itself is the mechanism shifting the cost onto founders; negotiate both the size <em>and</em>, where you can, the framing. Still, getting the size right captures most of the win.'},
+       {t:'Accept the 20% without question — option pools are normal.',v:'poor',fb:'Pools are normal; a <em>20% pre-money</em> pool is a stealth few-points dilution of the founders dressed up as standard. "It’s standard" is exactly what you’re told when you’re not expected to do the math. Do the math.'},
+       {t:'Refuse to create any option pool.',v:'poor',fb:'Also wrong — you genuinely need a pool to hire and grant equity to your team (your engineers’ shares come from it). The goal isn’t zero pool; it’s a <em>right-sized</em> pool, placed as favorably as you can negotiate.'}
+     ]},
+    {q:'You raised on SAFEs with a $5M cap. Now pricing a round at a $20M valuation, a co-founder assumes the SAFEs are "a small slice."',
+     opts:[
+       {t:'Model the fully-diluted cap table including SAFE conversion before signing — at a $5M cap they convert as if the company were worth $5M.',v:'best',fb:'SAFE overhang is a classic surprise: those early dollars convert at the <em>cap</em>, not the new price, so they take a far bigger slice than the amount raised suggests. Running the fully-diluted table first means no nasty shock at close — and it’s squarely the diligence a founder must do.'},
+       {t:'Have the lawyers run the SAFE conversion math before the round closes.',v:'ok',fb:'Getting it modeled is what matters, and lawyers/finance should verify it. It’s "ok" not "best" only because <em>you</em> should understand the mechanic too, not outsource the intuition — a founder blindsided by their own cap table has abdicated something important.'},
+       {t:'Assume the SAFEs are small and deal with them at close.',v:'poor',fb:'This is precisely how founders get a shock at signing. Uncapped-in-your-head SAFEs at a low cap can convert to a surprisingly large chunk; "we’ll figure it out at close" means discovering the dilution when it’s too late to plan around it.'},
+       {t:'Try to renegotiate or ignore the SAFE caps.',v:'poor',fb:'The caps are a binding promise you already made to early backers; walking them back torches trust and may not even be legal. The answer isn’t to dodge the conversion — it’s to model it honestly and price the round with eyes open.'}
+     ]},
+    {q:'In technical diligence, an investor asks: "What happens if your lead architect leaves? Is the system documented?"',
+     opts:[
+       {t:'Give an honest answer plus a mitigation — documentation, cross-training, reducing the bus-factor — because investors fund teams that de-risk key people.',v:'best',fb:'Key-person risk is a real thing investors probe, and the confident-honest answer ("here’s the concentration, and here’s how we’re reducing it") builds far more trust than a denial. It also happens to be good engineering leadership — a system only one person understands is a liability regardless of fundraising.'},
+       {t:'Reassure them the architect is happy and committed, so it’s a non-issue.',v:'ok',fb:'Retention matters, but "they won’t leave" isn’t a mitigation — people leave for reasons outside your control. Pair the reassurance with the actual risk-reduction (docs, cross-training), or a sharp investor hears an unmanaged single point of failure.'},
+       {t:'Dismiss it — "that’s not going to happen."',v:'poor',fb:'Waving away a legitimate risk reads as either naïve or evasive to someone who’s seen companies cratered by a key departure. It’s the fastest way to lower an investor’s confidence in the whole technical story.'},
+       {t:'Downplay how much context lives in one person’s head.',v:'poor',fb:'Hiding concentration risk in diligence is dangerous — if it surfaces later (and it does), it looks like you either didn’t know your own risks or misrepresented them. Both are worse than the risk itself. Be honest and show the plan.'}
+     ]},
+    {q:'Runway is getting short. You can raise a small (dilutive) equity round now, or take venture debt to avoid dilution.',
+     opts:[
+       {t:'Understand the trade — use venture debt to reach a milestone that de-risks the next raise, not to avoid a raise you genuinely need.',v:'best',fb:'Venture debt extends runway without dilution, but it’s a loan with a claim on the company and must be repaid — powerful as a bridge to a value-creating milestone, dangerous as a way to dodge reality. Knowing <em>when</em> it fits (and when it just adds risk to a struggling company) is the real skill.'},
+       {t:'Raise the small equity round to keep the balance sheet clean.',v:'ok',fb:'A defensible, conservative choice — equity adds no repayment obligation and keeps you flexible. It costs ownership, but a clean balance sheet has real value, especially if the business is still finding its footing. Reasonable, if the terms are fair.'},
+       {t:'Take the maximum venture debt to avoid any dilution.',v:'poor',fb:'Piling on debt to protect ownership can be a trap: if you miss the milestone, the loan comes due on a company that can’t pay, and debt holders get paid before you. Avoiding dilution at the cost of solvency is a bad trade.'},
+       {t:'Do nothing and hope the situation improves before cash runs out.',v:'poor',fb:'Runway problems don’t resolve by waiting, and financing takes months to close — running the clock down removes all your options and forces a desperate, terrible-terms raise (or worse). Short runway demands a deliberate decision now, not hope.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Treasury move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // cap table simulator
+  var ROUNDS=['Seed','Series A','Series B'];
+  var out=document.getElementById('c-out'),err=document.getElementById('c-err'),lastText='';
+  function run(){
+    err.textContent='';
+    var trs=document.querySelectorAll('#rtable tr');
+    var rounds=[];
+    for(var i=1;i<trs.length;i++){
+      var inv=parseFloat(trs[i].querySelector('.inv').value),pool=parseFloat(trs[i].querySelector('.pool').value),post=parseFloat(trs[i].querySelector('.post').value);
+      if(isNaN(inv)||isNaN(pool)||isNaN(post)){err.textContent='Fill every field in all three rounds.';out.classList.remove('show');return;}
+      if(inv+pool>=95){err.textContent='In '+ROUNDS[i-1]+', investor % + pool % must be under 95.';out.classList.remove('show');return;}
+      rounds.push({inv:inv,pool:pool,post:post});
+    }
+    // sequential dilution model, snapshot after each round
+    var holders={'Founders':100};
+    var cols=[{label:'Founding',post:null,h:{'Founders':100}}];
+    rounds.forEach(function(r,idx){
+      var factor=(100-r.inv-r.pool)/100;
+      Object.keys(holders).forEach(function(k){holders[k]=holders[k]*factor;});
+      holders['Option pool']=(holders['Option pool']||0)+r.pool;
+      holders[ROUNDS[idx]+' investors']=r.inv;
+      var snap={};Object.keys(holders).forEach(function(k){snap[k]=holders[k];});
+      cols.push({label:'post-'+ROUNDS[idx],post:r.post,h:snap});
+    });
+    var rowOrder=['Founders','Option pool','Seed investors','Series A investors','Series B investors'];
+    var tbl=document.getElementById('captbl');
+    var head='<tr><th class="nm">Holder</th>'+cols.map(function(c){return '<th>'+c.label+'</th>';}).join('')+'</tr>';
+    var body='';
+    rowOrder.forEach(function(name){
+      var any=cols.some(function(c){return c.h[name];});if(!any)return;
+      var cls=name==='Founders'?' class="founders"':'';
+      body+='<tr'+cls+'><td class="nm">'+name+'</td>'+cols.map(function(c){var v=c.h[name];return '<td>'+(v?v.toFixed(1)+'%':'—')+'</td>';}).join('')+'</tr>';
+    });
+    // founder value row
+    body+='<tr><td class="nm" style="color:#0F6E56">Founders’ stake value</td>'+cols.map(function(c){
+      if(c.post==null)return '<td>—</td>';
+      var fv=c.h['Founders']/100*c.post;return '<td>$'+fv.toFixed(1)+'m</td>';
+    }).join('')+'</tr>';
+    tbl.innerHTML=head+body;
+    var fStart=100,fEnd=cols[cols.length-1].h['Founders'],vEnd=fEnd/100*cols[cols.length-1].post;
+    document.getElementById('c-sum').innerHTML='Founders went from <b>100%</b> to <b>'+fEnd.toFixed(1)+'%</b> across three rounds — but their stake grew from ~$0 to <b>$'+vEnd.toFixed(1)+'m</b>. That’s the whole game: give up percentage to grow the value of what you keep. The option pool ('+ (cols[cols.length-1].h['Option pool']||0).toFixed(1) +'%) is your team’s equity budget.';
+    out.classList.add('show');
+    lastText='CAP TABLE — seed to Series B\n\n'+rowOrder.filter(function(n){return cols.some(function(c){return c.h[n];});}).map(function(name){
+      return name.padEnd(22)+cols.map(function(c){var v=c.h[name];return (v?v.toFixed(1)+'%':'—').padStart(10);}).join('');
+    }).join('\n')+'\n'+'Founders value'.padEnd(22)+cols.map(function(c){return (c.post==null?'—':'$'+(c.h['Founders']/100*c.post).toFixed(1)+'m').padStart(10);}).join('')+'\n\nFounders: 100% -> '+fEnd.toFixed(1)+'%, stake worth ~$'+vEnd.toFixed(1)+'m. Percentage down, value up.\n';
+  }
+  document.getElementById('c-run').addEventListener('click',run);
+  document.getElementById('c-copy').addEventListener('click',function(){
+    if(!lastText)run();
+    if(!lastText)return;
+    var btn=this;navigator.clipboard.writeText(lastText).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
