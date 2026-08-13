@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Chessboard — Technology Strategy</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#f0f0f0;color:#888}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#1c1c1c;color:#777}}
+/* 3-col compare */
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px 0}.cell{border:1px solid #e8e8e8;border-radius:10px;padding:9px 11px;background:#fafafa}@media(prefers-color-scheme:dark){.cell{border-color:#2a2a2a;background:#151515}}.cell h5{font-size:11.5px;font-weight:700;margin-bottom:3px;color:#5350B4}@media(prefers-color-scheme:dark){.cell h5{color:#a6a3ff}}.cell p{font-size:11px;color:#666;margin:0;line-height:1.4}@media(prefers-color-scheme:dark){.cell p{color:#999}}
+/* portfolio bar */
+.pf{display:flex;border-radius:8px;overflow:hidden;margin:12px 0 4px;font-size:10.5px;font-weight:700;color:#fff;text-align:center}.pf div{padding:8px 4px;line-height:1.3}.pf .core{background:#0F6E56;flex:70}.pf .adj{background:#BA7517;flex:20}.pf .trans{background:#5350B4;flex:10}
+.pflab{display:flex;font-size:10px;color:#888;font-weight:600}.pflab span:nth-child(1){flex:70}.pflab span:nth-child(2){flex:20}.pflab span:nth-child(3){flex:10}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:460px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 87–96 · Stage 5</span>
+<h1>♟️ The Chessboard</h1>
+<p class="sub">This is where the road arrives at the actual job. A CTO's defining output isn't code or even org design — it's <strong>technology strategy</strong>: a small set of hard choices about where to invest, where not to, and how technology wins the game the business is playing. A grandmaster doesn't move every piece; they see the board, pick the decisive line, and sacrifice the rest. Strategy is deciding which moves matter.</p>
+
+<div class="tip">First module of <strong>Stage 5 · The CTO Craft</strong> — the summit. The centerpiece is a real <strong>strategy-doc builder</strong>: write a three-year technology strategy that actually guides decisions.</p></div>
+
+<h2><span class="sn">1</span>Strategy is choosing what NOT to do</h2>
+<p>The most common thing called "strategy" isn't one. A list of goals ("scale to 10M users, improve reliability, adopt AI, hire great people") is a wish list — every option ticked, nothing sacrificed. Real strategy, as Richard Rumelt frames it, has a hard <strong>kernel</strong>: a <em>diagnosis</em> of the one challenge that matters most, a <em>guiding policy</em> for how you'll tackle it, and a set of <em>coherent actions</em> that all point the same way. Its defining feature is <strong>sacrifice</strong> — a strategy that doesn't tell you what to say <em>no</em> to isn't a strategy, it's a mission statement.</p>
+<div class="sched">
+  <div class="col"><h4>❌ Bad strategy (fluff &amp; goals)</h4>
+    <div class="blk bad">A list of goals, all ticked</div>
+    <div class="blk bad">"Be the best / grow / innovate"</div>
+    <div class="blk bad">No diagnosis of the real challenge</div>
+    <div class="blk bad">Nothing is sacrificed or excluded</div>
+    <div class="blk bad">Changes no one's actual decisions</div>
+  </div>
+  <div class="col"><h4>✅ Good strategy (a hard choice)</h4>
+    <div class="blk good">Diagnosis of the one thing that matters</div>
+    <div class="blk good">A guiding policy to address it</div>
+    <div class="blk good">Coherent actions that reinforce each other</div>
+    <div class="blk good">An explicit list of what we won't do</div>
+    <div class="blk good">Redirects where the money &amp; people go</div>
+  </div>
+</div>
+
+<h2><span class="sn">2</span>A strategy doc that guides decisions</h2>
+<p>A technology strategy earns its keep only if it changes what people build. The test: six months from now, when a team faces a fork, does the doc tell them which way to go? If it's a shelf-ware slide deck full of aspirations, it fails. A good one is short, opinionated, and referenced constantly — it says <em>here's our bet, here's why, and here's what that means we're not doing</em>. You'll write one in the deliverable, and the discipline is the same as <a class="x" href="leadership_storyteller.html">The Storyteller</a>: lead with the choice, justify it, name the trade-offs.</p>
+
+<h2><span class="sn">3</span>Moats &amp; defensibility</h2>
+<p>Strategy asks not just "how do we win?" but "how do we <em>keep</em> winning once competitors notice?" That's a <strong>moat</strong> — a durable advantage. The hard truth: <strong>most technical sophistication is not a moat.</strong> Clever architecture and hard engineering feel defensible, but competitors catch up, and being 10% better rarely holds a market. Durable moats are usually structural:</p>
+<ul>
+<li><strong>Network effects</strong> — the product gets better as more people use it (marketplaces, social, platforms). The strongest moat there is.</li>
+<li><strong>Switching costs</strong> — once a customer builds on you, leaving is painful (data, integrations, workflows). Platform APIs create this deliberately.</li>
+<li><strong>Economies of scale</strong> — you can serve cheaper than anyone smaller (infra, data).</li>
+<li><strong>Data / proprietary assets</strong> — a data advantage that compounds and can't be copied.</li>
+</ul>
+<p>The strategic question for a CTO: is our technical work building something <em>defensible</em>, or just something impressive? Direct engineering investment toward the moat.</p>
+
+<h2><span class="sn">4</span>Build / buy / partner — with real numbers</h2>
+<p>Every capability you need is a choice: build it, buy it, or partner for it. Engineers reflexively build ("we can do it better"), which quietly spends your scarcest capital — engineering time — on things that don't differentiate you. Decide with the numbers from <a class="x" href="leadership_counting_house.html">The Counting House</a>, not ego:</p>
+<div class="three">
+  <div class="cell"><h5>Build</h5><p>When it's your <b>core differentiator</b> — the thing customers pay <em>you</em> for. Build the moat; own the crown jewels.</p></div>
+  <div class="cell"><h5>Buy</h5><p>When it's <b>commodity</b> — auth, observability, payments, infra. Someone sells it better and cheaper than you'd build it. Buy speed.</p></div>
+  <div class="cell"><h5>Partner</h5><p>When you need a capability or reach you <b>can't build fast enough</b> and don't want to own — integrations, certifications, distribution.</p></div>
+</div>
+<div class="warn"><strong>The two traps.</strong> "Build everything" burns years reinventing commodity infrastructure and starves your differentiator. "Buy everything" leaves you with no moat — a thin wrapper around other people's products that anyone can clone. The strategy is knowing which few things are worth building and ruthlessly buying the rest.</p></div>
+
+<h2><span class="sn">5</span>Innovation portfolio &amp; tech debt as a liability</h2>
+<p>You can't bet everything on the safe core, or everything on moonshots. A healthy <strong>innovation portfolio</strong> balances horizons — a common split is roughly <strong>70 / 20 / 10</strong>:</p>
+<div class="pf"><div class="core">70% Core</div><div class="adj">20% Adjacent</div><div class="trans">10% Transformational</div></div>
+<div class="pflab"><span>today's cash cow</span><span>next markets</span><span>the big bet</span></div>
+<p style="margin-top:10px">Starve the core and today's revenue erodes; skip the 10% and you have no future. As CTO you own that balance — and you defend the 10% when short-term pressure tries to raid it.</p>
+<p>Reframe <strong>tech debt as a balance-sheet liability</strong>, not a moral failing. Like financial debt, it accrues <em>interest</em> — every quarter you don't pay it, everything ships a little slower. Some debt is smart leverage (ship now, refactor later, deliberately); some is reckless (shortcuts nobody chose). Paying it down is an <em>investment</em> in future velocity, and framing it that way (in business terms) is how you win the budget to do it.</p>
+
+<h2><span class="sn">6</span>AI strategy — the bet you can't skip</h2>
+<p>Right now, every CTO owes their company a real answer to "what's our AI strategy?" — and the wrong answers are equally dangerous: <strong>AI theater</strong> (bolt a chatbot on to look current) and <strong>willful blindness</strong> (ignore it and hope). A real AI strategy asks the strategic questions: <em>Where does AI genuinely change our product, our cost-to-serve, or our moat? What's now possible that wasn't? What's newly threatened?</em> Then it makes the build-vs-buy call deliberately — for most, you <em>buy</em> the foundation models (the <a class="x" href="aws_cloud_toolbox.html#genai">Bedrock/vendor</a> layer) and <em>build</em> the product and data advantage on top. The moat is rarely the model; it's your proprietary data and the workflow you wrap around it.</p>
+
+<h2><span class="sn">7</span>Deliverable — a three-year technology strategy</h2>
+<p>Write a real one for a company you know. Fill the kernel — diagnosis, guiding policy, the big bets, and (crucially) what you <em>won't</em> do — and the builder assembles a strategy one-pager that could actually guide decisions:</p>
+<div class="builder">
+  <div class="fld">Company / context<input id="c-co" type="text" placeholder="e.g. a mid-stage B2B SaaS at ~$15M ARR, growth slowing"></div>
+  <div class="fld">Diagnosis — the ONE challenge or opportunity that matters most<textarea id="c-diag" rows="2" placeholder="e.g. Growth is capped by slow onboarding and infra that can't serve enterprise — and AI is resetting what customers expect."></textarea></div>
+  <div class="fld">Guiding policy — our overall approach to it<textarea id="c-policy" rows="2" placeholder="e.g. Go up-market to enterprise by making the platform fast, secure and extensible, and use AI to collapse time-to-value."></textarea></div>
+  <div class="fld">The 3 big bets (where we invest over 3 years)<textarea id="c-bets" rows="3" placeholder="e.g. 1) Re-platform for enterprise scale & security&#10;2) AI-assisted onboarding that cuts time-to-value 10x&#10;3) A public platform API so customers build on us (switching-cost moat)"></textarea></div>
+  <div class="fld">What we will NOT do (the sacrifices)<textarea id="c-not" rows="2" placeholder="e.g. No new verticals, no consumer product, and no building commodity infra we can buy."></textarea></div>
+  <div class="fld">Build / buy / partner calls<input id="c-bbp" type="text" placeholder="e.g. Build the platform APIs & data layer; buy auth, observability & foundation models; partner for compliance certs."></div>
+  <div class="fld">How we'll know it's working (the signal)<input id="c-signal" type="text" placeholder="e.g. Enterprise ARR mix, time-to-value, and NRR all trending up"></div>
+  <button id="c-gen">♟️ Assemble the strategy →</button>
+  <button id="c-copy" class="copy">Copy</button>
+  <div id="c-out" class="out-box"></div>
+</div>
+
+<h2><span class="sn">8</span>Pressure-test your instincts</h2>
+<p>Strategy fails in predictable ways — mistaking goals for strategy, building what you should buy, trusting a moat that isn't, and doing AI theater. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Write the three-year strategy for a company you know — the hardest and most revealing field is "what we will NOT do." (2) For your current work, ask of each major effort: build, buy, or partner — and is engineering time going to the moat? (3) Name your company's real moat honestly; if it's "our tech is better," keep looking. (4) Write one sentence on where AI genuinely changes your product — no theater.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 5 · the CTO craft. The first of the summit modules. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'The CEO asks for a "tech strategy." The team produces: "scale to 10M users, improve reliability, adopt AI, hire great engineers."',
+     opts:[
+       {t:'Point out that’s a goal list, not a strategy — and drive a real one: diagnose the key challenge, then make hard choices about focus and sacrifice.',v:'best',fb:'Every item ticked, nothing given up — that’s a wish list, not strategy. A real strategy names the one challenge that matters and what you’ll sacrifice to win it. Reframing this is exactly the CTO’s job; the goal list would guide no actual decision.'},
+       {t:'Add priorities and sequencing to the goals.',v:'ok',fb:'Prioritizing helps and is a step up from an undifferentiated list. But sequencing goals still isn’t strategy — you haven’t diagnosed the core challenge or decided what to <em>not</em> do. Push past ordering the wishes to choosing among them.'},
+       {t:'Ship the goal list as the strategy — it covers everything.',v:'poor',fb:'"Covers everything" is the tell of bad strategy: no diagnosis, no sacrifice, no choice. A strategy that asks for everything provides no guidance when a team hits a real fork — which is the only moment strategy exists to serve.'},
+       {t:'Make it longer and more comprehensive to be thorough.',v:'poor',fb:'Comprehensiveness is the opposite of strategy. More goals means more directions means less focus; you’d be polishing the wish list. Strategy is subtraction — the value is in what you cross out, not what you add.'}
+     ]},
+    {q:'A team wants to build a custom auth system in-house — "we understand our needs best, and we can build it better."',
+     opts:[
+       {t:'Buy commodity infrastructure; reserve building for real differentiators — engineering time is your scarcest capital.',v:'best',fb:'Auth is a solved commodity that specialists build better and maintain forever; every week your team spends on it is a week stolen from the thing customers actually pay you for. "We can build it better" is usually true and almost always the wrong use of your scarcest resource.'},
+       {t:'Timebox a build-vs-buy evaluation with real numbers.',v:'ok',fb:'Good discipline — decide with cost, time and opportunity-cost numbers, not instinct. It’s "ok" not "best" only because for a pure commodity like auth the answer is nearly always "buy"; the evaluation is worth doing but shouldn’t become a way to justify a fun build.'},
+       {t:'Let them build it — we’re strong engineers and it’s core plumbing.',v:'poor',fb:'The classic engineer’s trap. "We’re good at it" isn’t the question; "does it differentiate us?" is. Building commodity plumbing feels productive while quietly starving your moat and signing up for years of maintenance nobody credits you for.'},
+       {t:'Make it policy to buy everything and never build in-house.',v:'poor',fb:'Overcorrection into no moat. If you buy <em>everything</em>, you’re a thin wrapper around other people’s products that anyone can clone. The skill is discernment — build the few differentiating things, buy the rest — not a blanket rule either way.'}
+     ]},
+    {q:'Leadership is convinced "our technology is our moat" because the product is genuinely sophisticated and hard to build.',
+     opts:[
+       {t:'Pressure-test it — technical sophistication rarely lasts; steer investment toward structural moats (network effects, switching costs, data, scale).',v:'best',fb:'Being 10% better is not a moat — competitors catch up, and clever architecture doesn’t stop them. Durable advantage is structural. The strategic move is to convert engineering effort into something defensible (lock-in, data, network) rather than betting the company on staying perpetually ahead on cleverness.'},
+       {t:'Invest deliberately in the things that are actually defensible.',v:'ok',fb:'Right direction — channeling effort toward real moats is the goal. It’s "ok" mainly because it skips the crucial first step of dislodging the false belief; if leadership still thinks the sophistication itself is the moat, they’ll under-invest in the structural stuff. Name the illusion, then redirect.'},
+       {t:'Assume the technical complexity keeps competitors out.',v:'poor',fb:'Complexity is a barrier for a while and then it isn’t — well-funded competitors reproduce hard tech routinely, and "hard to build" is not "hard to compete with." Resting on sophistication is how technically excellent companies get out-maneuvered by ones with a real moat.'},
+       {t:'File lots of patents to protect the technology.',v:'poor',fb:'Patents rarely make a moat in fast-moving software — they’re slow, expensive, hard to enforce, and easy to design around. Treating a patent portfolio as your defensibility strategy is usually cargo-cult moat-building, not the real thing.'}
+     ]},
+    {q:'The board wants to cut all "non-feature" work to maximize output. You’re carrying serious tech debt that slows every release.',
+     opts:[
+       {t:'Frame tech debt as a balance-sheet liability accruing interest — paying it down is an investment that raises future velocity.',v:'best',fb:'"Non-feature work" is the wrong frame; translate it into their language (from <a class="x" href="leadership_storyteller.html">The Storyteller</a>): debt with compounding interest that taxes every future feature. Framed as an investment in velocity — with the cost of ignoring it — you win the budget instead of losing the argument.'},
+       {t:'Negotiate a fixed % of capacity (say 15–20%) for debt paydown.',v:'ok',fb:'A pragmatic, durable arrangement — a standing allocation prevents debt from ever being fully raided. Strong, though pair it with the business framing so the board understands <em>why</em> it’s protected, or the percentage gets cut the next time pressure rises.'},
+       {t:'Comply and freeze all debt work to maximize feature output.',v:'poor',fb:'The interest compounds. Freezing debt paydown buys a short output bump, then velocity decays quarter after quarter until you’re barely shipping — the classic way teams grind to a halt while "maximizing output." Short-term features bought with long-term speed.'},
+       {t:'Keep doing debt work quietly and hide it from the board.',v:'poor',fb:'Hiding it means you never win the real argument and you erode trust if discovered. The answer is to <em>make the case</em> in business terms, not to go underground — a CTO who can’t defend essential work openly has a communication gap, not a stealth-work solution.'}
+     ]},
+    {q:'Everyone is shipping "AI features." The board wants an AI strategy, and there’s pressure to bolt a chatbot onto the product.',
+     opts:[
+       {t:'Ask where AI genuinely changes the product, cost, or moat — build a real strategy, and make the build-vs-buy (foundation model) call deliberately.',v:'best',fb:'A real AI strategy starts from "what’s newly possible or newly threatened for <em>us</em>?", not "what looks current?" For most, you buy the model and build the proprietary data + workflow advantage on top — the moat is rarely the model itself. That’s strategy; a bolted-on chatbot is theater.'},
+       {t:'Run small, cheap experiments to find where AI adds real value.',v:'ok',fb:'A genuinely good approach — discovery beats a grand pronouncement, and cheap experiments surface where AI actually moves a metric. It’s "ok" mostly because experiments need a strategic frame to interpret; pair the tests with the "where does this change our moat?" question so you’re learning toward something.'},
+       {t:'Bolt a chatbot onto the product so we look current.',v:'poor',fb:'AI theater — shipping an AI feature to signal relevance rather than to create value. It burns effort, often ships something users don’t want, and substitutes the appearance of a strategy for an actual one. The board asked for strategy; a chatbot is a costume.'},
+       {t:'Ignore AI for now — it’s hype and will pass.',v:'poor',fb:'Willful blindness is the mirror-image error to theater. Even if much is hype, "what’s newly possible or newly threatened?" is a question you must answer, because if AI genuinely resets your market and you looked away, no later effort catches up. Engage seriously, even to conclude "not yet."'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Strategist move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  function val(id){return (document.getElementById(id).value||'').trim();}
+  var out=document.getElementById('c-out');
+  function build(){
+    var co=val('c-co')||'a mid-stage B2B SaaS at ~$15M ARR, growth slowing';
+    var diag=val('c-diag')||'Growth is capped by slow onboarding and infra that can’t serve enterprise — and AI is resetting what customers expect.';
+    var pol=val('c-policy')||'Go up-market to enterprise by making the platform fast, secure and extensible, and use AI to collapse time-to-value.';
+    var bets=(document.getElementById('c-bets').value||'').split('\n').map(function(x){return x.trim();}).filter(Boolean);
+    if(!bets.length)bets=['Re-platform for enterprise scale & security (SOC2, multi-region)','AI-assisted onboarding that cuts time-to-value 10x','A public platform API so customers build on us (switching-cost moat)'];
+    var not=val('c-not')||'No new verticals, no consumer product, and no building commodity infra we can buy.';
+    var bbp=val('c-bbp')||'Build the platform APIs & data layer; buy auth, observability & foundation models; partner for compliance certifications.';
+    var sig=val('c-signal')||'Enterprise ARR mix, time-to-value, and NRR all trending up.';
+    var lines=['# Three-year technology strategy','Context: '+co,'','## Diagnosis (the one thing that matters)','  '+diag,'','## Guiding policy','  '+pol,'','## The bets (where we invest)'];
+    bets.forEach(function(b,i){lines.push('  '+(i+1)+'. '+b.replace(/^\d+[).\s]+/,''));});
+    lines.push('','## What we will NOT do (the sacrifices)','  '+not,'','## Build / buy / partner','  '+bbp,'','## How we’ll know it’s working','  '+sig,'',
+      '---',
+      'A strategy is a set of choices, not a list of goals. The sharpest line above is',
+      '"what we will NOT do" — if it’s empty or painless, this isn’t a strategy yet.',
+      'Revisit yearly; it should still be telling teams which fork to take.');
+    return lines.join('\n');
+  }
+  document.getElementById('c-gen').addEventListener('click',function(){out.textContent=build();out.classList.add('show');});
+  document.getElementById('c-copy').addEventListener('click',function(){
+    if(!out.classList.contains('show')){out.textContent=build();out.classList.add('show');}
+    var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
