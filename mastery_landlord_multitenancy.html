@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Landlord — Multi-Tenancy &amp; SaaS Architecture</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:320px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}.ascii{font-size:11.5px;line-height:1.5}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · SaaS Architecture</span>
+<h1>🏢 The Landlord</h1>
+<p class="sub">Every SaaS product is a building with many tenants inside — the question is how much of the building each tenant actually shares. Share too much and one tenant's bad behavior (or a single missing filter in a query) leaks into everyone else's apartment. Isolate too much and you've built a hundred single-tenant products with a hundred times the operational cost. Multi-tenancy is choosing, deliberately, where that line sits.</p>
+
+<h2><span class="sn">1</span>Pool, silo, and bridge — the three isolation models</h2>
+<table>
+<tr><th>Model</th><th>How it works</th><th>Trade-off</th></tr>
+<tr><td><strong>Pool</strong></td><td>All tenants share the same database and app instances; every row is tagged with a <code>tenant_id</code>.</td><td>Cheapest to run and scale; isolation is only as strong as your query discipline.</td></tr>
+<tr><td><strong>Silo</strong></td><td>Each tenant gets fully separate infrastructure — its own database, sometimes its own app deployment.</td><td>Strongest isolation and easiest to reason about; most expensive, hardest to operate at scale.</td></tr>
+<tr><td><strong>Bridge</strong></td><td>A hybrid — shared app tier but per-tenant databases (or the reverse), often reserved for large/regulated tenants.</td><td>Isolation where it matters most, shared cost where it doesn't.</td></tr>
+</table>
+<p>Most SaaS products start pooled for cost efficiency, then bridge their largest or most regulated tenants into silos as those customers demand it — you rarely choose one model for the product's entire lifetime.</p>
+
+<h2><span class="sn">2</span>The pool model's classic bug — a forgotten tenant filter</h2>
+<p>Pooled multi-tenancy's entire security model rests on one thing: every single query that touches tenant data includes a <code>WHERE tenant_id = ?</code>. Forget it once, in one endpoint, and tenant A can read tenant B's data — this is one of the most common real-world SaaS data breaches, and it's purely a discipline failure, not a sophisticated attack:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// A shared "invoices" table — the tenant filter is the ENTIRE isolation boundary</span>
+<span class="kw">const</span> invoices = [
+  { id: <span class="num">1</span>, tenantId: <span class="str">'acme'</span>, amount: <span class="num">500</span> },
+  { id: <span class="num">2</span>, tenantId: <span class="str">'acme'</span>, amount: <span class="num">1200</span> },
+  { id: <span class="num">3</span>, tenantId: <span class="str">'globex'</span>, amount: <span class="num">9000</span> }, <span class="cm">// a competitor's invoice — must never leak</span>
+];
+
+<span class="kw">function</span> <span class="fn">buggyQuery</span>() { <span class="cm">// forgot the tenant filter</span>
+  <span class="kw">return</span> invoices;
+}
+<span class="kw">function</span> <span class="fn">correctQuery</span>(tenantId) {
+  <span class="kw">return</span> invoices.<span class="fn">filter</span>(inv =&gt; inv.tenantId === tenantId);
+}
+
+console.<span class="fn">log</span>(<span class="str">'acme calls the BUGGY endpoint (no tenant filter):'</span>);
+console.<span class="fn">log</span>(<span class="fn">buggyQuery</span>());
+console.<span class="fn">log</span>(<span class="str">'  ⚠️  acme just saw globex\'s $9000 invoice — a real data breach'</span>);
+console.<span class="fn">log</span>(<span class="str">''</span>);
+console.<span class="fn">log</span>(<span class="str">'acme calls the CORRECT endpoint (tenant filter applied):'</span>);
+console.<span class="fn">log</span>(<span class="fn">correctQuery</span>(<span class="str">'acme'</span>));
+console.<span class="fn">log</span>(<span class="str">'→ this is why teams enforce tenant filtering at the ORM/query-builder level,'</span>);
+console.<span class="fn">log</span>(<span class="str">'  not by trusting every hand-written query to remember it'</span>);</pre><div class="out"></div></div>
+<div class="warn">Don't rely on developer discipline alone — enforce it structurally: row-level security policies at the database level, or a query-builder wrapper that makes it impossible to construct a tenant query without a tenant ID. The bug above should be a compile-time or database-level impossibility, not a code-review hope.</div>
+
+<h2><span class="sn">3</span>Noisy neighbors</h2>
+<p>In a pooled model, one tenant running a huge batch export or an inefficient query can degrade response times for every other tenant sharing that database — the "noisy neighbor" problem. The fix is treating each tenant's resource consumption as something to actively bound, not just monitor after the fact:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Per-tenant rate limiting protects everyone else from one heavy tenant</span>
+<span class="kw">class</span> <span class="fn">TenantLimiter</span> {
+  <span class="fn">constructor</span>(limitPerMinute) { <span class="kw">this</span>.limit = limitPerMinute; <span class="kw">this</span>.usage = {}; }
+  <span class="fn">request</span>(tenantId) {
+    <span class="kw">this</span>.usage[tenantId] = (<span class="kw">this</span>.usage[tenantId] || <span class="num">0</span>) + <span class="num">1</span>;
+    <span class="kw">return</span> <span class="kw">this</span>.usage[tenantId] &lt;= <span class="kw">this</span>.limit;
+  }
+}
+<span class="kw">const</span> limiter = <span class="kw">new</span> <span class="fn">TenantLimiter</span>(<span class="num">5</span>); <span class="cm">// 5 requests/min per tenant, independent of every other tenant</span>
+
+<span class="cm">// "globex" runs a heavy batch job; "acme" makes a normal handful of requests</span>
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; <span class="num">8</span>; i++) {
+  <span class="kw">const</span> ok = limiter.<span class="fn">request</span>(<span class="str">'globex'</span>);
+  <span class="kw">if</span> (!ok) { console.<span class="fn">log</span>(<span class="str">'globex request #'</span> + (i + <span class="num">1</span>) + <span class="str">' → 429 throttled (protects other tenants\' capacity)'</span>); }
+}
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; <span class="num">3</span>; i++) {
+  <span class="kw">const</span> ok = limiter.<span class="fn">request</span>(<span class="str">'acme'</span>);
+  console.<span class="fn">log</span>(<span class="str">'acme request #'</span> + (i + <span class="num">1</span>) + <span class="str">' → '</span> + (ok ? <span class="str">'200 OK (unaffected by globex)'</span> : <span class="str">'429'</span>));
+}</pre><div class="out"></div></div>
+
+<h2><span class="sn">4</span>Per-tenant cost attribution</h2>
+<p>In a shared, pooled system, "how much does this tenant cost us to serve" isn't automatic — you have to actually measure it (compute time, storage, egress, support load) and tie it back to a tenant ID, or you're pricing blind. Without this, a whale customer running heavy queries on your cheapest plan can be quietly unprofitable for years before anyone notices:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Per-tenant margin: measured cost to serve vs. what they actually pay</span>
+<span class="kw">const</span> tenants = [
+  { name: <span class="str">'acme'</span>,   plan: <span class="str">'starter'</span>,  monthlyPrice: <span class="num">99</span>,  computeHrs: <span class="num">2</span>,   storageGB: <span class="num">5</span>   },
+  { name: <span class="str">'globex'</span>, plan: <span class="str">'starter'</span>,  monthlyPrice: <span class="num">99</span>,  computeHrs: <span class="num">180</span>, storageGB: <span class="num">900</span> }, <span class="cm">// heavy usage, cheap plan</span>
+  { name: <span class="str">'initech'</span>,plan: <span class="str">'enterprise'</span>, monthlyPrice: <span class="num">2500</span>, computeHrs: <span class="num">40</span>,  storageGB: <span class="num">200</span> },
+];
+<span class="kw">const</span> COMPUTE_COST_PER_HR = <span class="num">0.5</span>, STORAGE_COST_PER_GB = <span class="num">0.1</span>;
+
+tenants.<span class="fn">forEach</span>(t =&gt; {
+  <span class="kw">const</span> cost = (t.computeHrs * COMPUTE_COST_PER_HR) + (t.storageGB * STORAGE_COST_PER_GB);
+  <span class="kw">const</span> margin = t.monthlyPrice - cost;
+  console.<span class="fn">log</span>(t.name + <span class="str">' ('</span> + t.plan + <span class="str">', $'</span> + t.monthlyPrice + <span class="str">'/mo): cost to serve $'</span> + cost.<span class="fn">toFixed</span>(<span class="num">2</span>) + <span class="str">' → margin $'</span> + margin.<span class="fn">toFixed</span>(<span class="num">2</span>) + (margin &lt; <span class="num">0</span> ? <span class="str">'  ⚠️  LOSING MONEY on this tenant'</span> : <span class="str">''</span>));
+});
+console.<span class="fn">log</span>(<span class="str">'→ without per-tenant attribution, globex\'s loss is invisible — buried in an average'</span>);</pre><div class="out"></div></div>
+<div class="tip">This is where <a class="back" href="leadership_bazaar.html">The Bazaar</a>'s usage-based pricing becomes a technical necessity, not just a pricing preference: metering actual per-tenant consumption is the only way to price a heavy-usage tenant correctly instead of subsidizing them with everyone else's margin.</div>
+
+<h2><span class="sn">5</span>The enterprise-readiness checklist</h2>
+<p>Before a large enterprise will sign, procurement and security teams typically require the same short list regardless of your product's actual functionality — build these in early rather than scrambling for a single deal:</p>
+<ul>
+<li><strong>SSO/SAML</strong> — enterprise identity providers (Okta, Azure AD), not just email/password.</li>
+<li><strong>Role-based access control (RBAC)</strong> — the enterprise's admin controls who on their side can see/do what.</li>
+<li><strong>Audit logs</strong> — a queryable record of who did what, when, for their own compliance needs.</li>
+<li><strong>Data residency</strong> — some regulated customers require their data to physically stay in a specific region.</li>
+<li><strong>SLA &amp; uptime commitments</strong> — see <a class="back" href="leadership_fine_print.html">The Fine Print</a> on what you can honestly promise.</li>
+</ul>
+
+<div class="ok"><strong>Try it:</strong> (1) In a real project, find every query that touches user/customer data and confirm each one filters by tenant/account ID — treat any that don't as a live bug. (2) Add a simple per-tenant rate limiter to an API endpoint. (3) Pick 3 fake tenants with different usage levels and compute their margin the way §4 does — would any of them lose you money at scale? <strong>Deliverable:</strong> add tenant isolation to a phase project — a <code>tenant_id</code> column enforced at the query layer, plus one test that proves tenant A cannot read tenant B's data.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mastery Track · extends Phase 2 (Databases) &amp; Phase 3 (full-stack). From <a class="back" href="upcoming.html">The Road to CTO</a> board — Stage 1, technical foundation. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>
