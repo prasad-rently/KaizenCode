@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Switchboard — Networking Internals</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:300px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}.ascii{font-size:11.5px;line-height:1.5}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Networking</span>
+<h1>🔀 The Switchboard</h1>
+<p class="sub">Every request you've ever made in this curriculum crossed a network you mostly ignored — Phase 1 treated it as a black box. This module opens the box: how a name becomes an address, what TCP and UDP actually trade off, why HTTP keeps reinventing its own plumbing, and how a load balancer decides which server gets your request.</p>
+
+<h2><span class="sn">1</span>DNS resolution — a name becomes an address</h2>
+<p>Before a single byte of your request goes anywhere, the hostname has to resolve to an IP. That's a chain of caches and delegations, checked in order — each layer that answers saves a hop:</p>
+<pre class="ascii"><span class="cm">Browser cache → OS resolver cache → recursive resolver (ISP/8.8.8.8)</span>
+<span class="cm">  → root server → TLD server (.com) → authoritative server → IP</span></pre>
+<p>Run the chain and see where a cold lookup actually spends its time versus a warm one:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Simulated DNS resolution chain — each hop only runs on a cache miss</span>
+<span class="kw">const</span> cache = <span class="kw">new</span> <span class="fn">Map</span>();
+<span class="kw">function</span> <span class="fn">resolve</span>(host) {
+  <span class="kw">if</span> (cache.<span class="fn">has</span>(host)) <span class="kw">return</span> { ip: cache.<span class="fn">get</span>(host), hops: [<span class="str">'browser cache HIT'</span>] };
+  <span class="kw">const</span> hops = [<span class="str">'browser cache MISS'</span>, <span class="str">'OS resolver MISS'</span>, <span class="str">'recursive resolver → root'</span>, <span class="str">'root → .com TLD'</span>, <span class="str">'TLD → authoritative NS'</span>, <span class="str">'authoritative → A record'</span>];
+  <span class="kw">const</span> ip = <span class="str">'203.0.113.'</span> + (host.<span class="fn">length</span> % <span class="num">255</span>);
+  cache.<span class="fn">set</span>(host, ip);
+  <span class="kw">return</span> { ip, hops };
+}
+console.<span class="fn">log</span>(<span class="str">'cold lookup:'</span>, <span class="fn">resolve</span>(<span class="str">'api.example.com'</span>));
+console.<span class="fn">log</span>(<span class="str">'warm lookup (same host):'</span>, <span class="fn">resolve</span>(<span class="str">'api.example.com'</span>));
+console.<span class="fn">log</span>(<span class="str">'→ TTL controls how long that warm hit lasts before the chain repeats'</span>);</pre><div class="out"></div></div>
+<table>
+<tr><th>Record</th><th>Maps to</th></tr>
+<tr><td><code>A</code> / <code>AAAA</code></td><td>Hostname → IPv4 / IPv6 address</td></tr>
+<tr><td><code>CNAME</code></td><td>Hostname → another hostname (alias)</td></tr>
+<tr><td><code>MX</code></td><td>Domain → mail server, with priority</td></tr>
+<tr><td><code>TXT</code></td><td>Arbitrary text — SPF/DKIM, domain verification</td></tr>
+</table>
+<div class="tip"><strong>Mobile analogy:</strong> DNS's layered cache is the same idea as an app checking memory cache → disk cache → network — check the cheapest layer first, and a short TTL is the network equivalent of a cache-invalidation policy.</div>
+
+<h2><span class="sn">2</span>TCP vs UDP — the reliability trade-off</h2>
+<p>TCP spends three packets before your data even starts moving, in exchange for guaranteed, ordered delivery. UDP skips the handshake and just sends — faster, but nothing guarantees the packet arrives, or arrives in order:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// TCP: handshake before any data. UDP: no handshake, no guarantee.</span>
+<span class="kw">function</span> <span class="fn">tcpSend</span>(payload) {
+  <span class="kw">const</span> log = [<span class="str">'SYN →'</span>, <span class="str">'← SYN-ACK'</span>, <span class="str">'ACK →'</span>, <span class="str">'  (connection established)'</span>, <span class="str">'DATA: '</span> + payload + <span class="str">' →'</span>, <span class="str">'← ACK'</span>];
+  <span class="kw">return</span> log;
+}
+<span class="kw">function</span> <span class="fn">udpSend</span>(payload, dropped) {
+  <span class="kw">return</span> dropped ? [<span class="str">'DATAGRAM: '</span> + payload + <span class="str">' → '</span>, <span class="str">'  ✗ lost — nobody notices, nobody resends'</span>]
+                 : [<span class="str">'DATAGRAM: '</span> + payload + <span class="str">' → delivered, no ack expected'</span>];
+}
+console.<span class="fn">log</span>(<span class="str">'TCP (reliable, ordered):'</span>);
+<span class="fn">tcpSend</span>(<span class="str">'GET /orders'</span>).<span class="fn">forEach</span>(l =&gt; console.<span class="fn">log</span>(<span class="str">'  '</span> + l));
+console.<span class="fn">log</span>(<span class="str">''</span>);
+console.<span class="fn">log</span>(<span class="str">'UDP (fast, best-effort):'</span>);
+<span class="fn">udpSend</span>(<span class="str">'video frame #482'</span>, <span class="kw">true</span>).<span class="fn">forEach</span>(l =&gt; console.<span class="fn">log</span>(<span class="str">'  '</span> + l));
+console.<span class="fn">log</span>(<span class="str">'→ a dropped video frame is fine to skip; a dropped payment request is not'</span>);</pre><div class="out"></div></div>
+<div class="tip">Use TCP when correctness matters more than latency (APIs, payments, file transfer). Use UDP when freshness matters more than completeness (live video, gaming, DNS queries themselves) — the receiver would rather skip a stale packet than wait for a resend.</div>
+
+<h2><span class="sn">3</span>HTTP/1.1 → 2 → 3 — solving the same bottleneck three times</h2>
+<p>Each HTTP version exists to remove a head-of-line blocking problem the previous one introduced:</p>
+<table>
+<tr><th>Version</th><th>Transport</th><th>The problem it fixes</th></tr>
+<tr><td>HTTP/1.1</td><td>TCP</td><td>Baseline — one request per connection at a time (or several parallel connections as a workaround)</td></tr>
+<tr><td>HTTP/2</td><td>TCP</td><td>Multiplexes many requests over <em>one</em> TCP connection — but one lost packet still blocks every stream (TCP head-of-line blocking)</td></tr>
+<tr><td>HTTP/3</td><td>QUIC (over UDP)</td><td>Each stream is independent at the transport level — a lost packet only blocks its own stream, not the others</td></tr>
+</table>
+<p><strong>QUIC</strong> is why HTTP/3 rides on UDP instead of TCP: it reimplements reliability and ordering <em>per-stream</em> in user space, so it gets TCP's guarantees without TCP's single shared queue. It also folds the TLS handshake into the same round trip as the connection handshake, shaving a full round-trip off every new connection.</p>
+<div class="warn">Multiplexing (HTTP/2+) is why mobile apps that batch dozens of small API calls into one connection stopped needing "domain sharding" tricks — the old HTTP/1.1 workaround of spreading requests across fake subdomains just to get more parallel connections.</div>
+
+<h2><span class="sn">4</span>Load-balancing algorithms</h2>
+<p>A load balancer decides which backend server handles each request. The algorithm matters once servers aren't identical or connections aren't short-lived:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Round-robin vs weighted vs least-connections, over 8 incoming requests</span>
+<span class="kw">const</span> servers = [{ name: <span class="str">'A'</span>, weight: <span class="num">1</span>, conns: <span class="num">0</span> }, { name: <span class="str">'B'</span>, weight: <span class="num">1</span>, conns: <span class="num">0</span> }, { name: <span class="str">'C (bigger box)'</span>, weight: <span class="num">2</span>, conns: <span class="num">0</span> }];
+
+<span class="kw">function</span> <span class="fn">roundRobin</span>(n) {
+  <span class="kw">const</span> picks = [];
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; n; i++) picks.<span class="fn">push</span>(servers[i % servers.<span class="fn">length</span>].name);
+  <span class="kw">return</span> picks;
+}
+<span class="kw">function</span> <span class="fn">weighted</span>(n) {
+  <span class="kw">const</span> pool = servers.<span class="fn">flatMap</span>(s =&gt; <span class="fn">Array</span>(s.weight).<span class="fn">fill</span>(s.name));
+  <span class="kw">const</span> picks = [];
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; n; i++) picks.<span class="fn">push</span>(pool[i % pool.<span class="fn">length</span>]);
+  <span class="kw">return</span> picks;
+}
+<span class="kw">function</span> <span class="fn">leastConnections</span>(n) {
+  <span class="kw">const</span> load = { A: <span class="num">3</span>, B: <span class="num">0</span>, <span class="str">'C (bigger box)'</span>: <span class="num">1</span> }; <span class="cm">// existing open connections</span>
+  <span class="kw">const</span> picks = [];
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; n; i++) {
+    <span class="kw">const</span> pick = <span class="fn">Object</span>.<span class="fn">entries</span>(load).<span class="fn">sort</span>((a, b) =&gt; a[<span class="num">1</span>] - b[<span class="num">1</span>])[<span class="num">0</span>][<span class="num">0</span>];
+    load[pick]++; picks.<span class="fn">push</span>(pick);
+  }
+  <span class="kw">return</span> picks;
+}
+console.<span class="fn">log</span>(<span class="str">'round-robin:      '</span>, <span class="fn">roundRobin</span>(<span class="num">8</span>).<span class="fn">join</span>(<span class="str">', '</span>));
+console.<span class="fn">log</span>(<span class="str">'weighted (C=2x):  '</span>, <span class="fn">weighted</span>(<span class="num">8</span>).<span class="fn">join</span>(<span class="str">', '</span>));
+console.<span class="fn">log</span>(<span class="str">'least-connections:'</span>, <span class="fn">leastConnections</span>(<span class="num">8</span>).<span class="fn">join</span>(<span class="str">', '</span>));
+console.<span class="fn">log</span>(<span class="str">'→ least-connections adapts to real load; round-robin assumes every request costs the same'</span>);</pre><div class="out"></div></div>
+<p><strong>Consistent hashing</strong> is a fourth approach, used less for fairness and more for <em>stickiness</em>: hash the request key (a user ID, a cache key) onto a ring of servers, so the same key routes to the same server every time — critical for in-memory caches or sticky sessions, since adding/removing one server only reshuffles a small slice of the ring instead of everything.</p>
+
+<h2><span class="sn">5</span>Anycast — one IP, many locations</h2>
+<p>Anycast advertises the <em>same</em> IP address from multiple physical locations over BGP, and routers naturally send each client to whichever advertiser is topologically closest — no DNS-based geolocation needed. It's how large CDNs and DNS resolvers (like <code>1.1.1.1</code>) answer from a nearby point of presence everywhere on Earth using one address. The trade-off: if the nearest location goes down, BGP reroutes to the next-closest automatically, but a request already in flight to the failing location can be dropped mid-connection during the reroute.</p>
+
+<h2><span class="sn">6</span>Connection pooling</h2>
+<p>A fresh TCP connection costs a handshake (and, for HTTPS, a TLS handshake on top) before any real data moves — paying that cost on every single request is the single most avoidable source of latency in a busy client or service. <strong>Connection pooling</strong> keeps a set of already-established connections open and reuses them across requests instead of tearing down and rebuilding:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// A tiny connection pool: reuse an idle connection instead of paying handshake cost again</span>
+<span class="kw">class</span> <span class="fn">Pool</span> {
+  <span class="fn">constructor</span>(max) { <span class="kw">this</span>.max = max; <span class="kw">this</span>.idle = []; <span class="kw">this</span>.created = <span class="num">0</span>; }
+  <span class="fn">acquire</span>() {
+    <span class="kw">if</span> (<span class="kw">this</span>.idle.<span class="fn">length</span>) <span class="kw">return</span> { conn: <span class="kw">this</span>.idle.<span class="fn">pop</span>(), reused: <span class="kw">true</span> };
+    <span class="kw">this</span>.created++;
+    <span class="kw">return</span> { conn: <span class="str">'conn#'</span> + <span class="kw">this</span>.created, reused: <span class="kw">false</span> };
+  }
+  <span class="fn">release</span>(conn) { <span class="kw">if</span> (<span class="kw">this</span>.idle.<span class="fn">length</span> &lt; <span class="kw">this</span>.max) <span class="kw">this</span>.idle.<span class="fn">push</span>(conn); }
+}
+<span class="kw">const</span> pool = <span class="kw">new</span> <span class="fn">Pool</span>(<span class="num">5</span>);
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; <span class="num">4</span>; i++) {
+  <span class="kw">const</span> { conn, reused } = pool.<span class="fn">acquire</span>();
+  console.<span class="fn">log</span>(<span class="str">'request '</span> + i + <span class="str">' got '</span> + conn + (reused ? <span class="str">' (reused — no new handshake)'</span> : <span class="str">' (new — paid the handshake cost)'</span>));
+  pool.<span class="fn">release</span>(conn);
+}
+console.<span class="fn">log</span>(<span class="str">'total real connections created:'</span>, pool.created, <span class="str">'for 4 requests'</span>);</pre><div class="out"></div></div>
+<div class="tip">This is why database drivers, HTTP clients (<code>URLSession</code>, <code>OkHttp</code>), and API gateways all pool connections by default — and why HTTP/2's multiplexing (§3) is, conceptually, connection pooling taken to its extreme: one physical connection serving unlimited concurrent logical streams.</div>
+
+<div class="ok"><strong>Try it:</strong> (1) Run <code>dig yourdomain.com</code> and read the TTL and the chain of NS records it followed. (2) Open browser devtools → Network tab, load a page, and inspect one request's timing breakdown (DNS, connect, TLS, TTFB) — that's §1–§3 of this module, measured live. (3) Run <code>curl -v https://example.com</code> and identify which HTTP version and TLS version were negotiated. <strong>Deliverable:</strong> trace one real request end-to-end with <code>dig</code>/<code>curl</code>/devtools and write up what happened at each stage — DNS resolution, TCP/TLS handshake, HTTP version negotiated, and time spent in each phase.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mastery Track · extends Phase 1 (HTTP &amp; backend foundations). From <a class="back" href="upcoming.html">The Road to CTO</a> board — Stage 1, technical foundation. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>
