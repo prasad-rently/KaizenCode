@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Round Table — Executive Peer &amp; the Board</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#fbeeea;color:#993C1D}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#241310;color:#e0917a}}
+/* peer reference */
+.ref{border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;margin:14px 0}@media(prefers-color-scheme:dark){.ref{border-color:#2a2a2a}}.ref .rr{display:flex;gap:11px;padding:8px 12px;border-top:1px solid #f0f0f0;font-size:12.5px;background:#fafafa}.ref .rr:first-child{border-top:0}@media(prefers-color-scheme:dark){.ref .rr{border-color:#202020;background:#151515}}.ref .rk{flex:0 0 74px;font-weight:700;color:#5350B4}@media(prefers-color-scheme:dark){.ref .rk{color:#a6a3ff}}.ref .rv{color:#555}@media(prefers-color-scheme:dark){.ref .rv{color:#aaa}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* board-deck builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.frow{display:flex;gap:10px}.frow .fld{flex:1}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:520px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 87–96 · Stage 5</span>
+<h1>👑 The Round Table</h1>
+<p class="sub">Somewhere on the way to CTO, the room changes. You stop being the most senior engineer explaining a decision upward, and become one peer among several — CEO, CFO, CPO, COO — each running their own function, each with their own scoreboard, all of you jointly accountable to a board that mostly can't read code. Technical brilliance stops being the differentiator; being a trusted, plain-spoken executive peer is.</p>
+
+<div class="tip">Third module of <strong>Stage 5 · The CTO Craft</strong>. The centerpiece is a real <strong>board-deck builder</strong> — assemble an engineering update and one big ask into the one-page format a board actually reads.</p></div>
+
+<h2><span class="sn">1</span>From tech lead to executive peer</h2>
+<p>As an engineering leader you were used to being <em>the</em> authority on technical matters, translating your team's work upward to people who deferred to your judgment on anything code-shaped. At the executive table that deference disappears — the CFO doesn't defer to you on architecture any more than you'd defer to them on hedging strategy, and neither of you defers to the other by default. You're all peers who must <strong>earn</strong> credibility with each other, continuously, through judgment other executives can see and trust — not through technical depth they can't evaluate.</p>
+<p>The shift that trips up the most technically excellent leaders: stop translating engineering <em>to</em> the room and start representing engineering's interests <em>in</em> the room, in the room's native language — growth, risk, cash, customers. See <a class="x" href="leadership_storyteller.html">The Storyteller</a> for the mechanics of that translation; this module is about the room itself.</p>
+
+<h2><span class="sn">2</span>Reading the other seats at the table</h2>
+<p>Each peer optimizes for something different, and none of it is malicious — it's their job. Knowing what each one is actually measured on turns friction into negotiation:</p>
+<div class="ref">
+  <div class="rr"><span class="rk">CEO</span><span class="rv">The whole story — growth, the narrative to the board and market, and the tie-breaker when functions disagree. Bring them <em>choices with a recommendation</em>, not raw problems; they're allocating scarce attention across every function, not just yours.</span></div>
+  <div class="rr"><span class="rk">CFO</span><span class="rv">Cash, runway, margin, predictability. Engineering spend is the biggest controllable cost line they own no direct control over — so unpredictable burn or a surprise infra bill reads as a control failure on <em>their</em> desk. Forecast, and flag variance before they find it.</span></div>
+  <div class="rr"><span class="rk">CPO/CRO</span><span class="rv">Roadmap velocity and revenue — "why can't we ship faster" is the default friction point, because they're measured on outcomes engineering delivers but doesn't fully control. See <a class="x" href="leadership_product_whisperer.html">The Product Whisperer</a> for the peer relationship in depth.</span></div>
+  <div class="rr"><span class="rk">COO/GC</span><span class="rv">Operations run smoothly, risk stays contained. First call when something breaks in production or a contract goes sideways — see <a class="x" href="leadership_fine_print.html">The Fine Print</a> and <a class="x" href="leadership_weathervane.html">The Weathervane</a>.</span></div>
+</div>
+<p>The skill isn't agreeing with every seat — it's <strong>disagree-and-commit</strong>: argue your position hard in the room with the full weight of your evidence, then once the CEO or the group decides, execute the decision as if it were your own idea, in public, without relitigating it in the hallway afterward. Executives who only commit to decisions they personally won lose the trust of every other peer within a quarter.</p>
+
+<h2><span class="sn">3</span>What a board actually wants from engineering</h2>
+<p>Most engineering leaders over-prepare depth the board never asked for and under-prepare the three things they actually came for:</p>
+<div class="sched">
+  <div class="col"><h4>✅ What lands</h4>
+    <div class="blk good">Is the engine healthy? (2–3 numbers, trended)</div>
+    <div class="blk good">What's the one big risk, and is it contained?</div>
+    <div class="blk good">The one decision you need from <em>them</em></div>
+    <div class="blk good">Confidence conveyed by brevity + candor</div>
+    <div class="blk good">Answers ready for the two hard questions</div>
+  </div>
+  <div class="col"><h4>⚠️ What loses the room</h4>
+    <div class="blk bad">A wall of dashboards with no narrative</div>
+    <div class="blk bad">Sprint-level detail no director can act on</div>
+    <div class="blk bad">Burying a real risk in "all green" optimism</div>
+    <div class="blk bad">No explicit ask — they leave unsure what you need</div>
+    <div class="blk bad">Getting defensive on the hard question</div>
+  </div>
+</div>
+<p>Board meetings run a predictable cadence — quarterly for most private companies, monthly board-committee touchpoints at scale — and engineering usually gets 10–15 minutes inside a packed agenda. Investor relations follows the same discipline in a higher-stakes room: in fundraising or diligence calls you are the credibility check on whether the technology can support the story the CEO is telling, so the same "health, risk, ask" shape — backed by evidence you can defend live — is what an investor is listening for too.</p>
+
+<h2><span class="sn">4</span>Deliverable — build your board deck</h2>
+<p>One page: the engineering update, then one big ask. Fill in your own numbers, wins and risk — or use the sample — and the builder assembles the board-ready format:</p>
+<div class="builder">
+  <div class="frow">
+    <div class="fld">Health metric #1<input id="b-h1" type="text" placeholder="e.g. Uptime: 99.95% (target 99.9%)"></div>
+    <div class="fld">Health metric #2<input id="b-h2" type="text" placeholder="e.g. Deploy frequency: 42/week, up from 28"></div>
+  </div>
+  <div class="fld">Health metric #3<input id="b-h3" type="text" placeholder="e.g. Eng spend: $1.8M this quarter, 3% under budget"></div>
+  <div class="fld">The win — one thing that went right<textarea id="b-win" rows="2" placeholder="e.g. Shipped the payments migration two weeks early with zero customer-facing incidents."></textarea></div>
+  <div class="fld">The risk — the one thing the board should worry about<textarea id="b-risk" rows="2" placeholder="e.g. Our identity provider's contract renews in 60 days at 3x the price; migrating is a two-quarter effort."></textarea></div>
+  <div class="fld">Is the risk contained? What's the plan?<input id="b-plan" type="text" placeholder="e.g. Negotiating a 1-year bridge now; migration scoped and budgeted for Q3 if the bridge fails"></div>
+  <div class="fld">The big ask — the specific decision you need<input id="b-ask" type="text" placeholder="e.g. Approve a $400k contingency to fund the identity-provider migration if negotiation fails"></div>
+  <div class="fld">Why now (the case for this ask)<textarea id="b-why" rows="2" placeholder="e.g. Waiting until the contract lapses removes our negotiating leverage and risks a forced, rushed migration."></textarea></div>
+  <button id="b-gen">👑 Assemble the board deck →</button>
+  <button id="b-copy" class="copy">Copy</button>
+  <div id="b-out" class="out-box"></div>
+</div>
+
+<h2><span class="sn">5</span>When the role splits: CTO vs VP Engineering</h2>
+<p>In an early-stage company one person is both the technical visionary and the delivery manager. That stops scaling once engineering crosses roughly 40–60 people, or the company starts making bets — architecture, build-vs-buy, an AI strategy — that need dedicated external-facing attention a delivery calendar won't allow:</p>
+<div class="ref">
+  <div class="rr"><span class="rk">CTO</span><span class="rv">Outward and forward-facing — technology strategy, architecture bets, board/investor technical credibility, M&amp;A diligence, sometimes the public face of engineering (conference talks, analyst calls).</span></div>
+  <div class="rr"><span class="rk">VP Eng</span><span class="rv">Inward and delivery-facing — team structure, hiring, sprint execution, on-call, the day-to-day engineering org. Owns whether the roadmap actually ships.</span></div>
+</div>
+<p>The split only works with a genuinely clear line — usually strategy-and-external vs. org-and-delivery — and a CTO who resists it because "I want to still run the team" is usually the reason a growing company's technical strategy quietly stalls: nobody has the bandwidth to think two years out while also running today's stand-up. <a class="x" href="leadership_architect_of_teams.html">The Architect of Teams</a> covers the org-design side of this split in depth.</p>
+
+<h2><span class="sn">6</span>Pressure-test your instincts</h2>
+<p>The round table rewards candor and predictability, and punishes surprises and defensiveness. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Build the board deck above using your team's real numbers — does the "one big ask" survive being said out loud in 15 minutes? (2) Write down what each of your CEO, CFO and CPO is actually measured on this quarter — if you don't know, that's the gap to close first. (3) Find one recent decision you disagreed with and check whether you're still relitigating it in hallway conversations instead of having committed. (4) If your org is past ~50 engineers, sketch where a CTO/VP-Eng line would actually fall.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 5 · the CTO craft. Pairs with <a class="x" href="leadership_storyteller.html">The Storyteller</a> (translating up) and <a class="x" href="leadership_chessboard.html">The Chessboard</a> (the strategy the board is evaluating). <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'In the board meeting, a director asks a sharp question about an outage your slide glossed over as "resolved."',
+     opts:[
+       {t:'Answer directly — what happened, the actual impact, what’s now in place so it doesn’t recur.',v:'best',fb:'Boards forgive incidents; they don’t forgive being managed. A direct, specific answer — cause, impact, fix — builds exactly the credibility a glossed-over slide was trying to protect and failed to. Candor under a hard question is the entire audition.'},
+       {t:'Acknowledge it was worse than the slide implied, and follow up with the details afterward.',v:'ok',fb:'Honest and better than deflecting, but "I’ll follow up" in the room reads as under-prepared for a question you should have anticipated. If it was material enough to ask about, it was material enough to have the answer ready live.'},
+       {t:'Downplay it further to keep the meeting moving.',v:'poor',fb:'A director who senses they’re being managed stops trusting every other slide in the deck, not just this one. Minimizing a real incident in front of the board is the fastest way to convert a recoverable outage into a standing credibility problem.'},
+       {t:'Get defensive about why the question is unfair given how hard the team worked.',v:'poor',fb:'The board isn’t grading effort, they’re grading whether risk is understood and contained. Defensiveness signals you can’t take a hard question — which is a worse signal to a board than the outage itself.'}
+     ]},
+    {q:'The CFO flags that engineering spend is trending 15% over the quarter\'s plan, and you\'re hearing about it for the first time in a leadership sync.',
+     opts:[
+       {t:'Own that your forecasting process missed it, get current numbers today, and commit to a variance-flagging cadence going forward.',v:'best',fb:'Being surprised by your own budget in front of peers is the failure — not the 15%. Owning the process gap and fixing forward-visibility rebuilds exactly the predictability the CFO is measured on, and treats them as a peer, not an adversary.'},
+       {t:'Explain the 15% is justified given what shipped this quarter.',v:'ok',fb:'The justification may well be true and worth stating — but leading with "here’s why it’s fine" before addressing that you didn’t see it coming skips the part the CFO actually cares about: predictability. Say both, in that order.'},
+       {t:'Push back that finance should have caught this earlier, not you.',v:'poor',fb:'Spend is engineering’s to forecast and own; deflecting it to finance reads as failing to run your own function and confirms the CFO’s worst assumption about engineering as an uncontrolled cost center.'},
+       {t:'Say nothing and address it privately with your team later.',v:'poor',fb:'The CFO already raised it in front of peers — silence in the room reads as either not caring or not being on top of your own budget. Address it live; a private fix afterward doesn’t undo the trust cost of the moment.'}
+     ]},
+    {q:'You argued hard against a board-approved decision to delay your platform migration a year in favor of a new feature. The vote didn’t go your way.',
+     opts:[
+       {t:'Commit fully in public — execute the decision as your own, while still tracking the risk you raised.',v:'best',fb:'This is disagree-and-commit: you made your case with full force before the decision, and once it’s made you execute it, not undermine it. Quietly tracking the risk (so you have real data if it resurfaces) is good stewardship, not relitigating.'},
+       {t:'Comply, but make sure people know it wasn’t your call if it goes wrong.',v:'poor',fb:'This is compliance without commitment — you’ll execute the letter of the decision while positioning to be right later. Peers notice, and it teaches the room that decisions you lose don’t actually get your full effort.'},
+       {t:'Keep raising the same objection in follow-up meetings.',v:'poor',fb:'Relitigating a decided vote after you had your say erodes the group’s ability to decide anything — and marks you as someone who only commits to outcomes they personally win, which peers stop trusting with hard calls.'},
+       {t:'Quietly under-resource the feature so the migration effectively still happens.',v:'poor',fb:'Sabotaging a decision you lost — even quietly, even for reasons you believe in — is a trust-destroying move at the executive level. If the decision is genuinely wrong, the fix is better evidence next cycle, not a workaround now.'}
+     ]},
+    {q:'You have 12 minutes for the engineering section of a packed board agenda and 40 slides you\'re proud of.',
+     opts:[
+       {t:'Cut to 2–3 health metrics, one win, one risk with its containment plan, and one clear ask.',v:'best',fb:'A board wants the shape — is the engine healthy, what’s the one risk, what do you need from us — not the depth. Twelve minutes fits four things well; it doesn’t fit forty slides at all. Cutting hard is the actual skill being tested here.'},
+       {t:'Present the top 10 slides quickly and offer the rest as an appendix.',v:'ok',fb:'A reasonable compromise — the appendix lets rigor exist without consuming room time. It’s "ok" rather than "best" because ten slides in twelve minutes still rushes past the one thing a board actually needs to leave with: the ask.'},
+       {t:'Rush through all 40 to make sure nothing important is left out.',v:'poor',fb:'Nothing lands at that pace — the board leaves with no clear read on health, risk, or what you need from them. "Nothing left out" and "nothing understood" are the same outcome from the board’s chair.'},
+       {t:'Ask for more time in the current meeting to cover everything properly.',v:'poor',fb:'The agenda is packed for every function, not just yours — asking to expand your slot at other executives’ expense signals you haven’t internalized that board time is the scarcest shared resource in the room.'}
+     ]},
+    {q:'Engineering has grown to 70 people. You\'re both setting 2-year technical strategy and running weekly sprint planning, and neither is getting your best attention.',
+     opts:[
+       {t:'Propose splitting the role — hire or promote a VP Eng for delivery, keep the CTO seat focused on strategy and the board/investor relationship.',v:'best',fb:'At this scale, strategy and delivery are both full-time jobs that trade off against each other daily. Naming the split explicitly — and giving up day-to-day delivery — is what lets both actually get done well, rather than both being done adequately.'},
+       {t:'Hire a strong engineering manager layer but keep the CTO title covering both strategy and delivery personally.',v:'ok',fb:'Delegating execution helps, but if you\'re still the final owner of both strategy and delivery, the bandwidth problem persists at the top — you\'re still the bottleneck deciding sprint priorities today and thinking two years out tomorrow.'},
+       {t:'Keep doing both — splitting the role would dilute your authority.',v:'poor',fb:'This is the classic failure mode: authority isn’t diluted by focus, and the company’s technical strategy quietly stalls because nobody has bandwidth to think past the next sprint. The org outgrew one person doing both roles; resisting that doesn’t un-outgrow it.'},
+       {t:'Split the role, but keep both strategy and delivery decisions run through you as a formality.',v:'poor',fb:'A split in title without a split in actual decision rights doesn’t solve the bandwidth problem — it just adds a layer of approval theater. The new VP Eng needs real ownership of delivery, not a rubber stamp to seek from you.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Peer move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // board-deck builder
+  function val(id){return (document.getElementById(id).value||'').trim();}
+  var out=document.getElementById('b-out');
+  function build(){
+    var h1=val('b-h1')||'Uptime: 99.95% (target 99.9%)';
+    var h2=val('b-h2')||'Deploy frequency: 42/week, up from 28';
+    var h3=val('b-h3')||'Eng spend: $1.8M this quarter, 3% under budget';
+    var win=val('b-win')||'Shipped the payments migration two weeks early with zero customer-facing incidents.';
+    var risk=val('b-risk')||"Our identity provider's contract renews in 60 days at 3x the price; migrating is a two-quarter effort.";
+    var plan=val('b-plan')||'Negotiating a 1-year bridge now; migration scoped and budgeted for Q3 if the bridge fails.';
+    var ask=val('b-ask')||'Approve a $400k contingency to fund the identity-provider migration if negotiation fails.';
+    var why=val('b-why')||'Waiting until the contract lapses removes our negotiating leverage and risks a forced, rushed migration.';
+    return [
+      'ENGINEERING UPDATE — BOARD DECK',
+      'To: The Board     From: [you, CTO]     Date: [today]',
+      '─────────────────────────────────────────────',
+      '',
+      'ENGINE HEALTH',
+      '  • '+h1,
+      '  • '+h2,
+      '  • '+h3,
+      '',
+      'THE WIN',
+      '  '+win,
+      '',
+      'THE RISK — is it contained?',
+      '  Risk:      '+risk,
+      '  Contained: '+plan,
+      '',
+      'THE ASK',
+      '  '+ask,
+      '  Why now:   '+why,
+      '',
+      '─────────────────────────────────────────────',
+      'Why this deck works: three trended health numbers (not forty), one named',
+      'win, one named risk with its containment plan already stated — no hoping',
+      'nobody asks — and exactly one decision the board needs to make. Twelve',
+      'minutes, no ambiguity about what you need from the room.'
+    ].join('\n');
+  }
+  document.getElementById('b-gen').addEventListener('click',function(){out.textContent=build();out.classList.add('show');});
+  document.getElementById('b-copy').addEventListener('click',function(){
+    if(!out.classList.contains('show')){out.textContent=build();out.classList.add('show');}
+    var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
