@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Magistrate — Technical Due Diligence</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#fbeeea;color:#993C1D}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#241310;color:#e0917a}}
+/* reference */
+.ref{border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;margin:14px 0}@media(prefers-color-scheme:dark){.ref{border-color:#2a2a2a}}.ref .rr{display:flex;gap:11px;padding:8px 12px;border-top:1px solid #f0f0f0;font-size:12.5px;background:#fafafa}.ref .rr:first-child{border-top:0}@media(prefers-color-scheme:dark){.ref .rr{border-color:#202020;background:#151515}}.ref .rk{flex:0 0 74px;font-weight:700;color:#5350B4}@media(prefers-color-scheme:dark){.ref .rk{color:#a6a3ff}}.ref .rv{color:#555}@media(prefers-color-scheme:dark){.ref .rv{color:#aaa}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* DD checklist builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.chint{font-size:10.5px;color:#888;margin:2px 0 10px;line-height:1.5}
+.dgroup{margin-bottom:14px}.dgroup h5{font-size:11px;font-weight:700;color:#5350B4;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}@media(prefers-color-scheme:dark){.dgroup h5{color:#a6a3ff}}
+.drow{display:flex;align-items:center;gap:9px;font-size:12.5px;padding:6px 0;border-top:1px solid #f0f0f0}.drow:first-of-type{border-top:0}@media(prefers-color-scheme:dark){.drow{border-color:#222}}.drow label{flex:1;color:#333}@media(prefers-color-scheme:dark){.drow label{color:#ccc}}.drow select{font:inherit;font-size:11.5px;font-weight:600;padding:4px 7px;border-radius:6px;border:1px solid #d8d8d8;background:#fff;color:#1a1a1a}@media(prefers-color-scheme:dark){.drow select{background:#0d0d0d;border-color:#333;color:#e8e8e8}}
+.dout{display:none;margin-top:14px}.dout.show{display:block}.drep{white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:10px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:420px;overflow:auto}@media(prefers-color-scheme:dark){.drep{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}
+.dverd{font-size:13px;font-weight:700;padding:10px 12px;border-radius:8px}.dv-go{background:#e7f7ef;color:#0F6E56}.dv-caution{background:#fbf1e0;color:#8a5210}.dv-halt{background:#fbe9e6;color:#993C1D}@media(prefers-color-scheme:dark){.dv-go{background:#0c2016;color:#5fd0a0}.dv-caution{background:#241a09;color:#e0b070}.dv-halt{background:#2a1712;color:#e8907a}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 87–96 · Stage 5</span>
+<h1>🏛️ The Magistrate</h1>
+<p class="sub">Every acquisition closes on a story, but it's built on what technical due diligence actually finds. As a CTO you'll sit on both sides of this table across your career — running DD on a company you're acquiring, and surviving DD on the company you built. Both roles reward the same instinct: look for the truth under the pitch, calmly, before the wire transfer makes it permanent.</p>
+
+<div class="tip">Fourth module of <strong>Stage 5 · The CTO Craft</strong>. The centerpiece is a real <strong>due-diligence checklist</strong> — score each item and get an honest go / caution / halt read on your own project.</p></div>
+
+<h2><span class="sn">1</span>Why technical DD decides deals</h2>
+<p>Financial and legal diligence get most of the attention in a deal, but technical diligence is what tells you whether the thing you're buying (or the thing you're being bought for) actually works the way the pitch says it does. A clean cap table doesn't help you if the codebase is unmaintainable, the "proprietary AI" is three engineers babysitting a prompt, or the team that built it all leaves the day the earn-out clears. Technical DD exists to answer one question for the acquirer, and to prepare one answer for the target: <strong>is what's being described what's actually there?</strong></p>
+
+<h2><span class="sn">2</span>Running DD as the acquirer</h2>
+<p>A good technical DD covers six areas — go deep enough to be honest, not so deep you kill the deal timeline on things that don't matter:</p>
+<div class="ref">
+  <div class="rr"><span class="rk">Architecture</span><span class="rv">Does it scale to where the combined company needs it to go, or does the pitch deck's growth story break the system a year in? Read the actual bottlenecks, not the roadmap slide.</span></div>
+  <div class="rr"><span class="rk">Code &amp; debt</span><span class="rv">Test coverage, deploy frequency, incident history, and how much of "velocity" is masking a debt bill someone will have to pay. A demo always works; ask what breaks under real load.</span></div>
+  <div class="rr"><span class="rk">Security</span><span class="rv">Past breaches, pen-test history, how secrets and access are managed. A single undisclosed prior breach can be a deal-killer on its own — see below.</span></div>
+  <div class="rr"><span class="rk">IP &amp; licensing</span><span class="rv">Does the company actually own its code? Chase unassigned contractor IP and copyleft license exposure — this is <a class="x" href="leadership_fine_print.html">The Fine Print</a>'s territory, and it belongs in every DD checklist.</span></div>
+  <div class="rr"><span class="rk">Team</span><span class="rv">Who actually holds the architecture in their head, and are they staying? Key-person risk is invisible in an org chart and decisive in an integration.</span></div>
+  <div class="rr"><span class="rk">Vendor &amp; cost</span><span class="rv">Hidden infra spend, vendor lock-in, and contracts that don't survive a change of control (some MSAs let the vendor walk or reprice on acquisition).</span></div>
+</div>
+<div class="warn"><strong>Weight the checklist, don't just tally it.</strong> A dozen minor findings rarely kill a deal; one severe finding — undisclosed breach, no IP assignment on core code, a single engineer who is the entire system's tribal knowledge — usually should. Diligence isn't a scorecard average, it's a search for the one thing that changes the price or the decision.</p></div>
+
+<h2><span class="sn">3</span>Surviving DD as the target</h2>
+<p>The best time to prepare for diligence is long before anyone asks for it. The teams that come through clean aren't the ones with nothing wrong — they're the ones who found their own landmines first:</p>
+<ul>
+<li><strong>Run your own audit before they do.</strong> Everything in the acquirer's checklist above, you should already know the answer to. A surprise the acquirer finds costs you leverage; a surprise you disclose yourself costs you almost nothing.</li>
+<li><strong>Fix what's cheap to fix now.</strong> An unsigned contractor IP assignment takes a signature today and a deal-threatening negotiation during diligence. Close known gaps months before a deal is even on the table.</li>
+<li><strong>Document the architecture, not just the code.</strong> If the system's design lives only in one engineer's head, diligence reads that as risk regardless of how good the code actually is. Write it down.</li>
+<li><strong>Be straight about what's bad.</strong> A target who disclosed their tech debt honestly and has a credible plan reads as trustworthy; a target whose debt surfaces mid-diligence reads as either dishonest or unaware — both are worse than the debt itself.</li>
+</ul>
+
+<h2><span class="sn">4</span>Integration and acquihires</h2>
+<p>The deal closing is the easy part; making two engineering orgs and two stacks work as one is where most of the real risk lives — and it's usually underweighted at signing:</p>
+<div class="sched">
+  <div class="col"><h4>✅ Integration done well</h4>
+    <div class="blk good">A named integration owner and a real 100-day plan</div>
+    <div class="blk good">Systems merge on a deliberate timeline, not "day one"</div>
+    <div class="blk good">Retention offers signed before close, not after</div>
+    <div class="blk good">Cultural/process gaps named, not assumed away</div>
+  </div>
+  <div class="col"><h4>⚠️ Integration done badly</h4>
+    <div class="blk bad">"We'll figure out the merge after close"</div>
+    <div class="blk bad">Forcing a stack rewrite immediately post-acquisition</div>
+    <div class="blk bad">Key engineers leave once their retention window ends</div>
+    <div class="blk bad">Two teams, two tools, no decision on which wins</div>
+  </div>
+</div>
+<p>An <strong>acquihire</strong> — buying a company mainly for its team, not its product or revenue — flips the checklist above: the product and architecture matter far less than whether the specific people you're paying for will actually stay, and for how long. Structure retention (vesting, milestones) as the real center of that deal, not an afterthought bolted on at the end.</p>
+
+<h2><span class="sn">5</span>Deliverable — run the diligence checklist</h2>
+<p>Score each item honestly against your own project (or one you're evaluating) and the tool gives you a go / caution / halt read, weighted so one severe finding outranks a pile of minor ones:</p>
+<div class="builder">
+  <div class="chint">Rate each item: <b>Clear</b> (no concern), <b>Watch</b> (minor, fixable), or <b>Red flag</b> (severe — would change the price or the decision).</div>
+  <div id="d-groups"></div>
+  <button id="d-run">🏛️ Run the diligence →</button>
+  <div id="d-out" class="dout"></div>
+</div>
+
+<h2><span class="sn">6</span>What actually kills deals</h2>
+<p>Most findings are negotiated into the price. A short list of things tend to kill the deal outright, or should: undisclosed prior breaches, no IP assignment on core revenue-generating code, financial or usage metrics that don't reconcile with the pitch, and key engineers who make clear in diligence interviews that they're leaving regardless of retention terms. If you find one of these, the conversation isn't "how do we price this in" — it's "should this deal happen at all."</p>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Diligence rewards patience and honesty on both sides of the table, and punishes rushing past what a finding is actually telling you. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Run the checklist above against your own project — honestly, not optimistically — and see what the verdict says. (2) If you're ever on the target side, write your own disclosure memo before anyone asks for one. (3) For your last (or next) vendor or acquisition conversation, find and read the change-of-control clause. (4) Sketch a 100-day integration plan for a hypothetical acquisition of a team half your size — where does the stack merge, and on whose timeline?</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 5 · the CTO craft. Pairs with <a class="x" href="leadership_fine_print.html">The Fine Print</a> (IP &amp; licensing) and <a class="x" href="leadership_treasury.html">The Treasury</a> (the deal's financial side). <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'You\'re running DD on an acquisition target. Diligence surfaces a breach from 18 months ago that was never disclosed to customers or, apparently, considered material.',
+     opts:[
+       {t:'Treat it as a serious flag — dig into scope, disclosure obligations, and whether leadership hid or genuinely didn\'t know, before anything else in the deal proceeds.',v:'best',fb:'An undisclosed breach is one of the few findings that should stop a deal cold until it\'s fully understood — the technical scope matters, but so does whether leadership\'s judgment or honesty is the actual problem. Both change the price and the trust calculus.'},
+       {t:'Note it as a risk item, price it into the deal, and continue diligence on other areas.',v:'ok',fb:'Pricing in known risk is a normal part of DD — but treating an undisclosed breach as just another line item undersells it. It’s "ok" only if the pricing conversation genuinely accounts for what non-disclosure signals about leadership, not just the technical fallout.'},
+       {t:'Since it happened 18 months ago and nothing seems to have gone wrong since, let it go.',v:'poor',fb:'Time passing doesn’t erase the fact that it was hidden. The breach itself may be small; the decision not to disclose it is the real finding, and it predicts how this team will handle the next uncomfortable truth after close.'},
+       {t:'Raise it verbally with the target\'s CTO and take their reassurance at face value.',v:'poor',fb:'A verbal reassurance from the party being diligenced is not verification — it’s exactly what diligence exists to check. Get the incident timeline, the actual scope, and confirm independently before treating this as resolved.'}
+     ]},
+    {q:'You\'re the target. Your own pre-DD audit turns up an old contractor who never signed an IP assignment, and their code is now in your core product.',
+     opts:[
+       {t:'Get a retroactive IP assignment signed now, before the acquirer\'s diligence starts.',v:'best',fb:'This is exactly the landmine to defuse before anyone asks — cheap and quiet to fix now (a signature), expensive and public to fix mid-diligence (renegotiated terms, or a killed deal). Finding your own gaps first is the whole point of a pre-DD audit.'},
+       {t:'Disclose it proactively to the acquirer along with your remediation plan.',v:'ok',fb:'Proactive disclosure builds trust and beats getting caught — but disclosing an unresolved gap is weaker than disclosing a closed one. If there\'s time before diligence formally starts, fix it first, then disclose that it was found and fixed.'},
+       {t:'Say nothing and hope the acquirer\'s diligence doesn\'t look closely at contractor agreements.',v:'poor',fb:'IP chain-of-title is standard-issue in any competent technical DD — this will very likely be found, and finding it themselves costs you far more leverage and trust than disclosing it would have.'},
+       {t:'Quietly rewrite that section of code to remove the exposure before diligence begins.',v:'poor',fb:'A rushed rewrite under deal pressure is expensive and often doesn\'t even fully resolve the legal question (was it truly independent, and does it retroactively fix the IP already shipped?). Getting the original contractor to sign is usually faster and actually clean.'}
+     ]},
+    {q:'Deal timeline is aggressive — the board wants to sign in two weeks, and there\'s only time for a shallow technical review.',
+     opts:[
+       {t:'Push for at least a focused pass on the highest-severity areas — security, IP, and key-person risk — even if architecture depth gets cut.',v:'best',fb:'Not all six DD areas carry equal deal-killing weight. A compressed timeline is a real constraint, but the areas most likely to hide a fatal finding (undisclosed breach, unassigned IP, a team that\'s about to walk) are exactly the ones worth protecting the time for.'},
+       {t:'Do a full shallow pass across every area rather than a deep pass on a few.',v:'ok',fb:'Better than skipping DD, but spreading thin risks missing depth on the areas that actually kill deals while checking boxes everywhere else. If time is genuinely scarce, prioritize depth on the highest-severity risks over even coverage.'},
+       {t:'Skip technical DD to hit the timeline — the business case is strong enough.',v:'poor',fb:'This is how a great business case turns into a bad acquisition — the business case being strong is exactly why diligence should confirm the technology can actually deliver it. Aggressive timelines are a reason to prioritize DD, not skip it.'},
+       {t:'Delay the deal significantly to do a full deep review on everything.',v:'poor',fb:'Diligence should be proportionate to the deal, not maximal by default — an unnecessary full-depth review on every area can kill a good deal on timeline alone. Scope depth to severity, not to an abstract standard of thoroughness.'}
+     ]},
+    {q:'Right after close, there\'s pressure to merge the acquired team\'s stack into yours immediately, "so we\'re one company from day one."',
+     opts:[
+       {t:'Name an integration owner and build a deliberate 100-day plan — merge what must merge first, and sequence the rest.',v:'best',fb:'"One company from day one" is a culture goal, not an architecture instruction — forcing an immediate stack merge under that banner is how integrations fail. A named owner and a sequenced plan gets you to one company without breaking either system on the way.'},
+       {t:'Let both stacks run in parallel for now and revisit consolidation in six months.',v:'ok',fb:'Buys time to think clearly, which beats rushing — but "revisit in six months" without an actual owner or plan can drift into permanent duplication, which has its own cost (double the systems, double the on-call, double the vendor spend).'},
+       {t:'Force an immediate rewrite onto your stack so there\'s only one system.',v:'poor',fb:'A rushed forced migration right after close is one of the most reliable ways to lose the acquired team\'s trust and their key engineers in the same quarter — exactly when retention matters most. Integration needs a plan, not a deadline set by optics.'},
+       {t:'Leave the two teams and stacks fully independent indefinitely.',v:'poor',fb:'No integration plan at all defeats the purpose of the acquisition — you paid for synergy and got two companies instead of one. Some deliberate merging has to happen; the question is sequencing, not whether.'}
+     ]},
+    {q:'You\'re evaluating an acquihire — the product is mediocre, but the five-person team is exceptional and you want them.',
+     opts:[
+       {t:'Center the deal on retention terms for the specific people you want, structured with real vesting tied to them staying.',v:'best',fb:'In an acquihire the team <em>is</em> the asset — the product and its architecture are close to irrelevant to the deal\'s success. Retention structure isn\'t a deal term here, it\'s the entire point; get it right or you\'ve bought nothing.'},
+       {t:'Run the same full technical DD checklist you\'d use for a product acquisition.',v:'ok',fb:'Some diligence is still warranted (IP, security basics), but weighting it like a product acquisition misses what actually matters here. Spend the diligence effort on retention risk and team dynamics, not architecture depth on a product you\'re not really buying.'},
+       {t:'Skip diligence entirely since you\'re not really buying the product.',v:'poor',fb:'Even in an acquihire, IP and security basics still matter — you don\'t want to inherit unassigned code or a hidden breach along with the team. "It\'s just for the people" doesn\'t make the legal exposure disappear.'},
+       {t:'Offer standard compensation with no special retention structure, assuming they\'ll want to stay anyway.',v:'poor',fb:'Assuming loyalty without structuring for it is how acquihires fail — the people you paid for have other options, and without real retention incentives some will be gone within a year, leaving you with the mediocre product and none of the reason you bought it.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Diligence move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // DD checklist builder
+  var GROUPS=[
+    {name:'Architecture & scalability',items:[
+      'System handles current load with real headroom, not just at demo scale',
+      'No single point of failure the whole product depends on',
+      'Architecture decisions are documented, not only in one person\'s head'
+    ]},
+    {name:'Code & tech debt',items:[
+      'Meaningful automated test coverage on core paths',
+      'Incident history is known and trending in a healthy direction',
+      'Tech debt is tracked and roughly quantified, not just "known about"'
+    ]},
+    {name:'Security',items:[
+      'No undisclosed prior breaches or unresolved critical vulnerabilities',
+      'Secrets and access are managed properly (no hardcoded creds, least-privilege access)',
+      'A recent penetration test or security review exists'
+    ]},
+    {name:'IP & licensing',items:[
+      'Every contractor and employee has signed IP assignment',
+      'Dependency licenses are known and no unresolved copyleft/AGPL exposure',
+      'No unlicensed third-party code in the core product'
+    ]},
+    {name:'Team & key-person risk',items:[
+      'More than one person understands the core architecture',
+      'Key engineers are likely to stay through and after any transition'
+    ]},
+    {name:'Vendor & cost',items:[
+      'No vendor lock-in or contract that breaks on a change of control',
+      'Infra and vendor spend is known, forecasted, and not quietly ballooning'
+    ]}
+  ];
+  var host2=document.getElementById('d-groups');
+  var idx=0,fields=[];
+  GROUPS.forEach(function(g){
+    var gd=document.createElement('div');gd.className='dgroup';
+    var h=document.createElement('h5');h.textContent=g.name;gd.appendChild(h);
+    g.items.forEach(function(item){
+      var id='d-'+(idx++);
+      fields.push({id:id,group:g.name,item:item});
+      var row=document.createElement('div');row.className='drow';
+      var lab=document.createElement('label');lab.textContent=item;lab.setAttribute('for',id);
+      var sel=document.createElement('select');sel.id=id;
+      ['clear','watch','red'].forEach(function(v){
+        var o=document.createElement('option');o.value=v;
+        o.textContent=v==='clear'?'Clear':v==='watch'?'Watch':'Red flag';
+        sel.appendChild(o);
+      });
+      row.appendChild(lab);row.appendChild(sel);gd.appendChild(row);
+    });
+    host2.appendChild(gd);
+  });
+
+  var out=document.getElementById('d-out');
+  document.getElementById('d-run').addEventListener('click',function(){
+    var counts={clear:0,watch:0,red:0},reds=[],watches=[];
+    fields.forEach(function(f){
+      var v=document.getElementById(f.id).value;
+      counts[v]++;
+      if(v==='red')reds.push(f.group+' — '+f.item);
+      if(v==='watch')watches.push(f.group+' — '+f.item);
+    });
+    var verdict,vclass;
+    if(reds.length>0){verdict='HALT — resolve the red flag'+(reds.length===1?'':'s')+' before proceeding';vclass='dv-halt';}
+    else if(watches.length>=4){verdict='CAUTION — several open items, price them in and get a remediation timeline';vclass='dv-caution';}
+    else if(watches.length>0){verdict='CAUTION — minor open items, workable with a remediation plan';vclass='dv-caution';}
+    else {verdict='GO — no material findings across the checklist';vclass='dv-go';}
+    var html='<div class="dverd '+vclass+'">'+verdict+'</div>';
+    html+='<div class="drep">'+fields.length+' items checked: '+counts.clear+' clear, '+counts.watch+' to watch, '+counts.red+' red flag'+(counts.red===1?'':'s')+'.\n';
+    if(reds.length){html+='\nRED FLAGS (resolve or reprice before signing):\n'+reds.map(function(r){return'  • '+r;}).join('\n')+'\n';}
+    if(watches.length){html+='\nWATCH ITEMS (fixable, track to a remediation date):\n'+watches.map(function(r){return'  • '+r;}).join('\n')+'\n';}
+    html+='\nRemember: this is a search for the one finding that changes the price or\nthe decision, not an average to be maximized. A single red flag outweighs\na dozen clears.</div>';
+    out.innerHTML=html;out.classList.add('show');
+  });
+})();
+</script>
+</body></html>
