@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Storm Keeper — Crisis Leadership</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#fbeeea;color:#993C1D}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#241310;color:#e0917a}}
+/* reference */
+.ref{border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;margin:14px 0}@media(prefers-color-scheme:dark){.ref{border-color:#2a2a2a}}.ref .rr{display:flex;gap:11px;padding:8px 12px;border-top:1px solid #f0f0f0;font-size:12.5px;background:#fafafa}.ref .rr:first-child{border-top:0}@media(prefers-color-scheme:dark){.ref .rr{border-color:#202020;background:#151515}}.ref .rk{flex:0 0 74px;font-weight:700;color:#5350B4}@media(prefers-color-scheme:dark){.ref .rk{color:#a6a3ff}}.ref .rv{color:#555}@media(prefers-color-scheme:dark){.ref .rv{color:#aaa}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* runbook builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input,.fld select{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus,.fld select:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input,.fld select{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus,.fld select:focus{border-color:#8f8cff}}.frow{display:flex;gap:10px}.frow .fld{flex:1}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:560px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 87–96 · Stage 5</span>
+<h1>⛈️ The Storm Keeper</h1>
+<p class="sub">Most leadership is exercised in calm weather, with time to think. Crisis leadership is the opposite: a breach, an outage, a layoff, all demand decisions in minutes with incomplete information, while people are watching how you behave more closely than what you say. The skill isn't having no fires — it's staying calm, decisive and honest while one burns, and being someone people trust more, not less, after it's over.</p>
+
+<div class="tip">Fifth module of <strong>Stage 5 · The CTO Craft</strong>. The centerpiece is a real <strong>breach-response runbook builder</strong> — generate a phased runbook with comms templates ready before you ever need them.</p></div>
+
+<h2><span class="sn">1</span>Why crisis leadership is a different skill</h2>
+<p>Ordinary leadership rewards deliberation — gather data, consult, decide. Crisis leadership punishes it: the data is incomplete, the clock is running, and waiting for certainty is itself a decision with consequences. The three things that actually change outcomes under pressure aren't technical brilliance, they're <strong>calm</strong> (people mirror the state of whoever's in charge), <strong>a single decision-maker per front</strong> (so the crisis isn't run by committee), and <strong>honesty delivered on a predictable cadence</strong> — even "we don't know yet, next update in one hour" beats silence.</p>
+
+<h2><span class="sn">2</span>Security breach response — three fronts at once</h2>
+<p>A real breach runs on three tracks simultaneously, each with a different owner, and the CTO's job is making sure none of them blocks the others:</p>
+<div class="ref">
+  <div class="rr"><span class="rk">Technical</span><span class="rv">Contain first, investigate second — stop the bleeding (revoke access, isolate systems) before you fully understand root cause. Preserve logs and evidence; don't let panic wipe the forensic trail.</span></div>
+  <div class="rr"><span class="rk">Legal</span><span class="rv">Notification obligations (GDPR: 72 hours to the regulator; many US states have their own breach-notification laws) are often stricter than engineering's instinct to "wait until we fully understand it." Loop in counsel within the first hour, not after the postmortem.</span></div>
+  <div class="rr"><span class="rk">PR / trust</span><span class="rv">Customers forgive breaches; they don't forgive finding out from a journalist before you told them. Get ahead of disclosure on your own timeline and your own words — see <a class="x" href="leadership_fine_print.html">The Fine Print</a> for the contractual (DPA) side of this.</span></div>
+</div>
+<div class="warn"><strong>The instinct to "wait until we're sure" is usually wrong.</strong> Legal notification clocks often start at discovery, not at confirmation, and a delayed disclosure that later looks like a cover-up does far more trust damage than an early "we're investigating a potential incident" that turns out to be false-positive.</p></div>
+
+<h2><span class="sn">3</span>Catastrophic outages — command, not chaos</h2>
+<p>A major outage needs the same discipline as a breach: a named incident commander who isn't also the person debugging, a single channel of truth (not five Slack threads), and a strict separation between "fixing it now" and "understanding why" — those are sequential, not simultaneous, jobs. Afterward, run a <strong>blameless postmortem</strong>: the goal is the systemic cause (a missing alert, an untested rollback path, a single point of failure) not the name of who pushed the change. A team that fears blame stops reporting near-misses, which is exactly the data you need to prevent the next outage.</p>
+
+<h2><span class="sn">4</span>Layoffs, done humanely</h2>
+<p>Layoffs are a crisis with no adversary and no fix — just a hard, sad decision that has to be executed with dignity for the people leaving and honesty for the people staying:</p>
+<ul>
+<li><strong>Decide once, communicate fast.</strong> Long rumor periods before the actual announcement are crueler than the announcement itself — uncertainty erodes trust and productivity across the whole org, not just the affected group.</li>
+<li><strong>Be direct and specific.</strong> State clearly who is affected, what happens next (severance, benefits, timeline), and why — vague corporate language reads as evasive exactly when people need clarity most.</li>
+<li><strong>Don't over-explain to justify yourself.</strong> A long defensive rationale centers your comfort over their situation; be honest about the reason in one or two sentences and spend the rest of the conversation on what they need to know.</li>
+<li><strong>The remaining team needs its own honest conversation</strong> — about why, about what's different going forward, and about whether more is coming. Silence here reads as "you're next," and drives your best people to leave first, since they have the most options.</li>
+</ul>
+
+<h2><span class="sn">5</span>Communicating when everything is on fire</h2>
+<p>The same four rules apply whether the fire is a breach, an outage, or a layoff: <strong>a single source of truth</strong> (one channel, one status page, one person authorized to speak), <strong>a predictable cadence</strong> (announce your next update time even if there's nothing new — silence is what erodes trust, not slow progress), <strong>proportionate transparency</strong> (say what you know, flag what you don't, avoid speculation), and <strong>no promises you might have to walk back</strong> — "we expect to resolve this by 6pm" that slips to midnight costs more trust than "we don't have an ETA yet, next update in one hour."</p>
+
+<h2><span class="sn">6</span>Deliverable — build your breach-response runbook</h2>
+<p>Fill in the specifics of a hypothetical (or real) incident — or use the sample — and the builder assembles a phased runbook with ready-to-adapt comms templates for the internal team, customers, and regulators:</p>
+<div class="builder">
+  <div class="fld">Incident — one-line description<input id="r-desc" type="text" placeholder="e.g. Unauthorized access to a database containing customer email addresses and hashed passwords"></div>
+  <div class="frow">
+    <div class="fld">Systems / data affected<input id="r-scope" type="text" placeholder="e.g. Users table — emails, hashed passwords. No plaintext passwords or payment data."></div>
+    <div class="fld">Regulatory trigger?<select id="r-reg"><option value="yes">Yes — personal data involved (GDPR/CCPA-type obligations)</option><option value="no">No — no personal/regulated data involved</option></select></div>
+  </div>
+  <div class="fld">Incident commander (single point of contact)<input id="r-ic" type="text" placeholder="e.g. VP Engineering, backed up by the on-call SRE lead"></div>
+  <div class="fld">Customer-facing impact?<input id="r-cust" type="text" placeholder="e.g. Yes — recommend all users reset their password as a precaution"></div>
+  <button id="r-gen">⛈️ Assemble the runbook →</button>
+  <button id="r-copy" class="copy">Copy</button>
+  <div id="r-out" class="out-box"></div>
+</div>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Crisis leadership rewards speed, candor and a clear chain of command — and punishes silence, hedging, and running everything through one overloaded person. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Generate the runbook above for a hypothetical breach in your own system — could your team execute it at 2am without you? (2) Find your company's actual breach-notification legal obligations (GDPR/CCPA/state law) before you need them under pressure. (3) Review your last real incident's postmortem — is it blameless, or does it name people instead of systems? (4) If you've never run a layoff, read your company's severance policy today, not during the crisis.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 5 · the CTO craft. Pairs with <a class="x" href="leadership_fine_print.html">The Fine Print</a> (breach notification &amp; DPAs) and <a class="x" href="leadership_weathervane.html">The Weathervane</a> (risk management before the crisis hits). <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'A potential breach is discovered late Friday. The team isn\'t yet sure of the scope, and someone suggests waiting until Monday to loop in legal so the weekend isn\'t "wasted" on a false alarm.',
+     opts:[
+       {t:'Loop in legal and begin containment immediately, in parallel with scoping — notification clocks often start at discovery, not confirmation.',v:'best',fb:'Many breach-notification laws start the clock at discovery, not at certainty — waiting for confirmation before involving legal can itself create a compliance problem, independent of how the breach turns out. Contain and scope in parallel; don\'t sequence them.'},
+       {t:'Start technical containment now, and inform legal first thing Monday morning.',v:'ok',fb:'Containing immediately is right — but a 48-hour delay in reaching legal is exactly the gap that turns a fast, defensible response into a late one if the notification clock is already running. Reach counsel same-day, even off-hours, on anything with potential personal-data exposure.'},
+       {t:'Wait for full confirmation of scope before telling anyone outside the immediate technical team.',v:'poor',fb:'"We weren\'t sure yet" is rarely an accepted excuse for a late legal or regulatory notification, and the delay itself often becomes the story once it becomes public — turning a manageable incident into a "did they cover it up" narrative.'},
+       {t:'Quietly patch the vulnerability and monitor for a few days before deciding whether it needs escalation.',v:'poor',fb:'Treating a potential breach as a private engineering matter skips the legal and disclosure obligations entirely — and if it turns out to be real, "we knew and sat on it for days" is a far worse position than an early, honest "we\'re investigating."'}
+     ]},
+    {q:'A major outage is underway. Three different engineers are independently debugging, posting updates in three different Slack channels, and the CEO is asking you directly for an ETA every ten minutes.',
+     opts:[
+       {t:'Name one incident commander, one status channel, and tell the CEO you\'ll give a real update on a fixed cadence rather than react to every ping.',v:'best',fb:'Chaos during an outage is usually a command-structure problem, not a technical one. One commander, one channel, and a predictable update cadence (even "no new info, next update in 30 min") converts panic into a manageable process — for the team and for the CEO.'},
+       {t:'Ask the engineers to consolidate into one channel, but keep answering the CEO\'s pings directly as they come.',v:'ok',fb:'Consolidating the channel is the right instinct and fixes half the chaos. Still answering every ad hoc ping from the CEO, though, pulls your attention away from running the incident — better to set the cadence explicitly so both of you know when the next real update lands.'},
+       {t:'Let the engineers keep debugging in parallel — more eyes means faster resolution.',v:'poor',fb:'Parallel debugging without coordination usually duplicates effort and risks conflicting fixes landing at once, which can make an outage worse, not faster to resolve. Incidents need a commander directing effort, not a free-for-all.'},
+       {t:'Tell the CEO a specific ETA to make the pings stop, and adjust it later if needed.',v:'poor',fb:'A confident ETA you have to walk back costs more trust than admitting you don\'t have one yet. "No ETA yet, next update in 30 minutes" is a more honest and more trust-preserving answer than a guess dressed up as a commitment.'}
+     ]},
+    {q:'A layoff is decided. Someone suggests a long, detailed all-hands explaining every factor that led to the decision, hoping full transparency will prevent anger.',
+     opts:[
+       {t:'Be direct and specific about who\'s affected and what happens next, with a concise honest reason — save the extended justification.',v:'best',fb:'Long justifications tend to center the leader\'s comfort over the affected people\'s actual needs in the moment: clarity on severance, timeline, and benefits. State the reason honestly in a sentence or two, then spend the rest of the time on what people need to know and do next.'},
+       {t:'Give a moderate explanation of the business reasons, then focus most of the time on logistics and support.',v:'ok',fb:'A reasonable balance — logistics genuinely matter most to people in the moment. It\'s "ok" rather than "best" mainly in degree: keep the business-reasons portion tight so it doesn\'t crowd out the practical information people are anxiously waiting for.'},
+       {t:'Keep the announcement vague about reasons to avoid legal risk or hurt feelings.',v:'poor',fb:'Vagueness reads as evasive exactly when people most need clarity, and it doesn\'t actually reduce legal risk — it just adds confusion and distrust on top of an already hard day, for both those leaving and those staying.'},
+       {t:'Let the affected employees\' managers each decide individually how much to share.',v:'poor',fb:'Inconsistent messaging across managers turns one hard day into a confusing, rumor-prone one, and can create real fairness and legal exposure if people are told materially different things about the same decision.'}
+     ]},
+    {q:'After a breach is resolved, the postmortem discussion starts drifting toward "whose deploy caused this" instead of "what let it happen."',
+     opts:[
+       {t:'Redirect explicitly to blameless postmortem norms — the systemic gap (missing check, untested path, unclear ownership), not the individual.',v:'best',fb:'A blameless postmortem culture is what keeps people reporting near-misses in the future; a culture that hunts for who to blame teaches everyone to hide problems instead. The fix here is almost always a missing safeguard, not a person who needs correcting.'},
+       {t:'Let the discussion happen, but privately reassure the individual afterward that they\'re not in trouble.',v:'ok',fb:'A private reassurance helps that one person, but doesn\'t fix what the room just witnessed — everyone else saw a name get blamed in the postmortem, and that memory shapes what they choose to disclose next time regardless of a private follow-up.'},
+       {t:'Identify who made the mistake so it\'s clear for performance reviews.',v:'poor',fb:'Wiring incident postmortems into performance evaluation is one of the most reliable ways to destroy blameless-culture trust — people stop being honest about their own mistakes the moment disclosure has a career cost attached.'},
+       {t:'Skip the postmortem since the incident is already resolved.',v:'poor',fb:'Resolving the symptom without understanding the systemic cause all but guarantees a repeat. The postmortem is where the actual prevention work happens — skipping it because the fire is out treats containment as the whole job.'}
+     ]},
+    {q:'During an active incident, a journalist reaches out asking if your company has been breached, before your own internal investigation is complete.',
+     opts:[
+       {t:'Give a short, honest holding statement — investigating a potential incident, will share more once confirmed — rather than "no comment" or speculation.',v:'best',fb:'"No comment" often reads as confirmation by omission, and speculating before you know the facts can create statements you\'ll have to retract. A brief, honest holding statement buys time truthfully without over- or under-committing.'},
+       {t:'Say "no comment" until the investigation is fully complete.',v:'ok',fb:'Understandable caution, but a flat "no comment" to a direct breach question often reads worse than a short honest holding statement — it can look like stonewalling rather than diligence, especially if the story runs regardless.'},
+       {t:'Deny any breach has occurred to avoid alarming customers before you\'re certain.',v:'poor',fb:'A denial that\'s later contradicted by facts is far more damaging than "we\'re investigating" ever would have been — it converts a technical incident into a credibility crisis, which is a strictly worse position.'},
+       {t:'Ignore the outreach entirely and hope the story doesn\'t run.',v:'poor',fb:'Silence doesn\'t stop a story from running — it just means the story runs without your side of it. Engaging with a brief, honest statement is almost always better than ceding the entire narrative to someone else\'s reporting.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Storm-keeper move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // breach-response runbook builder
+  function val(id){return (document.getElementById(id).value||'').trim();}
+  var out=document.getElementById('r-out');
+  function build(){
+    var desc=val('r-desc')||'Unauthorized access to a database containing customer email addresses and hashed passwords';
+    var scope=val('r-scope')||'Users table — emails, hashed passwords. No plaintext passwords or payment data.';
+    var reg=document.getElementById('r-reg').value;
+    var ic=val('r-ic')||'VP Engineering, backed up by the on-call SRE lead';
+    var cust=val('r-cust')||'Yes — recommend all users reset their password as a precaution';
+    var regLine = reg==='yes'
+      ? 'YES — personal data involved. Regulatory notification clocks likely apply (e.g. GDPR: 72 hours to the supervisory authority from discovery). Loop in legal / DPO within the hour.'
+      : 'No regulated personal data identified — confirm this with legal before standing down the regulatory track.';
+    return [
+      'BREACH-RESPONSE RUNBOOK',
+      'Incident: '+desc,
+      'Scope:    '+scope,
+      'Incident commander: '+ic,
+      '─────────────────────────────────────────────',
+      '',
+      'PHASE 1 — DETECT & TRIAGE (first 30 min)',
+      '  • Confirm the incident commander (single decision-maker, not the person debugging).',
+      '  • Open one incident channel; all updates and decisions logged there only.',
+      '  • Preserve logs/evidence before making changes — don\'t destroy the forensic trail.',
+      '',
+      'PHASE 2 — CONTAIN (first 1–2 hours)',
+      '  • Revoke/rotate compromised credentials and access. Isolate affected systems.',
+      '  • Contain first, root-cause second — stop the bleeding before full understanding.',
+      '',
+      'PHASE 3 — ASSESS SCOPE (parallel with containment)',
+      '  • Scope: '+scope,
+      '  • Regulatory trigger: '+regLine,
+      '  • Loop in legal counsel now, not after scope is fully confirmed.',
+      '',
+      'PHASE 4 — NOTIFY',
+      '  • Internal exec/board notified with facts-so-far, not speculation.',
+      '  • Customer-facing impact: '+cust,
+      '  • Regulator notification prepared per legal\'s guidance on the applicable clock.',
+      '',
+      'PHASE 5 — REMEDIATE & MONITOR',
+      '  • Patch the root cause. Add monitoring/alerting for recurrence.',
+      '  • Keep the single status channel updated on a fixed cadence until closed.',
+      '',
+      'PHASE 6 — BLAMELESS POST-MORTEM (within 1 week of closure)',
+      '  • Systemic cause, not individual blame. Concrete follow-up actions with owners.',
+      '',
+      '─────────────────────────────────────────────',
+      'COMMS TEMPLATE — INTERNAL STATUS UPDATE',
+      '  Status: [investigating / contained / resolved] as of [time].',
+      '  What we know: '+desc,
+      '  What we\'re doing: [containment/remediation action in progress].',
+      '  Next update: [fixed time], regardless of new information.',
+      '',
+      'COMMS TEMPLATE — CUSTOMER NOTIFICATION',
+      '  Subject: Security incident update',
+      '  We recently discovered '+desc.charAt(0).toLowerCase()+desc.slice(1)+'.',
+      '  Affected: '+scope,
+      '  What we\'ve done: contained the issue and are investigating the full scope.',
+      '  What you should do: '+cust,
+      '  We will follow up with confirmed details by [date]. Contact: [security@company].',
+      '',
+      'COMMS TEMPLATE — REGULATOR / HOLDING STATEMENT (press)',
+      '  "We are aware of and actively investigating a potential security incident.',
+      '  We will share confirmed details as soon as our investigation is complete."'
+    ].join('\n');
+  }
+  document.getElementById('r-gen').addEventListener('click',function(){out.textContent=build();out.classList.add('show');});
+  document.getElementById('r-copy').addEventListener('click',function(){
+    if(!out.classList.contains('show')){out.textContent=build();out.classList.add('show');}
+    var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
