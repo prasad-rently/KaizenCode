@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Renovator — Migrations &amp; Legacy Modernization</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:320px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}.ascii{font-size:11.5px;line-height:1.5}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Migrations</span>
+<h1>🔨 The Renovator</h1>
+<p class="sub">Almost every real CTO job is inherited, not green-fielded — a system someone else built, under constraints you don't fully know, that has to keep serving live traffic while you change it underneath. Modernization done well is invisible to users; done badly, it's the outage that makes the news.</p>
+
+<h2><span class="sn">1</span>The strangler fig — replace a system without a big-bang cutover</h2>
+<p>Named after the strangler fig vine that grows around a host tree until the original is gone, this pattern puts a routing facade in front of the legacy system, then migrates functionality piece by piece — each migrated piece gets routed to the new system, everything else still hits the old one — until eventually nothing routes to the legacy system anymore and it can be safely deleted:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// A strangler-fig router: route each endpoint to legacy or new, migrated one at a time</span>
+<span class="kw">const</span> migrated = <span class="kw">new</span> <span class="fn">Set</span>([<span class="str">'/checkout'</span>]); <span class="cm">// only checkout has been rebuilt so far</span>
+
+<span class="kw">function</span> <span class="fn">route</span>(endpoint) {
+  <span class="kw">return</span> migrated.<span class="fn">has</span>(endpoint) ? <span class="str">'→ NEW service'</span> : <span class="str">'→ LEGACY monolith'</span>;
+}
+[<span class="str">'/checkout'</span>, <span class="str">'/search'</span>, <span class="str">'/profile'</span>, <span class="str">'/checkout'</span>].<span class="fn">forEach</span>(e =&gt; console.<span class="fn">log</span>(e + <span class="str">' '</span> + <span class="fn">route</span>(e)));
+console.<span class="fn">log</span>(<span class="str">''</span>);
+console.<span class="fn">log</span>(<span class="str">'...three months later, /search is rebuilt and migrated too...'</span>);
+migrated.<span class="fn">add</span>(<span class="str">'/search'</span>);
+[<span class="str">'/checkout'</span>, <span class="str">'/search'</span>, <span class="str">'/profile'</span>].<span class="fn">forEach</span>(e =&gt; console.<span class="fn">log</span>(e + <span class="str">' '</span> + <span class="fn">route</span>(e)));
+console.<span class="fn">log</span>(<span class="str">'→ the legacy monolith shrinks one endpoint at a time — never one risky cutover'</span>);</pre><div class="out"></div></div>
+<div class="tip">The facade is what makes this safe: users and other services never know which side of the fence a request landed on, and you can migrate — or revert — one endpoint at a time without touching the rest.</div>
+
+<h2><span class="sn">2</span>Zero-downtime schema changes — expand/contract</h2>
+<p>A naive schema change (rename a column, change its type) locks or breaks the table while old code is still reading/writing the old shape. The safe pattern splits one risky change into several safe ones — <strong>expand, migrate, contract</strong> — never removing the old shape until everything reading it has moved on:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Expand/contract: rename "name" → "full_name" with zero downtime, across 4 phases</span>
+<span class="kw">let</span> row = { name: <span class="str">'Alex Chen'</span> };
+
+console.<span class="fn">log</span>(<span class="str">'PHASE 1 — EXPAND: add the new column, keep the old one'</span>);
+row.full_name = row.name; <span class="cm">// backfill</span>
+console.<span class="fn">log</span>(<span class="str">'  row now:'</span>, row, <span class="str">'(old code still reads/writes "name" safely)'</span>);
+
+console.<span class="fn">log</span>(<span class="str">'PHASE 2 — DUAL-WRITE: new code writes BOTH columns'</span>);
+<span class="kw">function</span> <span class="fn">writeDual</span>(value) { row.name = value; row.full_name = value; }
+<span class="fn">writeDual</span>(<span class="str">'Alex Chen-Rivera'</span>);
+console.<span class="fn">log</span>(<span class="str">'  row now:'</span>, row, <span class="str">'(both old and new readers see correct data)'</span>);
+
+console.<span class="fn">log</span>(<span class="str">'PHASE 3 — MIGRATE READS: switch all readers to "full_name"'</span>);
+console.<span class="fn">log</span>(<span class="str">'  (no data change — just a code deploy; "name" is now unread but still written)'</span>);
+
+console.<span class="fn">log</span>(<span class="str">'PHASE 4 — CONTRACT: once nothing reads "name", stop writing it and drop the column'</span>);
+<span class="kw">delete</span> row.name;
+console.<span class="fn">log</span>(<span class="str">'  row now:'</span>, row, <span class="str">'— migration complete, zero downtime the whole way'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">3</span>Dual-writes — the trap hiding inside phase 2</h2>
+<p>Writing to two places "at once" is never actually atomic — one write can succeed while the other fails, silently diverging the two copies. This is exactly the risk phase 2 above introduces, and it's why dual-writes need explicit handling, not just hope:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Dual-write failure: the second write fails, and now the two copies disagree</span>
+<span class="kw">let</span> primary = { balance: <span class="num">100</span> };
+<span class="kw">let</span> secondary = { balance: <span class="num">100</span> };
+
+<span class="kw">function</span> <span class="fn">unsafeDualWrite</span>(amount, secondaryFails) {
+  primary.balance += amount; <span class="cm">// this write succeeds</span>
+  <span class="kw">if</span> (secondaryFails) <span class="kw">throw</span> <span class="kw">new</span> <span class="fn">Error</span>(<span class="str">'secondary write failed (network blip, timeout, whatever)'</span>);
+  secondary.balance += amount;
+}
+<span class="kw">try</span> { <span class="fn">unsafeDualWrite</span>(<span class="num">50</span>, <span class="kw">true</span>); }
+<span class="kw">catch</span> (e) { console.<span class="fn">log</span>(<span class="str">'⛔ '</span> + e.message); }
+console.<span class="fn">log</span>(<span class="str">'primary.balance:  '</span>, primary.balance, <span class="str">'(the write went through)'</span>);
+console.<span class="fn">log</span>(<span class="str">'secondary.balance:'</span>, secondary.balance, <span class="str">'(silently stale — nobody was told)'</span>);
+console.<span class="fn">log</span>(<span class="str">''</span>);
+console.<span class="fn">log</span>(<span class="str">'→ safer alternatives: write to ONE source of truth and replicate via change-data-capture'</span>);
+console.<span class="fn">log</span>(<span class="str">'  (CDC/Debezium-style), or use an outbox pattern — never two independent application writes'</span>);</pre><div class="out"></div></div>
+<div class="warn">If you must dual-write, add a reconciliation job that periodically diffs the two copies and alerts on drift — dual-writes without reconciliation accumulate silent inconsistency for as long as the migration takes.</div>
+
+<h2><span class="sn">4</span>Rewrite vs. refactor economics</h2>
+<p>The tempting move when inheriting a messy system is "let's just rewrite it from scratch, clean" — this is one of the most reliable ways to lose 6–18 months and end up with a system that has all-new bugs and none of the accumulated business-logic knowledge the old one quietly encoded. Netscape's full rewrite in the late '90s famously ceded the browser market to competitors while they rebuilt. The strangler fig above exists precisely because incremental replacement, done in production, almost always beats a big-bang rewrite:</p>
+<table>
+<tr><th></th><th>Big-bang rewrite</th><th>Incremental (strangler fig)</th></tr>
+<tr><td>Risk</td><td>All-or-nothing — ships once, fails visibly</td><td>Spread across many small, revertible steps</td></tr>
+<tr><td>Business logic</td><td>Re-derived from scratch — easy to lose edge cases</td><td>Preserved; migrated piece carries its logic forward</td></tr>
+<tr><td>Value delivered</td><td>None until the whole rewrite ships</td><td>Each migrated piece ships value immediately</td></tr>
+<tr><td>When it's right</td><td>The old system is genuinely unsalvageable (rare)</td><td>Almost every other case</td></tr>
+</table>
+
+<div class="ok"><strong>Try it:</strong> (1) Pick one painful legacy endpoint and sketch what a strangler-fig facade in front of it would look like. (2) For a real column you'd like to rename or retype, write out the four expand/contract phases explicitly before touching anything. (3) If your system has any dual-write, check whether a reconciliation job actually exists — if not, that's live drift risk today. <strong>Deliverable:</strong> execute a zero-downtime column migration on a real (or phase) project, with traffic running throughout — expand, dual-write, migrate reads, contract.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mastery Track · extends Phase 2 (Databases) &amp; Phase 4 (DevOps). From <a class="back" href="upcoming.html">The Road to CTO</a> board — Stage 1, technical foundation. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>

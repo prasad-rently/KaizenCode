@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Registrar — Privacy &amp; Compliance Engineering</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:320px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}.ascii{font-size:11.5px;line-height:1.5}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Privacy &amp; Compliance</span>
+<h1>📋 The Registrar</h1>
+<p class="sub">"We're GDPR compliant" is a sentence a lawyer can write; whether it's actually true is an engineering question. A user's data lives in a database, a cache, a search index, a log file, three analytics tools, and a nightly backup — deleting them "everywhere" is a pipeline you have to build, not a checkbox you can tick. This is <a class="back" href="mastery_vault_security.html">The Vault</a>'s sibling: security keeps data from the wrong people; this module governs what you're allowed to keep, for how long, and how you prove it.</p>
+
+<h2><span class="sn">1</span>GDPR &amp; India's DPDP Act — the core rights</h2>
+<p>The two frameworks most engineers will encounter share the same backbone even though the terminology differs — GDPR calls the company a "controller/processor," India's Digital Personal Data Protection Act (DPDP, 2023) calls it a "Data Fiduciary," and the user a "Data Principal" — but the technical obligations converge on the same handful of rights:</p>
+<table>
+<tr><th>Right</th><th>What it requires you to build</th></tr>
+<tr><td>Access</td><td>Export everything you hold about a user, in a readable format, on request.</td></tr>
+<tr><td>Erasure ("right to be forgotten")</td><td>Actually delete a user's data — not just hide it — across every system that holds it.</td></tr>
+<tr><td>Portability</td><td>Export in a structured, machine-readable format they can take to a competitor.</td></tr>
+<tr><td>Consent withdrawal</td><td>Stop processing data the moment consent is withdrawn, not at the next convenient release.</td></tr>
+</table>
+<p>None of these are legal-team deliverables — every one of them requires a real, working pipeline your team builds, tests, and maintains.</p>
+
+<h2><span class="sn">2</span>Deletion pipelines — "everywhere" is more places than you think</h2>
+<p>A user's data is never in just one table. A real deletion request has to cascade through every system that might hold a copy, and the pipeline has to actually confirm each one, not assume:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// A real deletion request cascades across every system that might hold a copy</span>
+<span class="kw">const</span> systems = [
+  { name: <span class="str">'primary database'</span>, deletable: <span class="kw">true</span> },
+  { name: <span class="str">'search index'</span>, deletable: <span class="kw">true</span> },
+  { name: <span class="str">'analytics warehouse'</span>, deletable: <span class="kw">true</span> },
+  { name: <span class="str">'nightly backups (last 30 days)'</span>, deletable: <span class="kw">false</span> }, <span class="cm">// can't delete from an immutable backup directly</span>
+  { name: <span class="str">'third-party email tool'</span>, deletable: <span class="kw">true</span> },
+];
+
+<span class="kw">function</span> <span class="fn">deleteUser</span>(userId) {
+  <span class="kw">const</span> results = [];
+  systems.<span class="fn">forEach</span>(s =&gt; {
+    <span class="kw">if</span> (s.deletable) results.<span class="fn">push</span>(s.name + <span class="str">': ✅ deleted'</span>);
+    <span class="kw">else</span> results.<span class="fn">push</span>(s.name + <span class="str">': ⏳ flagged for deletion on next backup rotation (expires within retention window)'</span>);
+  });
+  <span class="kw">return</span> results;
+}
+<span class="fn">deleteUser</span>(<span class="str">'user_42'</span>).<span class="fn">forEach</span>(r =&gt; console.<span class="fn">log</span>(r));
+console.<span class="fn">log</span>(<span class="str">'→ "deleted" for backups usually means "will age out within N days" — document that'</span>);
+console.<span class="fn">log</span>(<span class="str">'  explicitly, since regulators expect you to know exactly where every copy lives'</span>);</pre><div class="out"></div></div>
+<div class="warn">The most common real-world failure isn't malice, it's an untracked copy — a debug export, a support ticket attachment, a spreadsheet someone downloaded. A deletion pipeline is only as complete as your actual data inventory.</div>
+
+<h2><span class="sn">3</span>Retention policies — data shouldn't live forever by default</h2>
+<p>The safest data is data you no longer hold — every record you keep past its useful life is pure liability with no offsetting benefit. A retention policy makes expiry automatic instead of "whenever someone remembers to clean up":</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Automated retention: purge records past their policy's TTL</span>
+<span class="kw">const</span> now = <span class="num">1000</span>; <span class="cm">// "today", in days-since-epoch for simplicity</span>
+<span class="kw">const</span> POLICY_DAYS = { <span class="str">'support_ticket'</span>: <span class="num">365</span>, <span class="str">'login_log'</span>: <span class="num">90</span>, <span class="str">'marketing_consent'</span>: <span class="num">730</span> };
+<span class="kw">const</span> records = [
+  { type: <span class="str">'support_ticket'</span>, createdAt: <span class="num">400</span> },   <span class="cm">// 600 days old</span>
+  { type: <span class="str">'login_log'</span>, createdAt: <span class="num">950</span> },        <span class="cm">// 50 days old</span>
+  { type: <span class="str">'login_log'</span>, createdAt: <span class="num">700</span> },        <span class="cm">// 300 days old — past policy</span>
+  { type: <span class="str">'marketing_consent'</span>, createdAt: <span class="num">500</span> },
+];
+records.<span class="fn">forEach</span>(r =&gt; {
+  <span class="kw">const</span> ageDays = now - r.createdAt;
+  <span class="kw">const</span> limit = POLICY_DAYS[r.type];
+  console.<span class="fn">log</span>(r.type + <span class="str">' (age '</span> + ageDays + <span class="str">'d, limit '</span> + limit + <span class="str">'d): '</span> + (ageDays &gt; limit ? <span class="str">'🗑️  PURGE — past retention window'</span> : <span class="str">'✅ keep'</span>));
+});
+console.<span class="fn">log</span>(<span class="str">'→ run this as a scheduled job, not a manual quarterly cleanup'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">4</span>SOC 2 / ISO 27001 — controls as code</h2>
+<p>Traditional compliance audits are a once-a-year manual scramble: screenshots, spreadsheets, someone frantically confirming every engineer with prod access still needs it. <strong>Controls as code</strong> treats each compliance requirement as an automated, continuously-running check — the same discipline as your test suite, applied to compliance instead of correctness:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// SOC 2 controls, automated: run continuously instead of once a year by hand</span>
+<span class="kw">const</span> systemState = {
+  prodDbEncryptedAtRest: <span class="kw">true</span>,
+  mfaEnforcedForAllAdmins: <span class="kw">true</span>,
+  auditLogRetentionDays: <span class="num">45</span>, <span class="cm">// policy requires 90+</span>
+  staleAdminAccounts: [<span class="str">'ex-employee@company.com'</span>], <span class="cm">// should have been revoked</span>
+};
+<span class="kw">const</span> controls = [
+  { id: <span class="str">'CC6.1'</span>, name: <span class="str">'Encryption at rest'</span>, <span class="fn">check</span>: () =&gt; systemState.prodDbEncryptedAtRest },
+  { id: <span class="str">'CC6.6'</span>, name: <span class="str">'MFA for privileged access'</span>, <span class="fn">check</span>: () =&gt; systemState.mfaEnforcedForAllAdmins },
+  { id: <span class="str">'CC7.2'</span>, name: <span class="str">'Audit log retention ≥ 90 days'</span>, <span class="fn">check</span>: () =&gt; systemState.auditLogRetentionDays &gt;= <span class="num">90</span> },
+  { id: <span class="str">'CC6.3'</span>, name: <span class="str">'No stale privileged accounts'</span>, <span class="fn">check</span>: () =&gt; systemState.staleAdminAccounts.<span class="fn">length</span> === <span class="num">0</span> },
+];
+<span class="kw">let</span> failures = <span class="num">0</span>;
+controls.<span class="fn">forEach</span>(c =&gt; {
+  <span class="kw">const</span> pass = c.<span class="fn">check</span>();
+  <span class="kw">if</span> (!pass) failures++;
+  console.<span class="fn">log</span>(c.id + <span class="str">' '</span> + c.name + <span class="str">': '</span> + (pass ? <span class="str">'✅ PASS'</span> : <span class="str">'❌ FAIL'</span>));
+});
+console.<span class="fn">log</span>(<span class="str">''</span>);
+console.<span class="fn">log</span>(failures + <span class="str">' of '</span> + controls.<span class="fn">length</span> + <span class="str">' controls failing — caught by a nightly job, not next year\'s audit'</span>);</pre><div class="out"></div></div>
+<div class="tip">This is the same instinct as <a class="back" href="mastery_paved_road_platform_engineering.html">The Paved Road</a>'s DORA metrics — measure continuously, automatically, so drift is caught in days instead of discovered a year later by an outside auditor.</div>
+
+<h2><span class="sn">5</span>Audit trails</h2>
+<p>An audit trail is an append-only, tamper-evident log of who accessed or changed what, when — required both to satisfy SOC 2/ISO 27001 auditors and, in practice, to actually investigate an incident (see <a class="back" href="leadership_storm_keeper.html">The Storm Keeper</a>). The two properties that make an audit log actually trustworthy: <strong>append-only</strong> (no one, including admins, can edit past entries) and <strong>separated from the systems it's watching</strong> (so compromising the main system doesn't let an attacker also erase their tracks).</p>
+
+<div class="ok"><strong>Try it:</strong> (1) List every system that would need to receive a deletion request for one of your users — database, search, analytics, backups, third-party tools — and check whether a pipeline actually reaches all of them today. (2) Write one retention policy for a real data type in your system and check whether anything currently enforces it automatically. (3) Pick three SOC 2 Trust Services Criteria and write an automated check for each, the way §4 does. <strong>Deliverable:</strong> map SOC 2 controls onto a phase project — pick a real control category (access control, encryption, logging, change management) and document exactly how your project would satisfy it, with an automated check where possible.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mastery Track · pairs with The Vault (security) and extends Phase 2 (Databases). From <a class="back" href="upcoming.html">The Road to CTO</a> board — Stage 1, technical foundation. This completes Stage 1 and the full 32-module board. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>
