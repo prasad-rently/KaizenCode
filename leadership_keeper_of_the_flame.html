@@ -1,0 +1,195 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Keeper of the Flame — CTO Self-Management</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#fbeeea;color:#993C1D}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#241310;color:#e0917a}}
+/* reference */
+.ref{border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;margin:14px 0}@media(prefers-color-scheme:dark){.ref{border-color:#2a2a2a}}.ref .rr{display:flex;gap:11px;padding:8px 12px;border-top:1px solid #f0f0f0;font-size:12.5px;background:#fafafa}.ref .rr:first-child{border-top:0}@media(prefers-color-scheme:dark){.ref .rr{border-color:#202020;background:#151515}}.ref .rk{flex:0 0 74px;font-weight:700;color:#5350B4}@media(prefers-color-scheme:dark){.ref .rk{color:#a6a3ff}}.ref .rv{color:#555}@media(prefers-color-scheme:dark){.ref .rv{color:#aaa}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* calendar audit builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.chint{font-size:10.5px;color:#888;margin:2px 0 10px;line-height:1.5}
+.crow{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:7px 0;border-top:1px solid #f0f0f0}.crow:first-of-type{border-top:0}@media(prefers-color-scheme:dark){.crow{border-color:#222}}.crow label{flex:1.4;color:#333}@media(prefers-color-scheme:dark){.crow label{color:#ccc}}.crow .cwrap{flex:1;display:flex;align-items:center;gap:6px}.crow input[type=number]{font:inherit;font-size:12px;width:52px;padding:5px 7px;border-radius:6px;border:1px solid #d8d8d8;background:#fff;color:#1a1a1a}@media(prefers-color-scheme:dark){.crow input[type=number]{background:#0d0d0d;border-color:#333;color:#e8e8e8}}.crow .cunit{font-size:10.5px;color:#888;white-space:nowrap}
+.chdr{display:flex;gap:10px;font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.3px;padding-bottom:4px}.chdr span:first-child{flex:1.4}.chdr span:last-child{flex:1}
+.cout{display:none;margin-top:14px}.cout.show{display:block}
+.cverd{font-size:13px;font-weight:700;padding:10px 12px;border-radius:8px;margin-bottom:8px}.cv-good{background:#e7f7ef;color:#0F6E56}.cv-mixed{background:#fbf1e0;color:#8a5210}.cv-bad{background:#fbe9e6;color:#993C1D}@media(prefers-color-scheme:dark){.cv-good{background:#0c2016;color:#5fd0a0}.cv-mixed{background:#241a09;color:#e0b070}.cv-bad{background:#2a1712;color:#e8907a}}
+.crep{white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:420px;overflow:auto}@media(prefers-color-scheme:dark){.crep{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 87–96 · Stage 5</span>
+<h1>🕯️ The Keeper of the Flame</h1>
+<p class="sub">Every module in this track has been about leading other people, other functions, or a room. This last one is about the person doing the leading. A CTO who burns out, drifts technically irrelevant, or loses executive presence eventually loses the ability to do any of the rest well — and nobody else is going to manage that for you. Self-management is the un-glamorous, unassigned final skill that keeps everything else standing.</p>
+
+<div class="tip">Seventh and final module of <strong>Stage 5 · The CTO Craft</strong> — completing the Leadership track. The centerpiece is a real <strong>two-week calendar audit</strong> that scores how you actually spend time against what you say matters most.</p></div>
+
+<h2><span class="sn">1</span>Why self-management is the last, hardest skill</h2>
+<p>Every other module in this track has an external scoreboard — the board approves the ask, the deal closes, the post gets read. Self-management has no scoreboard and no deadline, which is exactly why it's the one CTOs neglect longest: there's no forcing function until burnout, an ugly board meeting, or a resignation letter forces the issue. The skill is building your own forcing functions — a calendar audit, a coach, a peer group — before the crisis does it for you.</p>
+
+<h2><span class="sn">2</span>Calendar &amp; energy audits</h2>
+<p>Ask any CTO what matters most and they'll say strategy, their people, the big technical bets. Look at their actual calendar and it's often back-to-back status meetings and firefighting. The gap between <em>stated</em> priorities and <em>calendar</em> priorities is the single most honest diagnostic available to you — and almost nobody runs it on themselves.</p>
+<div class="sched">
+  <div class="col"><h4>✅ Calendar matches priorities</h4>
+    <div class="blk good">Protected blocks for the 1–2 things that matter most</div>
+    <div class="blk good">Recurring meetings periodically pruned, not just added to</div>
+    <div class="blk good">Energy-matched scheduling — hard thinking when you're sharp</div>
+    <div class="blk good">White space to actually think, not just react</div>
+  </div>
+  <div class="col"><h4>⚠️ Calendar drifts from priorities</h4>
+    <div class="blk bad">100% reactive — every hour is someone else's request</div>
+    <div class="blk bad">"Strategic thinking" never has an actual block</div>
+    <div class="blk bad">Status meetings that could be a written update</div>
+    <div class="blk bad">Zero white space; every gap fills with something</div>
+  </div>
+</div>
+<p>Energy audits go a layer deeper than time: not just <em>what</em> you spent time on but whether it left you charged or drained, and whether the draining things are unavoidable or just habitual. A calendar can be "aligned" on paper and still be quietly burning you out if it's wall-to-wall high-stakes context switching with no recovery built in.</p>
+
+<h2><span class="sn">3</span>Staying technical enough — and no more</h2>
+<p>Two opposite failure modes, both common: the CTO who still writes production code and reviews every PR, starving the strategic and people work only they can do; and the CTO who's drifted so far from the technology that they can't ask a sharp question in an architecture review or a diligence call. Neither serves the company. The right amount of "staying technical" is just enough to ask the question that catches the wrong assumption — reading code occasionally, sitting in on design reviews, staying current on the technologies that matter to your strategy — not enough to be the bottleneck reviewing every change.</p>
+
+<h2><span class="sn">4</span>Mentors, coaches &amp; peer groups</h2>
+<p>The CTO seat is structurally isolating: you have no peer inside the company who does your job, and the people who report to you can't always be candid about your blind spots. Three distinct relationships fill that gap, and most CTOs are missing at least one:</p>
+<div class="ref">
+  <div class="rr"><span class="rk">Mentor</span><span class="rv">Someone further along the path who's navigated the specific transition you're in — invaluable for pattern-matching ("I've seen this exact board dynamic before").</span></div>
+  <div class="rr"><span class="rk">Coach</span><span class="rv">A trained, paid, confidential relationship focused on <em>you</em> — your patterns, blind spots, and growth, not the company's problems. Not therapy, but adjacent in candor.</span></div>
+  <div class="rr"><span class="rk">Peer group</span><span class="rv">Other CTOs at a similar stage, meeting regularly, who understand the specific weight of the seat without you having to explain the context every time.</span></div>
+</div>
+
+<h2><span class="sn">5</span>Executive presence</h2>
+<p>Presence is what people feel in the room with you before you've said anything technical — calm under pressure (see <a class="x" href="leadership_storm_keeper.html">The Storm Keeper</a>), being genuinely listened-to as a peer (see <a class="x" href="leadership_round_table.html">The Round Table</a>), and a baseline of steadiness that makes people trust your judgment in a crisis before they've tested it. Presence isn't performed charisma; it's usually the visible symptom of the internal work in this module actually being done — well-managed energy, a clear sense of priorities, and enough outside support that you're not white-knuckling every hard moment alone.</p>
+
+<h2><span class="sn">6</span>Avoiding burnout, and knowing when to leave</h2>
+<p>Burnout in this seat rarely announces itself — it creeps in as declining patience, shrinking curiosity, and decisions made from exhaustion rather than judgment. Build your own early-warning signals (a recurring calendar/energy audit is one) rather than waiting for a collapse to notice. And build the harder self-honesty too: sometimes the right answer isn't managing your way through it, it's recognizing that the fit with this company, this stage, or this role has genuinely ended. Staying past that point rarely serves you, your team, or the company — the healthiest CTOs are the ones honest enough to know the difference between a hard patch and a real ending.</p>
+
+<h2><span class="sn">7</span>Deliverable — run your two-week calendar audit</h2>
+<p>List your top stated priorities with a weight (how much of your time <em>should</em> go there), then log roughly how you actually spent the last two weeks. The audit shows the gap — and whether recovery time exists at all:</p>
+<div class="builder">
+  <div class="chint">Weights should roughly total 100 — they represent the share of your time each priority <em>deserves</em>. Actual hours are your real two-week total per category.</div>
+  <div class="chdr"><span>Priority / category</span><span>Target weight (%)</span><span>Actual hours (2 wks)</span></div>
+  <div id="c-rows"></div>
+  <div style="margin-top:10px"><button id="c-run">🕯️ Run the audit →</button></div>
+  <div id="c-out" class="cout"></div>
+</div>
+
+<h2><span class="sn">8</span>Pressure-test your instincts</h2>
+<p>Self-management rewards honesty with yourself before anyone else asks the hard question, and punishes waiting for a crisis to force the issue. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Run the calendar audit above with your real last two weeks — not the idealized version. (2) If you don't have a coach, mentor, or peer group, pick the one you're missing most and take one concrete step toward it this month. (3) Name the one technical area you've let drift too far, and the one you're still over-involved in — trade an hour from the second toward the first. (4) Honestly answer: if nothing changes, are you still doing this job in two years, by choice?</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 5 · the CTO craft — <strong>final module.</strong> Pairs with <a class="x" href="leadership_round_table.html">The Round Table</a> (executive presence) and <a class="x" href="leadership_storm_keeper.html">The Storm Keeper</a> (staying steady under pressure). <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'A real calendar audit shows 80% of your time in reactive meetings and status updates, and almost none in the "technical strategy" you told the board was your top priority.',
+     opts:[
+       {t:'Treat the gap as the real signal it is — prune recurring meetings, delegate the reactive load, and protect blocks for the stated priority.',v:'best',fb:'This is exactly what the audit is for: the calendar is the honest record of your actual priorities, regardless of what you say in a board deck. Closing the gap means actively removing things from the calendar, not just resolving to "try harder" to fit strategy in around them.'},
+       {t:'Acknowledge the gap and add strategy time into whatever slots are left over.',v:'ok',fb:'Adding time is better than ignoring the finding, but slotting strategic thinking into leftover gaps usually means it gets bumped by the next urgent request. Real change here means removing lower-value recurring commitments, not just hoping the leftovers survive.'},
+       {t:'Decide the audit doesn\'t reflect the real value of the reactive work and change nothing.',v:'poor',fb:'This is the exact rationalization that lets the gap persist for years. If reactive work genuinely is the top priority, then say that to the board honestly — but if it isn\'t, dismissing the audit\'s finding just protects the status quo from scrutiny.'},
+       {t:'Quietly stop claiming technical strategy is a priority rather than changing the calendar.',v:'poor',fb:'Redefining the stated priority to match the calendar, instead of the other way around, avoids the harder and more valuable work — deciding what actually deserves your time and making the calendar reflect that choice deliberately.'}
+     ]},
+    {q:'You notice you\'re still personally reviewing every pull request and writing code most weeks, and your VP Eng has started routing architecture decisions around you because you\'re slow to respond.',
+     opts:[
+       {t:'Recognize you\'ve drifted into the "still writing code" failure mode and deliberately hand off review/coding load to make room for the strategic work only you can do.',v:'best',fb:'A VP Eng routing around you is a clear signal the current allocation isn\'t working — your scarce time is going to work others can do, at the cost of work only you can. Naming it and handing it off deliberately is the fix; waiting for it to resolve itself won\'t work.'},
+       {t:'Keep reviewing PRs you find most interesting, and delegate the rest.',v:'ok',fb:'Partial delegation helps, but if the selection criterion is "what\'s interesting to me" rather than "what actually needs my judgment," you\'re still occupying bandwidth that should go to strategy. Delegate based on where your judgment is genuinely load-bearing, not personal preference.'},
+       {t:'Keep doing it — staying hands-on with code is core to being a credible technical leader.',v:'poor',fb:'Credibility from occasional sharp technical judgment is not the same as needing to review every PR — and a VP Eng routing decisions around you is direct evidence the current level of involvement is actively costing the org speed, not building credibility.'},
+       {t:'Stop touching code entirely, effective immediately, to force the change.',v:'poor',fb:'Overcorrecting to zero technical involvement swings into the opposite failure mode this module warns about — losing the technical grounding to ask sharp questions later. The goal is calibrated involvement, not an abrupt switch from too much to none.'}
+     ]},
+    {q:'You realize you haven\'t had a real, candid conversation about your own blind spots with anyone in over a year — everyone around you either reports to you or evaluates you.',
+     opts:[
+       {t:'Actively seek out a coach, mentor, or peer group — the seat is structurally isolating, and this doesn\'t resolve on its own.',v:'best',fb:'The CTO role has no natural peer inside the company, and reports can\'t always be candid about your blind spots without risk. This gap doesn\'t close by waiting — it takes a deliberate, outside relationship built specifically for that candor.'},
+       {t:'Ask a trusted direct report to be more candid with you going forward.',v:'ok',fb:'Worth trying, and better than nothing — but a direct report giving candid feedback to the person who evaluates them carries a real, structural power imbalance that limits how honest it can safely be. It\'s a supplement to outside support, not a substitute for it.'},
+       {t:'Assume you\'re self-aware enough not to need outside perspective.',v:'poor',fb:'Self-assessed self-awareness is precisely what blind spots defeat — by definition, you can\'t see what you can\'t see. This is the rationalization that lets isolation continue until a crisis forces the issue.'},
+       {t:'Decide it\'s not a priority right now given how busy things are.',v:'poor',fb:'"Too busy" is usually itself a symptom of the misalignment this module is about — and the isolation this addresses tends to compound quietly rather than wait for a better quarter. The busier things feel, the more this kind of outside perspective usually matters.'}
+     ]},
+    {q:'You\'ve been feeling persistently less patient, less curious, and more numb to wins that used to excite you — classic early burnout signs — but the company is mid-crisis and it feels like a bad time to slow down.',
+     opts:[
+       {t:'Treat the signals as real and address them now — a burned-out CTO makes worse decisions in a crisis, not better ones.',v:'best',fb:'"Bad time to slow down" is almost always exactly when burnout is most dangerous — the crisis needs your best judgment, and declining patience and numbness are early signs that judgment is already degrading. Addressing it now protects the crisis response, it doesn\'t compete with it.'},
+       {t:'Note it, but plan to address it once the current crisis resolves.',v:'ok',fb:'A reasonable instinct to not fully drop everything mid-crisis, but "after this crisis" often becomes "after the next one" indefinitely. At minimum, take small recovery steps now rather than deferring the whole question to an undefined future calm.'},
+       {t:'Push through — self-care can wait until things are calmer.',v:'poor',fb:'This is the pattern that turns early, manageable burnout signals into a genuine collapse. The crisis is precisely the environment where degraded judgment is most costly — pushing through doesn\'t protect the company, it puts it at more risk.'},
+       {t:'Dismiss the feelings as normal stress that everyone in this role experiences.',v:'poor',fb:'Normalizing the signals doesn\'t make them less real or less predictive of burnout — it just delays acting on them. "Everyone feels this" may be true and still be a problem worth addressing rather than accepting as the cost of the job.'}
+     ]},
+    {q:'After real reflection, you conclude the company\'s next stage genuinely needs a different kind of CTO than you — not a performance problem, just a fit that\'s run its course.',
+     opts:[
+       {t:'Have the honest conversation with the CEO/board about the mismatch and plan a deliberate, well-handled transition.',v:'best',fb:'Recognizing a genuine fit mismatch — distinct from a fixable hard patch — and naming it honestly is one of the most mature moves in this whole track. A planned, honest transition serves the company, the successor, and your own reputation far better than either staying past the point of fit or leaving abruptly.'},
+       {t:'Stay for now while quietly starting to look for what\'s next.',v:'ok',fb:'Understandable caution, but a prolonged quiet job search while still running the company risks a messier, more sudden exit later, and denies the company the chance to plan a clean transition. If you\'re genuinely convinced it\'s over, moving toward an honest conversation sooner tends to serve everyone better.'},
+       {t:'Push through the mismatch indefinitely since leaving would look like failure.',v:'poor',fb:'Staying past a genuine fit mismatch out of appearance rarely serves anyone — the company gets a leader who\'s not really the right fit for what\'s next, and you extend a role that\'s already run its course. "How it looks" is a poor reason to override honest judgment about fit.'},
+       {t:'Resign abruptly without warning to act on the realization immediately.',v:'poor',fb:'An abrupt, unplanned exit — even from a genuine and correct realization — creates unnecessary chaos for the team and the company. The insight that it\'s time to go doesn\'t require it to happen overnight; a deliberate transition serves the same conclusion far better.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Self-aware move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // calendar audit builder
+  var CATS=[
+    {name:'Technical strategy & architecture bets',weight:20,hours:4},
+    {name:'People — 1:1s, coaching, hiring',weight:20,hours:10},
+    {name:'Board / exec / cross-functional',weight:15,hours:8},
+    {name:'Reactive firefighting & status meetings',weight:10,hours:28},
+    {name:'Deep individual thinking / white space',weight:15,hours:2},
+    {name:'Public presence (writing, talks, dev-rel)',weight:5,hours:0},
+    {name:'Recovery / non-work energy',weight:15,hours:8}
+  ];
+  var host2=document.getElementById('c-rows');
+  CATS.forEach(function(c,i){
+    var row=document.createElement('div');row.className='crow';
+    var lab=document.createElement('label');lab.textContent=c.name;
+    var wwrap=document.createElement('div');wwrap.className='cwrap';
+    var wi=document.createElement('input');wi.type='number';wi.min=0;wi.max=100;wi.value=c.weight;wi.id='c-w-'+i;
+    var wu=document.createElement('span');wu.className='cunit';wu.textContent='%';
+    wwrap.appendChild(wi);wwrap.appendChild(wu);
+    var hwrap=document.createElement('div');hwrap.className='cwrap';
+    var hi=document.createElement('input');hi.type='number';hi.min=0;hi.max=200;hi.value=c.hours;hi.id='c-h-'+i;
+    var hu=document.createElement('span');hu.className='cunit';hu.textContent='hrs';
+    hwrap.appendChild(hi);hwrap.appendChild(hu);
+    row.appendChild(lab);row.appendChild(wwrap);row.appendChild(hwrap);
+    host2.appendChild(row);
+  });
+
+  var out=document.getElementById('c-out');
+  document.getElementById('c-run').addEventListener('click',function(){
+    var totalHours=0,rows=[];
+    CATS.forEach(function(c,i){
+      var w=parseFloat(document.getElementById('c-w-'+i).value)||0;
+      var h=parseFloat(document.getElementById('c-h-'+i).value)||0;
+      totalHours+=h;
+      rows.push({name:c.name,weight:w,hours:h});
+    });
+    var lines=[],gaps=[];
+    rows.forEach(function(r){
+      var actualPct = totalHours>0 ? Math.round((r.hours/totalHours)*100) : 0;
+      var gap = actualPct - r.weight;
+      lines.push('  '+r.name+': target '+r.weight+'%, actual '+actualPct+'% ('+r.hours+'h)'+(Math.abs(gap)>=8?'  ← '+(gap>0?'over':'under')+' by '+Math.abs(gap)+'pt':''));
+      gaps.push({name:r.name,gap:gap});
+    });
+    var recoveryRow=rows.find(function(r){return /recovery/i.test(r.name);});
+    var recoveryPct = recoveryRow && totalHours>0 ? Math.round((recoveryRow.hours/totalHours)*100) : 0;
+    var bigGaps=gaps.filter(function(g){return Math.abs(g.gap)>=8;});
+    var verdict,vclass;
+    if(recoveryPct<8 || bigGaps.length>=4){verdict='MISALIGNED — the calendar and the stated priorities barely resemble each other';vclass='cv-bad';}
+    else if(bigGaps.length>=2 || recoveryPct<12){verdict='MIXED — some real gaps worth deliberately closing';vclass='cv-mixed';}
+    else {verdict='ALIGNED — time roughly matches what you say matters most';vclass='cv-good';}
+    var html='<div class="cverd '+vclass+'">'+verdict+'</div>';
+    html+='<div class="crep">Total logged: '+totalHours+' hours over two weeks.\n\n'+lines.join('\n')+'\n\n';
+    if(bigGaps.length){
+      html+='LARGEST GAPS:\n'+bigGaps.sort(function(a,b){return Math.abs(b.gap)-Math.abs(a.gap);}).slice(0,3).map(function(g){return'  • '+g.name+' — '+(g.gap>0?'consuming ':'starved of ')+Math.abs(g.gap)+' points more than its stated weight';}).join('\n')+'\n\n';
+    }
+    html+='Recovery/non-work energy is '+recoveryPct+'% of logged time. Below ~10–12% consistently\nis a leading indicator of burnout, regardless of how aligned everything else looks.\n\nThe fix for a real gap is removing something from the calendar, not adding\nmore around the edges — pick one thing above to prune this week.</div>';
+    out.innerHTML=html;out.classList.add('show');
+  });
+})();
+</script>
+</body></html>
