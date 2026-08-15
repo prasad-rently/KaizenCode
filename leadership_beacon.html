@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Beacon — Public Presence &amp; Dev-Rel</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.x{color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.x{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:18px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}
+/* two-column contrast */
+.sched{display:flex;gap:14px;margin:14px 0}.sched .col{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:10px;background:#fafafa}@media(prefers-color-scheme:dark){.sched .col{border-color:#2a2a2a;background:#161616}}.sched .col h4{font-size:12px;font-weight:700;margin-bottom:8px;text-align:center}.blk{font-size:10.5px;border-radius:5px;padding:5px 7px;margin-bottom:4px;line-height:1.3}.blk.good{background:#e7f7ef;color:#0F6E56}.blk.bad{background:#fbeeea;color:#993C1D}@media(prefers-color-scheme:dark){.blk.good{background:#0c2016;color:#5fd0a0}.blk.bad{background:#241310;color:#e0917a}}
+/* reference */
+.ref{border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;margin:14px 0}@media(prefers-color-scheme:dark){.ref{border-color:#2a2a2a}}.ref .rr{display:flex;gap:11px;padding:8px 12px;border-top:1px solid #f0f0f0;font-size:12.5px;background:#fafafa}.ref .rr:first-child{border-top:0}@media(prefers-color-scheme:dark){.ref .rr{border-color:#202020;background:#151515}}.ref .rk{flex:0 0 74px;font-weight:700;color:#5350B4}@media(prefers-color-scheme:dark){.ref .rk{color:#a6a3ff}}.ref .rv{color:#555}@media(prefers-color-scheme:dark){.ref .rv{color:#aaa}}
+/* scenario panel */
+.scn{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.scn{border-color:#2a2a2a;background:#141416}}.scn .q{font-size:13px;font-weight:600;margin-bottom:10px}.opt{display:block;width:100%;text-align:left;font:inherit;font-size:12.5px;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#333;padding:9px 12px;border-radius:8px;margin-bottom:7px;transition:border-color .12s,background .12s}.opt:hover{border-color:#5350B4}@media(prefers-color-scheme:dark){.opt{background:#0d0d0d;border-color:#333;color:#ccc}.opt:hover{border-color:#8f8cff}}.opt.best{border-color:#0F6E56;background:#f4fef8}.opt.ok{border-color:#BA7517;background:#fdf9f0}.opt.poor{border-color:#993C1D;background:#fbf1ee}@media(prefers-color-scheme:dark){.opt.best{background:#0a1f14;border-color:#4cc9a4}.opt.ok{background:#1f1a0a;border-color:#e0a75a}.opt.poor{background:#2a1712;border-color:#d9704f}}.verdict{font-size:12px;line-height:1.5;margin-top:8px;padding:9px 12px;border-radius:8px;display:none;background:#fff;border:1px dashed #d8d8d8}.verdict.show{display:block}@media(prefers-color-scheme:dark){.verdict{background:#0d0d0d;border-color:#2a2a2a;color:#c8c8c8}}.tag{font-weight:700}.tag.best{color:#0F6E56}.tag.ok{color:#BA7517}.tag.poor{color:#993C1D}@media(prefers-color-scheme:dark){.tag.best{color:#4cc9a4}.tag.ok{color:#e0a75a}.tag.poor{color:#d9704f}}
+/* post outline builder */
+.builder{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:12px 0;background:#f9f9fb}@media(prefers-color-scheme:dark){.builder{border-color:#2a2a2a;background:#141416}}.fld{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#666;margin-bottom:11px}@media(prefers-color-scheme:dark){.fld{color:#999}}.fld textarea,.fld input{font:inherit;font-size:12.5px;font-family:inherit;width:100%;padding:7px 9px;border:1px solid #d8d8d8;border-radius:7px;background:#fff;color:#1a1a1a;resize:vertical;line-height:1.5}.fld textarea:focus,.fld input:focus{outline:none;border-color:#5350B4}@media(prefers-color-scheme:dark){.fld textarea,.fld input{background:#0d0d0d;border-color:#333;color:#e8e8e8}.fld textarea:focus,.fld input:focus{border-color:#8f8cff}}.builder button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#5350B4;color:#fff;padding:8px 16px;border-radius:7px;margin-right:8px}.builder button:hover{background:#423fa0}@media(prefers-color-scheme:dark){.builder button{background:#8f8cff;color:#111}.builder button:hover{background:#a6a3ff}}.builder button.copy{background:transparent;color:#5350B4;border:1px solid #5350B4}@media(prefers-color-scheme:dark){.builder button.copy{background:transparent;color:#8f8cff;border-color:#8f8cff}}.out-box{display:none;white-space:pre-wrap;font-family:'SF Mono','Fira Code',monospace;font-size:12px;line-height:1.6;margin-top:12px;padding:12px 14px;border-radius:8px;background:#fff;border:1px dashed #d8d8d8;color:#1a1a1a;max-height:520px;overflow:auto}.out-box.show{display:block}@media(prefers-color-scheme:dark){.out-box{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Leadership · Weeks 87–96 · Stage 5</span>
+<h1>📡 The Beacon</h1>
+<p class="sub">Nobody applies to a company they've never heard of, and no engineering org builds a reputation by accident. Public presence — the blog, the conference talk, the well-judged post — is a compounding asset: every piece of real technical writing keeps working long after you hit publish, pulling in candidates and credibility while you sleep. It's also the executive skill most engineers never practice, because writing for strangers feels riskier than writing for a pull request.</p>
+
+<div class="tip">Sixth module of <strong>Stage 5 · The CTO Craft</strong>. The centerpiece is a real <strong>technical post outline builder</strong> — turn a piece of real engineering work into a structured draft, and the deliverable is publishing it.</p></div>
+
+<h2><span class="sn">1</span>Why public presence is a CTO job, not a nice-to-have</h2>
+<p>A strong engineering brand does three things no amount of internal-only excellence can: it makes hiring cheaper (inbound candidates who already respect the work convert far better than cold outreach), it makes the CTO's word carry further externally (investors, partners, the press all weight public credibility), and it attracts the kind of engineers who read engineering blogs — often your best hires. None of this requires a marketing department; it requires a CTO willing to occasionally write and speak in public, and a habit of doing it consistently rather than in bursts.</p>
+
+<h2><span class="sn">2</span>The engineering blog — what actually works</h2>
+<p>Most engineering blogs fail for the same reason most technical talks fail: they're written to sound impressive instead of to be useful. The posts that get shared and remembered follow a simple shape:</p>
+<div class="sched">
+  <div class="col"><h4>✅ Posts that spread</h4>
+    <div class="blk good">A specific problem, with real numbers</div>
+    <div class="blk good">The wrong approaches tried first, honestly</div>
+    <div class="blk good">One clear insight a reader can reuse</div>
+    <div class="blk good">Concrete code/diagrams, not just prose</div>
+    <div class="blk good">A narrow, honest title over a grand one</div>
+  </div>
+  <div class="col"><h4>⚠️ Posts that don't</h4>
+    <div class="blk bad">"We migrated to microservices" with no numbers</div>
+    <div class="blk bad">Reads like a press release, not an engineer</div>
+    <div class="blk bad">No mistakes admitted — implausibly smooth</div>
+    <div class="blk bad">Buried lede — the insight is in paragraph 9</div>
+    <div class="blk bad">Written once, then the blog goes dark for a year</div>
+  </div>
+</div>
+<p>Cadence matters more than polish: a blog that publishes something real every month or two, even short, beats one that publishes a masterpiece annually. Consistency is what turns a blog into a habit readers (and candidates) come back to.</p>
+
+<h2><span class="sn">3</span>Conference talks &amp; dev-rel</h2>
+<p>A conference talk is a blog post with a harder deadline and a live audience — the same "specific problem, honest mistakes, one reusable insight" shape applies, but a talk also builds something writing can't: a room full of people who now recognize your face and your company's name. Dev-rel — open-sourcing tools, sponsoring or speaking at meetups, answering in public forums — is the same flywheel at smaller, more frequent scale. Don't treat these as all-or-nothing: one well-prepared talk a year, done well, outperforms five rushed, forgettable ones.</p>
+
+<h2><span class="sn">4</span>Hiring through visibility</h2>
+<p>The flywheel is simple and slow to start: real technical content → engineers discover and respect the work → inbound interest rises → the recruiting funnel gets cheaper and higher-quality → the company can afford to be more selective, which raises the bar, which produces more content worth writing about. It compounds over quarters, not weeks — the mistake is expecting a single post to move a hiring pipeline, then abandoning the habit when it doesn't. Judge it over a year, not a launch week.</p>
+
+<h2><span class="sn">5</span>Social-media judgment for executives</h2>
+<p>Once you're a public technical face of the company, everything you post is read as company position whether you intend that or not. A few durable rules: <strong>separate opinion from company position explicitly</strong> when the topic is remotely contentious; <strong>never post about an active incident</strong> before the crisis-comms plan has cleared it — see <a class="x" href="leadership_storm_keeper.html">The Storm Keeper</a>; <strong>don't reveal competitive or customer specifics</strong> even in an otherwise harmless technical post — see <a class="x" href="leadership_fine_print.html">The Fine Print</a> on confidentiality; and <strong>assume permanence</strong> — a post can be deleted, a screenshot cannot.</p>
+
+<h2><span class="sn">6</span>Deliverable — outline a real technical post</h2>
+<p>Pick a real piece of engineering work — a problem you solved, a mistake you learned from, a system you built — and the builder turns it into a structured, publish-ready outline. Fill it in, then actually write and publish it:</p>
+<div class="builder">
+  <div class="fld">The problem — specific, with real numbers if you have them<textarea id="p-prob" rows="2" placeholder="e.g. Our checkout API's p99 latency hit 4.2s under Black Friday load, up from 400ms."></textarea></div>
+  <div class="fld">What you tried first that didn't work<textarea id="p-fail" rows="2" placeholder="e.g. We assumed it was database load and added read replicas — latency barely moved."></textarea></div>
+  <div class="fld">What actually fixed it<textarea id="p-fix" rows="2" placeholder="e.g. The real bottleneck was a synchronous third-party fraud-check call; we made it async with a fallback."></textarea></div>
+  <div class="fld">The one reusable insight for the reader<input id="p-insight" type="text" placeholder="e.g. Always profile before assuming the obvious bottleneck is the real one."></div>
+  <div class="fld">Working title<input id="p-title" type="text" placeholder="e.g. How a synchronous fraud check quietly 10x'd our checkout latency"></div>
+  <button id="p-gen">📡 Assemble the outline →</button>
+  <button id="p-copy" class="copy">Copy</button>
+  <div id="p-out" class="out-box"></div>
+</div>
+
+<h2><span class="sn">7</span>Pressure-test your instincts</h2>
+<p>Public presence rewards honesty and consistency, and punishes polish without substance and posts written faster than they're thought through. Pick what you'd actually do, then see how it plays out:</p>
+<div id="scenarios"></div>
+
+<div class="ok"><strong>Try it:</strong> (1) Use the outline builder above on a real piece of your own engineering work, then actually publish it — internally at minimum, publicly if you can. (2) Read your last three planned social posts as if you were a competitor or a journalist — what would they take from it? (3) If your engineering blog has gone quiet, commit to one honest post this month rather than a big relaunch. (4) Before your next public talk, cut the slide count in half and add one honest failure you haven't shared before.</div>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Leadership track · Stage 5 · the CTO craft. Pairs with <a class="x" href="leadership_storyteller.html">The Storyteller</a> (writing for an audience) and <a class="x" href="leadership_storm_keeper.html">The Storm Keeper</a> (what not to post during a crisis). <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>
+(function(){
+  var SCN=[
+    {q:'Marketing wants your engineering blog post to sound more impressive — remove the part where you describe the approach that failed first.',
+     opts:[
+       {t:'Push back and keep the honest failure — it\'s the part readers actually trust and learn from.',v:'best',fb:'The failed-approach section is usually the most valuable part of a technical post: it\'s specific, honest, and teaches the reader something a polished success story can\'t. Removing it to sound more impressive makes the post less trustworthy and less useful, which is the opposite of good public presence.'},
+       {t:'Compress the failed-approach section but keep a shorter version of it.',v:'ok',fb:'A reasonable compromise if space is genuinely tight — but make sure the compression doesn\'t remove the specifics (what was tried, why it didn\'t work) that make it credible and useful. A vague one-liner about a failure isn\'t much better than cutting it entirely.'},
+       {t:'Remove it — marketing knows how to position content better than engineering does.',v:'poor',fb:'Optimizing a technical post for polish over honesty is exactly the pattern that makes engineering blogs forgettable. Readers who work in the field can tell when a post is implausibly smooth, and it costs you the credibility the post was meant to build.'},
+       {t:'Don\'t publish it at all rather than have the disagreement with marketing.',v:'poor',fb:'Avoiding a manageable internal disagreement by killing a genuinely useful post is a worse outcome than either option — the flywheel this module describes only works if content actually ships. Advocate for the honest version rather than defaulting to nothing.'}
+     ]},
+    {q:'You\'re offered a conference speaking slot in six weeks on a topic you care about, but your calendar is already very full.',
+     opts:[
+       {t:'Accept, and scope the talk to one narrow, well-prepared story rather than trying to cover everything.',v:'best',fb:'A narrow, well-prepared talk on one real story beats a broad, rushed one every time — both for the audience and for your own prep time. Scoping tightly is what makes a six-week runway realistic without sacrificing quality.'},
+       {t:'Accept, and plan to reuse an existing internal presentation with light editing.',v:'ok',fb:'Reasonable time management, but internal presentations are often written for people who already have context a conference audience won\'t have. Budget real time to reshape it for outsiders, or the talk will land flatter than the topic deserves.'},
+       {t:'Decline — better to skip it than deliver something mediocre under time pressure.',v:'poor',fb:'This treats "polished" and "worth doing" as the same thing. A focused, honestly-prepared talk on a narrow slice of the topic is achievable in six weeks and still builds the flywheel — declining forgoes a real opportunity that a smaller scope would have solved.'},
+       {t:'Accept and try to cover the full breadth of the topic to maximize value for the audience.',v:'poor',fb:'Broad coverage under time pressure usually means shallow coverage of everything and depth on nothing — the opposite of what makes a talk memorable. Depth on one real story beats breadth on many, especially when prep time is scarce.'}
+     ]},
+    {q:'A candidate mentions in their interview that your engineering blog is the reason they applied. Leadership asks whether the blog is "worth the engineering time" since it hasn\'t obviously moved the hiring pipeline metrics yet.',
+     opts:[
+       {t:'Explain the flywheel compounds over quarters, point to this candidate as early evidence, and commit to tracking it properly going forward.',v:'best',fb:'One candidate citing the blog is a real, if small, data point — and the honest answer is that this kind of brand-building compounds slowly. Naming the timeline explicitly, and starting to actually measure it, is more convincing than either dismissing the question or overclaiming impact from one anecdote.'},
+       {t:'Agree to pause the blog until there\'s clearer ROI data.',v:'ok',fb:'Wanting evidence before continuing an investment is a fair instinct, but pausing a slow-compounding asset right as it shows its first real signal (a candidate citing it) risks killing it exactly when it was starting to work. If evidence is the ask, measure it — don\'t default to stopping.'},
+       {t:'Insist it\'s obviously working and no measurement is needed.',v:'poor',fb:'"Obviously working" without any tracking is a hard position to defend to leadership asking a fair question about time investment — and it misses the chance to actually build the case with real inbound-candidate data over time.'},
+       {t:'Quietly keep writing without engaging with leadership\'s question at all.',v:'poor',fb:'Leadership asked a legitimate resourcing question; not engaging with it risks the initiative getting cut without warning by someone who never got a real answer. Make the case explicitly rather than hoping the question goes away.'}
+     ]},
+    {q:'You want to post your honest opinion on a contentious industry debate (e.g. a controversial technology choice) from your personal account.',
+     opts:[
+       {t:'Post it, but explicitly frame it as your personal view, separate from company position.',v:'best',fb:'As a public technical face of the company, an unlabeled opinion on a contentious topic reads as company position by default. Explicitly separating "this is my personal view" preserves your voice and judgment while not putting words in the company\'s mouth that it never agreed to.'},
+       {t:'Run it by comms/legal first, then post with their light-touch edits.',v:'ok',fb:'A reasonable extra layer of caution for a genuinely contentious topic, especially early in building this judgment. It\'s "ok" rather than "best" only because routing every opinion through a review process for personal takes isn\'t sustainable long-term — the "personal view" framing should usually be enough on its own.'},
+       {t:'Post it without any framing — it\'s your personal account, so it\'s obviously your own opinion.',v:'poor',fb:'"It\'s my personal account" doesn\'t change how it reads to the outside world once you\'re a known technical leader at the company — readers, press, and customers will often treat it as a company signal regardless of the account it came from. Frame it explicitly.'},
+       {t:'Don\'t post it at all — anything contentious is too risky for an executive.',v:'poor',fb:'Avoiding all contentious topics entirely makes for a hollow, forgettable public presence — the honest, opinionated posts are often the ones that build real credibility. The skill is framing and judgment, not silence on anything with an edge.'}
+     ]},
+    {q:'While drafting a blog post about a recent system redesign, you realize the honest story reveals a specific detail about a major customer\'s usage pattern.',
+     opts:[
+       {t:'Generalize or anonymize that detail so the technical insight survives without exposing the customer specifics.',v:'best',fb:'The reusable insight rarely depends on the exact customer detail — generalizing ("a large enterprise customer" instead of naming them, or describing the pattern without identifying specifics) preserves the value of the post while respecting confidentiality obligations that likely exist in that customer\'s contract.'},
+       {t:'Ask the customer directly for permission to reference them specifically.',v:'ok',fb:'Asking permission is a legitimate path if you specifically want to name them, but it\'s slower and not always necessary — for most technical posts, anonymizing the detail gets you the same educational value without the extra step or the risk of a "no."'},
+       {t:'Publish it as originally written since the detail is technically accurate.',v:'poor',fb:'Accuracy isn\'t the same as permission — customer usage details are frequently covered by confidentiality clauses in the contract (see The Fine Print), and publishing them without consent risks a real breach of contract regardless of how interesting the technical story is.'},
+       {t:'Scrap the whole post rather than deal with the confidentiality question.',v:'poor',fb:'The entire post doesn\'t need to be abandoned over one detail — generalizing that one piece almost always preserves the value of the story. Scrapping good content over a solvable specificity problem is an overcorrection.'}
+     ]}
+  ];
+  var host=document.getElementById('scenarios');
+  var LABEL={best:'Beacon move',ok:'Workable',poor:'Trap'};
+  SCN.forEach(function(s,i){
+    var box=document.createElement('div');box.className='scn';
+    var q=document.createElement('div');q.className='q';q.textContent=(i+1)+'. '+s.q;box.appendChild(q);
+    var verdict=document.createElement('div');verdict.className='verdict';
+    s.opts.forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.textContent=o.t.replace(/<[^>]+>/g,'');
+      b.addEventListener('click',function(){
+        box.querySelectorAll('.opt').forEach(function(x){x.classList.remove('best','ok','poor');});
+        b.classList.add(o.v);
+        verdict.innerHTML='<span class="tag '+o.v+'">'+LABEL[o.v]+'.</span> '+o.fb;
+        verdict.classList.add('show');
+      });
+      box.appendChild(b);
+    });
+    box.appendChild(verdict);host.appendChild(box);
+  });
+
+  // technical post outline builder
+  function val(id){return (document.getElementById(id).value||'').trim();}
+  var out=document.getElementById('p-out');
+  function build(){
+    var prob=val('p-prob')||'Our checkout API\'s p99 latency hit 4.2s under Black Friday load, up from 400ms.';
+    var fail=val('p-fail')||'We assumed it was database load and added read replicas — latency barely moved.';
+    var fix=val('p-fix')||'The real bottleneck was a synchronous third-party fraud-check call; we made it async with a fallback.';
+    var insight=val('p-insight')||'Always profile before assuming the obvious bottleneck is the real one.';
+    var title=val('p-title')||'How a synchronous fraud check quietly 10x\'d our checkout latency';
+    return [
+      'TECHNICAL POST OUTLINE',
+      'Working title: '+title,
+      '─────────────────────────────────────────────',
+      '',
+      'HOOK (first 2–3 sentences)',
+      '  Open with the problem, in numbers: '+prob,
+      '  Make the reader feel the stakes before you explain anything.',
+      '',
+      'WHAT WE TRIED FIRST (be honest here — this is the part readers trust)',
+      '  '+fail,
+      '  Explain why it seemed reasonable at the time, and what the data showed once it didn\'t work.',
+      '',
+      'WHAT ACTUALLY WORKED',
+      '  '+fix,
+      '  Show the mechanism, not just the outcome — a diagram, a snippet, or the actual before/after numbers.',
+      '',
+      'THE ONE INSIGHT (make this quotable — it\'s what gets shared)',
+      '  '+insight,
+      '',
+      'CLOSE',
+      '  Restate the numbers before vs. after. Invite questions or a link to related work.',
+      '  Optional: one line on what you\'d do differently next time — earns more trust than pretending it was clean.',
+      '',
+      '─────────────────────────────────────────────',
+      'Why this outline works: it leads with a concrete, numbered problem, admits',
+      'what didn\'t work before revealing the fix, and ends on one insight a reader',
+      'can actually reuse. That shape is what gets technical posts shared — and',
+      'what makes a hiring candidate say "I applied because of that post."'
+    ].join('\n');
+  }
+  document.getElementById('p-gen').addEventListener('click',function(){out.textContent=build();out.classList.add('show');});
+  document.getElementById('p-copy').addEventListener('click',function(){
+    if(!out.classList.contains('show')){out.textContent=build();out.classList.add('show');}
+    var btn=this;navigator.clipboard.writeText(out.textContent).then(function(){var t=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=t;},1200);});
+  });
+})();
+</script>
+</body></html>
