@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Deep Linking — Getting Users to the Right Screen From Anywhere</title><meta name="description" content="Universal Links vs. custom URL schemes, deferred deep linking through app-store installs, and the cold-start-vs-warm-start navigation state problem every deep link implementation eventually hits."><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:25px;font-weight:700;margin-bottom:6px;letter-spacing:-.5px;line-height:1.2}.sub{font-size:13px;color:#666;margin-bottom:10px}@media(prefers-color-scheme:dark){.sub{color:#888}}.meta{font-size:11.5px;color:#999;font-weight:600;letter-spacing:.3px;margin-bottom:26px}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.75;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.tldr{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:16px 0;background:#f9f9fb;font-size:13px}@media(prefers-color-scheme:dark){.tldr{border-color:#2a2a2a;background:#141416}}.tldr b{color:#5350B4}@media(prefers-color-scheme:dark){.tldr b{color:#8f8cff}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mobile Development · Article</span>
+<h1>🔗 Deep Linking: Getting Users to the Right Screen From Anywhere</h1>
+<p class="sub">A link that opens the app to its home screen instead of the thing the user tapped isn't a deep link — it's a broken promise. The plumbing that makes a link land on the right screen touches URL routing, the app store, and your navigation stack all at once.</p>
+<p class="meta">Mobile Development · ~9 min read · updated August 2026</p>
+
+<div class="tldr"><b>TL;DR</b> — Prefer platform-verified HTTPS links (Universal Links / App Links) over custom URL schemes — they degrade gracefully to a web page when the app isn't installed, and they can't be hijacked by another app registering the same scheme. Deferred deep linking (surviving an app-store install round-trip) needs an extra matching step, since the OS gives you nothing for free across that gap. And every deep link handler needs a real answer for "the app was cold-launched with no navigation stack yet" — that's where most implementations quietly break.</div>
+
+<h2>1 · Three kinds of link, three different jobs</h2>
+<table>
+<tr><th>Type</th><th>Example</th><th>Behaviour</th></tr>
+<tr><td><strong>Custom URL scheme</strong></td><td><code>myapp://product/42</code></td><td>Opens the app directly if installed; otherwise the OS shows nothing useful — no fallback, and any app can register the same scheme.</td></tr>
+<tr><td><strong>Universal Link / App Link</strong></td><td><code>https://example.com/product/42</code></td><td>A real HTTPS URL the OS routes to your app <em>if</em> it's installed and the domain has verified ownership; otherwise it opens normally in the browser.</td></tr>
+<tr><td><strong>Deferred deep link</strong></td><td>Same URL, tapped by a user with the app <em>not yet installed</em></td><td>Sends the user through the store install flow, then (with extra plumbing) still lands them on the original screen after first launch.</td></tr>
+</table>
+
+<h2>2 · Why HTTPS links won over custom schemes</h2>
+<p>Custom schemes (<code>myapp://…</code>) were the original mechanism and still have their place for internal, app-to-app links you fully control — but they have two structural problems for anything public: <strong>no verified ownership</strong> (any app can claim <code>myapp://</code> and hijack the traffic), and <strong>no fallback</strong> — tapping one with the app not installed does nothing useful, often silently.</p>
+<p>Universal Links (iOS) and App Links (Android) fix both by using a real domain you provably own, verified through a well-known file the OS fetches once and caches:</p>
+<div class="snippet"><div class="bar"><span class="lang">apple-app-site-association · JSON</span><span class="acts"><button class="copy">Copy</button></span></div><pre>{
+  <span class="str">"applinks"</span>: {
+    <span class="str">"details"</span>: [{
+      <span class="str">"appID"</span>: <span class="str">"TEAMID.com.example.app"</span>,
+      <span class="str">"paths"</span>: [<span class="str">"/product/*"</span>, <span class="str">"/invite/*"</span>]
+    }]
+  }
+}</pre></div>
+<p>That file lives at <code>https://example.com/.well-known/apple-app-site-association</code> (Android's equivalent is <code>assetlinks.json</code>). Because ownership is cryptographically tied to a domain you serve, only your app can claim those paths — and because it's a real HTTPS URL, a user without the app simply lands on your website instead of a dead end.</p>
+<div class="tip"><strong>Rule of thumb:</strong> use Universal/App Links for anything a user might tap from outside your app (email, SMS, another app, a QR code, social sharing). Reserve custom schemes for links your own app generates and consumes internally, where hijacking risk and the no-fallback problem don't apply.</div>
+
+<h2>3 · Deferred deep linking: bridging the install gap</h2>
+<p>The hard case: a user without the app taps a link, gets routed to the store, installs, and opens the app for the first time. By then the original URL is gone — first launch carries no memory of what was tapped, because the OS provides no built-in channel across an app-store install.</p>
+<p>Every deferred-deep-linking approach is really a matching problem, closing that gap with some combination of:</p>
+<ul>
+<li><strong>Clipboard handoff</strong> — copy identifying data to the clipboard before redirecting to the store, read it back on first launch. Increasingly restricted by OS clipboard-privacy prompts.</li>
+<li><strong>Fingerprint matching</strong> — correlate the pre-install click (IP, user agent, timestamp) with the post-install first-open signal probabilistically. Imperfect and privacy-sensitive; treat matches as best-effort, not guaranteed.</li>
+<li><strong>A pending-action table server-side</strong> — store "this link was tapped, for this general context" keyed loosely, and reconcile it against the app's first authenticated request rather than trying to be exact about identity before the user has signed in.</li>
+</ul>
+<div class="warn"><strong>Don't over-invest before measuring.</strong> Deferred linking is inherently probabilistic and often the least reliable link in the whole flow. Build the simple, verified case (app already installed) rock-solid first — it's most of the traffic — before spending real effort making the install-gap case marginally better.</div>
+
+<h2>4 · The part every implementation gets wrong: navigation state</h2>
+<p>A deep link can arrive in two completely different app states, and handling only one of them is the most common bug in this space:</p>
+<table>
+<tr><th>State</th><th>What's already true</th><th>What has to happen</th></tr>
+<tr><td><strong>Warm start</strong></td><td>App is already running, navigation stack exists, user is mid-session.</td><td>Push the target screen onto the existing stack — but decide deliberately whether to preserve or clear what came before.</td></tr>
+<tr><td><strong>Cold start</strong></td><td>App had zero navigation state; the deep link <em>is</em> the first thing that happens.</td><td>Build a synthetic stack — target screen plus whatever ancestor screens back-navigation should logically lead to — not just the target screen floating alone with a dead-end back button.</td></tr>
+</table>
+<div class="snippet"><div class="bar"><span class="lang">Navigation handler · pseudocode</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="kw">function</span> <span class="fn">handleDeepLink</span>(url, appState) {
+  <span class="kw">const</span> target = router.<span class="fn">resolve</span>(url);   <span class="cm">// { screen: "product", params: { id: 42 } }</span>
+
+  <span class="kw">if</span> (appState.isColdStart) {
+    <span class="cm">// Build a full synthetic stack: Home → Category → Product,</span>
+    <span class="cm">// not just "Product" floating with nowhere sensible to go back to.</span>
+    navigation.<span class="fn">setStack</span>(router.<span class="fn">ancestorsFor</span>(target).<span class="fn">concat</span>(target));
+  } <span class="kw">else</span> {
+    <span class="cm">// Warm start: an explicit product decision — does this interrupt</span>
+    <span class="cm">// the current flow, or queue until the user finishes what they're doing?</span>
+    navigation.<span class="fn">push</span>(target);
+  }
+}</pre></div>
+<p>Auth adds another layer: if the target screen requires sign-in and the deep link arrives before the user has authenticated, the link's destination has to survive the login flow and resume afterward — a link that silently drops its destination the moment auth is required trains users to distrust every link you send them.</p>
+
+<h2>5 · Quick checklist</h2>
+<ul>
+<li>✅ HTTPS Universal/App Links for anything tapped from outside the app; custom schemes only for internal use.</li>
+<li>✅ Domain-verification file (<code>apple-app-site-association</code> / <code>assetlinks.json</code>) served correctly and cached-checked.</li>
+<li>✅ Deferred linking treated as best-effort, with the installed-app path made solid first.</li>
+<li>✅ Cold-start deep links build a real navigation stack, not a dead-end screen.</li>
+<li>✅ A deep link's destination survives an interrupting login flow.</li>
+<li>❌ Don't rely on a custom scheme as the only entry point for public/shareable links.</li>
+<li>❌ Don't assume the app is already running when you write the handler — write the cold-start path first.</li>
+</ul>
+
+<h2>6 · Key takeaways</h2>
+<p>Deep linking looks like a routing problem and is actually three problems stacked together: proving you own the URL, bridging the gap when the app isn't installed yet, and reconstructing navigation state the OS never guarantees you'll have. Get the verified, already-installed case right first — build cold-start navigation as a first-class path, not an afterthought — and the deferred-install case can stay best-effort without anyone noticing.</p>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mobile Development · KaizenCode. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}});})();</script>
+</body></html>

@@ -57,9 +57,14 @@ KaizenCode/
 ├── phase4_docker_devops.html
 ├── phase5_aws_cloud.html
 ├── phase6_distributed_systems_kafka.html
-├── roadmap_summary_md.md                   # full text summary of all phases
-├── mastery_*.html                          # 17 Mastery Track modules (inline runnable code)
-├── crypto_*.html                           # Cryptography topic — generic, per-method explainers
+├── roadmap_summary_md.md                   # full text summary of the six phases
+├── mastery_*.html                          # 27 Mastery Track modules (inline runnable code)
+├── crypto_*.html                           # Cryptography topic — 9 generic, per-method explainers
+├── aws_*.html                              # AWS deep-dive: from-scratch guide + cloud toolbox
+├── mobile_*.html                           # Mobile Development field notes (5 articles)
+├── leadership_*.html                       # Leadership track — 22 modules, Stages 2–5 of the CTO board
+├── upcoming.html                           # the build-and-track board (32/32 modules shipped)
+├── map.html                                # site map — every track & module at a glance
 ├── docs/                                   # markdown companion docs (+ generated .html siblings)
 │   ├── README.md
 │   ├── 00-project-setup.md
@@ -72,18 +77,28 @@ KaizenCode/
 └── README.md
 ```
 
-### Three tracks
+### Six tracks
 
 - **Core phases (1–6)** — the ordered "build & run a system" journey.
-- **Mastery Track** — 17 cross-cutting modules (named, not numbered) covering
+- **Mastery Track** — 27 cross-cutting modules (named, not numbered) covering
   observability, security, deep auth, testing, APIs, IaC, leadership, CI/CD,
   event-driven systems, data engineering, performance, cloud cost, AI/LLM apps,
-  concurrency, resilience, database internals, and systems algorithms. Each has
-  **inline runnable code** (copy + ▶ Run buttons) and stays zero-dependency.
-- **Cryptography** — a growing topic of **generic, project-independent**
-  explainers, one cryptographic method per file (`crypto_*.html`), reusing the
-  Mastery module's runnable-code shell. Starts with **ECDH key agreement**; RSA,
-  AES-GCM, hashing/HMAC, and digital signatures are planned.
+  concurrency, resilience, database internals, systems algorithms, networking,
+  Kubernetes, DDD, mobile-at-scale, platform engineering, multi-tenancy,
+  disaster recovery, migrations, and privacy/compliance. Each has **inline
+  runnable code** (copy + ▶ Run buttons) and stays zero-dependency.
+- **Cryptography** — 9 **generic, project-independent** explainers, one method
+  per file (`crypto_*.html`), reusing the Mastery module's runnable-code shell:
+  ECDH, RSA, AES-GCM, hashing/HMAC, HKDF, digital signatures, Shamir's Secret
+  Sharing, zero-knowledge proofs, and a TLS 1.3 handshake capstone.
+- **AWS deep-dive** (`aws_*.html`) — a from-scratch guide to core AWS services
+  with runnable labs and a 4-week planner, plus a decision-driven cloud toolbox.
+- **Mobile Development** (`mobile_*.html`) — blog-style field notes on
+  mobile-specific problems: silent push, offline-first sync, background
+  execution limits, device fragmentation, and deep linking.
+- **Leadership Track** (`leadership_*.html`) — 22 modules covering the people,
+  delivery, business, and CTO-craft stages of [`upcoming.html`](upcoming.html),
+  the build-and-track board (all 32 planned modules now shipped).
 
 ### Docs as HTML
 

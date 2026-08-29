@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Background Execution Limits — What the OS Actually Lets You Do</title><meta name="description" content="How iOS and Android really schedule background work: background modes, BGTaskScheduler, WorkManager, Doze mode, and why 'run this every 15 minutes' is a request, not a promise."><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:25px;font-weight:700;margin-bottom:6px;letter-spacing:-.5px;line-height:1.2}.sub{font-size:13px;color:#666;margin-bottom:10px}@media(prefers-color-scheme:dark){.sub{color:#888}}.meta{font-size:11.5px;color:#999;font-weight:600;letter-spacing:.3px;margin-bottom:26px}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.75;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.tldr{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:16px 0;background:#f9f9fb;font-size:13px}@media(prefers-color-scheme:dark){.tldr{border-color:#2a2a2a;background:#141416}}.tldr b{color:#5350B4}@media(prefers-color-scheme:dark){.tldr b{color:#8f8cff}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mobile Development · Article</span>
+<h1>🔋 Background Execution Limits: What the OS Actually Lets You Do</h1>
+<p class="sub">"Schedule a background refresh every 15 minutes" is a request you file, not a promise the OS keeps. Understanding why turns mysterious "it works on my phone but not my user's" bugs into predictable behaviour.</p>
+<p class="meta">Mobile Development · ~8 min read · updated August 2026</p>
+
+<div class="tldr"><b>TL;DR</b> — Both platforms treat background CPU time as a scarce, rationed resource, not something your app owns. iOS grants short bursts through specific APIs (background modes, BGTaskScheduler) and decides <em>if and when</em> to honour a scheduled request based on usage patterns and battery. Android's Doze mode and background-execution limits do the same with WorkManager. Design every background task assuming it might run late, run rarely, or not run at all — and make the foreground path the one that's actually reliable.</div>
+
+<h2>1 · Why the OS rations background time at all</h2>
+<p>A phone's battery and thermal envelope are shared across every app the user has installed. If each app could run freely in the background — polling servers, keeping radios awake, holding CPU — the device would be dead by lunchtime. So both platforms flipped the default: <strong>background execution is off unless you ask for a specific, narrow capability</strong>, and even then the OS reserves the right to say no.</p>
+<div class="tip"><strong>Mental model:</strong> foreground execution is a lease you hold as long as you're on screen. Background execution is a favour the OS grants in small, unpredictable doses, sized to how much it trusts your app not to abuse it.</div>
+
+<h2>2 · iOS: named capabilities, not a general "run in background"</h2>
+<p>There is no API on iOS for "keep running in the background." Instead you declare one or more specific <code>UIBackgroundModes</code>, each unlocking a narrow, purpose-built capability:</p>
+<table>
+<tr><th>Background mode</th><th>What it actually grants</th></tr>
+<tr><td><code>fetch</code></td><td>Periodic short wake-ups to refresh content — frequency chosen by the system, not you.</td></tr>
+<tr><td><code>remote-notification</code></td><td>A few seconds of runtime when a silent push arrives (see the push notifications article).</td></tr>
+<tr><td><code>audio</code>, <code>location</code>, <code>voip</code></td><td>Genuinely continuous background execution — but only while actively playing audio, tracking location the user opted into, or holding a VoIP call.</td></tr>
+<tr><td><code>processing</code> (BGTaskScheduler)</td><td>Longer, deferrable maintenance work (minutes), usually while charging and on Wi-Fi.</td></tr>
+</table>
+<div class="snippet"><div class="bar"><span class="lang">iOS · Swift — BGTaskScheduler</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="kw">func</span> <span class="fn">scheduleCleanup</span>() {
+  <span class="kw">let</span> request = BGProcessingTaskRequest(identifier: <span class="str">"com.example.cleanup"</span>)
+  request.requiresNetworkConnectivity = <span class="kw">true</span>
+  request.requiresExternalPower = <span class="kw">true</span>          <span class="cm">// hint, not a hard rule the OS must obey</span>
+  request.earliestBeginDate = Date(timeIntervalSinceNow: <span class="num">3600</span>)
+  <span class="kw">try?</span> BGTaskScheduler.shared.<span class="fn">submit</span>(request)
+  <span class="cm">// The system decides WHEN — or IF — this actually runs, based on</span>
+  <span class="cm">// battery level, how often the user opens the app, and system load.</span>
+}</pre></div>
+<div class="warn"><strong>Every request is advisory.</strong> <code>earliestBeginDate</code> means "not before this time," never "at this time." An app the user opens twice a week gets far fewer background opportunities than one they open twelve times a day — the OS is actively learning and rationing per app.</div>
+
+<h2>3 · Android: WorkManager on top of Doze and App Standby</h2>
+<p>Android's story is the same shape with different names. <strong>Doze mode</strong> kicks in when the device is stationary and unplugged for a while: network access, sync, and jobs are batched into short "maintenance windows" instead of running whenever requested. <strong>App Standby Buckets</strong> further throttle how often a specific app gets to run background jobs based on how recently and often the user engages with it — an app in the "rare" bucket might get one job execution window a day.</p>
+<div class="snippet"><div class="bar"><span class="lang">Android · Kotlin — WorkManager</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="kw">val</span> constraints = Constraints.Builder()
+    .<span class="fn">setRequiredNetworkType</span>(NetworkType.CONNECTED)
+    .<span class="fn">setRequiresBatteryNotLow</span>(<span class="kw">true</span>)
+    .<span class="fn">build</span>()
+
+<span class="kw">val</span> request = PeriodicWorkRequestBuilder&lt;SyncWorker&gt;(<span class="num">15</span>, TimeUnit.MINUTES)
+    .<span class="fn">setConstraints</span>(constraints)
+    .<span class="fn">build</span>()
+
+<span class="cm">// "15 minutes" is a MINIMUM interval, not a guarantee — Doze and the</span>
+<span class="cm">// standby bucket can and will stretch it out much further.</span>
+WorkManager.<span class="fn">getInstance</span>(context).<span class="fn">enqueue</span>(request)</pre></div>
+<p>WorkManager's real value isn't scheduling precision — it's that it survives app restarts, reboots, and picks the right underlying mechanism (JobScheduler, or a fallback) for you. It never promises a specific wall-clock time.</p>
+
+<h2>4 · The battery budget mental model</h2>
+<p>Think of every background wake-up as spending from a shared budget the OS is protecting on the user's behalf, not one your app owns:</p>
+<ul>
+<li><strong>Radio wake time is the expensive line item.</strong> Turning on the cellular or Wi-Fi radio from an idle state costs far more energy than the few hundred milliseconds it's actually transmitting. Batch network calls so one wake-up does several jobs' worth of work.</li>
+<li><strong>Engagement is currency.</strong> Both platforms give more generous background allowances to apps the user actually opens often. An app that never gets opened accrues almost no background trust.</li>
+<li><strong>Charging + Wi-Fi is the OS's preferred moment.</strong> Heavy, deferrable work (cleanup, large downloads, analytics upload) should be flagged as such so the system can slot it into a moment that costs the user nothing they'd notice.</li>
+</ul>
+
+<h2>5 · Designing work that survives being rationed</h2>
+<p>Once you accept that background execution is opportunistic, the design shifts from "make sure this runs" to "make sure it's fine whenever it eventually runs — or doesn't":</p>
+<div class="ok"><strong>Pattern:</strong> keep a local "next required sync" timestamp. On every app foreground, cold start, and successful background wake, check it and catch up if stale — rather than relying on any single background trigger to be the one that fires.</div>
+<ul>
+<li><strong>Make tasks resumable, not atomic-or-nothing.</strong> A background window can end mid-task; checkpoint progress so a retry continues instead of restarting.</li>
+<li><strong>Never gate correctness on a background task firing.</strong> The foreground reconciliation path (open app → sync) is the one guarantee you actually have.</li>
+<li><strong>Prefer push-triggered work over polling.</strong> A silent push that says "come sync" costs the OS's battery budget only when there's actually something new — a 15-minute poll spends budget constantly, whether or not anything changed.</li>
+<li><strong>Respect explicit hints.</strong> <code>requiresExternalPower</code>, <code>requiresBatteryNotLow</code>, and Doze-maintenance-window constraints exist so the system can trust you — abuse them (or work around them with foreground-service tricks) and the platform quietly downgrades your app's standing.</li>
+</ul>
+
+<h2>6 · Quick checklist</h2>
+<ul>
+<li>✅ Declare the narrowest background mode / constraint set that covers the actual need.</li>
+<li>✅ Treat every scheduled time as "earliest," never "exact."</li>
+<li>✅ Batch network work into as few radio wake-ups as possible.</li>
+<li>✅ Reconcile on foreground as the guaranteed catch-up path.</li>
+<li>✅ Make background tasks resumable across a killed process.</li>
+<li>❌ Don't rely on precise interval scheduling for anything user-facing.</li>
+<li>❌ Don't fight Doze/App Standby with background-service workarounds — it erodes the OS's trust in your app.</li>
+</ul>
+
+<h2>7 · Key takeaways</h2>
+<p>iOS and Android converged on the same answer from different directions: background execution is a rationed, opportunistic favour, sized by how much the OS trusts your app and how much budget it has to spare. Build features so the foreground path is where correctness lives, and let background work be the pleasant surprise when the OS decides to grant it — not the thing your app depends on.</p>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mobile Development · KaizenCode. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}});})();</script>
+</body></html>

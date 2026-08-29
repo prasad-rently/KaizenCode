@@ -18,7 +18,7 @@ incremental improvement.
 - `index.html` — the homepage; links to all six phases, the Mastery Track, the
   Cryptography topic, and the docs.
 - `phaseN_*.html` — six standalone core learning docs (phases 1–6).
-- `mastery_*.html` — seventeen standalone Mastery Track modules (named, not numbered)
+- `mastery_*.html` — twenty-seven standalone Mastery Track modules (named, not numbered)
   covering cross-cutting topics. These add an **inline runnable-code component**:
   every `<pre>` is wrapped in `.snippet` with a Copy button, and JS snippets get a
   ▶ Run button driven by a small vanilla-JS runner inlined at the bottom of each
@@ -46,6 +46,11 @@ incremental improvement.
   module shell with `.snippet` Copy blocks (e.g. `mobile_silent_push_notifications.html`).
   Cards go in the `#mobile` section. Keep them vendor- and project-neutral — never reveal
   internal project or PoC details.
+- `aws_*.html` — the **AWS deep-dive** topic: `aws_from_scratch.html` teaches core AWS
+  services from first principles with runnable labs and a 4-week planner;
+  `aws_cloud_toolbox.html` is a decision-driven toolbox (concept → verdict → worked
+  example) for the capabilities a real app needs. Reuses the Mastery/Crypto shell
+  conventions. Cards go in the `#aws` section of `index.html`.
 - `roadmap_summary_md.md` — full prose summary of all phases (source of truth for content).
 - `docs/` — markdown companion docs (per phase + meta). The `.md` files are the
   source of truth; `docs/*.html` and `roadmap_summary.html` are **generated** from

@@ -118,7 +118,7 @@ footer a{color:var(--accent);text-decoration:none}
     </div>
     <div class="stats">
       <div class="stat"><div class="n">6</div><div class="l">Core phases</div></div>
-      <div class="stat"><div class="n">35+</div><div class="l">Modules live</div></div>
+      <div class="stat"><div class="n">43</div><div class="l">Modules live</div></div>
       <div class="stat"><div class="n">5</div><div class="l">Stages → CTO</div></div>
       <div class="stat"><div class="n">32</div><div class="l">On the roadmap</div></div>
     </div>
@@ -143,7 +143,7 @@ footer a{color:var(--accent);text-decoration:none}
       <a class="phase" href="#mastery">
         <div class="p-top"><div class="p-num">2</div><span class="p-weeks">Ongoing depth</span></div>
         <div class="p-title">Mastery &amp; deep dives</div>
-        <div class="p-desc">The senior toolbox — 17 cross-cutting Mastery modules, deep-dive topics on Cryptography and AWS, and practical Mobile Development field notes. All with runnable, in-page code.</div>
+        <div class="p-desc">The senior toolbox — 27 cross-cutting Mastery modules, deep-dive topics on Cryptography and AWS, and practical Mobile Development field notes. All with runnable, in-page code.</div>
         <div class="p-tags"><span class="p-tag">Mastery</span><span class="p-tag">Cryptography</span><span class="p-tag">AWS</span><span class="p-tag">Mobile</span></div>
         <div class="p-foot">Mastery, Cryptography, AWS, Mobile ↓</div>
       </a>
@@ -261,8 +261,8 @@ footer a{color:var(--accent);text-decoration:none}
       <a class="phase" href="mastery_gateway_apis.html">
         <div class="p-top"><div class="p-num">🚪</div><span class="p-weeks">▶ runnable</span></div>
         <div class="p-title">The Gateway</div>
-        <div class="p-desc">Modern API design — REST vs GraphQL vs gRPC, resolvers, the N+1 trap, cursor pagination, token-bucket rate limiting, versioning.</div>
-        <div class="p-tags"><span class="p-tag">GraphQL</span><span class="p-tag">gRPC</span><span class="p-tag">Pagination</span><span class="p-tag">Gateways</span></div>
+        <div class="p-desc">Modern API design — REST vs GraphQL vs gRPC, protobuf &amp; the 4 gRPC streaming modes, deadline propagation, resolvers, the N+1 trap, cursor pagination, token-bucket rate limiting, versioning.</div>
+        <div class="p-tags"><span class="p-tag">GraphQL</span><span class="p-tag">gRPC</span><span class="p-tag">Protobuf</span><span class="p-tag">Pagination</span></div>
         <div class="p-foot">Open module →</div>
       </a>
 
@@ -434,6 +434,14 @@ footer a{color:var(--accent);text-decoration:none}
         <div class="p-foot">Open module →</div>
       </a>
 
+      <a class="phase" href="mastery_courier_rpc_frameworks.html">
+        <div class="p-top"><div class="p-num">📦</div><span class="p-weeks">▶ runnable</span></div>
+        <div class="p-title">The Courier</div>
+        <div class="p-desc">RPC frameworks as a category — gRPC vs Thrift vs JSON-RPC vs Cap'n Proto, where RPC quietly runs your day (Kubernetes, blockchain wallets, etcd), and its real vulnerabilities: reflection leaks, HTTP/2 Rapid Reset, the "trusted network" fallacy.</div>
+        <div class="p-tags"><span class="p-tag">RPC</span><span class="p-tag">gRPC</span><span class="p-tag">Thrift</span><span class="p-tag">Security</span></div>
+        <div class="p-foot">Open module →</div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -552,7 +560,7 @@ footer a{color:var(--accent);text-decoration:none}
   <div class="wrap">
     <p class="eyebrow">Part 2 · Mobile Development</p>
     <h2 class="sec-title">Field notes for mobile engineers</h2>
-    <p class="sec-sub">Deep, practical articles on the mobile-specific problems the backend books skip — push, offline, sync, device constraints. Written from real research and kept vendor- and project-neutral.</p>
+    <p class="sec-sub">Deep, practical articles on the mobile-specific problems the backend books skip — push, offline sync, background execution, device fragmentation, deep linking. Written from real research and kept vendor- and project-neutral.</p>
     <div class="grid">
 
       <a class="phase" href="mobile_silent_push_notifications.html">
@@ -563,12 +571,37 @@ footer a{color:var(--accent);text-decoration:none}
         <div class="p-foot">Read the article →</div>
       </a>
 
-      <div class="phase" style="opacity:.55;cursor:default">
-        <div class="p-top"><div class="p-num">📝</div><span class="p-weeks">soon</span></div>
-        <div class="p-title">More field notes</div>
-        <div class="p-desc">Offline-first sync, deep links, app-size budgets and release trains — practical mobile articles, added over time.</div>
-        <div class="p-tags"><span class="p-tag">Offline</span><span class="p-tag">Sync</span><span class="p-tag">Releases</span></div>
-      </div>
+      <a class="phase" href="mobile_offline_first_sync.html">
+        <div class="p-top"><div class="p-num">🔌</div><span class="p-weeks">article</span></div>
+        <div class="p-title">Offline-First Sync</div>
+        <div class="p-desc">Designing for the network you don't have — local-first writes, durable sync queues, and the conflict-resolution decision (LWW vs. server-merge vs. CRDTs) every offline-tolerant app has to make deliberately.</div>
+        <div class="p-tags"><span class="p-tag">Local-first</span><span class="p-tag">Conflicts</span><span class="p-tag">CRDTs</span><span class="p-tag">Optimistic UI</span></div>
+        <div class="p-foot">Read the article →</div>
+      </a>
+
+      <a class="phase" href="mobile_background_execution_limits.html">
+        <div class="p-top"><div class="p-num">🔋</div><span class="p-weeks">article</span></div>
+        <div class="p-title">Background Execution Limits</div>
+        <div class="p-desc">What the OS actually lets you do — iOS background modes &amp; BGTaskScheduler, Android Doze &amp; WorkManager, and why "every 15 minutes" is a request, not a promise.</div>
+        <div class="p-tags"><span class="p-tag">BGTaskScheduler</span><span class="p-tag">WorkManager</span><span class="p-tag">Doze</span><span class="p-tag">Battery</span></div>
+        <div class="p-foot">Read the article →</div>
+      </a>
+
+      <a class="phase" href="mobile_device_fragmentation_testing.html">
+        <div class="p-top"><div class="p-num">🧩</div><span class="p-weeks">article</span></div>
+        <div class="p-title">Device Fragmentation</div>
+        <div class="p-desc">Designing for hardware you'll never see — screen-size ranges, low-RAM/thermal budgets, and why capability detection ages better than a device-model blocklist.</div>
+        <div class="p-tags"><span class="p-tag">Screens</span><span class="p-tag">Low-end</span><span class="p-tag">OOM</span><span class="p-tag">Capability detection</span></div>
+        <div class="p-foot">Read the article →</div>
+      </a>
+
+      <a class="phase" href="mobile_deep_linking_navigation.html">
+        <div class="p-top"><div class="p-num">🔗</div><span class="p-weeks">article</span></div>
+        <div class="p-title">Deep Linking</div>
+        <div class="p-desc">Universal Links vs. custom schemes, bridging deferred installs, and the cold-start navigation stack problem that breaks most deep-link implementations.</div>
+        <div class="p-tags"><span class="p-tag">Universal Links</span><span class="p-tag">Deferred linking</span><span class="p-tag">Navigation</span></div>
+        <div class="p-foot">Read the article →</div>
+      </a>
 
     </div>
   </div>

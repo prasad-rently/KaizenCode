@@ -111,14 +111,13 @@ cross-references, not a list.
 
 ## Considered but deferred (future rounds)
 
-Still-unbuilt candidates, for when the track grows again:
+The Cartographer (DDD), The Switchboard (networking internals), The
+Gatekeeper (deep auth), and **The Courier** (RPC frameworks — IDL/codegen,
+marshalling, gRPC vs Thrift vs JSON-RPC vs Cap'n Proto, real-world usage,
+pros/cons, and vulnerabilities like reflection leakage and HTTP/2 Rapid
+Reset) below have since shipped as Mastery modules. Still-unbuilt
+candidates, for when the track grows again:
 
-- **The Cartographer** — domain-driven design: bounded contexts, aggregates,
-  hexagonal/clean architecture, ubiquitous language.
-- **The Switchboard** — networking internals: DNS, TLS handshake, TCP vs UDP,
-  HTTP/2 & /3, load-balancing algorithms.
-- **The Gatekeeper** — deep auth: OAuth2/OIDC flows, PKCE, sessions vs tokens,
-  refresh rotation, SSO (extends The Vault without overlapping it).
 - **The Green Thread** — sustainability/efficiency: carbon-aware scheduling,
   energy-per-request, efficient runtimes.
 

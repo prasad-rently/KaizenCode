@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Courier — RPC Frameworks</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}a.xref{color:#5350B4;font-weight:600;text-decoration:none}@media(prefers-color-scheme:dark){a.xref{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Distributed Systems</span>
+<h1>📦 The Courier</h1>
+<p class="sub">RPC frameworks, as a category — not just gRPC. Why "call it like a local function" won over raw sockets, where this pattern quietly runs your day, and the tradeoffs and vulnerabilities that come with the convenience.</p>
+
+<h2><span class="sn">1</span>What RPC actually is</h2>
+<p>Every backend eventually needs Service A to ask Service B to do something and hand back an answer. You could open a raw TCP socket and invent your own byte format — and early distributed systems did exactly that, painfully, for every single service pair. <strong>RPC (Remote Procedure Call)</strong> is the idea that this should feel like calling a normal function: <code>paymentService.charge(orderId, amount)</code> reads exactly like a local method call, but under the hood it's serialized, sent across the network, executed on a different machine, and the result is deserialized back into your call site — with the network hop hidden from the caller.</p>
+<p>This is <em>older</em> than REST. Sun's RPC (ONC RPC) shipped in the 1980s; CORBA and Microsoft's DCOM chased the same idea across languages and vendors in the 1990s; Java RMI did it for the JVM. REST arrived in 2000 as a reaction to how heavy and vendor-locked that generation had become — modeling the world as *resources* you `GET`/`POST`/`PUT` instead of *actions* you invoke. Both ideas are still very much alive today; they just solve different problems.</p>
+<div class="tip"><strong>Mobile analogy:</strong> think of RPC as calling a delegate method where the delegate object happens to live on another machine. REST is closer to fetching and updating a record through a URL. Neither is "wrong" — they're different mental models for the same underlying job: getting two programs to talk.</div>
+
+<h2><span class="sn">2</span>Anatomy of a call</h2>
+<p>Strip away any specific framework's branding and every RPC system is built from the same four pieces:</p>
+<table>
+<tr><th>Piece</th><th>Job</th></tr>
+<tr><td><strong>IDL</strong> (Interface Definition Language)</td><td>A language-neutral contract describing the available methods and message shapes — gRPC's <code>.proto</code>, Thrift's <code>.thrift</code>.</td></tr>
+<tr><td><strong>Codegen: stub &amp; skeleton</strong></td><td>A compiler reads the IDL and generates a client-side <strong>stub</strong> (looks like a local function, actually makes the network call) and a server-side <strong>skeleton</strong> (receives the call, invokes your real handler). This is what makes it <em>feel</em> local.</td></tr>
+<tr><td><strong>Marshalling</strong></td><td>Converting in-memory objects into bytes for the wire, and back again on the other end. Binary formats (Protobuf, Thrift's compact protocol) are smaller and faster to pack/unpack than JSON text.</td></tr>
+<tr><td><strong>Transport</strong></td><td>The actual network layer underneath — HTTP/2 for gRPC, raw TCP or HTTP for Thrift, plain HTTP/1.1 for JSON-RPC.</td></tr>
+</table>
+<p>Run this to see the stub do its job — from the caller's side it's one line, but the stub is quietly doing marshal → "send" → "server handles it" → unmarshal underneath:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// The "server": your actual business logic, oblivious to the network</span>
+<span class="kw">const</span> serverHandlers = {
+  <span class="fn">getUser</span>: (id) =&gt; ({ id, name: <span class="str">'Gokul'</span>, plan: <span class="str">'pro'</span> }),
+};
+
+<span class="cm">// The "stub": generated code that makes a remote call look local</span>
+<span class="kw">function</span> <span class="fn">makeStub</span>(handlers) {
+  <span class="kw">return</span> <span class="kw">new</span> Proxy({}, {
+    <span class="fn">get</span>(_, method) {
+      <span class="kw">return</span> (...args) =&gt; {
+        <span class="kw">const</span> wireBytes = JSON.<span class="fn">stringify</span>({ method, args }); <span class="cm">// 1. marshal</span>
+        console.<span class="fn">log</span>(<span class="str">'→ sending over the wire:'</span>, wireBytes);
+        <span class="kw">const</span> response = handlers[method](...args);            <span class="cm">// 2. "network hop" + server executes</span>
+        <span class="kw">const</span> unmarshalled = JSON.<span class="fn">parse</span>(JSON.<span class="fn">stringify</span>(response)); <span class="cm">// 3. unmarshal</span>
+        <span class="kw">return</span> unmarshalled;
+      };
+    },
+  });
+}
+
+<span class="kw">const</span> userService = <span class="fn">makeStub</span>(serverHandlers);
+
+<span class="cm">// 4. Calling code never sees any of the above — it just calls a function</span>
+console.<span class="fn">log</span>(<span class="str">'caller sees only:'</span>, userService.<span class="fn">getUser</span>(<span class="num">42</span>));</pre><div class="out"></div></div>
+<div class="tip"><strong>The whole value proposition is in that last line.</strong> The caller wrote <code>userService.getUser(42)</code> — no URL, no HTTP verb, no manual JSON parsing. Every RPC framework, from 1980s ONC RPC to today's gRPC, exists to make that line possible.</div>
+
+<h2><span class="sn">3</span>Where RPC quietly runs your day</h2>
+<p>You've almost certainly triggered dozens of RPC calls today without ever seeing the word "RPC":</p>
+<table>
+<tr><th>What you did</th><th>What's actually happening underneath</th></tr>
+<tr><td>Ordered food or booked a ride</td><td>The order, payment, driver-matching, and notification services are almost certainly separate backends calling each other over an internal RPC framework — often gRPC — many times to fulfil one tap.</td></tr>
+<tr><td>Connected a crypto wallet (MetaMask, etc.) to a dApp</td><td>The wallet talks to a blockchain node using <strong>JSON-RPC</strong> — <code>eth_getBalance</code>, <code>eth_sendTransaction</code> are literal RPC method names sent as JSON over HTTP. This is the de facto standard across Ethereum and most EVM chains.</td></tr>
+<tr><td>A Kubernetes cluster scheduling a pod</td><td>The kubelet talks to the container runtime (containerd, CRI-O) over gRPC via the <strong>CRI</strong> (Container Runtime Interface); <strong>etcd</strong>, the datastore behind the whole cluster's state, exposes its official client API as gRPC (etcd v3 API).</td></tr>
+<tr><td>Traffic flowing through a service mesh (Envoy, Istio)</td><td>Envoy's control-plane configuration protocol, <strong>xDS</strong>, is itself gRPC — the proxy that routes your traffic is, underneath, an RPC client.</td></tr>
+<tr><td>Using enterprise software at a bank or telco</td><td>A meaningful amount of back-office integration still runs on RPC's earlier generation — Java RMI, CORBA, .NET Remoting/WCF — systems built in the 1990s–2000s that are still in production today.</td></tr>
+</table>
+
+<h2><span class="sn">4</span>The RPC family</h2>
+<table>
+<tr><th>Framework</th><th>IDL</th><th>Wire format</th><th>Transport</th><th>Known for</th></tr>
+<tr><td><strong>gRPC</strong></td><td><code>.proto</code> (Protobuf)</td><td>Binary</td><td>HTTP/2</td><td>Google-created (2015, successor to its internal "Stubby"), cloud-native default — Kubernetes CRI, etcd v3, Envoy xDS.</td></tr>
+<tr><td><strong>Apache Thrift</strong></td><td><code>.thrift</code></td><td>Binary (several codecs)</td><td>Pluggable — raw TCP, HTTP, more</td><td>Originated at Facebook/Meta; transport flexibility over any framework here.</td></tr>
+<tr><td><strong>JSON-RPC</strong></td><td>None — just a JSON convention</td><td>JSON text</td><td>Usually HTTP</td><td>Simplicity; the de facto standard for blockchain node APIs.</td></tr>
+<tr><td><strong>Cap'n Proto</strong></td><td><code>.capnp</code></td><td>Binary, zero-copy</td><td>Pluggable</td><td>No serialization step at all — the wire bytes <em>are</em> the in-memory layout.</td></tr>
+<tr><td><strong>CORBA / DCOM / Java RMI</strong></td><td>IDL / interfaces</td><td>Binary, proprietary</td><td>Proprietary</td><td>1990s enterprise RPC — largely superseded, but still alive in legacy back-office systems.</td></tr>
+</table>
+
+<h2><span class="sn">5</span>Why teams reach for it</h2>
+<ul>
+<li><strong>It reads like code you already write.</strong> A typed method call is a lower cognitive tax than assembling a URL, a verb, headers, and a JSON body by convention.</li>
+<li><strong>Contracts catch bugs before runtime.</strong> A typo'd field name or wrong type fails at compile time against the generated stub, instead of surfacing as a silent <code>undefined</code> deep in production.</li>
+<li><strong>Performance, at scale.</strong> Binary encoding plus a multiplexed transport (HTTP/2 for gRPC) beats JSON-over-HTTP/1.1 meaningfully once you're making thousands of internal calls per second.</li>
+<li><strong>Streaming is native, not bolted on.</strong> Long-lived, bidirectional data flows (covered in depth in <a class="xref" href="mastery_gateway_apis.html">The Gateway</a>'s gRPC section) are a first-class call shape, not a workaround.</li>
+<li><strong>Polyglot by design.</strong> Codegen means a Python client calling a Go service is exactly as natural as calling within one language — nobody hand-writes the client library.</li>
+</ul>
+
+<h2><span class="sn">6</span>The tradeoffs</h2>
+<ul>
+<li><strong>Harder to debug by hand.</strong> You can't just open a browser network tab or <code>curl</code> an endpoint and read the response — binary payloads need dedicated tooling (<code>grpcurl</code>, <code>protoc --decode</code>) before a human can make sense of them.</li>
+<li><strong>No free HTTP caching.</strong> Every RPC call typically rides as an HTTP <code>POST</code> underneath, so the standard browser/CDN caching that a REST <code>GET</code> gets for free doesn't apply.</li>
+<li><strong>Tighter coupling than it looks.</strong> Client and server compile against the same contract. Rename or renumber a field carelessly and you can deploy a server that silently breaks every client still running the old stub.</li>
+<li><strong>Extra infrastructure for public/browser use.</strong> Since browsers can't speak raw gRPC, you need a translating layer (gRPC-Web + a proxy) the moment a browser client needs in — another component to run and secure.</li>
+</ul>
+<p>That "tighter coupling" point is the one that bites teams for real — schema evolution has real, learnable rules. Run this to see the difference between a safe change and a breaking one:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// An OLD client, compiled against an earlier schema version</span>
+<span class="kw">function</span> <span class="fn">oldClientReads</span>(serverResponse) {
+  <span class="kw">return</span> { id: serverResponse.id, name: serverResponse.name };
+}
+
+<span class="cm">// ✅ SAFE evolution: the server ADDED a new field ("plan").</span>
+<span class="cm">// The old client simply doesn't know to look for it — no crash.</span>
+<span class="kw">const</span> serverV2Response = { id: <span class="num">42</span>, name: <span class="str">'Gokul'</span>, plan: <span class="str">'pro'</span> };
+console.<span class="fn">log</span>(<span class="str">'field added, old client still works:'</span>, <span class="fn">oldClientReads</span>(serverV2Response));
+
+<span class="cm">// ❌ BREAKING evolution: the server RENAMED "name" to "fullName".</span>
+<span class="cm">// The old client's stub still asks for the field number/name it</span>
+<span class="cm">// was compiled against — that data is simply gone now.</span>
+<span class="kw">const</span> serverV3ResponseRenamed = { id: <span class="num">42</span>, fullName: <span class="str">'Gokul'</span>, plan: <span class="str">'pro'</span> };
+<span class="kw">const</span> broken = <span class="fn">oldClientReads</span>(serverV3ResponseRenamed);
+console.<span class="fn">log</span>(<span class="str">'field renamed, old client silently loses data:'</span>, broken);
+console.<span class="fn">log</span>(broken.name === <span class="kw">undefined</span> ? <span class="str">'⛔ name is undefined — this ships a real bug'</span> : <span class="str">'ok'</span>);</pre><div class="out"></div></div>
+<div class="warn"><strong>The rule that saves you:</strong> in Protobuf and Thrift, once a field number ships, treat it as permanent. Add new fields with new numbers; never reuse, renumber, or repurpose an old one. Deleting a field is safer than renaming it — a rename is a silent data-loss bug wearing a refactor's clothes.</div>
+
+<h2><span class="sn">7</span>Vulnerabilities &amp; security pitfalls</h2>
+<p>RPC's convenience hides real, well-documented risk if a team treats it as "just internal, so it's safe":</p>
+<ul>
+<li><strong>Reflection left on in production.</strong> gRPC's server reflection service — meant for local debugging with tools like <code>grpcurl</code> — hands back the entire list of methods and message schemas to any caller who can reach the port, if left enabled. That's a free map of your internal API surface to anyone who gets network access, no source code required. Disable it outside development.</li>
+<li><strong>Insecure-by-default during local dev.</strong> Most gRPC client libraries make you explicitly choose transport security, and it's common (and convenient) to disable it for local testing. The failure mode is that plaintext config quietly making it to a production deploy because "it worked locally."</li>
+<li><strong>The "trusted internal network" fallacy.</strong> Because RPC ports usually aren't browser-facing, teams often skip real authorization on service-to-service calls, assuming only their own services can reach them. Once an attacker lands on <em>any</em> host inside that network, the same broad, typed, easy-to-call surface that makes RPC pleasant for your own engineers makes lateral movement between services easier for an intruder too — the RPC-shaped version of SSRF pivoting.</li>
+<li><strong>Protocol-level exposure via the transport.</strong> Because gRPC rides on HTTP/2, it inherits HTTP/2's own vulnerabilities. The <strong>HTTP/2 Rapid Reset</strong> technique (<code>CVE-2023-44487</code>, disclosed October 2023 by Google, Cloudflare, and AWS together) rapidly opened and cancelled streams to power some of the largest DDoS attacks ever recorded — every HTTP/2 server implementation, gRPC included, needed patching, regardless of what sat above the transport.</li>
+<li><strong>Binary parsing is still attack surface.</strong> Like any binary deserializer, generated Protobuf/Thrift parsers can have bugs. A malformed or adversarial payload hitting a parsing edge case can crash a service (denial of service) even without achieving a full exploit.</li>
+</ul>
+<div class="ok"><strong>Mental model:</strong> RPC gives you a typed, efficient phone line between services — it says nothing about who's allowed to call. Authentication (mTLS, tokens) and authorization are always a layer <em>you</em> add on top, the same way <a class="xref" href="mastery_vault_security.html">The Vault</a> and <a class="xref" href="mastery_gatekeeper_auth.html">The Gatekeeper</a> require it everywhere else.</div>
+
+<h2><span class="sn">8</span>RPC vs. REST vs. messaging</h2>
+<table>
+<tr><th>The situation</th><th>Reach for</th></tr>
+<tr><td>Public-facing, needs to be cacheable and browsable</td><td>REST</td></tr>
+<tr><td>A rich client wants to shape the exact response tree it renders</td><td>GraphQL</td></tr>
+<tr><td>Internal service-to-service, high volume, low latency, both sides under your control</td><td>RPC (gRPC / Thrift)</td></tr>
+<tr><td>The sender doesn't need a reply and shouldn't wait for one</td><td>Messaging / event queue (see <a class="xref" href="mastery_streaming_mind_eventdriven.html">The Streaming Mind</a>)</td></tr>
+</table>
+
+<h2><span class="sn">9</span>Quick checklist</h2>
+<ul>
+<li>✅ IDL treated as a permanent contract — new fields get new numbers, nothing is renumbered or renamed after shipping.</li>
+<li>✅ Reflection/introspection disabled outside local development.</li>
+<li>✅ Transport security (mTLS/TLS) explicit and verified in every environment, not just assumed from "it's internal."</li>
+<li>✅ Authorization checked on every RPC call, not waved through because the network is "trusted."</li>
+<li>✅ Debugging tooling (grpcurl or equivalent) in the team's kit before it's needed at 2am.</li>
+<li>❌ Don't expose an RPC service directly to a browser — put gRPC-Web and a proxy in front, or expose REST/GraphQL instead.</li>
+<li>❌ Don't assume "internal only" means "no auth needed."</li>
+</ul>
+
+<h2><span class="sn">10</span>Key takeaways</h2>
+<p>RPC isn't a competitor to REST so much as a different answer to a different question — REST asks "what resource, what verb," RPC asks "what function, on what machine." It's the quiet default behind an enormous share of the infrastructure you already depend on daily, from the blockchain node your wallet talks to, to the container runtime scheduling the backend behind almost any app on your phone. The convenience of "it feels like a local call" is real and worth having — as long as you remember that a local-feeling call still crosses a real network, still needs real authorization, and still inherits every vulnerability of the transport underneath it.</p>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mastery Track · KaizenCode. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>

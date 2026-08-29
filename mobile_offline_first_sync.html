@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Offline-First Sync — Designing for the Network You Don't Have</title><meta name="description" content="A practical guide to offline-first mobile architecture: local-first storage, sync queues, conflict resolution (LWW vs CRDTs vs OT), and optimistic UI that stays correct when the network doesn't."><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:25px;font-weight:700;margin-bottom:6px;letter-spacing:-.5px;line-height:1.2}.sub{font-size:13px;color:#666;margin-bottom:10px}@media(prefers-color-scheme:dark){.sub{color:#888}}.meta{font-size:11.5px;color:#999;font-weight:600;letter-spacing:.3px;margin-bottom:26px}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.75;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.tldr{border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;margin:16px 0;background:#f9f9fb;font-size:13px}@media(prefers-color-scheme:dark){.tldr{border-color:#2a2a2a;background:#141416}}.tldr b{color:#5350B4}@media(prefers-color-scheme:dark){.tldr b{color:#8f8cff}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mobile Development · Article</span>
+<h1>🔌 Offline-First Sync: Designing for the Network You Don't Have</h1>
+<p class="sub">Most mobile apps are built as if the network is always there and treat "offline" as an error state. Offline-first flips that: the local copy is the truth, and the network is just how two truths eventually agree.</p>
+<p class="meta">Mobile Development · ~9 min read · updated August 2026</p>
+
+<div class="tldr"><b>TL;DR</b> — Write to local storage first and render instantly; queue the change for the server in the background. When the same record changes in two places before they can agree, you need an explicit conflict policy — last-write-wins for simple fields, CRDTs or server-side merge for anything collaborative. The hard part was never "detecting offline." It's deciding, in advance, who wins when two truths disagree.</div>
+
+<h2>1 · Online-first vs. offline-first, as architectures</h2>
+<p>An <strong>online-first</strong> app treats the server as the only source of truth: a screen shows a spinner, calls the API, and renders what comes back. Offline is handled — if at all — as a special error state with a "no connection" banner.</p>
+<p>An <strong>offline-first</strong> app treats the <em>local database</em> as the source of truth for rendering. Every read comes from disk, instantly, whether or not the network is up. Every write goes to disk first, then to a queue that drains to the server whenever a connection exists. The network becomes a background concern instead of something the UI blocks on.</p>
+<div class="tip"><strong>Mental model:</strong> in online-first, the network is on the critical path of every screen. In offline-first, the network is on the critical path of nothing — it's a background job that keeps the local copy honest.</div>
+
+<h2>2 · The write path: local first, sync later</h2>
+<p>The core shape is the same across iOS, Android, and React Native, regardless of which local database you use (SQLite, Core Data, Room, Realm, WatermelonDB):</p>
+<div class="snippet"><div class="bar"><span class="lang">Write path · pseudocode</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="kw">function</span> <span class="fn">updateTodo</span>(id, changes) {
+  <span class="cm">// 1. Write to local DB immediately — the UI reads from here</span>
+  db.<span class="fn">update</span>(<span class="str">"todos"</span>, id, { ...changes, <span class="str">"_dirty"</span>: <span class="kw">true</span>, <span class="str">"_updatedAt"</span>: <span class="fn">now</span>() });
+  ui.<span class="fn">render</span>();  <span class="cm">// instant — no network in this path</span>
+
+  <span class="cm">// 2. Enqueue a sync job; a background worker drains this queue</span>
+  <span class="cm">// whenever connectivity + auth allow, independent of this call</span>
+  syncQueue.<span class="fn">enqueue</span>({ type: <span class="str">"update"</span>, table: <span class="str">"todos"</span>, id, changes });
+}</pre></div>
+<p>Nothing about step 1 depends on the network being up. That single property is what "offline-first" buys you: the app <em>feels</em> the same whether the user is on fibre or in a lift.</p>
+
+<h2>3 · The queue has to survive a killed app</h2>
+<p>A sync queue kept only in memory is worthless — the OS can suspend or kill the app at any time, especially on a low-end device under memory pressure. The queue must be a durable, ordered log <em>in the same local database</em> as the data it describes, so a crash mid-sync leaves the system in a state it can resume from, not one it has to guess about.</p>
+<ul>
+<li><strong>Ordering matters.</strong> Two edits to the same record must replay in the order they happened, or the second can be silently overwritten by the first.</li>
+<li><strong>Idempotency matters more.</strong> The same job may run twice — once before a crash, once after resume, or once from a duplicate network retry. Give every job a stable ID and let the server de-duplicate by it.</li>
+<li><strong>Batch the drain.</strong> Sending one request per queued change is slow and battery-hungry; batch several jobs into one sync round-trip when the queue has more than a few pending.</li>
+</ul>
+
+<h2>4 · Conflicts: the part nobody wants to design for</h2>
+<p>The queue eventually catches up to the server — but what if the server's copy of that record <em>also</em> changed while the device was offline? Now two versions disagree, and something has to decide the outcome. There is no default-correct answer; it's a product decision disguised as an engineering one.</p>
+<table>
+<tr><th>Strategy</th><th>How it decides</th><th>Good fit</th></tr>
+<tr><td><strong>Last-write-wins (LWW)</strong></td><td>Whichever edit has the newer timestamp overwrites the other, field by field or record by record.</td><td>Simple settings, single-owner records (a user's own profile field).</td></tr>
+<tr><td><strong>Server-authoritative merge</strong></td><td>The server applies domain rules (e.g. "quantity can only decrease") and returns the resolved state; the client accepts it.</td><td>Inventory, balances — anything with business invariants.</td></tr>
+<tr><td><strong>CRDTs</strong> (conflict-free replicated data types)</td><td>The data structure itself is designed so concurrent edits merge mathematically without a decision — e.g. a grow-only counter, or an OR-Set for list membership.</td><td>Collaborative editing, offline-tolerant counters/sets.</td></tr>
+<tr><td><strong>Operational Transform (OT)</strong></td><td>Edits are transformed against each other so intent is preserved regardless of arrival order.</td><td>Real-time collaborative text (what Google Docs-style editors use).</td></tr>
+<tr><td><strong>Manual resolution</strong></td><td>Surface both versions to the user and let them pick.</td><td>High-stakes, low-frequency conflicts (a shared document rename).</td></tr>
+</table>
+<div class="warn"><strong>Clocks lie.</strong> LWW is only as good as the clock behind the timestamp. A device with a skewed clock can make an old edit look newest and silently clobber a real change. Prefer a server-issued logical clock (a monotonic version number per record) over the device's wall clock whenever you can.</div>
+
+<h2>5 · Optimistic UI and the rollback you must plan for</h2>
+<p>Because the UI renders from local state before the server has confirmed anything, every optimistic write needs a defined failure path — not just a happy path:</p>
+<div class="snippet"><div class="bar"><span class="lang">Sync worker · pseudocode</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="kw">async function</span> <span class="fn">drainQueue</span>() {
+  <span class="kw">for</span> (<span class="kw">const</span> job <span class="kw">of</span> syncQueue.<span class="fn">pending</span>()) {
+    <span class="kw">try</span> {
+      <span class="kw">const</span> result = <span class="kw">await</span> api.<span class="fn">send</span>(job);       <span class="cm">// idempotency key = job.id</span>
+      db.<span class="fn">reconcile</span>(job.table, result);      <span class="cm">// server's version wins on return</span>
+      syncQueue.<span class="fn">markDone</span>(job.id);
+    } <span class="kw">catch</span> (err) {
+      <span class="kw">if</span> (err.<span class="fn">isConflict</span>()) {
+        db.<span class="fn">applyResolution</span>(job, err.serverVersion);  <span class="cm">// §4's chosen strategy</span>
+      } <span class="kw">else if</span> (err.<span class="fn">isRetryable</span>()) {
+        syncQueue.<span class="fn">retryWithBackoff</span>(job.id);         <span class="cm">// leave "_dirty" set, try later</span>
+      } <span class="kw">else</span> {
+        db.<span class="fn">rollback</span>(job);                          <span class="cm">// e.g. 422 — undo the optimistic write</span>
+        ui.<span class="fn">notify</span>(<span class="str">"Couldn't save that change"</span>);
+      }
+    }
+  }
+}</pre></div>
+<p>The three branches — reconcile, retry, rollback — are not optional extras. An optimistic UI without a rollback path is just a UI that lies to the user when the server disagrees.</p>
+
+<h2>6 · Detecting "online" is a trap; detecting "synced" is the real signal</h2>
+<p>A raw connectivity flag (<code>NWPathMonitor</code>, <code>ConnectivityManager</code>) tells you the radio is up — not that requests actually complete. Captive portals, VPN failures, and flaky cell towers all report "connected" while every request times out. Treat connectivity state as a hint to <em>attempt</em> a sync, and treat an actual successful round-trip as the only proof you have that syncing works right now. Surface "last synced 4 minutes ago" to the user, not "online"/"offline" — it's the honest signal and it degrades gracefully.</p>
+
+<h2>7 · Quick checklist</h2>
+<ul>
+<li>✅ UI reads and writes local storage first; network is a background concern.</li>
+<li>✅ Sync queue is durable (on-disk), ordered, and every job has a stable idempotency key.</li>
+<li>✅ A named conflict strategy exists per data type — LWW, server-merge, CRDT, or manual — chosen deliberately, not by default.</li>
+<li>✅ Every optimistic write has a defined rollback, not just a happy path.</li>
+<li>✅ "Synced" state comes from a successful round-trip, not from a connectivity flag.</li>
+<li>❌ Don't use device wall-clock timestamps as your only conflict tiebreaker.</li>
+<li>❌ Don't let the sync queue live only in memory.</li>
+</ul>
+
+<h2>8 · Key takeaways</h2>
+<p>Offline-first isn't a network feature bolted onto an online app — it's a different default direction for data flow: local first, network as an eventually-consistent background sync. The engineering cost isn't in detecting "no internet"; it's in deciding, up front, who wins when two truths disagree — and building a queue durable enough to keep trying until they do.</p>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mobile Development · KaizenCode. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}});})();</script>
+</body></html>

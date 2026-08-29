@@ -13,7 +13,56 @@
 </table>
 <div class="tip"><strong>Mobile analogy:</strong> with REST you often hit <code>/user</code> then <code>/user/posts</code> then <code>/posts/comments</code> — three round trips. GraphQL lets the app request the whole tree in <em>one</em> query, asking only for the fields the screen renders.</div>
 
-<h2><span class="sn">2</span>How a resolver actually works</h2>
+<h2><span class="sn">2</span>gRPC: schema-first RPC over HTTP/2</h2>
+<p>Where GraphQL optimises the <strong>client ↔ backend-for-frontend</strong> edge, gRPC optimises <strong>service ↔ service</strong> calls inside your infrastructure. You write a contract once, in a <code>.proto</code> file, and generate typed client + server code for every language you use — no hand-written HTTP client, no guessing field names.</p>
+<div class="snippet"><div class="bar"><span class="lang">user.proto</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="kw">syntax</span> = <span class="str">"proto3"</span>;
+
+<span class="kw">service</span> UserService {
+  <span class="kw">rpc</span> <span class="fn">GetUser</span>      (UserRequest) <span class="kw">returns</span> (UserReply);            <span class="cm">// unary</span>
+  <span class="kw">rpc</span> <span class="fn">StreamOrders</span> (OrderQuery)  <span class="kw">returns</span> (<span class="kw">stream</span> Order);      <span class="cm">// server streaming</span>
+  <span class="kw">rpc</span> <span class="fn">UploadEvents</span> (<span class="kw">stream</span> Event) <span class="kw">returns</span> (UploadSummary);   <span class="cm">// client streaming</span>
+  <span class="kw">rpc</span> <span class="fn">Chat</span>          (<span class="kw">stream</span> Message) <span class="kw">returns</span> (<span class="kw">stream</span> Message);   <span class="cm">// bidirectional</span>
+}
+
+<span class="kw">message</span> UserRequest { <span class="tn">int32</span> id = <span class="num">1</span>; }
+<span class="kw">message</span> UserReply   { <span class="tn">int32</span> id = <span class="num">1</span>; <span class="tn">string</span> name = <span class="num">2</span>; }</pre></div>
+<p>Two things make this different from a REST or GraphQL call: the wire format is <strong>binary</strong> (protobuf), which is smaller and faster to (de)serialise than JSON text, and the transport is <strong>HTTP/2</strong>, which multiplexes many calls over one connection instead of opening a new one per request. Together they're why gRPC is the default for chatty, high-throughput microservice meshes.</p>
+<p>The four RPC shapes above aren't just an API quirk — they're the actual reason teams reach for gRPC over REST. Run this to see the shape of each, simulated with async generators (unary = 1-in-1-out, streaming = many-in-and/or-out):</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Unary: one request, one response — like a normal REST call</span>
+<span class="kw">async function</span> <span class="fn">getUser</span>(req) { <span class="kw">return</span> { id: req.id, name: <span class="str">'Gokul'</span> }; }
+
+<span class="cm">// Server streaming: one request, many responses over time</span>
+<span class="kw">async function*</span> <span class="fn">streamOrders</span>(query) {
+  <span class="kw">for</span> (<span class="kw">const</span> id <span class="kw">of</span> [<span class="num">101</span>, <span class="num">102</span>, <span class="num">103</span>]) <span class="kw">yield</span> { orderId: id };
+}
+
+<span class="cm">// Client streaming: many requests, one response at the end</span>
+<span class="kw">async function</span> <span class="fn">uploadEvents</span>(events) {
+  <span class="kw">let</span> count = <span class="num">0</span>;
+  <span class="kw">for await</span> (<span class="kw">const</span> _ <span class="kw">of</span> events) count++;
+  <span class="kw">return</span> { received: count };
+}
+
+<span class="cm">// Bidirectional: both sides stream, interleaved and independent</span>
+<span class="kw">async function*</span> <span class="fn">chat</span>(incoming) {
+  <span class="kw">for await</span> (<span class="kw">const</span> msg <span class="kw">of</span> incoming) <span class="kw">yield</span> msg.<span class="fn">toUpperCase</span>() + <span class="str">' 👋'</span>;
+}
+
+console.<span class="fn">log</span>(<span class="str">'unary        →'</span>, <span class="kw">await</span> <span class="fn">getUser</span>({ id: <span class="num">42</span> }));
+
+<span class="kw">for await</span> (<span class="kw">const</span> order <span class="kw">of</span> <span class="fn">streamOrders</span>({}))
+  console.<span class="fn">log</span>(<span class="str">'server-stream →'</span>, order);
+
+<span class="kw">async function*</span> <span class="fn">fakeClicks</span>() { <span class="kw">yield</span> <span class="str">'click'</span>; <span class="kw">yield</span> <span class="str">'scroll'</span>; <span class="kw">yield</span> <span class="str">'click'</span>; }
+console.<span class="fn">log</span>(<span class="str">'client-stream →'</span>, <span class="kw">await</span> <span class="fn">uploadEvents</span>(<span class="fn">fakeClicks</span>()));
+
+<span class="kw">async function*</span> <span class="fn">fakeMessages</span>() { <span class="kw">yield</span> <span class="str">'hi'</span>; <span class="kw">yield</span> <span class="str">'there'</span>; }
+<span class="kw">for await</span> (<span class="kw">const</span> reply <span class="kw">of</span> <span class="fn">chat</span>(<span class="fn">fakeMessages</span>()))
+  console.<span class="fn">log</span>(<span class="str">'bidi-stream   →'</span>, reply);</pre><div class="out"></div></div>
+<div class="tip"><strong>Deadlines, not just timeouts.</strong> A REST client usually times out on its own, alone. gRPC lets a caller attach a <em>deadline</em> to a request that propagates through every downstream call it triggers — if service A gives itself 500ms and calls B, B inherits the remaining budget automatically, so no service downstream keeps working on a request the original caller has already given up on.</div>
+<div class="warn"><strong>Not for the browser, directly.</strong> Browsers can't open raw HTTP/2 trailer-based streams the way gRPC needs, so browser clients go through <strong>gRPC-Web</strong> plus a translating proxy (e.g. Envoy) — another reason gRPC dominates service-to-service traffic but REST/GraphQL still front most public and browser-facing APIs.</div>
+
+<h2><span class="sn">3</span>How a resolver actually works</h2>
 <p>GraphQL isn't magic — a <strong>resolver</strong> is just a function per field. Run a tiny GraphQL-style engine: ask for specific fields, get back exactly those.</p>
 <div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Resolvers: one function per field</span>
 <span class="kw">const</span> db = { <span class="num">42</span>: { id: <span class="num">42</span>, name: <span class="str">'Gokul'</span>, email: <span class="str">'g@x.io'</span>, secret: <span class="str">'hidden'</span> } };
@@ -30,7 +79,7 @@
 };
 console.<span class="fn">log</span>(result); <span class="cm">// exactly the fields asked for</span></pre><div class="out"></div></div>
 
-<h2><span class="sn">3</span>The N+1 problem (GraphQL's classic trap)</h2>
+<h2><span class="sn">4</span>The N+1 problem (GraphQL's classic trap)</h2>
 <p>Naively resolving a list + a nested field fires 1 query for the list, then N more — one per item. At scale this melts your database. Run it to see 1+N vs the batched fix.</p>
 <div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Simulated DB hits</span>
 <span class="kw">let</span> naive = <span class="num">0</span>, batched = <span class="num">0</span>;
@@ -48,7 +97,7 @@ console.<span class="fn">log</span>(<span class="str">'naive queries:  '</span>,
 console.<span class="fn">log</span>(<span class="str">'batched queries:'</span>, batched, <span class="str">'(constant)'</span>);
 console.<span class="fn">log</span>(<span class="str">'fix → DataLoader: collect ids, one IN-query per tick'</span>);</pre><div class="out"></div></div>
 
-<h2><span class="sn">4</span>Cursor pagination (do this, not OFFSET)</h2>
+<h2><span class="sn">5</span>Cursor pagination (do this, not OFFSET)</h2>
 <p>Phase 2 used <code>LIMIT/OFFSET</code>. It breaks on live data: insert a row and page 2 shifts, showing duplicates. <strong>Cursor</strong> pagination ("everything after id X") is stable and fast.</p>
 <div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Keyset / cursor pagination</span>
 <span class="kw">const</span> rows = [{id:<span class="num">10</span>},{id:<span class="num">9</span>},{id:<span class="num">8</span>},{id:<span class="num">7</span>},{id:<span class="num">6</span>},{id:<span class="num">5</span>}];
@@ -63,7 +112,7 @@ console.<span class="fn">log</span>(<span class="str">'fix → DataLoader: colle
 console.<span class="fn">log</span>(<span class="str">'page 1:'</span>, p1);
 console.<span class="fn">log</span>(<span class="str">'page 2:'</span>, <span class="fn">page</span>(p1.nextCursor, <span class="num">2</span>)); <span class="cm">// stable even if rows inserted</span></pre><div class="out"></div></div>
 
-<h2><span class="sn">5</span>Rate limiting (the token bucket)</h2>
+<h2><span class="sn">6</span>Rate limiting (the token bucket)</h2>
 <p>An API gateway's job: protect the backend. The <strong>token bucket</strong> allows bursts up to a cap, then throttles to a steady refill rate. Run it — the 4th rapid request gets blocked.</p>
 <div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// Token bucket: capacity 3</span>
 <span class="kw">function</span> <span class="fn">makeBucket</span>(capacity) {
@@ -77,7 +126,7 @@ console.<span class="fn">log</span>(<span class="str">'page 2:'</span>, <span cl
 <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt;= <span class="num">5</span>; i++)
   console.<span class="fn">log</span>(<span class="str">'req '</span> + i + <span class="str">': '</span> + <span class="fn">allow</span>());</pre><div class="out"></div></div>
 
-<h2><span class="sn">6</span>API gateways &amp; versioning</h2>
+<h2><span class="sn">7</span>API gateways &amp; versioning</h2>
 <ul>
 <li><strong>Gateway</strong> = one front door (Kong, AWS API Gateway, Nginx) handling auth, rate limiting, routing, and TLS — so each service doesn't reimplement them.</li>
 <li><strong>Versioning</strong> — never break existing clients. Add <code>/api/v2</code> alongside <code>v1</code>; deprecate with a sunset header and a timeline.</li>
