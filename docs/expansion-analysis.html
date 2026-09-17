@@ -40,13 +40,7 @@
 <h3>Design note</h3>
 <p>The Oracle's API example uses the <strong>Claude Messages API</strong> with a current model id (<code>claude-sonnet-5</code>) and keeps the key server-side (cross-links <strong>The Vault</strong>). Its "ship responsibly" guidance links to <strong>The Bulwark</strong> (timeouts/retries) and <strong>The Watchtower</strong> (logging for eval) — the Mastery Track is increasingly a web of cross-references, not a list.</p>
 <h2>Considered but deferred (future rounds)</h2>
-<p>Still-unbuilt candidates, for when the track grows again:</p>
-<ul><li><strong>The Cartographer</strong> — domain-driven design: bounded contexts, aggregates,</li></ul>
-<p>  hexagonal/clean architecture, ubiquitous language.</p>
-<ul><li><strong>The Switchboard</strong> — networking internals: DNS, TLS handshake, TCP vs UDP,</li></ul>
-<p>  HTTP/2 &amp; /3, load-balancing algorithms.</p>
-<ul><li><strong>The Gatekeeper</strong> — deep auth: OAuth2/OIDC flows, PKCE, sessions vs tokens,</li></ul>
-<p>  refresh rotation, SSO (extends The Vault without overlapping it).</p>
+<p>The Cartographer (DDD), The Switchboard (networking internals), The Gatekeeper (deep auth), and <strong>The Courier</strong> (RPC frameworks — IDL/codegen, marshalling, gRPC vs Thrift vs JSON-RPC vs Cap'n Proto, real-world usage, pros/cons, and vulnerabilities like reflection leakage and HTTP/2 Rapid Reset) below have since shipped as Mastery modules. Still-unbuilt candidates, for when the track grows again:</p>
 <ul><li><strong>The Green Thread</strong> — sustainability/efficiency: carbon-aware scheduling,</li></ul>
 <p>  energy-per-request, efficient runtimes.</p>
 <h2>Recommendation</h2>
