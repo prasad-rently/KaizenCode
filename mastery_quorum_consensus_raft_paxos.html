@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Quorum — Distributed Consensus (Raft &amp; Paxos)</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}a.xref{color:#5350B4;font-weight:600;text-decoration:none}@media(prefers-color-scheme:dark){a.xref{color:#8f8cff}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Distributed Systems</span>
+<h1>🗳️ The Quorum</h1>
+<p class="sub">How a room full of computers agree on one truth, even when some of them crash and the phone lines between them are unreliable. Raft and Paxos, explained so a non-engineer could follow the plot — with the real production systems running on them today.</p>
+
+<h2><span class="sn">1</span>The problem, with no jargon at all</h2>
+<p>Imagine five branch managers of the same bank, each keeping their own ledger of your account balance, in five different cities. A customer walks into any branch and should always see the same, correct balance — even if one city's phone line to the others is down for an hour, even if a manager gets sick and can't come to work today.</p>
+<p>If there were only <strong>one</strong> manager, this would be trivial — one ledger, one truth. But one manager is a single point of failure: if their office burns down, the bank has no record of anyone's money. So you need several copies. And the moment you have several copies, you have a new problem that didn't exist before: <strong>what happens when they disagree?</strong> Two managers, unable to reach each other, each think they're the one in charge and each accept a different, conflicting transaction. Now the bank has two truths, and no way to know which one is real.</p>
+<div class="tip"><strong>This is the whole problem, restated once, precisely:</strong> given several copies of the same data, spread across machines that can crash and a network that can drop or delay messages, how do you get everyone to agree on the same sequence of events — without ever letting two of them believe two different, conflicting things are both true? That question is called <strong>distributed consensus</strong>, and <strong>Raft</strong> and <strong>Paxos</strong> are the two most famous answers to it.</div>
+
+<h2><span class="sn">2</span>Why "just have everyone agree" isn't simple</h2>
+<p>The obvious-sounding fix — "have all five managers call each other and agree before writing anything down" — breaks the instant you ask a hard question: <strong>what if a manager doesn't answer?</strong> Did their phone die, is their office on fire, or are they just slow to pick up? From the other end of a silent phone line, a crashed computer and a merely slow one look <em>identical</em>. You can't wait forever for an answer that may never come, but you also can't safely assume "no answer" means "they agreed" or "they're gone" — either guess can be wrong and can corrupt the data.</p>
+<p>This is why naive approaches fail: "wait for everyone to reply" hangs forever the moment one machine is down. "Assume silence means yes" lets a genuinely disagreeing manager slip through. Consensus algorithms exist because the correct answer is neither of those — it's a specific, carefully proven protocol that stays correct no matter which machines are slow, crashed, or temporarily cut off, as long as they eventually come back and don't actively lie.</p>
+
+<h2><span class="sn">3</span>The trick that makes it possible: majority rule</h2>
+<p>Here's the insight both Raft and Paxos are built on, and it's simpler than it sounds: instead of requiring <em>all</em> managers to agree, require only a <strong>majority</strong> — more than half. With 5 managers, that's any 3.</p>
+<p>Why does that work? Because of one guaranteed fact of arithmetic: <strong>any two majorities out of the same group must share at least one member.</strong> With 5 managers, any group of 3 and any other group of 3 must overlap by at least one person — there's no way to pick two different sets of 3 out of 5 people with zero overlap. That shared member is a witness who knows about <em>both</em> decisions, which is exactly the hook a consensus algorithm uses to prevent two conflicting decisions from ever both being considered final.</p>
+<table>
+<tr><th>Total members</th><th>Majority needed</th><th>How many can be unreachable and still make progress</th></tr>
+<tr><td>3</td><td>2</td><td>1</td></tr>
+<tr><td>5</td><td>3</td><td>2</td></tr>
+<tr><td>7</td><td>4</td><td>3</td></tr>
+</table>
+<div class="tip"><strong>Board-of-directors analogy:</strong> a company's bylaws require a quorum to pass any resolution. If two separate factions each somehow got a quorum in two different rooms and each "passed" a conflicting resolution, at least one director would have had to be in both rooms — which is impossible if they're both happening at once. That's exactly the guarantee majority rule buys a distributed system: it makes two conflicting truths structurally impossible, not just unlikely.</div>
+
+<h2><span class="sn">4</span>Meet Raft: electing a leader</h2>
+<p><strong>Raft</strong> (2014, designed at Stanford specifically to be easier to understand than Paxos) organizes every node into one of three roles: <strong>Leader</strong> (the one node currently in charge of ordering new writes), <strong>Follower</strong> (everyone else, passively replicating what the leader tells them), and <strong>Candidate</strong> (a temporary role during an election).</p>
+<p>Think of a classroom picking a weekly line leader. The current line leader says "I'm still here!" every few seconds (a <strong>heartbeat</strong>). If a kid stops hearing that heartbeat — the leader is home sick — they don't all shout "I'll do it!" at the exact same instant, because that would cause chaos. Instead, <strong>each kid waits a random amount of time</strong> before raising their hand; whoever's random wait runs out first raises their hand, asks everyone else to vote for them, and — if a majority says yes — becomes the new leader. The randomness is the whole trick: it makes it unlikely that two kids raise their hands at the exact same moment, and if it does happen anyway (a tie, or <strong>split vote</strong>), everyone just waits a new random amount of time and tries again.</p>
+<p>Run this to watch that election play out, including what happens when a split vote forces a retry:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">function</span> <span class="fn">electLeader</span>(nodeCount) {
+  <span class="kw">let</span> term = <span class="num">0</span>;
+  <span class="kw">const</span> majorityNeeded = Math.<span class="fn">floor</span>(nodeCount / <span class="num">2</span>) + <span class="num">1</span>;
+
+  <span class="kw">while</span> (<span class="kw">true</span>) {
+    term++;
+    <span class="cm">// Every node independently picks a random "how long I'll wait before</span>
+    <span class="cm">// running for leader" timeout — this randomness is the entire trick.</span>
+    <span class="kw">const</span> timeouts = Array.<span class="fn">from</span>({ length: nodeCount }, () =&gt;
+      Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * <span class="num">150</span>) + <span class="num">150</span>);
+    <span class="kw">const</span> minTimeout = Math.<span class="fn">min</span>(...timeouts);
+    <span class="kw">const</span> candidates = timeouts
+      .<span class="fn">map</span>((t, i) =&gt; (t === minTimeout ? i : <span class="kw">null</span>))
+      .<span class="fn">filter</span>((i) =&gt; i !== <span class="kw">null</span>);
+
+    console.<span class="fn">log</span>(<span class="str">`Term ${term}: timeouts = [${timeouts.join(', ')}]ms`</span>);
+
+    <span class="kw">if</span> (candidates.length &gt; <span class="num">1</span>) {
+      console.<span class="fn">log</span>(<span class="str">`  ⚠️ Split vote — nodes ${candidates.join(' & ')} tied at ${minTimeout}ms.`</span>);
+      console.<span class="fn">log</span>(<span class="str">'  Nobody reaches a majority this round — everyone re-randomizes and tries again.'</span>);
+      <span class="kw">continue</span>;
+    }
+    <span class="kw">const</span> winner = candidates[<span class="num">0</span>];
+    console.<span class="fn">log</span>(<span class="str">`  ✅ Node ${winner} times out first (${minTimeout}ms) and requests votes.`</span>);
+    console.<span class="fn">log</span>(<span class="str">`  👑 Node ${winner} wins a majority (needs ${majorityNeeded}/${nodeCount}) — leader for term ${term}.`</span>);
+    <span class="kw">return</span> winner;
+  }
+}
+
+<span class="fn">electLeader</span>(<span class="num">5</span>);</pre><div class="out"></div></div>
+<div class="ok"><strong>Run it a few times.</strong> Most runs elect a leader in one round. Occasionally you'll see a split vote and a retry — that's not a bug, it's Raft working exactly as designed: a rare, self-correcting hiccup instead of a system that can hang forever.</div>
+
+<h2><span class="sn">5</span>Log replication: how a decision becomes official</h2>
+<p>Once elected, the leader is the only node allowed to accept new writes. Think of it as a shared logbook: the leader writes each new entry into its own copy first, then sends it to every follower to copy into <em>their</em> logbooks too. The leader only tells the outside world "yes, that's official now" — <strong>commits</strong> it — once a <strong>majority</strong> of nodes (including itself) have confirmed they've copied it down.</p>
+<p>This single rule is what keeps everything consistent even through a crash: if the leader dies the instant after committing, the replacement leader is guaranteed to be elected from among the nodes that have that entry (because it's in a majority, and any new leader also needs a majority of votes — and those two majorities must overlap, per §3). A leader can never "lose" an entry it already told the world was final.</p>
+<p>Run this to see the rule in action — including the scenario that matters most: what happens when the network splits and only some nodes can hear the leader.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">function</span> <span class="fn">tryCommit</span>(reachableFollowers, totalNodes, value) {
+  <span class="kw">const</span> acks = <span class="num">1</span> + reachableFollowers; <span class="cm">// the leader always counts itself</span>
+  <span class="kw">const</span> majorityNeeded = Math.<span class="fn">floor</span>(totalNodes / <span class="num">2</span>) + <span class="num">1</span>;
+  <span class="kw">const</span> committed = acks &gt;= majorityNeeded;
+  console.<span class="fn">log</span>(<span class="str">`Proposing "${value}" — leader + ${reachableFollowers} reachable follower(s) = ${acks}/${totalNodes} (need ${majorityNeeded})`</span>);
+  console.<span class="fn">log</span>(committed
+    ? <span class="str">'  ✅ COMMITTED — a majority confirmed it. This write is now permanent.'</span>
+    : <span class="str">'  ⛔ BLOCKED — cannot reach a majority. The write stays pending. This is intentional, not a bug.'</span>);
+  <span class="kw">return</span> committed;
+}
+
+console.<span class="fn">log</span>(<span class="str">'--- Normal day: all 5 nodes reachable ---'</span>);
+<span class="fn">tryCommit</span>(<span class="num">4</span>, <span class="num">5</span>, <span class="str">'balance = $500'</span>);
+
+console.<span class="fn">log</span>(<span class="str">'\n--- An undersea cable is cut. Leader ends up on the 3-node side. ---'</span>);
+<span class="fn">tryCommit</span>(<span class="num">2</span>, <span class="num">5</span>, <span class="str">'balance = $400'</span>);
+
+console.<span class="fn">log</span>(<span class="str">'\n--- Same cable cut. This time the leader is stranded on the 2-node side. ---'</span>);
+<span class="fn">tryCommit</span>(<span class="num">1</span>, <span class="num">5</span>, <span class="str">'balance = $999 (fraudulent!)'</span>);</pre><div class="out"></div></div>
+<div class="warn"><strong>That last line is the entire point.</strong> A leader cut off from the majority of the cluster physically cannot commit anything, no matter how badly it wants to. It doesn't know it's the minority side — from its own point of view, the followers just went quiet. But the algorithm doesn't let it guess; it just refuses to proceed without proof (a majority ack). That refusal is what stops a stranded, isolated node from silently corrupting the bank balance.</div>
+
+<h2><span class="sn">6</span>The real-time scenario: a cut undersea cable</h2>
+<p>Picture a database cluster with 5 nodes: 3 in a US data center, 2 in a European one, replicating over an undersea fiber link. One day, a ship's anchor drags across the seabed and severs the cable. Both sides are now completely cut off from each other — but each side can still talk to itself.</p>
+<ul>
+<li><strong>The US side (3 nodes)</strong> is a majority. If the leader happens to be there, it keeps committing writes normally — customers on that side see zero disruption. If the leader was on the European side, the US nodes notice the missing heartbeat, hold an election among themselves, and elect a new leader (3 is enough to reach the 3-of-5 majority) — service resumes within one election timeout, typically well under a second.</li>
+<li><strong>The European side (2 nodes)</strong> is a minority. It can still elect a "leader" among just those 2 nodes if it wants to — but that leader can never get a 3-of-5 majority to commit anything, because there simply aren't 3 nodes on that side of the cut cable. European users see writes hang or get rejected until the cable is repaired — annoying, but the data stays correct. No customer on either side ever sees a balance that later has to be silently reverted.</li>
+</ul>
+<p>That's the entire value proposition of consensus in one real incident: instead of two data centers quietly diverging into two different "truths" that someone has to reconcile by hand later (and guess which one was "right"), the minority side simply stops, loudly and safely, until it can rejoin the majority.</p>
+
+<h2><span class="sn">7</span>Where this is running right now, without you noticing</h2>
+<table>
+<tr><th>System</th><th>What it uses consensus for</th></tr>
+<tr><td><strong>etcd</strong> (the datastore behind every Kubernetes cluster)</td><td>Runs Raft directly. Every "which pod is scheduled where," every config value, is a Raft-committed log entry. If etcd's consensus breaks, the entire cluster stops making decisions.</td></tr>
+<tr><td><strong>Apache Kafka (KRaft mode)</strong></td><td>Kafka replaced its old ZooKeeper dependency with a built-in Raft implementation to decide who the cluster controller is and track topic/partition metadata.</td></tr>
+<tr><td><strong>CockroachDB &amp; TiDB</strong></td><td>Run an independent Raft group <em>per data shard</em>, so each slice of the database has its own little committee of replicas agreeing on writes.</td></tr>
+<tr><td><strong>HashiCorp Consul &amp; Vault</strong></td><td>Use Raft to agree on cluster leadership and configuration/secrets state.</td></tr>
+<tr><td><strong>Google Chubby &amp; Spanner</strong></td><td>Google's internal lock service (Chubby) and its globally-distributed database (Spanner) are built on Paxos variants — Paxos predates Raft by over a decade and Google's own systems are why it became famous.</td></tr>
+</table>
+
+<h2><span class="sn">8</span>Raft vs. Paxos</h2>
+<p>Paxos came first — Leslie Lamport described it in the late 1980s, and it's mathematically proven correct. It's also notorious for being hard to actually understand and implement correctly: Lamport's own 2001 follow-up paper explaining it more simply was literally titled <em>"Paxos Made Simple"</em> — and engineers still joke that it wasn't. Paxos separates roles into <em>Proposers</em>, <em>Acceptors</em>, and <em>Learners</em> with no built-in concept of a stable leader, which makes it flexible but genuinely difficult to reason about.</p>
+<p>Raft (2014) was explicitly designed as a reaction to that: same mathematical guarantees, but built around one central, relatable idea — there is always (at most) one leader, elections are a distinct visible phase, and replication is "the leader copies its log to everyone else." That's why nearly every <em>new</em> system (etcd, Kafka, Consul) picked Raft, while Paxos mostly survives inside older systems built before Raft existed, or in heavily customized "Multi-Paxos" variants that evolved their own leader concept to get similar simplicity.</p>
+<table>
+<tr><th></th><th>Paxos</th><th>Raft</th></tr>
+<tr><td>Introduced</td><td>~1989 (Lamport)</td><td>2014 (Ongaro &amp; Ousterhout, Stanford)</td></tr>
+<tr><td>Core roles</td><td>Proposer, Acceptor, Learner</td><td>Leader, Follower, Candidate</td></tr>
+<tr><td>Leader concept</td><td>Not built in (added informally in "Multi-Paxos")</td><td>Explicit, central to the design</td></tr>
+<tr><td>Reputation</td><td>Provably correct, notoriously hard to implement right</td><td>Designed from day one to be teachable and implementable</td></tr>
+<tr><td>Where you'll meet it</td><td>Google Chubby/Spanner, older systems</td><td>etcd, Kafka (KRaft), Consul, CockroachDB, TiDB</td></tr>
+</table>
+
+<h2><span class="sn">9</span>What this doesn't solve — and when you don't need it</h2>
+<ul>
+<li><strong>It assumes crashes, not lies.</strong> Raft and Paxos both assume a node either works correctly or stops responding — never that it responds with deliberately false information. A malicious or corrupted node that lies convincingly can break both. Environments that must tolerate active liars (blockchains, adversarial multi-party systems) need a different, heavier family of algorithms: <strong>Byzantine Fault Tolerant</strong> consensus (PBFT and friends), which trades a lot of performance for that extra guarantee.</li>
+<li><strong>It costs a network round trip on every write.</strong> Committing anything requires hearing back from a majority, so write latency is bounded by how fast the majority — not just the leader — can respond. This is a deliberate, necessary cost of the guarantee, not an inefficiency to optimize away.</li>
+<li><strong>Most application data doesn't need it.</strong> Consensus shines for small amounts of critical, must-never-diverge state: "who's the leader," "what's the current config," "who holds this lock." That's why etcd and Kafka's controller use it for metadata and coordination, while the bulk of actual application data usually lives in ordinary replicated databases with weaker (and cheaper) consistency models. Reach for Raft/Paxos-backed storage only when you specifically need strong consistency for coordination — not by default for every dataset.</li>
+</ul>
+<div class="tip"><strong>How this connects to the rest of the curriculum:</strong> the messages Raft nodes send each other ("vote for me," "here's the next log entry") are themselves <a class="xref" href="mastery_courier_rpc_frameworks.html">RPC</a> calls — etcd's own Raft implementation is built on gRPC. The "clocks lie" warning in the <a class="xref" href="mobile_offline_first_sync.html">offline-first sync</a> article is exactly the problem majority rule sidesteps — instead of trusting timestamps, Raft trusts a proven vote count. And the undersea-cable scenario in §6 is the same multi-region failure mode <a class="xref" href="mastery_ark_disaster_recovery.html">The Ark</a> covers from the operator's side.</div>
+
+<h2><span class="sn">10</span>Quick checklist</h2>
+<ul>
+<li>✅ Understand: consensus needs a <em>majority</em>, not unanimous agreement — and any two majorities always overlap by design.</li>
+<li>✅ A leader that can't reach a majority must refuse to commit, even though it doesn't "know" it's isolated.</li>
+<li>✅ Randomized election timeouts are what prevent (and self-heal) split votes.</li>
+<li>✅ Reach for a Raft/Paxos-backed store for coordination metadata (leader election, locks, config) — not as your default database.</li>
+<li>❌ Don't assume it protects against a node that's actively lying — that needs Byzantine fault tolerance instead.</li>
+<li>❌ Don't expect it to be free — every commit costs a round trip to a majority, by design.</li>
+</ul>
+
+<h2><span class="sn">11</span>Key takeaways</h2>
+<p>Consensus algorithms solve one specific, hard problem: getting several unreliable machines, connected by an unreliable network, to agree on one unbroken sequence of truths — without ever letting two of them believe two different things are both final. The trick isn't exotic math; it's the simple, provable fact that any two majorities out of the same group must share a witness. Raft made that idea teachable by giving it a face — a leader, an election, a logbook — and that's exactly why it now quietly runs the control plane of Kubernetes, Kafka, and half the distributed databases built in the last decade.</p>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mastery Track · KaizenCode. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>

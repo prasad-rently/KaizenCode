@@ -39,8 +39,15 @@
 <ul><li><strong>The Juggler</strong> — one thread, many tasks in the air at once.</li><li><strong>The Bulwark</strong> — the defensive wall that holds when dependencies fall.</li><li><strong>The Engine Room</strong> — below deck, where the database machinery actually turns.</li><li><strong>The Foundry</strong> — where you forge the core data structures by hand.</li></ul>
 <h3>Design note</h3>
 <p>The Oracle's API example uses the <strong>Claude Messages API</strong> with a current model id (<code>claude-sonnet-5</code>) and keeps the key server-side (cross-links <strong>The Vault</strong>). Its "ship responsibly" guidance links to <strong>The Bulwark</strong> (timeouts/retries) and <strong>The Watchtower</strong> (logging for eval) — the Mastery Track is increasingly a web of cross-references, not a list.</p>
+<h2>Round 4 additions (RPC and consensus)</h2>
+<p>A fresh gap analysis in September 2026 surfaced two foundational distributed-systems topics nothing in the curriculum touched directly:</p>
+<ul><li><strong>The Courier</strong> 📦 — RPC frameworks as a category, not just gRPC: IDL/codegen,</li></ul>
+<p>  marshalling, gRPC vs Thrift vs JSON-RPC vs Cap'n Proto, where RPC quietly   runs day-to-day life (Kubernetes' CRI, etcd, blockchain wallets via   JSON-RPC), and its real vulnerabilities — reflection-service leakage, the   HTTP/2 Rapid Reset DDoS technique (CVE-2023-44487), the "trusted internal   network" fallacy.</p>
+<ul><li><strong>The Quorum</strong> 🗳️ — distributed consensus (Raft &amp;amp; Paxos), written to be</li></ul>
+<p>  followable by a non-engineer: majority rule and why any two majorities   must overlap, Raft's leader-election and log-replication mechanics with   runnable simulations, a real-world "cut undersea cable" split-brain   scenario, and where it actually runs today (etcd, Kafka's KRaft, CockroachDB,   Google Spanner/Chubby on Paxos).</p>
+<p>Both are referenced from elsewhere in the curriculum already — The Courier's gRPC section is the transport The Quorum's own leader-election messages ride on, and the "clocks lie" warning in the offline-first-sync mobile article is exactly the problem majority rule sidesteps.</p>
 <h2>Considered but deferred (future rounds)</h2>
-<p>The Cartographer (DDD), The Switchboard (networking internals), The Gatekeeper (deep auth), and <strong>The Courier</strong> (RPC frameworks — IDL/codegen, marshalling, gRPC vs Thrift vs JSON-RPC vs Cap'n Proto, real-world usage, pros/cons, and vulnerabilities like reflection leakage and HTTP/2 Rapid Reset) below have since shipped as Mastery modules. Still-unbuilt candidates, for when the track grows again:</p>
+<p>The Cartographer (DDD), The Switchboard (networking internals), and The Gatekeeper (deep auth) below have since shipped as Mastery modules. Still- unbuilt candidates, for when the track grows again:</p>
 <ul><li><strong>The Green Thread</strong> — sustainability/efficiency: carbon-aware scheduling,</li></ul>
 <p>  energy-per-request, efficient runtimes.</p>
 <h2>Recommendation</h2>

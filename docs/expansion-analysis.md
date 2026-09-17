@@ -109,14 +109,34 @@ The Oracle's API example uses the **Claude Messages API** with a current model i
 Watchtower** (logging for eval) — the Mastery Track is increasingly a web of
 cross-references, not a list.
 
+## Round 4 additions (RPC and consensus)
+
+A fresh gap analysis in September 2026 surfaced two foundational
+distributed-systems topics nothing in the curriculum touched directly:
+
+- **The Courier** 📦 — RPC frameworks as a category, not just gRPC: IDL/codegen,
+  marshalling, gRPC vs Thrift vs JSON-RPC vs Cap'n Proto, where RPC quietly
+  runs day-to-day life (Kubernetes' CRI, etcd, blockchain wallets via
+  JSON-RPC), and its real vulnerabilities — reflection-service leakage, the
+  HTTP/2 Rapid Reset DDoS technique (CVE-2023-44487), the "trusted internal
+  network" fallacy.
+- **The Quorum** 🗳️ — distributed consensus (Raft &amp; Paxos), written to be
+  followable by a non-engineer: majority rule and why any two majorities
+  must overlap, Raft's leader-election and log-replication mechanics with
+  runnable simulations, a real-world "cut undersea cable" split-brain
+  scenario, and where it actually runs today (etcd, Kafka's KRaft, CockroachDB,
+  Google Spanner/Chubby on Paxos).
+
+Both are referenced from elsewhere in the curriculum already — The Courier's
+gRPC section is the transport The Quorum's own leader-election messages ride
+on, and the "clocks lie" warning in the offline-first-sync mobile article is
+exactly the problem majority rule sidesteps.
+
 ## Considered but deferred (future rounds)
 
-The Cartographer (DDD), The Switchboard (networking internals), The
-Gatekeeper (deep auth), and **The Courier** (RPC frameworks — IDL/codegen,
-marshalling, gRPC vs Thrift vs JSON-RPC vs Cap'n Proto, real-world usage,
-pros/cons, and vulnerabilities like reflection leakage and HTTP/2 Rapid
-Reset) below have since shipped as Mastery modules. Still-unbuilt
-candidates, for when the track grows again:
+The Cartographer (DDD), The Switchboard (networking internals), and The
+Gatekeeper (deep auth) below have since shipped as Mastery modules. Still-
+unbuilt candidates, for when the track grows again:
 
 - **The Green Thread** — sustainability/efficiency: carbon-aware scheduling,
   energy-per-request, efficient runtimes.
