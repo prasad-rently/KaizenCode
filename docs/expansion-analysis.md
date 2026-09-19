@@ -162,14 +162,24 @@ resolution (The Loom): four modules that each explicitly build on the one
 before it, turning the Mastery Track's distributed-systems corner into a
 connected arc rather than a flat list.
 
+## Round 7 addition (sustainability)
+
+- **The Green Thread** ♻️ — sustainable &amp; efficient computing: carbon-aware
+  scheduling with a runnable duck-curve simulation, why an idle server still
+  burns real power, algorithmic efficiency reframed as an energy lever (ties
+  to The Foundry), and the honest limits of carbon accounting. Cross-links
+  The Wallet (cost and energy efficiency point the same direction) and The
+  Foundry (an O(n²) algorithm is measurably more electricity, not just more
+  time, at scale).
+
 ## Considered but deferred (future rounds)
 
-The Cartographer (DDD), The Switchboard (networking internals), and The
-Gatekeeper (deep auth) below have since shipped as Mastery modules. Still-
-unbuilt candidates, for when the track grows again:
-
-- **The Green Thread** — sustainability/efficiency: carbon-aware scheduling,
-  energy-per-request, efficient runtimes.
+The Cartographer (DDD), The Switchboard (networking internals), The
+Gatekeeper (deep auth), and The Green Thread (sustainability) below have
+all since shipped as Mastery modules. Nothing is currently sitting in this
+list — new candidates from the September 2026 gap analysis (not yet
+backlogged here) include Search &amp; Vector Retrieval Internals, WebAssembly,
+Accessibility Engineering, and Internationalization/Localization.
 
 ## Recommendation
 

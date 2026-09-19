@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Green Thread — Sustainable &amp; Efficient Computing</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}a.xref{color:#5350B4;font-weight:600;text-decoration:none}@media(prefers-color-scheme:dark){a.xref{color:#8f8cff}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Sustainability</span>
+<h1>♻️ The Green Thread</h1>
+<p class="sub">The cloud isn't weightless — every request runs on real hardware, drawing real electricity, off a real power grid whose cleanliness changes hour by hour. Carbon-aware scheduling, why idle servers aren't actually idle, and the honest limits of "green" engineering.</p>
+
+<h2><span class="sn">1</span>The problem, made concrete</h2>
+<p>"The cloud" is a comforting word for something very physical: a rack of servers in a real building, drawing real electricity from a real regional power grid, generating real heat that has to be pumped back out. Data centers already account for a meaningful, fast-growing slice of global electricity demand — driven higher every year by the sheer scale of always-on services and, more recently, by the compute appetite of large AI workloads. None of that is abstract; it shows up as a line item on someone's power bill and, increasingly, as a line item regulators and enterprise customers ask about directly.</p>
+<div class="tip"><strong>This is the whole problem, restated once:</strong> every unit of compute has a real energy cost, and that energy has a real carbon cost that varies by <em>when</em> and <em>where</em> it runs. Engineering for sustainability means treating those two dials — timing and placement — as things you can actually design around, not just accept as fixed.</div>
+
+<h2><span class="sn">2</span>Why this became an engineering concern, not just a PR one</h2>
+<ul>
+<li><strong>It's literally money.</strong> Energy efficiency and cost efficiency point the same direction almost every time — an over-provisioned fleet wastes both electricity and your cloud bill, which is exactly the territory <a class="xref" href="mastery_wallet_finops.html">The Wallet</a> covers from the FinOps side.</li>
+<li><strong>It's increasingly a compliance question.</strong> Regulations like the EU's Corporate Sustainability Reporting Directive now require many companies to disclose emissions across their supply chain — and cloud compute is squarely inside that scope.</li>
+<li><strong>It's a procurement gate.</strong> A growing number of enterprise customers now ask vendors for sustainability data as part of buying software at all — it shows up in security questionnaires' cousin, the "ESG questionnaire."</li>
+</ul>
+
+<h2><span class="sn">3</span>The core lever: electricity isn't uniformly dirty</h2>
+<p>The single most useful fact in this whole topic: the <strong>carbon intensity</strong> of electricity — how much CO₂ is emitted per unit of energy — changes by the hour, because the mix of power plants actually running on the grid changes by the hour. Solar makes midday power cleaner in sunny regions; wind adds and removes supply unpredictably; when demand peaks (everyone home in the evening, air conditioning cranking) grids often lean on fast-start fossil plants to keep up. This exact pattern — a clean midday dip, a dirty evening spike as solar drops off just as demand rises — is well known in grid-operator circles as the <strong>"duck curve."</strong></p>
+<p>That means the same computation, run at 2pm versus 8pm, can have a meaningfully different carbon footprint — with zero code changes, just different timing.</p>
+
+<h2><span class="sn">4</span>Carbon-aware scheduling: shifting work to cleaner hours</h2>
+<p>Not every job needs to run <em>now</em>. Nightly backups, ML model training, video re-encoding, batch report generation — anything with a deadline hours or days away, rather than milliseconds, is a candidate for <strong>carbon-aware scheduling</strong>: querying a real-time grid carbon-intensity signal (services like WattTime and Electricity Maps publish exactly this, and the open-source <strong>Carbon Aware SDK</strong> from the Green Software Foundation wraps it into a reusable scheduling API) and running the deferrable work whenever the grid is cleanest within its deadline, instead of immediately.</p>
+<p>Run this to see the idea concretely — the same 3-hour batch job, scheduled two different ways against a realistic duck-curve-shaped day:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// A realistic 24-hour grid carbon-intensity curve (gCO2/kWh), shaped like a</span>
+<span class="cm">// real "duck curve": dirty overnight, a clean midday solar dip, a dirty</span>
+<span class="cm">// evening spike as solar drops off right as demand rises.</span>
+<span class="kw">const</span> hourlyIntensity = [
+  <span class="num">420</span>,<span class="num">410</span>,<span class="num">400</span>,<span class="num">395</span>,<span class="num">390</span>,<span class="num">385</span>,<span class="num">380</span>,<span class="num">360</span>,<span class="num">320</span>,<span class="num">260</span>, <span class="cm">// 12am–9am</span>
+  <span class="num">200</span>,<span class="num">150</span>,<span class="num">120</span>,<span class="num">110</span>,<span class="num">115</span>,<span class="num">130</span>,<span class="num">160</span>,<span class="num">220</span>,<span class="num">320</span>,<span class="num">410</span>, <span class="cm">// 10am–7pm</span>
+  <span class="num">440</span>,<span class="num">450</span>,<span class="num">445</span>,<span class="num">435</span>                                <span class="cm">// 8pm–11pm</span>
+];
+
+<span class="kw">function</span> <span class="fn">bestWindow</span>(intensities, durationHours, deadlineHour) {
+  <span class="kw">let</span> best = { startHour: <span class="num">0</span>, avg: Infinity };
+  <span class="kw">for</span> (<span class="kw">let</span> start = <span class="num">0</span>; start + durationHours &lt;= deadlineHour; start++) {
+    <span class="kw">const</span> window = intensities.<span class="fn">slice</span>(start, start + durationHours);
+    <span class="kw">const</span> avg = window.<span class="fn">reduce</span>((a, b) =&gt; a + b, <span class="num">0</span>) / window.length;
+    <span class="kw">if</span> (avg &lt; best.avg) best = { startHour: start, avg };
+  }
+  <span class="kw">return</span> best;
+}
+
+console.<span class="fn">log</span>(<span class="str">'Job: a 3-hour batch report, deferrable any time before 6pm (hour 18)'</span>);
+
+<span class="kw">const</span> naiveAvg = hourlyIntensity.<span class="fn">slice</span>(<span class="num">0</span>, <span class="num">3</span>).<span class="fn">reduce</span>((a, b) =&gt; a + b, <span class="num">0</span>) / <span class="num">3</span>;
+console.<span class="fn">log</span>(<span class="str">'Naive — run immediately at midnight →'</span>, naiveAvg.<span class="fn">toFixed</span>(<span class="num">0</span>), <span class="str">'gCO2/kWh avg'</span>);
+
+<span class="kw">const</span> best = <span class="fn">bestWindow</span>(hourlyIntensity, <span class="num">3</span>, <span class="num">18</span>);
+console.<span class="fn">log</span>(<span class="str">'Carbon-aware — best window starts at hour'</span>, best.startHour, <span class="str">'→'</span>, best.avg.<span class="fn">toFixed</span>(<span class="num">0</span>), <span class="str">'gCO2/kWh avg'</span>);
+
+<span class="kw">const</span> reduction = <span class="num">100</span> - (best.avg / naiveAvg) * <span class="num">100</span>;
+console.<span class="fn">log</span>(<span class="str">'\nSame job, same hardware, same duration — just moved to the solar dip.'</span>);
+console.<span class="fn">log</span>(<span class="str">'Estimated carbon reduction:'</span>, reduction.<span class="fn">toFixed</span>(<span class="num">0</span>) + <span class="str">'%'</span>, <span class="str">'— from timing alone.'</span>);</pre><div class="out"></div></div>
+<div class="warn"><strong>This only works for genuinely deferrable work.</strong> A user waiting on a page load cannot be told "come back at 1pm when the grid is cleaner." Carbon-aware scheduling is a batch-workload technique, not something you retrofit onto latency-sensitive request paths.</div>
+
+<h2><span class="sn">5</span>The idle-server trap</h2>
+<p>Here's a fact that surprises most engineers the first time they hear it: a server sitting at 0% utilization does <strong>not</strong> draw 0% of its peak power. Fans, memory, motherboard components, and baseline CPU circuitry all draw meaningful power even when nothing useful is happening — a server can easily burn well over half its peak wattage while sitting almost completely idle. That means a fleet sized for peak traffic but running at low average utilization isn't just wasting money (again, straight into <a class="xref" href="mastery_wallet_finops.html">The Wallet</a>'s territory) — it's burning real electricity for work that isn't happening.</p>
+<div class="ok"><strong>The fix is one you likely already have a name for:</strong> autoscaling that actually scales down (not just up), consolidating workloads onto fewer, better-utilized machines, and treating "idle capacity" as a genuine efficiency problem rather than just harmless headroom.</div>
+
+<h2><span class="sn">6</span>Code-level efficiency: the algorithm you pick has a wattage</h2>
+<p>Every extra CPU cycle a program burns is a tiny, real draw of electricity — which means the algorithmic-complexity lessons from <a class="xref" href="mastery_foundry_algorithms.html">The Foundry</a> have a second dimension beyond speed. Run this to see the gap in raw operation counts, not just wall-clock time:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">function</span> <span class="fn">quadraticOps</span>(n) { <span class="kw">return</span> n * n; }        <span class="cm">// proxy for an O(n²) algorithm's work</span>
+<span class="kw">function</span> <span class="fn">linearithmicOps</span>(n) { <span class="kw">return</span> n * Math.<span class="fn">log2</span>(n); } <span class="cm">// proxy for O(n log n)</span>
+
+<span class="kw">const</span> sizes = [<span class="num">1000</span>, <span class="num">10000</span>, <span class="num">100000</span>, <span class="num">1000000</span>];
+sizes.<span class="fn">forEach</span>((n) =&gt; {
+  <span class="kw">const</span> quad = <span class="fn">quadraticOps</span>(n);
+  <span class="kw">const</span> lin = <span class="fn">linearithmicOps</span>(n);
+  console.<span class="fn">log</span>(
+    n.<span class="fn">toLocaleString</span>() + <span class="str">' rows → O(n²): '</span> + Math.<span class="fn">round</span>(quad).<span class="fn">toLocaleString</span>() +
+    <span class="str">' ops · O(n log n): '</span> + Math.<span class="fn">round</span>(lin).<span class="fn">toLocaleString</span>() + <span class="str">' ops · '</span> +
+    (quad / lin).<span class="fn">toFixed</span>(<span class="num">0</span>) + <span class="str">'x more work'</span>
+  );
+});
+console.<span class="fn">log</span>(<span class="str">'\nEvery one of those extra ops is a sliver of real electricity.'</span>);
+console.<span class="fn">log</span>(<span class="str">'Run the slower algorithm daily, at scale, and the gap stops being academic.'</span>);</pre><div class="out"></div></div>
+<p>This isn't a blanket "rewrite everything in a faster language" argument — developer time and correctness matter too. But at genuine scale (a hot loop run millions of times a day, a query pattern hit by every request), the energy math is a real, additional reason the efficiency conversation from The Foundry is worth having.</p>
+
+<h2><span class="sn">7</span>Where this shows up in production today</h2>
+<table>
+<tr><th>Effort</th><th>What it does</th></tr>
+<tr><td><strong>Google's Carbon-Intelligent Computing Platform</strong></td><td>Publicly documented since 2020 — shifts non-urgent compute load across time and across Google's own data centers to align with periods and locations of cleaner electricity.</td></tr>
+<tr><td><strong>Green Software Foundation's Carbon Aware SDK</strong></td><td>An open-source toolkit that wraps real-time grid carbon-intensity data (from providers like WattTime and Electricity Maps) into a pluggable scheduling API teams can adopt instead of building this from scratch.</td></tr>
+<tr><td><strong>Cloud-provider carbon dashboards</strong></td><td>AWS's Customer Carbon Footprint Tool, Google Cloud's Carbon Footprint, and Microsoft's Emissions Impact Dashboard all now expose per-account, and increasingly per-region, emissions estimates — a starting point before building custom measurement.</td></tr>
+</table>
+
+<h2><span class="sn">8</span>The honest limits</h2>
+<ul>
+<li><strong>Carbon accounting is genuinely contested.</strong> "Market-based" accounting (counting renewable-energy certificates you've purchased) and "location-based" accounting (counting what's actually on your local grid, right now) can tell very different stories for the same workload. Be skeptical of any single number presented without saying which method it used.</li>
+<li><strong>Optimizing for carbon can fight optimizing for latency or availability.</strong> The cleanest region or the cleanest hour isn't always the fastest or the most reliable one — this is a real tradeoff to make deliberately, not something to paper over.</li>
+<li><strong>It's easy to over-claim from a demo.</strong> The large reduction §4's simulation prints is illustrative, built on a synthetic curve deliberately shaped like a strong duck-curve day — real savings depend entirely on your actual workload's flexibility and your actual grid's real intensity swings, which are rarely that dramatic.</li>
+</ul>
+
+<h2><span class="sn">9</span>When to actually invest here</h2>
+<div class="tip"><strong>Prioritize this when you have:</strong> genuinely deferrable batch or training workloads at meaningful scale, real idle-capacity waste sitting in your infrastructure bill, or an actual regulatory/procurement requirement landing on your desk. Treating "add carbon-awareness" as a blanket mandate for every service — including latency-critical, always-on request paths — is usually a mismatch between the technique and the problem.</div>
+
+<h2><span class="sn">10</span>Quick checklist</h2>
+<ul>
+<li>✅ Identify which workloads are genuinely deferrable before trying to carbon-schedule anything.</li>
+<li>✅ Treat idle capacity as an efficiency problem, not harmless headroom — scale down, not just up.</li>
+<li>✅ Revisit hot-path algorithmic complexity at genuine scale — it's a cost and an energy lever together.</li>
+<li>✅ State which carbon-accounting method (market-based vs location-based) any number you report actually uses.</li>
+<li>❌ Don't apply carbon-aware scheduling to latency-sensitive, user-facing request paths.</li>
+<li>❌ Don't treat a single sustainability metric as authoritative without knowing its accounting method.</li>
+</ul>
+
+<h2><span class="sn">11</span>Key takeaways</h2>
+<p>Sustainable engineering isn't a separate discipline bolted onto the rest of this curriculum — it's the same efficiency instincts from The Wallet and The Foundry, pointed at a different unit of measurement. The lever that's genuinely new is <em>time and place</em>: the same computation has a different footprint depending on when and where the electricity behind it came from, and for the sizable share of work that doesn't need to run this exact millisecond, that's a dial worth actually turning.</p>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mastery Track · KaizenCode. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>
