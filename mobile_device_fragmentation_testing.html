@@ -23,7 +23,7 @@
 <li><strong>Points/dp, not pixels.</strong> Design and measure in density-independent units (points on iOS, dp on Android) so the same layout scales correctly across pixel densities without manual per-density assets for everything.</li>
 <li><strong>Test the extremes, not the median.</strong> The smallest supported screen and the largest (including tablets and foldables, if supported) surface layout bugs the "average" device never will.</li>
 </ul>
-<div class="tip"><strong>Touch targets:</strong> both platforms recommend a minimum touch target around 44×44pt (iOS) / 48×48dp (Android) regardless of how the visual element looks smaller. On a dense small screen, a visually tidy 24px icon with no invisible padding is a real accessibility and usability bug.</div>
+<div class="tip"><strong>Touch targets:</strong> both platforms recommend a minimum touch target around 44×44pt (iOS) / 48×48dp (Android) regardless of how the visual element looks smaller. On a dense small screen, a visually tidy 24px icon with no invisible padding is a real accessibility and usability bug — see <a class="back" style="font-size:inherit" href="mastery_ramp_accessibility.html">The Ramp</a> for the full accessibility picture, mobile and web.</div>
 
 <h2>3 · Low-end hardware: the ceiling most dev devices never hit</h2>
 <p>Engineers build and test on devices that are, almost by definition, above the market median — a real budget device in your users' hands has less RAM, a slower CPU, and worse thermals than anything on a dev's desk. That gap is where "works for me" bugs live.</p>

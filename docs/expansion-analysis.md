@@ -183,14 +183,27 @@ connected arc rather than a flat list.
   "retrieval" were named there; this is how retrieval actually finds
   anything.
 
+## Round 9 addition (a genuine zero-coverage gap)
+
+- **The Ramp** ♿ — accessibility engineering: zero coverage anywhere in the
+  curriculum before this. Semantic HTML vs. ARIA (with a runnable simulation
+  of what a screen reader actually perceives), keyboard-navigation failure
+  modes (runnable focus-order demo), and real WCAG contrast-ratio math
+  (runnable, using the actual relative-luminance formula) rather than
+  eyeballing it. Grounded in the curb-cut effect and the real legal stakes
+  (ADA lawsuits, WCAG as the standard courts reference, the EU Accessibility
+  Act). Cross-links The Registrar (same engineering-vs-checkbox argument,
+  applied to "we're accessible" instead of "we're GDPR compliant") and the
+  Device Fragmentation mobile article (touch-target sizing).
+
 ## Considered but deferred (future rounds)
 
 The Cartographer (DDD), The Switchboard (networking internals), The
-Gatekeeper (deep auth), The Green Thread (sustainability), and The Haystack
-(search &amp; retrieval) below have all since shipped as Mastery modules.
-Nothing is currently sitting in this list — remaining candidates from the
-September 2026 gap analysis (not yet backlogged here) include WebAssembly,
-Accessibility Engineering, and Internationalization/Localization.
+Gatekeeper (deep auth), The Green Thread (sustainability), The Haystack
+(search &amp; retrieval), and The Ramp (accessibility) below have all since
+shipped as Mastery modules. Nothing is currently sitting in this list —
+remaining candidates from the September 2026 gap analysis (not yet
+backlogged here) include WebAssembly and Internationalization/Localization.
 
 ## Recommendation
 

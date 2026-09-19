@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Ramp — Accessibility Engineering</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}a.xref{color:#5350B4;font-weight:600;text-decoration:none}@media(prefers-color-scheme:dark){a.xref{color:#8f8cff}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Accessibility</span>
+<h1>♿ The Ramp</h1>
+<p class="sub">Building software that works when you can't see the screen, can't use a mouse, or can't hear the audio — not as charity, but as engineering that quietly makes the product better for everyone. Real WCAG math, real legal stakes, and the honest limits of automated tools.</p>
+
+<h2><span class="sn">1</span>The problem, with no jargon at all</h2>
+<p>Try this thought experiment: use the app you're building right now with your eyes closed, navigating only by keyboard, with a piece of software reading the screen aloud to you. Or with one hand in a cast, unable to use a mouse at all. Or completely muted, in a meeting, trying to follow a video with no captions. For a meaningful share of your actual users — not a hypothetical edge case — that thought experiment is just Tuesday. <strong>Accessibility engineering</strong> is the discipline of making sure the product still works in every one of those situations.</p>
+<div class="tip"><strong>This is the whole problem, restated once:</strong> most software is built and tested by people looking at a screen, holding a mouse or a touchscreen, with sound on. The moment any one of those assumptions breaks — visually, physically, or situationally — an inaccessible product simply stops working for that person. Accessibility is the engineering practice of not building on those assumptions in the first place.</div>
+
+<h2><span class="sn">2</span>Who this is actually for</h2>
+<p>It's tempting to file accessibility under "features for a small group of users with permanent disabilities." The more useful framing, borrowed from physical architecture, is the <strong>curb-cut effect</strong>: the sloped curb cut built into a sidewalk was designed for wheelchair users, but it turns out to help parents with strollers, delivery workers with hand trucks, travelers with rolling luggage, and anyone on a bike — a huge population that was never the original target. Software accessibility works the same way:</p>
+<table>
+<tr><th>Built for</th><th>Also quietly helps</th></tr>
+<tr><td>A screen-reader user who is blind</td><td>Voice-assistant users, SEO crawlers, anyone using a low-bandwidth text browser</td></tr>
+<tr><td>Someone with a broken arm who can't use a mouse (temporary)</td><td>Power users who prefer keyboard shortcuts for speed</td></tr>
+<tr><td>Captions for a Deaf or hard-of-hearing user</td><td>Anyone watching a video muted on a train, in a meeting, or in a noisy room (situational)</td></tr>
+<tr><td>High-contrast text for low-vision users</td><td>Anyone using their phone outdoors in bright sunlight glare</td></tr>
+</table>
+
+<h2><span class="sn">3</span>Semantic HTML: the foundation everything else builds on</h2>
+<p>The single highest-leverage decision in accessibility is almost embarrassingly simple: use the HTML element that actually means what you want, instead of a generic <code>&lt;div&gt;</code> styled to look like it. A real <code>&lt;button&gt;</code> comes with keyboard support, focusability, and an announced role <em>built into the browser for free</em>. A <code>&lt;div onclick="..."&gt;</code> styled identically has none of that — a sighted mouse user can't tell the difference; a screen reader or keyboard-only user hits a wall.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// What assistive tech actually perceives — not what it looks like on screen</span>
+<span class="kw">const</span> divAsButton = {
+  tag: <span class="str">'div'</span>,
+  role: <span class="kw">null</span>,             <span class="cm">// no implicit role — invisible as "a control" to a screen reader</span>
+  focusable: <span class="kw">false</span>,        <span class="cm">// not in the Tab order at all, unless extra work is added</span>
+  keyboard: <span class="kw">null</span>,          <span class="cm">// pressing Enter or Space does nothing</span>
+};
+
+<span class="kw">const</span> realButton = {
+  tag: <span class="str">'button'</span>,
+  role: <span class="str">'button'</span>,          <span class="cm">// implicit, free</span>
+  focusable: <span class="kw">true</span>,          <span class="cm">// automatically part of the Tab order</span>
+  keyboard: <span class="str">'Enter/Space triggers click'</span>, <span class="cm">// built in, no JS needed</span>
+};
+
+<span class="kw">function</span> <span class="fn">report</span>(el) {
+  console.<span class="fn">log</span>(<span class="str">`&lt;${el.tag}&gt; → role: ${el.role ?? 'NONE'}, focusable: ${el.focusable}, keyboard: ${el.keyboard ?? 'NOT SUPPORTED'}`</span>);
+}
+
+console.<span class="fn">log</span>(<span class="str">'A &lt;div onclick="..."&gt; styled to look exactly like a button:'</span>);
+<span class="fn">report</span>(divAsButton);
+console.<span class="fn">log</span>(<span class="str">'\nA real &lt;button onclick="..."&gt;, same visual style:'</span>);
+<span class="fn">report</span>(realButton);
+console.<span class="fn">log</span>(<span class="str">'\nBoth look identical on screen. Only one exists for a screen reader or keyboard user.'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">4</span>ARIA: powerful, and easy to make things worse with</h2>
+<p><strong>ARIA</strong> (Accessible Rich Internet Applications) attributes let you explicitly tell assistive tech what a custom element is and how it behaves — <code>role="button"</code>, <code>aria-expanded="true"</code>, <code>aria-label="Close menu"</code>. It exists for the cases semantic HTML genuinely can't cover: a custom dropdown, a tab panel, a live-updating notification region.</p>
+<div class="warn"><strong>The accessibility community's own first rule of ARIA is "don't use ARIA."</strong> Meaning: reach for it only after native HTML can't do the job. A wrongly-applied <code>role</code> or a stale <code>aria-expanded</code> that never updates doesn't just fail to help — it actively lies to a screen reader, which is worse than adding nothing at all. ARIA is a promise about behavior; breaking that promise is worse than never making it.</div>
+
+<h2><span class="sn">5</span>Keyboard navigation: the test that catches the most bugs</h2>
+<p>Unplug your mouse and try to use your own product with only Tab, Shift+Tab, Enter, and arrow keys. Two failure modes show up constantly: <strong>focus order that doesn't match visual order</strong> (CSS reordered things visually, but the underlying document order didn't move, so Tab jumps around unpredictably), and <strong>focus traps</strong> (a modal or menu that, once opened, never lets Tab escape it, stranding a keyboard user inside).</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">const</span> goodOrder = [<span class="str">'Skip to content'</span>, <span class="str">'Search'</span>, <span class="str">'Nav: Home'</span>, <span class="str">'Nav: About'</span>, <span class="str">'Main content'</span>];
+<span class="cm">// Visually, "Footer link" was moved up top with CSS — but the DOM order,</span>
+<span class="cm">// which is what Tab actually follows, was never updated to match.</span>
+<span class="kw">const</span> brokenOrder = [<span class="str">'Nav: Home'</span>, <span class="str">'Footer link'</span>, <span class="str">'Search'</span>, <span class="str">'Main content'</span>];
+
+<span class="kw">function</span> <span class="fn">simulateTabs</span>(order, count) {
+  <span class="kw">return</span> Array.<span class="fn">from</span>({ length: count }, (_, i) =&gt; order[i % order.length]).<span class="fn">join</span>(<span class="str">' → '</span>);
+}
+
+console.<span class="fn">log</span>(<span class="str">'Good — Tab order matches what a sighted user sees on screen:'</span>);
+console.<span class="fn">log</span>(<span class="fn">simulateTabs</span>(goodOrder, <span class="num">4</span>));
+
+console.<span class="fn">log</span>(<span class="str">'\nBroken — visually reordered with CSS, DOM order left untouched:'</span>);
+console.<span class="fn">log</span>(<span class="fn">simulateTabs</span>(brokenOrder, <span class="num">4</span>));
+console.<span class="fn">log</span>(<span class="str">'A mouse user never notices this bug exists. A keyboard-only user hits it immediately.'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">6</span>Color contrast: real math, not a guess</h2>
+<p>"Does this text look readable to me" is not a test — low-vision users and situational glare need an actual, measurable margin. <strong>WCAG</strong> defines a precise contrast-ratio formula based on relative luminance, and a normal-text minimum of <strong>4.5:1</strong> for the "AA" level most legal standards reference. Run this with the exact WCAG formula to see how easy it is to fail without realizing it:</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="cm">// The real WCAG 2.x relative luminance + contrast ratio formula</span>
+<span class="kw">function</span> <span class="fn">luminance</span>([r, g, b]) {
+  <span class="kw">const</span> vals = [r, g, b].<span class="fn">map</span>((c) =&gt; {
+    c /= <span class="num">255</span>;
+    <span class="kw">return</span> c &lt;= <span class="num">0.03928</span> ? c / <span class="num">12.92</span> : Math.<span class="fn">pow</span>((c + <span class="num">0.055</span>) / <span class="num">1.055</span>, <span class="num">2.4</span>);
+  });
+  <span class="kw">return</span> <span class="num">0.2126</span> * vals[<span class="num">0</span>] + <span class="num">0.7152</span> * vals[<span class="num">1</span>] + <span class="num">0.0722</span> * vals[<span class="num">2</span>];
+}
+<span class="kw">function</span> <span class="fn">contrastRatio</span>(rgbA, rgbB) {
+  <span class="kw">const</span> [L1, L2] = [<span class="fn">luminance</span>(rgbA), <span class="fn">luminance</span>(rgbB)];
+  <span class="kw">const</span> [lighter, darker] = L1 &gt; L2 ? [L1, L2] : [L2, L1];
+  <span class="kw">return</span> (lighter + <span class="num">0.05</span>) / (darker + <span class="num">0.05</span>);
+}
+
+<span class="kw">const</span> white = [<span class="num">255</span>, <span class="num">255</span>, <span class="num">255</span>];
+<span class="kw">const</span> lightGray = [<span class="num">200</span>, <span class="num">200</span>, <span class="num">200</span>]; <span class="cm">// a very common "looks fine to me" mistake</span>
+<span class="kw">const</span> darkerGray = [<span class="num">90</span>, <span class="num">90</span>, <span class="num">90</span>];
+
+<span class="kw">const</span> ratio1 = <span class="fn">contrastRatio</span>(white, lightGray);
+<span class="kw">const</span> ratio2 = <span class="fn">contrastRatio</span>(white, darkerGray);
+
+console.<span class="fn">log</span>(<span class="str">'White background + light gray text (#C8C8C8):'</span>, ratio1.<span class="fn">toFixed</span>(<span class="num">2</span>) + <span class="str">':1'</span>);
+console.<span class="fn">log</span>(<span class="str">'  WCAG AA needs 4.5:1 for normal text →'</span>, ratio1 &gt;= <span class="num">4.5</span> ? <span class="str">'PASS'</span> : <span class="str">'FAIL ⛔'</span>);
+console.<span class="fn">log</span>(<span class="str">'\nWhite background + darker gray text (#5A5A5A):'</span>, ratio2.<span class="fn">toFixed</span>(<span class="num">2</span>) + <span class="str">':1'</span>);
+console.<span class="fn">log</span>(<span class="str">'  WCAG AA needs 4.5:1 for normal text →'</span>, ratio2 &gt;= <span class="num">4.5</span> ? <span class="str">'PASS'</span> : <span class="str">'FAIL ⛔'</span>);</pre><div class="out"></div></div>
+<div class="tip"><strong>Never rely on color alone, either.</strong> A red vs. green error/success indicator with no icon or text label is invisible to the roughly 1 in 12 men with red-green color blindness — pair color with a shape, icon, or text every time.</div>
+
+<h2><span class="sn">7</span>How assistive tech actually reads a page</h2>
+<p>Browsers build a second, parallel tree alongside the visual DOM — the <strong>accessibility tree</strong> — made of each element's computed role, name, state, and value. A screen reader never sees pixels; it reads directly from this tree. Semantic HTML (§3) and correct ARIA (§4) are, together, exactly the mechanism that determines what ends up in that tree. Get either wrong, and the visual page can look perfect while the accessibility tree underneath is empty, wrong, or misleading.</p>
+
+<h2><span class="sn">8</span>Mobile accessibility has its own specifics</h2>
+<p>iOS's <strong>VoiceOver</strong> and Android's <strong>TalkBack</strong> are the mobile equivalents of a desktop screen reader, and they bring platform-specific requirements: every interactive control needs an accessible label (an icon-only button with no <code>accessibilityLabel</code> is announced as nothing useful at all), and touch targets need real minimum size — the same 44×44pt (iOS) / 48×48dp (Android) guidance covered in <a class="xref" href="mobile_device_fragmentation_testing.html">Device Fragmentation</a> exists precisely so a person with limited fine motor control can actually hit the button. Respecting the OS's dynamic type / font-scaling settings, rather than hardcoding pixel font sizes, is the mobile equivalent of the contrast work in §6.</p>
+
+<h2><span class="sn">9</span>The real-world stakes</h2>
+<p>This isn't a hypothetical compliance category. Lawsuits and demand letters citing inaccessible websites under the US <strong>Americans with Disabilities Act (ADA)</strong> are filed by the thousands every year, and <strong>WCAG</strong> (Web Content Accessibility Guidelines) is the standard courts and regulators consistently point to when deciding whether a site is accessible "enough." The EU's <strong>European Accessibility Act</strong> extends similar requirements across a wide range of digital products and services. The same engineering-vs-checkbox distinction <a class="xref" href="mastery_registrar_privacy_compliance.html">The Registrar</a> makes about GDPR applies here word-for-word: "we're accessible" is a sentence a lawyer can write; whether it's actually true is an engineering question.</p>
+
+<h2><span class="sn">10</span>The honest limits</h2>
+<ul>
+<li><strong>Automated tools catch a fraction of real issues.</strong> Tools like axe and Lighthouse are genuinely useful and free — but they can mechanically verify things like contrast ratios and missing labels, not whether a screen reader experience actually makes sense as a whole. They're a floor, not a ceiling; real coverage needs an actual person, ideally someone who uses assistive technology daily, testing the real flow.</li>
+<li><strong>"Accessibility overlay" widgets are widely distrusted by the accessibility community.</strong> Third-party scripts that promise to auto-fix a site's accessibility by injecting JavaScript over the top of existing markup are, by broad practitioner consensus, unreliable at best and actively disruptive to real assistive-tech users at worst — they don't fix the underlying semantic HTML and ARIA problems this module covers.</li>
+<li><strong>Retrofitting is always more expensive than building it in.</strong> Exactly like security or testing, accessibility bolted on at the end costs far more than the same decisions made while a component is first being built.</li>
+</ul>
+
+<h2><span class="sn">11</span>Quick checklist</h2>
+<ul>
+<li>✅ Use real semantic HTML elements (<code>button</code>, <code>nav</code>, <code>label</code>) before reaching for ARIA or a styled <code>div</code>.</li>
+<li>✅ Tab through your own UI with the mouse unplugged — check order and confirm no focus traps.</li>
+<li>✅ Check text contrast with the real WCAG formula, not eyeballing it.</li>
+<li>✅ Never encode meaning in color alone.</li>
+<li>✅ Give every icon-only control (mobile or web) a real accessible label.</li>
+<li>❌ Don't add ARIA roles/attributes you don't intend to keep accurate as the UI changes.</li>
+<li>❌ Don't treat an automated scanner's green checkmark, or an overlay widget, as proof the product is actually accessible.</li>
+</ul>
+
+<h2><span class="sn">12</span>Key takeaways</h2>
+<p>Accessibility engineering isn't a separate feature track bolted onto "real" product work — it's what happens when you stop assuming every user has full vision, a mouse, sound on, and perfect fine motor control. The curb-cut effect is the whole argument in one image: design for the person who genuinely can't use the default path, and you usually end up with something better for everyone standing behind them too.</p>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mastery Track · KaizenCode. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>
