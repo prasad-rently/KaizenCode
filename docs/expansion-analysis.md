@@ -196,14 +196,27 @@ connected arc rather than a flat list.
   applied to "we're accessible" instead of "we're GDPR compliant") and the
   Device Fragmentation mobile article (touch-target sizing).
 
+## Round 10 addition (a new execution model)
+
+- **The Kiln** 🧱 — WebAssembly: compiles and runs an actual, hand-verified
+  .wasm binary module live in the page — not a JS simulation, a real
+  `WebAssembly.instantiate()` call on real bytes (verified in Node before
+  publishing, then re-verified live in a browser tab). Covers why Wasm is
+  fast, its sandbox/linear-memory security model, real production use
+  (Figma, AutoCAD Web, Squoosh), WASI and why Cloudflare/Fastly run edge
+  functions in Wasm sandboxes instead of containers for the cold-start win,
+  and plugin sandboxing as a second use case. Cross-links The Edge (edge
+  compute runtimes) and The Helmsman (Wasm as an emerging, lighter
+  alternative to containers), both directions.
+
 ## Considered but deferred (future rounds)
 
 The Cartographer (DDD), The Switchboard (networking internals), The
 Gatekeeper (deep auth), The Green Thread (sustainability), The Haystack
-(search &amp; retrieval), and The Ramp (accessibility) below have all since
-shipped as Mastery modules. Nothing is currently sitting in this list —
-remaining candidates from the September 2026 gap analysis (not yet
-backlogged here) include WebAssembly and Internationalization/Localization.
+(search &amp; retrieval), The Ramp (accessibility), and The Kiln (WebAssembly)
+below have all since shipped as Mastery modules. Nothing is currently
+sitting in this list — the remaining candidate from the September 2026 gap
+analysis (not yet backlogged here) is Internationalization/Localization.
 
 ## Recommendation
 

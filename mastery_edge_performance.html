@@ -48,7 +48,7 @@ console.<span class="fn">log</span>(<span class="str">'DB was hit only'</span>, 
 
 <h2><span class="sn">4</span>Edge compute — run code, not just cache</h2>
 <p>Edge functions (Cloudflare Workers, Vercel Edge, Lambda@Edge) run <em>at the CDN</em>, milliseconds from the user. Perfect for auth checks, redirects, A/B splits, and personalization — without a trip to your origin region.</p>
-<div class="tip"><strong>Where compute runs</strong> is now a design axis: edge (closest, limited) → regional server (Phase 5) → background worker (Phase 6). Push latency-sensitive work outward, heavy work inward.</div>
+<div class="tip"><strong>Where compute runs</strong> is now a design axis: edge (closest, limited) → regional server (Phase 5) → background worker (Phase 6). Push latency-sensitive work outward, heavy work inward. Many of these edge platforms run your code in a WebAssembly sandbox rather than a container specifically for its sub-millisecond cold start — see <a class="back" style="font-size:inherit" href="mastery_kiln_webassembly.html">The Kiln</a>.</div>
 
 <h2><span class="sn">5</span>The cheap wins (cache headers + transport)</h2>
 <div class="snippet"><div class="bar"><span class="lang">HTTP · copy</span><span class="acts"><button class="copy">Copy</button></span></div><pre><span class="cm"># immutable, fingerprinted assets — cache for a year</span>

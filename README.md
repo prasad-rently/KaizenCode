@@ -58,7 +58,7 @@ KaizenCode/
 ├── phase5_aws_cloud.html
 ├── phase6_distributed_systems_kafka.html
 ├── roadmap_summary_md.md                   # full text summary of the six phases
-├── mastery_*.html                          # 33 Mastery Track modules (inline runnable code)
+├── mastery_*.html                          # 34 Mastery Track modules (inline runnable code)
 ├── crypto_*.html                           # Cryptography topic — 9 generic, per-method explainers
 ├── aws_*.html                              # AWS deep-dive: from-scratch guide + cloud toolbox
 ├── mobile_*.html                           # Mobile Development field notes (5 articles)
@@ -80,7 +80,7 @@ KaizenCode/
 ### Six tracks
 
 - **Core phases (1–6)** — the ordered "build & run a system" journey.
-- **Mastery Track** — 33 cross-cutting modules (named, not numbered) covering
+- **Mastery Track** — 34 cross-cutting modules (named, not numbered) covering
   observability, security, deep auth, testing, APIs, IaC, leadership, CI/CD,
   event-driven systems, data engineering, performance, cloud cost, AI/LLM apps,
   concurrency, resilience, database internals, systems algorithms, networking,

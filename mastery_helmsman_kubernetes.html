@@ -81,6 +81,7 @@ console.<span class="fn">log</span>(<span class="str">'→ the canary caught a b
 
 <h2><span class="sn">6</span>When Kubernetes is overkill</h2>
 <p>Kubernetes solves problems most teams don't have yet: hundreds of services, multiple teams deploying independently, workloads that genuinely need per-second autoscaling. If you're running a handful of services, a managed platform (Cloud Run, Fargate, App Runner, a single beefy server with Docker Compose) gets you 90% of the reliability with a fraction of the operational surface. Adopt Kubernetes when the coordination problem it solves is actually the problem you have — not because it's what "real" infrastructure looks like.</p>
+<div class="tip"><strong>A lighter-weight alternative is emerging, not replacing this yet:</strong> some platforms now run sandboxed code in WebAssembly instead of containers, trading container flexibility for near-instant cold starts — see <a class="back" style="font-size:inherit" href="mastery_kiln_webassembly.html">The Kiln</a>.</div>
 
 <div class="ok"><strong>Try it:</strong> (1) Install <code>minikube</code> or <code>kind</code> and run <code>kubectl get pods,deployments,services</code> against it. (2) Write a Deployment manifest for one of your phase projects and apply it. (3) Scale it with <code>kubectl scale</code> and watch the reconciliation loop create/kill pods live. <strong>Deliverable:</strong> deploy a phase project to a local cluster and perform a canary rollout — shift traffic in steps, watch for errors, and either complete the rollout or roll it back.</div>
 
