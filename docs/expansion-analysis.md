@@ -172,13 +172,24 @@ connected arc rather than a flat list.
   Foundry (an O(n²) algorithm is measurably more electricity, not just more
   time, at scale).
 
+## Round 8 addition (closing the retrieval gap)
+
+- **The Haystack** 🌾 — search &amp; vector retrieval internals: inverted
+  indexes and TF-IDF/BM25 ranking with runnable demos, why brute-force
+  nearest-neighbor search doesn't scale, and HNSW (the graph-based ANN
+  algorithm behind Pinecone/Weaviate/Milvus/pgvector) explained as a
+  highways-then-local-streets search. Directly explains the mechanism The
+  Oracle's RAG coverage introduced but never opened up — embeddings and
+  "retrieval" were named there; this is how retrieval actually finds
+  anything.
+
 ## Considered but deferred (future rounds)
 
 The Cartographer (DDD), The Switchboard (networking internals), The
-Gatekeeper (deep auth), and The Green Thread (sustainability) below have
-all since shipped as Mastery modules. Nothing is currently sitting in this
-list — new candidates from the September 2026 gap analysis (not yet
-backlogged here) include Search &amp; Vector Retrieval Internals, WebAssembly,
+Gatekeeper (deep auth), The Green Thread (sustainability), and The Haystack
+(search &amp; retrieval) below have all since shipped as Mastery modules.
+Nothing is currently sitting in this list — remaining candidates from the
+September 2026 gap analysis (not yet backlogged here) include WebAssembly,
 Accessibility Engineering, and Internationalization/Localization.
 
 ## Recommendation

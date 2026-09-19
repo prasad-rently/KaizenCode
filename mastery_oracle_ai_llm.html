@@ -83,7 +83,7 @@ console.<span class="fn">log</span>(<span class="str">'query ↔ billing doc: '<
   .<span class="fn">slice</span>(<span class="num">0</span>, <span class="num">1</span>);
 console.<span class="fn">log</span>(<span class="str">'retrieved context:'</span>, topK);
 console.<span class="fn">log</span>(<span class="str">'→ inject that text into the prompt so the model answers from facts'</span>);</pre><div class="out"></div></div>
-<div class="tip"><strong>The RAG pipeline:</strong> chunk documents → embed each chunk → store vectors (pgvector, Pinecone, Weaviate) → at query time embed the question, retrieve top-k, and prepend them to the prompt. It's Phase 2 (a database) + section 4 (embeddings) combined.</div>
+<div class="tip"><strong>The RAG pipeline:</strong> chunk documents → embed each chunk → store vectors (pgvector, Pinecone, Weaviate) → at query time embed the question, retrieve top-k, and prepend them to the prompt. It's Phase 2 (a database) + section 4 (embeddings) combined. How "retrieve top-k" actually works at scale — inverted indexes, TF-IDF/BM25, and the HNSW algorithm behind those vector databases — is covered in depth in <a class="back" style="font-size:inherit" href="mastery_haystack_search_retrieval.html">The Haystack</a>.</div>
 
 <h2><span class="sn">6</span>Prompt engineering &amp; structured output</h2>
 <ul>
