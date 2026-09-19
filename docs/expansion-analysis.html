@@ -46,6 +46,10 @@
 <ul><li><strong>The Quorum</strong> 🗳️ — distributed consensus (Raft &amp;amp; Paxos), written to be</li></ul>
 <p>  followable by a non-engineer: majority rule and why any two majorities   must overlap, Raft's leader-election and log-replication mechanics with   runnable simulations, a real-world "cut undersea cable" split-brain   scenario, and where it actually runs today (etcd, Kafka's KRaft, CockroachDB,   Google Spanner/Chubby on Paxos).</p>
 <p>Both are referenced from elsewhere in the curriculum already — The Courier's gRPC section is the transport The Quorum's own leader-election messages ride on, and the "clocks lie" warning in the offline-first-sync mobile article is exactly the problem majority rule sidesteps.</p>
+<h2>Round 5 addition (the trilogy's third leg)</h2>
+<ul><li><strong>The Metronome</strong> ⏱️ — time and clocks in distributed systems: why wall</li></ul>
+<p>  clocks can't be trusted to agree, Lamport clocks (order via causality, not   timestamps) and vector clocks (detecting genuine concurrency) with runnable   simulations, a Git-commit-graph analogy anyone already understands, and   where real systems land — Dynamo/Riak's version vectors, Spanner's TrueTime,   and how Raft (The Quorum) sidesteps the problem entirely by never needing   synchronized clocks across nodes.</p>
+<p>This closes out the RPC → Consensus → Time trilogy started with The Courier: three foundational distributed-systems ideas, each explicitly a sequel to the last, and each written to be followable without a CS background first.</p>
 <h2>Considered but deferred (future rounds)</h2>
 <p>The Cartographer (DDD), The Switchboard (networking internals), and The Gatekeeper (deep auth) below have since shipped as Mastery modules. Still- unbuilt candidates, for when the track grows again:</p>
 <ul><li><strong>The Green Thread</strong> — sustainability/efficiency: carbon-aware scheduling,</li></ul>

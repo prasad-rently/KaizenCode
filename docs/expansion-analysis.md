@@ -132,6 +132,20 @@ gRPC section is the transport The Quorum's own leader-election messages ride
 on, and the "clocks lie" warning in the offline-first-sync mobile article is
 exactly the problem majority rule sidesteps.
 
+## Round 5 addition (the trilogy's third leg)
+
+- **The Metronome** ⏱️ — time and clocks in distributed systems: why wall
+  clocks can't be trusted to agree, Lamport clocks (order via causality, not
+  timestamps) and vector clocks (detecting genuine concurrency) with runnable
+  simulations, a Git-commit-graph analogy anyone already understands, and
+  where real systems land — Dynamo/Riak's version vectors, Spanner's TrueTime,
+  and how Raft (The Quorum) sidesteps the problem entirely by never needing
+  synchronized clocks across nodes.
+
+This closes out the RPC → Consensus → Time trilogy started with The Courier:
+three foundational distributed-systems ideas, each explicitly a sequel to the
+last, and each written to be followable without a CS background first.
+
 ## Considered but deferred (future rounds)
 
 The Cartographer (DDD), The Switchboard (networking internals), and The
