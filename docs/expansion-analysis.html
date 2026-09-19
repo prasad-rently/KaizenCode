@@ -49,7 +49,11 @@
 <h2>Round 5 addition (the trilogy's third leg)</h2>
 <ul><li><strong>The Metronome</strong> ⏱️ — time and clocks in distributed systems: why wall</li></ul>
 <p>  clocks can't be trusted to agree, Lamport clocks (order via causality, not   timestamps) and vector clocks (detecting genuine concurrency) with runnable   simulations, a Git-commit-graph analogy anyone already understands, and   where real systems land — Dynamo/Riak's version vectors, Spanner's TrueTime,   and how Raft (The Quorum) sidesteps the problem entirely by never needing   synchronized clocks across nodes.</p>
-<p>This closes out the RPC → Consensus → Time trilogy started with The Courier: three foundational distributed-systems ideas, each explicitly a sequel to the last, and each written to be followable without a CS background first.</p>
+<p>This continues the RPC → Consensus → Time arc started with The Courier: foundational distributed-systems ideas, each explicitly a sequel to the last, each written to be followable without a CS background first.</p>
+<h2>Round 6 addition (resolving, not just detecting)</h2>
+<ul><li><strong>The Loom</strong> 🧵 — CRDTs (Conflict-free Replicated Data Types): picks up</li></ul>
+<p>  exactly where The Metronome's vector clocks left off — detecting a conflict   isn't resolving it. Covers G-Counters and OR-Sets with runnable merge   simulations, the classic Amazon Dynamo shopping-cart problem, why   collaborative text (Figma, Notion, Yjs/Automerge) needs a fancier CRDT   design, and directly resolves the "CRDTs" row in the offline-first-sync   mobile article's conflict-resolution table, which had named the strategy   without ever explaining the mechanism.</p>
+<p>RPC (The Courier) → Consensus (The Quorum) → Time (The Metronome) → Conflict resolution (The Loom): four modules that each explicitly build on the one before it, turning the Mastery Track's distributed-systems corner into a connected arc rather than a flat list.</p>
 <h2>Considered but deferred (future rounds)</h2>
 <p>The Cartographer (DDD), The Switchboard (networking internals), and The Gatekeeper (deep auth) below have since shipped as Mastery modules. Still- unbuilt candidates, for when the track grows again:</p>
 <ul><li><strong>The Green Thread</strong> — sustainability/efficiency: carbon-aware scheduling,</li></ul>

@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>The Loom — CRDTs &amp; Conflict-Free Replication</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:24px 20px;max-width:700px;margin:0 auto;line-height:1.6}@media(prefers-color-scheme:dark){body{background:#111;color:#e8e8e8}}a.back{font-size:12px;color:#5350B4;text-decoration:none;font-weight:600}@media(prefers-color-scheme:dark){a.back{color:#8f8cff}}.chip{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid #d0d0d0;color:#666;margin:14px 0}@media(prefers-color-scheme:dark){.chip{border-color:#333;color:#888}}h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:-.5px}.sub{font-size:13px;color:#666;margin-bottom:28px}@media(prefers-color-scheme:dark){.sub{color:#888}}h2{font-size:16px;font-weight:600;margin:32px 0 8px;padding-top:8px;border-top:1px solid #f0f0f0}@media(prefers-color-scheme:dark){h2{border-color:#222}}h3{font-size:14px;font-weight:600;margin:16px 0 6px;color:#444}@media(prefers-color-scheme:dark){h3{color:#ccc}}p{font-size:13px;color:#444;margin-bottom:8px}@media(prefers-color-scheme:dark){p{color:#bbb}}li{font-size:13px;color:#444;margin-bottom:5px;margin-left:18px}@media(prefers-color-scheme:dark){li{color:#bbb}}pre{font-size:12px;font-family:'SF Mono','Fira Code',monospace;overflow-x:auto;line-height:1.85;padding:12px 14px}code{font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:4px;font-family:'SF Mono','Fira Code',monospace}@media(prefers-color-scheme:dark){code{background:#222;color:#e8e8e8}}.kw{color:#5350B4}.str{color:#0F6E56}.num{color:#BA7517}.cm{color:#999}.fn{color:#185FA5}.tn{color:#993C1D}.tip{border-left:3px solid #5350B4;padding:10px 14px;margin:16px 0;background:#f8f7ff;border-radius:0 8px 8px 0;font-size:13px}.warn{border-left:3px solid #BA7517;padding:10px 14px;margin:16px 0;background:#fdf9f0;border-radius:0 8px 8px 0;font-size:13px}.ok{border-left:3px solid #0F6E56;padding:10px 14px;margin:16px 0;background:#f4fef8;border-radius:0 8px 8px 0;font-size:13px}@media(prefers-color-scheme:dark){.tip{background:#1c1a2e}.warn{background:#1f1a0a}.ok{background:#0a1f14}}table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f5f5f5;font-weight:600;padding:8px 10px;text-align:left;border:1px solid #e8e8e8}td{padding:8px 10px;border:1px solid #e8e8e8;vertical-align:top}@media(prefers-color-scheme:dark){th{background:#1a1a1a;border-color:#2a2a2a}td{border-color:#2a2a2a}}.sn{display:inline-block;background:#5350B4;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle}.snippet{margin:12px 0;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;background:#f5f5f5}@media(prefers-color-scheme:dark){.snippet{border-color:#2a2a2a;background:#1a1a1a}}.snippet .bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e8e8e8;background:#efefef}@media(prefers-color-scheme:dark){.snippet .bar{background:#161616;border-color:#2a2a2a}}.snippet .lang{font-size:11px;font-weight:600;color:#888;letter-spacing:.3px}.snippet .acts{display:flex;gap:6px}.snippet button{font:inherit;font-size:11px;font-weight:600;cursor:pointer;border:1px solid #d8d8d8;background:#fff;color:#444;padding:3px 10px;border-radius:6px;transition:all .15s}.snippet button:hover{border-color:#5350B4;color:#5350B4}.snippet button.run:hover{background:#5350B4;color:#fff}@media(prefers-color-scheme:dark){.snippet button{background:#222;border-color:#333;color:#bbb}.snippet button:hover{color:#8f8cff;border-color:#8f8cff}}.snippet pre{margin:0}.snippet .out{display:none;font-family:'SF Mono','Fira Code',monospace;font-size:12px;white-space:pre-wrap;padding:10px 14px;border-top:1px dashed #d8d8d8;background:#fafafa;color:#1a1a1a;line-height:1.6;max-height:280px;overflow:auto}.snippet .out.show{display:block}@media(prefers-color-scheme:dark){.snippet .out{background:#0d0d0d;border-color:#2a2a2a;color:#d8d8d8}}a.xref{color:#5350B4;font-weight:600;text-decoration:none}@media(prefers-color-scheme:dark){a.xref{color:#8f8cff}}</style></head><body>
+<a class="back" href="index.html">← KaizenCode</a>
+<span class="chip">Mastery Track · Distributed Systems</span>
+<h1>🧵 The Loom</h1>
+<p class="sub">CRDTs — data structures deliberately designed so that merging two conflicting copies always produces the same correct answer, automatically, no matter what order the merge happens in. How Figma, Notion, and a shared shopping cart all stay correct without ever asking a server to referee.</p>
+
+<h2><span class="sn">1</span>The problem, picking up where detection left off</h2>
+<p><a class="xref" href="mastery_metronome_logical_clocks.html">The Metronome</a> ended on a pointed limitation: vector clocks can tell you two edits are <em>concurrent</em> — genuinely independent, neither one caused by the other — but they say nothing about what to actually <em>do</em> about it. Two people editing the same shared shopping list while both offline, each adding and removing items, will eventually reconnect. Detecting that their lists disagree is the easy half. Producing one final, correct list — automatically, without waking up an engineer or a user to arbitrate — is what this module is about.</p>
+<div class="tip"><strong>This is the whole problem, restated once:</strong> can you design the <em>data structure itself</em> so that no matter what order two divergent copies get merged in, and no matter how many times you accidentally merge the same update twice, the result always converges to the one, single correct answer? A data structure with that property is called a <strong>CRDT</strong> — a Conflict-free Replicated Data Type.</div>
+
+<h2><span class="sn">2</span>Why "last write wins" and "ask a human" don't scale</h2>
+<p>The <a class="xref" href="mobile_offline_first_sync.html">offline-first sync</a> article already covered the blunt options: last-write-wins (LWW) picks whichever edit has the later timestamp and silently throws the other one away — fine for a single field like "display name," disastrous for "list of items in your cart," where throwing away someone's addition means their item just vanishes with no error, no warning. Asking a human to manually resolve every conflict doesn't scale either — nobody wants a "which version of your shopping list did you mean?" dialog every time two devices sync.</p>
+<p>CRDTs exist because there's a third option, specifically for structures shaped like counters, sets, and lists: design the merge rule so it's mathematically guaranteed to combine two versions correctly, every time, with no data loss and no human in the loop — for the shapes of data where that's actually possible.</p>
+
+<h2><span class="sn">3</span>The core trick: make merging boring on purpose</h2>
+<p>Every CRDT follows the same underlying discipline, whether it's a counter or a full document: the merge operation has to work correctly <strong>no matter what order it's applied in</strong>, and applying the same update <strong>twice by accident</strong> can never make things worse. In plain terms — order shouldn't matter, and repeats shouldn't hurt. Once a data structure and its merge rule satisfy that, you can replicate it across any number of machines, let them diverge for as long as the network is down, and merging them back together is always safe.</p>
+
+<h2><span class="sn">4</span>The simplest CRDT: a grow-only counter</h2>
+<p>Imagine three servers each counting "likes" on a post, and the network between them is unreliable. If they each kept one shared number and argued over whose number is "latest," you'd lose likes every time two servers updated concurrently. Instead, a <strong>G-Counter</strong> gives every replica its own private slot to increment — never anyone else's — and the true total is just the sum of every slot. Merging two versions is just taking the bigger number in each slot; you can never lose an increment, and merging the same state twice changes nothing.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">function</span> <span class="fn">increment</span>(counter, replicaId) {
+  <span class="kw">const</span> next = { ...counter };
+  next[replicaId] = (next[replicaId] || <span class="num">0</span>) + <span class="num">1</span>;
+  <span class="kw">return</span> next;
+}
+<span class="kw">function</span> <span class="fn">merge</span>(a, b) {
+  <span class="kw">const</span> ids = <span class="kw">new</span> Set([...Object.<span class="fn">keys</span>(a), ...Object.<span class="fn">keys</span>(b)]);
+  <span class="kw">const</span> out = {};
+  ids.<span class="fn">forEach</span>((id) =&gt; (out[id] = Math.<span class="fn">max</span>(a[id] || <span class="num">0</span>, b[id] || <span class="num">0</span>)));
+  <span class="kw">return</span> out;
+}
+<span class="kw">function</span> <span class="fn">total</span>(counter) {
+  <span class="kw">return</span> Object.<span class="fn">values</span>(counter).<span class="fn">reduce</span>((sum, n) =&gt; sum + n, <span class="num">0</span>);
+}
+
+<span class="cm">// Server A and Server B both count likes while disconnected from each other</span>
+<span class="kw">let</span> serverA = <span class="fn">increment</span>(<span class="fn">increment</span>({}, <span class="str">'A'</span>), <span class="str">'A'</span>); <span class="cm">// 2 likes came in on A</span>
+<span class="kw">let</span> serverB = <span class="fn">increment</span>({}, <span class="str">'B'</span>);                       <span class="cm">// 1 like came in on B</span>
+console.<span class="fn">log</span>(<span class="str">'Server A saw:'</span>, serverA, <span class="str">'→ total'</span>, <span class="fn">total</span>(serverA));
+console.<span class="fn">log</span>(<span class="str">'Server B saw:'</span>, serverB, <span class="str">'→ total'</span>, <span class="fn">total</span>(serverB));
+
+<span class="cm">// Merge in either order — the result is identical either way</span>
+<span class="kw">const</span> mergedAB = <span class="fn">merge</span>(serverA, serverB);
+<span class="kw">const</span> mergedBA = <span class="fn">merge</span>(serverB, serverA);
+console.<span class="fn">log</span>(<span class="str">'\nA-then-B merge:'</span>, mergedAB, <span class="str">'→ total'</span>, <span class="fn">total</span>(mergedAB));
+console.<span class="fn">log</span>(<span class="str">'B-then-A merge:'</span>, mergedBA, <span class="str">'→ total'</span>, <span class="fn">total</span>(mergedBA));
+console.<span class="fn">log</span>(<span class="str">'Merging the SAME state twice, by accident:'</span>, <span class="fn">merge</span>(mergedAB, serverA));
+console.<span class="fn">log</span>(<span class="str">'→ still correct. No likes lost, none double-counted, order never mattered.'</span>);</pre><div class="out"></div></div>
+
+<h2><span class="sn">5</span>A harder case: a set you can add to AND remove from</h2>
+<p>Counters only grow, which makes them easy. A shared shopping list needs both add and remove — and that's where a naive approach breaks: if Alice removes "milk" while Bob, at the same instant and unaware, re-adds "milk," which wins? An <strong>OR-Set</strong> (Observed-Remove Set) solves this with one clever trick: every <em>add</em> gets tagged with a unique ID, and a <em>remove</em> doesn't just say "milk is gone" — it says "remove exactly the tagged instances of milk I have personally seen so far." Any add that instance never observed — like Bob's concurrent re-add — survives the merge automatically, because the remove literally couldn't have been referring to it.</p>
+<div class="snippet" data-run><div class="bar"><span class="lang">JavaScript · runnable</span><span class="acts"><button class="run">▶ Run</button><button class="copy">Copy</button></span></div><pre><span class="kw">function</span> <span class="fn">add</span>(set, item, tag) { <span class="kw">return</span> { ...set, [tag]: { item, removed: <span class="kw">false</span> } }; }
+<span class="kw">function</span> <span class="fn">remove</span>(set, tag) {
+  <span class="kw">if</span> (!set[tag]) <span class="kw">return</span> set; <span class="cm">// can't remove a tag we never observed</span>
+  <span class="kw">return</span> { ...set, [tag]: { ...set[tag], removed: <span class="kw">true</span> } };
+}
+<span class="kw">function</span> <span class="fn">merge</span>(a, b) {
+  <span class="kw">const</span> tags = <span class="kw">new</span> Set([...Object.<span class="fn">keys</span>(a), ...Object.<span class="fn">keys</span>(b)]);
+  <span class="kw">const</span> out = {};
+  tags.<span class="fn">forEach</span>((tag) =&gt; {
+    <span class="kw">const</span> fromA = a[tag], fromB = b[tag];
+    out[tag] = fromA &amp;&amp; fromB
+      ? { item: fromA.item, removed: fromA.removed || fromB.removed } <span class="cm">// remove wins if EITHER saw it removed</span>
+      : (fromA || fromB);
+  });
+  <span class="kw">return</span> out;
+}
+<span class="kw">function</span> <span class="fn">visible</span>(set) {
+  <span class="kw">return</span> Object.<span class="fn">values</span>(set).<span class="fn">filter</span>((e) =&gt; !e.removed).<span class="fn">map</span>((e) =&gt; e.item);
+}
+
+<span class="kw">let</span> alice = <span class="fn">add</span>({}, <span class="str">'milk'</span>, <span class="str">'milk#1'</span>);
+<span class="kw">let</span> bob   = <span class="fn">merge</span>({}, alice); <span class="cm">// Bob syncs, sees "milk#1" too, before going offline</span>
+
+<span class="cm">// Now offline: Alice removes the milk she saw; Bob, unaware, re-adds a NEW milk</span>
+alice = <span class="fn">remove</span>(alice, <span class="str">'milk#1'</span>);
+bob   = <span class="fn">add</span>(bob, <span class="str">'milk'</span>, <span class="str">'milk#2'</span>);
+
+console.<span class="fn">log</span>(<span class="str">"Alice's list:"</span>, <span class="fn">visible</span>(alice));
+console.<span class="fn">log</span>(<span class="str">"Bob's list:  "</span>, <span class="fn">visible</span>(bob));
+
+<span class="kw">const</span> merged = <span class="fn">merge</span>(alice, bob);
+console.<span class="fn">log</span>(<span class="str">'\nMerged list:'</span>, <span class="fn">visible</span>(merged));
+console.<span class="fn">log</span>(<span class="str">"Milk survives — Bob's re-add used a NEW tag Alice's remove never saw."</span>);
+console.<span class="fn">log</span>(<span class="str">'This is "add-wins" semantics, and it fell out of the design automatically.'</span>);</pre><div class="out"></div></div>
+<div class="ok"><strong>This is the classic "Amazon shopping cart" story.</strong> Amazon's own engineers wrote about exactly this shape of problem in their original Dynamo paper: when a cart replicates across data centers and diverges, the one thing you must never do is silently lose an item someone added. An OR-Set-style merge is precisely why "add wins" is the safe default for a cart, even though it can occasionally leave behind an item someone genuinely meant to delete.</div>
+
+<h2><span class="sn">6</span>Collaborative text: the hardest everyday case</h2>
+<p>A shared document (Google Docs, Notion, Figma's text layers) needs something more elaborate than a set — <em>order</em> matters, and two people can type in the exact same spot at the same time. The trick text-focused CRDTs use is to give every single character a unique, permanent, sortable position identifier when it's typed — not "character 47," which shifts every time someone edits earlier in the document, but a stable identity tied to who typed it and what it was inserted between. Two concurrent insertions at "the same spot" get different, comparably-sortable identities, so they interleave into a deterministic, if not always intuitive, final order — without either character ever needing to know about the other at the moment it was typed.</p>
+<div class="tip"><strong>You don't need to hand-build this.</strong> Real products use battle-tested libraries — <strong>Yjs</strong> and <strong>Automerge</strong> are the two most widely used JavaScript CRDT libraries, and both handle this exact text-merging problem so application engineers don't have to invent position identifiers themselves.</div>
+
+<h2><span class="sn">7</span>Where CRDTs run in production</h2>
+<table>
+<tr><th>System</th><th>How it uses CRDTs</th></tr>
+<tr><td><strong>Figma</strong></td><td>Its real-time multiplayer engine is built around CRDT-style, order-independent operations so every collaborator's cursor and edits merge live without a central lock.</td></tr>
+<tr><td><strong>Yjs / Automerge</strong></td><td>The two dominant open-source CRDT libraries for JavaScript — power a large share of the current wave of collaborative, offline-friendly web editors.</td></tr>
+<tr><td><strong>Redis Enterprise (Active-Active / CRDB)</strong></td><td>Offers CRDT-based data types specifically so the same key can be written to in multiple regions simultaneously and reconcile automatically.</td></tr>
+<tr><td><strong>Riak</strong></td><td>Ships CRDT counters, sets, and maps as first-class database types, building directly on the version-vector work covered in <a class="xref" href="mastery_metronome_logical_clocks.html">The Metronome</a>.</td></tr>
+<tr><td><strong>Any well-built offline-first mobile app</strong></td><td>Per the <a class="xref" href="mobile_offline_first_sync.html">offline-first sync</a> article's conflict-strategy table — CRDTs are the "automatic, no-human-needed" option for the specific data shapes (counters, sets, collaborative structures) they're designed for.</td></tr>
+</table>
+
+<h2><span class="sn">8</span>The limits</h2>
+<ul>
+<li><strong>Not every data type has a good CRDT.</strong> "Cancel this order if the total is under $50" is a business rule, not a mergeable data shape — CRDTs solve structural merging, not arbitrary application logic. Those conflicts still need the server-merge or manual-resolution strategies from the offline-sync article.</li>
+<li><strong>Tombstones accumulate.</strong> An OR-Set never truly forgets a removed item — it keeps a "removed" marker (a tombstone) so future merges still know it was deleted. Long-lived, high-churn CRDTs need a garbage-collection strategy or their metadata grows forever.</li>
+<li><strong>"Correct" doesn't always mean "intuitive."</strong> Add-wins semantics mean a delete can sometimes be quietly overridden by a concurrent add the deleter never saw — mathematically consistent, but occasionally surprising to a user who insists they deleted something.</li>
+</ul>
+
+<h2><span class="sn">9</span>When to reach for one</h2>
+<table>
+<tr><th>The data looks like...</th><th>Reach for</th></tr>
+<tr><td>A single field, one clear owner (display name, avatar)</td><td>Last-write-wins</td></tr>
+<tr><td>A counter, set, or list that multiple replicas update concurrently</td><td>A CRDT (G-Counter, OR-Set, or a library like Yjs/Automerge)</td></tr>
+<tr><td>Business rules with real invariants (inventory, balances)</td><td>Server-authoritative merge</td></tr>
+<tr><td>Rare, high-stakes, low-frequency conflicts</td><td>Manual resolution — surface both versions to a human</td></tr>
+</table>
+
+<h2><span class="sn">10</span>Quick checklist</h2>
+<ul>
+<li>✅ Confirm the data shape actually fits a known CRDT pattern (counter, set, list) before reaching for one.</li>
+<li>✅ Use a maintained library (Yjs, Automerge) for anything text/document-shaped — don't hand-roll position identifiers.</li>
+<li>✅ Plan for tombstone growth on long-lived, high-churn sets.</li>
+<li>✅ Reserve CRDTs for genuinely concurrent, structural merges — not for enforcing business invariants.</li>
+<li>❌ Don't assume "add-wins" is always the intuitive outcome for users — document the behavior.</li>
+<li>❌ Don't build a custom CRDT from scratch when detecting-but-not-resolving (§1) is actually all you need.</li>
+</ul>
+
+<h2><span class="sn">11</span>Key takeaways</h2>
+<p>CRDTs are what you get when you push the idea from <a class="xref" href="mastery_metronome_logical_clocks.html">The Metronome</a> one step further: instead of just detecting that two things happened concurrently, design the data structure so merging concurrent versions is always safe, in any order, any number of times. That's not a trick that works for everything — but for the specific shapes of data that show up constantly in real products (counters, sets, collaborative documents), it's the difference between a shopping cart that never loses an item and a "sync conflict" dialog nobody wants to see.</p>
+
+<p style="margin-top:28px;font-size:12px;color:#888">Mastery Track · KaizenCode. <a class="back" href="index.html">← Back to KaizenCode</a></p>
+
+<script>(function(){function fmt(v){try{if(typeof v==='string')return v;if(Array.isArray(v)&&v.every(x=>x&&typeof x==='object'))return v.map(o=>JSON.stringify(o)).join('\n');return v&&typeof v==='object'?JSON.stringify(v,(k,val)=>typeof val==='bigint'?val.toString():val,2):String(v);}catch(e){return String(v);}}document.querySelectorAll('.snippet').forEach(function(s){var pre=s.querySelector('pre'),copyBtn=s.querySelector('button.copy'),runBtn=s.querySelector('button.run'),out=s.querySelector('.out');if(copyBtn){copyBtn.addEventListener('click',function(){navigator.clipboard.writeText(pre.textContent).then(function(){var t=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent=t;},1200);});});}if(runBtn){runBtn.addEventListener('click',function(){var logs=[];var c={log:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},error:function(){logs.push('⛔ '+[].slice.call(arguments).map(fmt).join(' '));},warn:function(){logs.push('⚠️ '+[].slice.call(arguments).map(fmt).join(' '));},info:function(){logs.push([].slice.call(arguments).map(fmt).join(' '));},table:function(v){logs.push(fmt(v));}};out.textContent='running…';out.classList.add('show');try{var fn=new Function('console','"use strict";return (async function(){\n'+pre.textContent+'\n})();');Promise.resolve(fn(c)).then(function(ret){if(ret!==undefined)logs.push('⟶ '+fmt(ret));out.textContent=logs.length?logs.join('\n'):'✓ ran (no console output)';}).catch(function(e){logs.push('⛔ '+(e&&e.message?e.message:e));out.textContent=logs.join('\n');});}catch(e){out.textContent='⛔ '+(e&&e.message?e.message:e);}});}});})();</script>
+</body></html>

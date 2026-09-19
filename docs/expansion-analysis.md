@@ -142,9 +142,25 @@ exactly the problem majority rule sidesteps.
   and how Raft (The Quorum) sidesteps the problem entirely by never needing
   synchronized clocks across nodes.
 
-This closes out the RPC → Consensus → Time trilogy started with The Courier:
-three foundational distributed-systems ideas, each explicitly a sequel to the
-last, and each written to be followable without a CS background first.
+This continues the RPC → Consensus → Time arc started with The Courier:
+foundational distributed-systems ideas, each explicitly a sequel to the last,
+each written to be followable without a CS background first.
+
+## Round 6 addition (resolving, not just detecting)
+
+- **The Loom** 🧵 — CRDTs (Conflict-free Replicated Data Types): picks up
+  exactly where The Metronome's vector clocks left off — detecting a conflict
+  isn't resolving it. Covers G-Counters and OR-Sets with runnable merge
+  simulations, the classic Amazon Dynamo shopping-cart problem, why
+  collaborative text (Figma, Notion, Yjs/Automerge) needs a fancier CRDT
+  design, and directly resolves the "CRDTs" row in the offline-first-sync
+  mobile article's conflict-resolution table, which had named the strategy
+  without ever explaining the mechanism.
+
+RPC (The Courier) → Consensus (The Quorum) → Time (The Metronome) → Conflict
+resolution (The Loom): four modules that each explicitly build on the one
+before it, turning the Mastery Track's distributed-systems corner into a
+connected arc rather than a flat list.
 
 ## Considered but deferred (future rounds)
 

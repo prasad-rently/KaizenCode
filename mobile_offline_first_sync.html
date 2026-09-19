@@ -39,7 +39,7 @@
 <tr><th>Strategy</th><th>How it decides</th><th>Good fit</th></tr>
 <tr><td><strong>Last-write-wins (LWW)</strong></td><td>Whichever edit has the newer timestamp overwrites the other, field by field or record by record.</td><td>Simple settings, single-owner records (a user's own profile field).</td></tr>
 <tr><td><strong>Server-authoritative merge</strong></td><td>The server applies domain rules (e.g. "quantity can only decrease") and returns the resolved state; the client accepts it.</td><td>Inventory, balances — anything with business invariants.</td></tr>
-<tr><td><strong>CRDTs</strong> (conflict-free replicated data types)</td><td>The data structure itself is designed so concurrent edits merge mathematically without a decision — e.g. a grow-only counter, or an OR-Set for list membership.</td><td>Collaborative editing, offline-tolerant counters/sets.</td></tr>
+<tr><td><strong>CRDTs</strong> (conflict-free replicated data types)</td><td>The data structure itself is designed so concurrent edits merge mathematically without a decision — e.g. a grow-only counter, or an OR-Set for list membership. Mechanics covered in depth in <a class="back" style="font-size:inherit" href="mastery_loom_crdts.html">The Loom</a>.</td><td>Collaborative editing, offline-tolerant counters/sets.</td></tr>
 <tr><td><strong>Operational Transform (OT)</strong></td><td>Edits are transformed against each other so intent is preserved regardless of arrival order.</td><td>Real-time collaborative text (what Google Docs-style editors use).</td></tr>
 <tr><td><strong>Manual resolution</strong></td><td>Surface both versions to the user and let them pick.</td><td>High-stakes, low-frequency conflicts (a shared document rename).</td></tr>
 </table>
